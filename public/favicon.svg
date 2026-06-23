@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" rx="28" fill="#2563eb"/>
+  <path d="M24 40 H104 M24 88 H104" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <!-- Metrological Ruler dashes on top -->
+  <path d="M34 40 V50 M44 40 V46 M54 40 V46 M64 162 M64 40 V54 M74 40 V46 M84 40 V46 M94 40 V50" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <!-- Metrological Ruler dashes on bottom -->
+  <path d="M34 88 V78 M44 88 V82 M54 88 V82 M64 88 V74 M74 88 V82 M84 88 V82 M94 88 V78" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <!-- CM and IN text characters -->
+  <text x="64" y="72" font-family="'Inter', -apple-system, sans-serif" font-weight="900" font-size="34" fill="#ffffff" text-anchor="middle" letter-spacing="-1">CM</text>
+</svg>

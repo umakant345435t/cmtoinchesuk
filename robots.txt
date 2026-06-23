@@ -1,0 +1,11 @@
+# Robots.txt for cmtoinches.uk — Metrology Portal Indexing rules
+User-agent: *
+Allow: /
+
+# Exclude potential programmatic loops or staging builds
+Disallow: /api/
+Disallow: /build/
+Disallow: /dev/
+
+# Sitemaps Location
+Sitemap: https://cmtoinches.uk/sitemap.xml

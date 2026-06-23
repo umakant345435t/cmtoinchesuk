@@ -1,0 +1,8 @@
+{
+  "name": "CM to Inches Converter",
+  "description": "Fast & accurate centimeter to inches converter custom-built for UK audience, featuring instant calculations, detailed charts, structured FAQ schema, and legal pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
