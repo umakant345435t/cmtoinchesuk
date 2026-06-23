@@ -30,7 +30,50 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState<RoutePath>('/');
+  const [currentPath, setCurrentPath] = useState<RoutePath>(() => {
+    if (typeof window !== 'undefined') {
+      let path = window.location.pathname;
+      if (!path.endsWith('/') && !path.includes('.')) {
+        path = path + '/';
+      }
+      
+      const allPaths: string[] = [
+        '/',
+        '/cm-to-inches/',
+        '/inches-to-cm/',
+        '/feet-to-cm/',
+        '/cm-to-feet/',
+        '/meters-to-feet/',
+        '/feet-to-meters/',
+        '/mm-to-inches/',
+        '/inches-to-mm/',
+        '/150-cm-to-inches/',
+        '/170-cm-to-inches/',
+        '/180-cm-to-inches/',
+        '/200-cm-to-inches/',
+        '/5-feet-in-cm/',
+        '/6-feet-in-cm/',
+        '/about-us/',
+        '/contact-us/',
+        '/privacy-policy/',
+        '/terms-and-conditions/',
+        '/disclaimer/',
+        '/cookie-policy/',
+        '/sitemap/',
+        '/blog/',
+        '/blog/how-many-inches-in-1-cm/',
+        '/blog/cm-vs-inches/',
+        '/blog/uk-height-conversion-guide/',
+        '/blog/clothing-size-conversion/',
+        '/blog/international-measurement-systems/'
+      ];
+      
+      if (allPaths.includes(path)) {
+        return path as RoutePath;
+      }
+    }
+    return '/';
+  });
   const [converterType, setConverterType] = useState<string>('cm-to-inches');
   const [converterValue, setConverterValue] = useState<number | undefined>(undefined);
 
@@ -41,6 +84,65 @@ export default function App() {
   const [contactMessage, setContactMessage] = useState('');
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
+
+  // Handle popstate (browser back/forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      let path = window.location.pathname;
+      if (!path.endsWith('/') && !path.includes('.')) {
+        path = path + '/';
+      }
+      
+      const allPaths: string[] = [
+        '/',
+        '/cm-to-inches/',
+        '/inches-to-cm/',
+        '/feet-to-cm/',
+        '/cm-to-feet/',
+        '/meters-to-feet/',
+        '/feet-to-meters/',
+        '/mm-to-inches/',
+        '/inches-to-mm/',
+        '/150-cm-to-inches/',
+        '/170-cm-to-inches/',
+        '/180-cm-to-inches/',
+        '/200-cm-to-inches/',
+        '/5-feet-in-cm/',
+        '/6-feet-in-cm/',
+        '/about-us/',
+        '/contact-us/',
+        '/privacy-policy/',
+        '/terms-and-conditions/',
+        '/disclaimer/',
+        '/cookie-policy/',
+        '/sitemap/',
+        '/blog/',
+        '/blog/how-many-inches-in-1-cm/',
+        '/blog/cm-vs-inches/',
+        '/blog/uk-height-conversion-guide/',
+        '/blog/clothing-size-conversion/',
+        '/blog/international-measurement-systems/'
+      ];
+
+      if (allPaths.includes(path)) {
+        handleNavigate(path as RoutePath);
+      } else {
+        handleNavigate('/');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  // Synchronize dynamic routes on startup
+  useEffect(() => {
+    if (currentPath !== '/') {
+      handleNavigate(currentPath);
+    }
+  }, []);
 
   // Scroll to top whenever route changes
   useEffect(() => {
@@ -140,10 +242,16 @@ export default function App() {
     else if (typeId === 'inches-to-mm') route = '/inches-to-mm/';
     
     setCurrentPath(route);
+    if (typeof window !== 'undefined' && window.location.pathname !== route) {
+      window.history.pushState({ path: route }, '', route);
+    }
   };
 
   const handleNavigate = (path: RoutePath) => {
     setCurrentPath(path);
+    if (typeof window !== 'undefined' && window.location.pathname !== path) {
+      window.history.pushState({ path }, '', path);
+    }
     // Reset specific custom values if arriving at generic route
     if (path === '/') {
       setConverterType('cm-to-inches');
