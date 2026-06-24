@@ -163,16 +163,16 @@ export const POPULAR_PAGES: HardcodedConversionPage[] = [
 
 export const FAQ_HOME: { question: string; answer: string }[] = [
   {
-    question: 'How do you convert CM to Inches mathematically?',
-    answer: 'To convert centimeters to inches, divide your centimeter value by 2.54. This specific divisor is used because one international standard inch is officially defined as exactly 2.54 centimeters. For example, if you have 25.4 cm, dividing by 2.54 yields exactly 10 inches. The mathematical representation is: Inches = Centimeters / 2.54 (or alternatively, Inches = Centimeters × 0.393700787).'
+    question: 'How do you mathematically convert between centimeters and inches?',
+    answer: 'To convert between centimeters and inches, one can divide the centimeter value by 2.54. This is the value of an inch in centimeters because an inch is defined as 2.54 centimeters. To convert 25.4 centimeters to inches, one would divide 25.4 by 2.54 to get 10 inches. Using mathematical notation, one could write Inches = Centimeters / 2.54. One could also write Inches = Centimeters * 0.393700787.'
   },
   {
-    question: 'What is the absolute legal conversion factor between metric centimeters and imperial inches?',
-    answer: 'The definitive, legally binding conversion factor was standardized by the International Yard and Pound Agreement in July 1959. This treaty established that 1 inch is precisely equal to 2.54 centimeters. Because this ratio is exact by definition, there is no fractional variation or metrological drift, making 2.54 the mathematically absolute constant used worldwide for length translation.'
+    question: 'What is the legally defined, absolute conversion factor between metric centimeters and imperial inches?',
+    answer: 'The legally defined conversion factor was agreed upon in 1959 when the International Yard and Pound Agreement was signed. This agreement states that 1 inch equals 2.54 centimeters. Since this agreement was about a equality of definitions, since inch and centimeter were defined in relation to one another, the conversion value would not change, since there would be no drift in measurements, would forever remain 2.54.'
   },
   {
-    question: 'How can I convert decimal inches to standard English fractions (such as 1/16 or 1/8)?',
-    answer: 'To translate a decimal inch value into a practical fractional value, isolate the decimal portion and multiply it by your desired fractional denominator (e.g., 16, 32, or 64). Round the resulting number to the nearest whole integer to find your numerator. For example, to convert 0.3937 inches to the nearest 16th: 0.3937 × 16 = 6.299, which rounds to 6. Therefore, 0.3937 inches is approximately 6/16, which simplifies to 3/8 of an inch.'
+    question: 'How do I convert inches expressed as decimals to inches expressed in standard English fractions, for example, 1/16 or 1/8?',
+    answer: 'To convert inches expressed as a decimal to a standard English fraction, take the decimal value of an inch, remove the whole number, and multiply the result by the denominator you want the fraction to have, i.e., 16, 32, 64, etc. Round to the nearest whole number for the numerator of the fraction. For example, to convert 0.3937 inches to the nearest 16th of an inch, multiply 0.3937 by 16 to get 6.299, which would be rounded to 6. Therefore, 0.3937 inches is about 3/8 of an inch, because 6/16 simplifies to that.'
   },
   {
     question: 'How many feet and inches are equivalent to exactly 170 cm?',

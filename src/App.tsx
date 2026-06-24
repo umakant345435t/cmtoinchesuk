@@ -730,25 +730,25 @@ export default function App() {
             </h2>
           </div>
           <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            Welcome to the premier <strong>cmtoinches.uk</strong> gateway. If you are aiming to convert centimeters to inches, look no further! This program offers instant visual calculators designed specifically for United Kingdom citizens, crafters, builders, and standard e-commerce shoppers.
+            Welcome to the original <strong>cmtoinches.uk</strong>. If you are trying to convert centimeters to inches, look no further. This program shows UK, crafters, builders, and normal e-commerce shoppers, UK focused, instant, visual calculators.
           </p>
           <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            By definition, one inch contains precisely 2.54 centimeters. To reverse this calculations and convert <strong>centimeters to inches</strong> directly, we apply the fractional base-10 metrics formula:
+            As per the definition, an inch contains 2.54 centimeters. To reverse this calculation and convert centimeters to inches, directly, the fractional base-10 metrics formula is used:
           </p>
 
           {/* Clean Formula Highlight Card */}
           <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl font-mono text-center space-y-3.5 max-w-xl mx-auto my-8 shadow-sm">
             <span className="text-xs text-blue-700 font-black tracking-widest uppercase">OFFICIAL STANDARD FORMULA</span>
             <div className="text-lg sm:text-2xl font-black text-blue-900">
-              Inches = Centimeters ÷ 2.54
+              Inches to = Centimeters ÷ 2.54
             </div>
             <p className="text-xs text-slate-500">
-              Rounded constant index ratio = 0.393700787 in/cm
+              Constant index ratio (Rounded) = 0.393700787 in/cm
             </p>
           </div>
 
           <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            For example, if you aim to find how many inches are in a layout measurement of 10 cm, compute: <code className="bg-slate-100 text-slate-900 px-2 py-1 rounded font-mono text-base font-black">10 ÷ 2.54 = 3.937 inches</code>. This accurate ratio ensures zero mechanical error margins.
+            If you want to find out how many inches are in a measurement of 10 cm, say you need to convert cm to inches, you would, <code className="bg-slate-100 text-slate-900 px-2 py-1 rounded font-mono text-base font-black">10 ÷ 2.54 = 3.937 (inches)</code>. This ratio is perfect and gives no mechanical error margin.
           </p>
         </section>
 
