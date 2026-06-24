@@ -3,7 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Change this to master if your default branch is master
+      - main
+      - master # Support both main and master branch naming conventions
 
 permissions:
   contents: write
