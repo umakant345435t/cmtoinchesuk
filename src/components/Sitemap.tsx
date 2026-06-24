@@ -72,7 +72,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           <Network className="w-6 h-6 text-blue-600 stroke-[2.5]" />
           Programmatic HTML Sitemap Index
         </h2>
-        <p className="text-xs text-slate-500 mt-1.5 leading-relaxed font-semibold">
+        <p className="text-lg text-slate-700 mt-2 leading-relaxed font-semibold">
           This page represents the comprehensive hierarchical diagram of <strong>cmtoinches.uk</strong>. Both spiders (Googlebot, Bingbot) and humans can immediately trace canonical structural boundaries and jump anywhere in one click.
         </p>
       </div>
@@ -82,13 +82,13 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           const Icon = cat.icon;
           return (
             <div key={idx} className="bg-slate-50/60 rounded-2xl p-5 border-2 border-slate-200 space-y-4">
-              <h3 className="text-xs font-black uppercase text-slate-905 tracking-wider flex items-center gap-2 border-b-2 border-slate-200 pb-2.5">
+              <h3 className="text-sm font-black uppercase text-slate-950 tracking-wider flex items-center gap-2 border-b-2 border-slate-200 pb-2.5">
                 <Icon className="w-4 h-4 text-slate-600 stroke-[2.5]" />
                 {cat.title}
               </h3>
               <ul className="space-y-3">
                 {cat.links.map((link, lIdx) => (
-                  <li key={lIdx} className="text-xs">
+                  <li key={lIdx} className="text-sm">
                     <button
                       onClick={() => onNavigate(link.path)}
                       className="text-left py-1 text-slate-800 hover:text-blue-600 font-bold transition-all hover:underline focus:outline-none flex items-start gap-1 w-full cursor-pointer"
@@ -113,8 +113,8 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           <FileCheck className="w-4 h-4 text-yellow-400 stroke-[2.5]" />
           CRAWLER TECHNICAL AUDIT METADATA
         </h4>
-        <p className="text-slate-300 font-semibold leading-relaxed">
-          This sitemap operates on clean static hashes corresponding with the live <code className="bg-slate-950 text-slate-200 px-1 py-0.5 rounded font-mono font-bold text-[10px]">/sitemap.xml</code> tree submitted to Google Search Console. 100% of links render instantly on the client side without broken callbacks or dynamic redirects.
+        <p className="text-slate-300 font-semibold leading-relaxed text-sm">
+          This sitemap operates on clean static hashes corresponding with the live <code className="bg-slate-950 text-slate-200 px-1.5 py-1 rounded font-mono font-bold text-xs">/sitemap.xml</code> tree submitted to Google Search Console. 100% of links render instantly on the client side without broken callbacks or dynamic redirects.
         </p>
       </div>
     </div>

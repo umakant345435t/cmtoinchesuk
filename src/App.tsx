@@ -326,7 +326,7 @@ export default function App() {
               {matchedPopularPage.h1}
             </h2>
             
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-700 leading-relaxed font-sans">
               {matchedPopularPage.explanationText} Use our accurate length converter configured specifically below to change variables, review imperial increments, and extract fractional references.
             </p>
 
@@ -338,15 +338,15 @@ export default function App() {
 
             <AdSensePlaceholder slotId="1002" type="in-feed-horizontal" />
 
-            <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 space-y-3.5 text-xs text-slate-700">
-              <h4 className="font-bold flex items-center gap-1.5 text-slate-900">
-                <FileCheck className="w-4 h-4 text-emerald-600" />
+            <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 space-y-3.5 text-sm text-slate-700">
+              <h3 className="text-xl font-extrabold flex items-center gap-1.5 text-slate-900">
+                <FileCheck className="w-5 h-5 text-emerald-600" />
                 Comparative Calibration Table
-              </h4>
-              <p>
+              </h3>
+              <p className="text-lg text-slate-700 leading-relaxed">
                 In standard UK trade registries, {matchedPopularPage.fromValue} {matchedPopularPage.fromUnit} represents:
               </p>
-              <ul className="list-disc pl-5 space-y-1.5 font-mono text-[11px] text-slate-600">
+              <ul className="list-disc pl-6 space-y-2 text-lg text-slate-700 font-sans">
                 <li><strong>{matchedPopularPage.toValue.toFixed(4)} Inches</strong> (Decimal layout)</li>
                 <li><strong>{ (matchedPopularPage.fromValue / 2.54).toFixed(2) } Inches</strong> (General rounding)</li>
                 {matchedPopularPage.displayImperial && (
@@ -384,7 +384,7 @@ export default function App() {
             <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               {activeType.label} (Precise {activeType.fromUnit} → {activeType.toUnit})
             </h2>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-700 leading-relaxed font-sans">
               Welcome to the official <strong>{activeType.label}</strong> authority segment. Use our optimized input layout box to calculate instantly, copy calibrated outcomes, and utilize correct step calculations.
             </p>
 
@@ -396,13 +396,13 @@ export default function App() {
 
             <AdSensePlaceholder slotId="1003" type="in-feed-horizontal" />
 
-            <div className="space-y-3 prose text-xs text-slate-600">
-              <h3 className="font-bold text-slate-950 text-sm">How to manual solve this conversion?</h3>
-              <p>
-                To resolve this manually without an online engine, leverage the official formula: <code className="bg-slate-100 p-0.5 rounded font-mono font-bold text-slate-900">{activeType.formula}</code>.
+            <div className="space-y-4 prose text-lg text-slate-700">
+              <h3 className="font-black text-slate-950 text-xl">How to manually solve this conversion?</h3>
+              <p className="text-lg text-slate-700 leading-relaxed font-sans">
+                To resolve this manually without an online engine, leverage the official formula: <code className="bg-slate-100 p-1.5 rounded font-mono font-black text-slate-900 text-base">{activeType.formula}</code>.
               </p>
-              <h3 className="font-bold text-slate-950 text-sm mt-3">Practical everyday demonstration:</h3>
-              <p>
+              <h3 className="font-black text-slate-950 text-xl mt-5">Practical everyday demonstration:</h3>
+              <p className="text-lg text-slate-700 leading-relaxed font-sans">
                 {activeType.example}. By maintaining high-precision coefficient ratios, we prevent physical measurement miscalculation errors across textile sewing models, heavy architectural design tasks, and UK driving licenses.
               </p>
             </div>
@@ -421,18 +421,18 @@ export default function App() {
               <span className="p-1 bg-slate-900 rounded text-amber-400 select-none text-sm font-bold">About</span>
               {POLICIES_DATA.aboutUs.title}
             </h2>
-            <p className="text-xs text-slate-700 leading-relaxed font-bold">
+            <p className="text-lg text-slate-800 leading-relaxed font-black">
               {POLICIES_DATA.aboutUs.intro}
             </p>
-            <div className="space-y-4 text-xs text-slate-600 leading-relaxed">
-              <h3 className="font-bold text-sm text-slate-900">1. Our Core Mission</h3>
-              <p>{POLICIES_DATA.aboutUs.mission}</p>
+            <div className="space-y-5 text-lg text-slate-700 leading-relaxed">
+              <h3 className="font-extrabold text-xl text-slate-900">1. Our Core Mission</h3>
+              <p className="text-lg text-slate-700 leading-relaxed font-sans">{POLICIES_DATA.aboutUs.mission}</p>
               
-              <h3 className="font-bold text-sm text-slate-900">2. Our Accuracy Commitment</h3>
-              <p>{POLICIES_DATA.aboutUs.qualityPromise}</p>
+              <h3 className="font-extrabold text-xl text-slate-900">2. Our Accuracy Commitment</h3>
+              <p className="text-lg text-slate-700 leading-relaxed font-sans">{POLICIES_DATA.aboutUs.qualityPromise}</p>
 
-              <h3 className="font-bold text-sm text-slate-900">3. Local UK Headquarters</h3>
-              <p className="bg-slate-50 p-3 rounded-lg border border-slate-100 font-mono text-[11px] text-slate-700">
+              <h3 className="font-extrabold text-xl text-slate-900">3. Local UK Headquarters</h3>
+              <p className="bg-slate-50 p-4 rounded-lg border border-slate-100 font-mono text-sm text-slate-700">
                 {POLICIES_DATA.aboutUs.address}
               </p>
             </div>
@@ -460,7 +460,7 @@ export default function App() {
               <h2 className="text-2xl font-black text-slate-900 tracking-tight">
                 Contact Our Support Team
               </h2>
-              <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+              <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed font-sans">
                 We value your comments, measurement inquiries, advertising partnerships, or metrological bug reports. To maintain your privacy and secure communication, we do not utilize third-party web forms.
               </p>
             </div>
@@ -528,11 +528,11 @@ export default function App() {
               <p className="text-[10px] text-slate-400 font-mono mt-1">Last updated: {POLICIES_DATA.privacyPolicy.lastUpdated}</p>
             </div>
             
-            <div className="space-y-6 text-xs text-slate-600 leading-relaxed">
+            <div className="space-y-8 text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.privacyPolicy.sections.map((sect, idx) => (
-                <div key={idx} className="space-y-2">
-                  <h3 className="font-black text-sm text-slate-900">{sect.heading}</h3>
-                  <p>{sect.content}</p>
+                <div key={idx} className="space-y-3">
+                  <h3 className="font-black text-xl text-slate-900">{sect.heading}</h3>
+                  <p className="text-lg text-slate-700 leading-relaxed font-sans">{sect.content}</p>
                 </div>
               ))}
             </div>
@@ -553,11 +553,11 @@ export default function App() {
               <p className="text-[10px] text-slate-400 font-mono mt-1">Last updated: {POLICIES_DATA.termsOfUse.lastUpdated}</p>
             </div>
             
-            <div className="space-y-6 text-xs text-slate-600 leading-relaxed">
+            <div className="space-y-8 text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.termsOfUse.sections.map((sect, idx) => (
-                <div key={idx} className="space-y-2">
-                  <h3 className="font-black text-sm text-slate-900">{sect.heading}</h3>
-                  <p>{sect.content}</p>
+                <div key={idx} className="space-y-3">
+                  <h3 className="font-black text-xl text-slate-900">{sect.heading}</h3>
+                  <p className="text-lg text-slate-700 leading-relaxed font-sans">{sect.content}</p>
                 </div>
               ))}
             </div>
@@ -575,7 +575,7 @@ export default function App() {
               <ShieldAlert className="w-6 h-6 text-rose-600 animate-pulse" />
               {POLICIES_DATA.disclaimer.title}
             </h2>
-            <p className="text-xs text-slate-600 leading-relaxed font-semibold bg-rose-50 p-4 rounded-xl border border-rose-100">
+            <p className="text-lg text-slate-700 leading-relaxed font-semibold bg-rose-50 p-5 rounded-xl border border-rose-100 font-sans">
               {POLICIES_DATA.disclaimer.content}
             </p>
           </div>
@@ -591,7 +591,7 @@ export default function App() {
             <h2 className="text-xl md:text-2xl font-black text-slate-900">
               {POLICIES_DATA.cookiePolicy.title}
             </h2>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.cookiePolicy.content}
             </p>
           </div>
@@ -619,7 +619,7 @@ export default function App() {
                 <BookOpen className="w-6 h-6 text-blue-600" />
                 Measurement Metrology & Guide Blog
               </h2>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-lg text-slate-600 mt-1.5 font-sans leading-relaxed">
                 Read deep-dives on international metric systems, clothing sizing conversions, and height indicators drafted by British experts.
               </p>
             </div>
@@ -638,7 +638,7 @@ export default function App() {
                   <h3 className="font-black text-slate-950 group-hover:text-blue-600 text-sm transition-colors">
                     {blog.title}
                   </h3>
-                  <p className="text-slate-500 text-[11px] line-clamp-2">
+                  <p className="text-slate-600 text-sm line-clamp-2 font-sans">
                     {blog.description}
                   </p>
                   <div className="pt-2 flex justify-between items-center text-[10px] text-slate-400 font-mono">
@@ -679,14 +679,14 @@ export default function App() {
                 <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
                   {blog.title}
                 </h1>
-                <p className="text-xs text-slate-500 italic mt-1 font-sans">
+                <p className="text-sm text-slate-600 italic mt-1 font-sans">
                   Published by: {blog.author} (Metrology content reviewer)
                 </p>
               </div>
 
               {/* Blog body HTML contents parsed cleanly with beautiful styling */}
               <div 
-                className="prose prose-slate max-w-none text-xs md:text-sm text-slate-700 space-y-4 leading-relaxed mt-4"
+                className="prose prose-slate max-w-none text-lg text-slate-800 space-y-5 leading-relaxed mt-6 font-sans"
                 dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
               />
 
@@ -724,31 +724,31 @@ export default function App() {
         {/* Rich SEO Content (Topical relevance section) */}
         <section className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-4">
           <div className="border-b border-slate-100 pb-3">
-            <h2 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-              <Scale className="w-5 h-5 text-blue-600" />
+            <h2 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
+              <Scale className="w-6 h-6 text-blue-600" />
               Primary CM to Inches Metrology Explanation
             </h2>
           </div>
-          <p className="text-xs text-slate-600 leading-relaxed">
+          <p className="text-lg text-slate-700 leading-relaxed font-sans">
             Welcome to the premier <strong>cmtoinches.uk</strong> gateway. If you are aiming to convert centimeters to inches, look no further! This program offers instant visual calculators designed specifically for United Kingdom citizens, crafters, builders, and standard e-commerce shoppers.
           </p>
-          <p className="text-xs text-slate-600 leading-relaxed">
+          <p className="text-lg text-slate-700 leading-relaxed font-sans">
             By definition, one inch contains precisely 2.54 centimeters. To reverse this calculations and convert <strong>centimeters to inches</strong> directly, we apply the fractional base-10 metrics formula:
           </p>
 
           {/* Clean Formula Highlight Card */}
-          <div className="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-xl font-mono text-center space-y-2 max-w-xl mx-auto my-6 shadow-sm">
-            <span className="text-[10px] text-blue-700 font-black tracking-widest uppercase">OFFICIAL STANDARD FORMULA</span>
-            <div className="text-base sm:text-lg font-black text-blue-900">
+          <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl font-mono text-center space-y-3.5 max-w-xl mx-auto my-8 shadow-sm">
+            <span className="text-xs text-blue-700 font-black tracking-widest uppercase">OFFICIAL STANDARD FORMULA</span>
+            <div className="text-lg sm:text-2xl font-black text-blue-900">
               Inches = Centimeters ÷ 2.54
             </div>
-            <p className="text-[10px] text-slate-500">
+            <p className="text-xs text-slate-500">
               Rounded constant index ratio = 0.393700787 in/cm
             </p>
           </div>
 
-          <p className="text-xs text-slate-600 leading-relaxed">
-            For example, if you aim to find how many inches are in a layout measurement of 10 cm, compute: <code className="bg-slate-100 text-slate-900 px-1 py-0.5 rounded font-mono text-[10px]">10 ÷ 2.54 = 3.937 inches</code>. This accurate ratio ensures zero mechanical error margins.
+          <p className="text-lg text-slate-700 leading-relaxed font-sans">
+            For example, if you aim to find how many inches are in a layout measurement of 10 cm, compute: <code className="bg-slate-100 text-slate-900 px-2 py-1 rounded font-mono text-base font-black">10 ÷ 2.54 = 3.937 inches</code>. This accurate ratio ensures zero mechanical error margins.
           </p>
         </section>
 

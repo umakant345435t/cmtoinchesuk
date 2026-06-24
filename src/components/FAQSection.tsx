@@ -33,10 +33,10 @@ export function FAQSection({ customFAQs }: FAQSectionProps) {
       <div className="bg-slate-50 px-6 py-5 border-b border-slate-200 flex items-center gap-2">
         <MessageSquare className="w-5 h-5 text-blue-600 stroke-[2.5]" />
         <div>
-          <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">
+          <h3 className="text-base font-black text-slate-900 uppercase tracking-widest">
             ❓ Frequently Asked Questions (FAQ)
           </h3>
-          <p className="text-xs text-slate-500 font-medium">
+          <p className="text-sm text-slate-600 font-medium">
             Answers regarding measurements, British metrology regulations, and conversions.
           </p>
         </div>
@@ -49,7 +49,7 @@ export function FAQSection({ customFAQs }: FAQSectionProps) {
             <div key={idx} className="py-4 first:pt-0 last:pb-0">
               <button
                 onClick={() => toggleFAQ(idx)}
-                className="w-full flex justify-between items-center text-left text-xs md:text-sm font-black text-slate-950 hover:text-blue-600 transition-colors focus:outline-none cursor-pointer"
+                className="w-full flex justify-between items-center text-left text-sm md:text-base font-black text-slate-950 hover:text-blue-600 transition-colors focus:outline-none cursor-pointer"
               >
                 <span className="pr-4">{faq.question}</span>
                 {isExpanded ? (
@@ -60,7 +60,7 @@ export function FAQSection({ customFAQs }: FAQSectionProps) {
               </button>
               
               {isExpanded && (
-                <div className="mt-3 text-xs text-slate-600 leading-relaxed bg-blue-50/40 p-4 rounded-xl border border-blue-100/50 border-l-4 border-l-blue-600 transition-all">
+                <div className="mt-3 text-lg text-slate-700 leading-relaxed bg-blue-50/40 p-5 rounded-xl border border-blue-100/50 border-l-4 border-l-blue-600 transition-all font-sans">
                   {faq.answer}
                 </div>
               )}

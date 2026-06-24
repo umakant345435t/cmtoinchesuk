@@ -73,10 +73,10 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
     <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="conversion-tables">
       {/* Title & Tabs */}
       <div className="bg-slate-50 px-6 py-5 border-b border-slate-200">
-        <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">
+        <h3 className="text-base font-black text-slate-900 uppercase tracking-widest">
           📊 High-Traffic Conversion Tables
         </h3>
-        <p className="text-xs text-slate-500 mt-1 font-semibold">
+        <p className="text-lg text-slate-700 mt-2 font-semibold">
           Select a reference tab below. Click any row to automatically load its values into the calculator tool.
         </p>
       </div>
