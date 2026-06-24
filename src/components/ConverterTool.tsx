@@ -12,7 +12,7 @@ interface ConverterToolProps {
 export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue, onNavigate }: ConverterToolProps) {
   const [selectedTypeId, setSelectedTypeId] = useState<string>(initialTypeId);
   const [inputValue, setInputValue] = useState<string>(
-    initialFromValue !== undefined ? initialFromValue.toString() : '10'
+    initialFromValue !== undefined ? initialFromValue.toString() : '0'
   );
   const [copied, setCopied] = useState<boolean>(false);
 

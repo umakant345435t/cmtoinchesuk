@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RoutePath } from '../types';
-import { HelpCircle, RefreshCw, Home, Compass, BookOpen, Link, FileText, CheckCircle, Menu, X } from 'lucide-react';
+import { HelpCircle, RefreshCw, Home, Compass, BookOpen, Link, FileText, Menu, X } from 'lucide-react';
 
 interface NavigationProps {
   currentPath: RoutePath;
@@ -19,8 +19,6 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'Sitemap', path: '/sitemap/', icon: FileText }
   ];
 
-  // Strip query strings or trailing parameters for displaying canonical URL safely
-  const displayUrlPath = currentPath.split('?')[0];
 
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-sm" id="header-navigation">
@@ -122,21 +120,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
         )}
       </div>
 
-      {/* Simulator bar showing current dynamic path */}
-      <div className="bg-slate-50 px-4 py-2 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
-        <div className="flex items-center gap-2 overflow-hidden w-full max-w-3xl">
-          <span className="text-slate-400 font-bold shrink-0">Current Browser URL:</span>
-          <div className="bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap scrollbar-none w-full">
-            <span className="text-blue-600 font-semibold">https://</span>
-            <span className="text-slate-900 font-medium">cmtoinches.uk</span>
-            <span className="text-blue-600 font-bold">{displayUrlPath}</span>
-          </div>
-        </div>
-        <div className="hidden sm:flex items-center gap-1 font-bold text-[10px] uppercase text-slate-400 shrink-0 select-none">
-          <CheckCircle className="w-3.5 h-3.5 text-blue-600" />
-          <span>SEO Routed (Indexed)</span>
-        </div>
-      </div>
+
     </header>
   );
 }
