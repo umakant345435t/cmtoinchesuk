@@ -97,7 +97,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
                       <span>{link.label}</span>
                     </button>
                     <span className="text-[9px] text-slate-400 font-bold font-mono pl-3.5 block select-all uppercase">
-                      https://cmtoinches.uk{link.path}
+                      https://www.cmtoinches.uk{link.path}
                     </span>
                   </li>
                 ))}
