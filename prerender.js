@@ -38,6 +38,7 @@ const routes = [
 const metadata = {
   'cm-to-inches': {
     title: 'CM to Inches Converter (cm → in) – Fast Imperial Tool',
+    h1: 'CM to Inches Converter (Precise cm → in)',
     description: 'Determine centimeter to inches instantly. Official 1cm = 2.54in standards guide.',
     formula: 'Inches = Centimeters ÷ 2.54',
     steps: [
@@ -48,6 +49,7 @@ const metadata = {
   },
   'inches-to-cm': {
     title: 'Inches to CM Converter (in → cm) – Dynamic Ruler Calculator',
+    h1: 'Inches to CM Converter (Precise in → cm)',
     description: 'Convert inches to centimeters using our high-precision base-10 metrics translator.',
     formula: 'Centimeters = Inches × 2.54',
     steps: [
@@ -58,6 +60,7 @@ const metadata = {
   },
   'feet-to-cm': {
     title: 'Feet to CM Converter (ft → cm) – Vertical Height Calculator',
+    h1: 'Feet to CM Converter (Precise ft → cm)',
     description: 'Translate standard imperial feet measures directly to decimal centimeters. Ideal for UK passports.',
     formula: 'Centimeters = Feet × 30.48',
     steps: [
@@ -68,6 +71,7 @@ const metadata = {
   },
   'cm-to-feet': {
     title: 'CM to Feet Converter (cm → ft) – Physical Statures Guide',
+    h1: 'CM to Feet Converter (Precise cm → ft)',
     description: 'Convert metric centimeters to customary imperial feet layout. Check formulas on-page.',
     formula: 'Feet = Centimeters ÷ 30.48',
     steps: [
@@ -78,6 +82,7 @@ const metadata = {
   },
   'meters-to-feet': {
     title: 'Meters to Feet Converter (m → ft) – Modern Metrology',
+    h1: 'Meters to Feet Converter (Precise m → ft)',
     description: 'Convert meters to feet instantly with this accurate calculator. Clean charts included.',
     formula: 'Feet = Meters × 3.2808399',
     steps: [
@@ -88,6 +93,7 @@ const metadata = {
   },
   'feet-to-meters': {
     title: 'Feet to Meters Converter (ft → m) – Technical Measurements',
+    h1: 'Feet to Meters Converter (Precise ft → m)',
     description: 'Convert feet measurements into SI meters with a clear mathematical step solver.',
     formula: 'Meters = Feet ÷ 3.2808399',
     steps: [
@@ -98,6 +104,7 @@ const metadata = {
   },
   'mm-to-inches': {
     title: 'Millimeters to Inches Converter (mm → in) – Carpenter Standard',
+    h1: 'Millimeters to Inches Converter (Precise mm → in)',
     description: 'Convert fine millimeters to traditional inches fractions. Suited for UK woodworking and fabric mills.',
     formula: 'Inches = Millimeters ÷ 25.4',
     steps: [
@@ -108,6 +115,7 @@ const metadata = {
   },
   'inches-to-mm': {
     title: 'Inches to Millimeters Converter (in → mm) – Metalwork Precise',
+    h1: 'Inches to Millimeters Converter (Precise in → mm)',
     description: 'Convert imperial inches directly to metric millimeter values instantly.',
     formula: 'Millimeters = Inches × 25.4',
     steps: [
@@ -118,38 +126,47 @@ const metadata = {
   },
   'about-us': {
     title: 'About Our Metrological Mission – cmtoinches.uk',
+    h1: 'About Our Metrological Mission',
     description: 'Meet our team, study our measurement standards commitments, and review our accuracy promise.'
   },
   'contact-us': {
     title: 'Contact Metrological Support – Feedback & Queries',
+    h1: 'Contact Our Support Team',
     description: 'Get in touch with the admin team at cmtoinches.uk. Reach our desk at support@cmtoinches.uk.'
   },
   'privacy-policy': {
     title: 'Privacy Policy – GDPR & AdSense Compliance standards',
+    h1: 'Privacy Policy',
     description: 'Review our detailed visitor privacy policy, AdSense cookie agreements, and full EU/UK GDPR alignment files.'
   },
   'terms-and-conditions': {
     title: 'Terms & Conditions of Service – cmtoinches.uk',
+    h1: 'Terms and Conditions',
     description: 'Study our calculator usage disclaimers, mathematical liability rules, and educational permissions.'
   },
   'disclaimer': {
     title: 'Complete Metrology Disclaimer – Verification Warning',
+    h1: 'Complete Metrology Disclaimer',
     description: 'Our official guidelines, calculations, and safety boundaries for architectural and mechanical DIY uses.'
   },
   'cookie-policy': {
     title: 'Cookie Policy – UK PECR & Tracking Frameworks',
+    h1: 'Cookie Policy',
     description: 'Details on how we leverage secure cache-only variables to improve page rendering speeds.'
   },
   'sitemap': {
     title: 'HTML Sitemap Index – cmtoinches.uk Navigation Map',
+    h1: 'Programmatic HTML Sitemap Index',
     description: 'Browse 100% of the active URLs, conversion guides, blog columns, and legal policy structures on this portal.'
   },
   'blog': {
     title: 'UK Metrology & Clothing Size Blog – Information Portal',
+    h1: 'Measurement Metrology & Guide Blog',
     description: 'Learn how metric measurements apply to British size charts, passport registries, and historic trades.'
   },
   'blog/how-many-inches-in-1-cm': {
     title: 'How Many Inches in 1 CM? The Definitive Metrology Answer – Metric Blog Guide',
+    h1: 'How Many Inches in 1 CM? The Definitive Metrology Answer',
     description: 'Study the exact fractional standard for how many inches live inside a single centimeter. Accurate layout tables and historical metric treaty summaries.',
     isBlog: true,
     author: 'Eleanor Vance',
@@ -158,6 +175,7 @@ const metadata = {
   },
   'blog/cm-vs-inches': {
     title: 'CM vs Inches: Understanding the Imperial & Metric Systems – Metric Blog Guide',
+    h1: 'CM vs Inches: Understanding the Imperial & Metric Systems',
     description: 'Explore historical, industrial, and daily differences between centimeters and inches. Essential reading for global engineering students.',
     isBlog: true,
     author: 'James Sterling',
@@ -166,6 +184,7 @@ const metadata = {
   },
   'blog/uk-height-conversion-guide': {
     title: 'The Ultimate UK Height Conversion Guide (CM, Feet, Inches) – Metric Blog Guide',
+    h1: 'The Ultimate UK Height Conversion Guide (CM, Feet, Inches)',
     description: 'Master British height documentation requirements. Seamlessly bridge metric meters and imperial stone, feet, or inches.',
     isBlog: true,
     author: 'Eleanor Vance',
@@ -174,6 +193,7 @@ const metadata = {
   },
   'blog/clothing-size-conversion': {
     title: 'How CM and Inches Impact Clothing & Shoe Sizes – Metric Blog Guide',
+    h1: 'How CM and Inches Impact Clothing & Shoe Sizes',
     description: 'Learn why UK shoe sizes, trousers, waist measures, and clothing labels vary across regions. Full metric translation arrays inside.',
     isBlog: true,
     author: 'Harriet Cole',
@@ -182,6 +202,7 @@ const metadata = {
   },
   'blog/international-measurement-systems': {
     title: 'A History of the International System of Units (SI) – Metric Blog Guide',
+    h1: 'A History of the International System of Units (SI)',
     description: 'A deep metrological study outlining the history of length definitions, from local steps to the light-speed standard.',
     isBlog: true,
     author: 'James Sterling',
@@ -190,6 +211,7 @@ const metadata = {
   },
   '150-cm-to-inches': {
     title: '150 CM to Inches Converter (150 cm → in) – Height Conversion',
+    h1: '150 CM to Inches Height Converter',
     description: 'Convert 150 centimeters to inches accurately. Find out what 150 cm means in inches (59.06 inches) and feet-inches format (4ft 11 inches) with standard tables.',
     formula: '150 ÷ 2.54 = 59.0551 inches',
     isSpecific: true,
@@ -198,6 +220,7 @@ const metadata = {
   },
   '170-cm-to-inches': {
     title: '170 CM to Inches Converter (170 cm → in) – Height Conversion',
+    h1: '170 CM to Inches Height Converter',
     description: 'Convert exactly 170 cm to inches. 170 centimeters equals 66.93 inches or 5ft 7in. Check our detailed guide and formula.',
     formula: '170 ÷ 2.54 = 66.9291 inches',
     isSpecific: true,
@@ -206,6 +229,7 @@ const metadata = {
   },
   '180-cm-to-inches': {
     title: '180 CM to Inches Converter (180 cm → in) – Height Conversion',
+    h1: '180 CM to Inches Height Converter',
     description: 'Convert 180 centimeters to inches. 180 cm equals 70.87 inches or 5 feet 11 inches. Fast, accurate, and completely free height guide.',
     formula: '180 ÷ 2.54 = 70.8661 inches',
     isSpecific: true,
@@ -214,6 +238,7 @@ const metadata = {
   },
   '200-cm-to-inches': {
     title: '200 CM to Inches Converter (200 cm → in) – Height Conversion',
+    h1: '200 CM to Inches Height Converter',
     description: 'How many inches is 200 cm? Convert 200 cm to inches (78.74 inches) or feet-inches (6ft 6.7in) instantly with this accurate tool.',
     formula: '200 ÷ 2.54 = 78.7402 inches',
     isSpecific: true,
@@ -222,6 +247,7 @@ const metadata = {
   },
   '5-feet-in-cm': {
     title: '5 Feet in CM – Accurate Height Conversion (5 ft → cm)',
+    h1: '5 Feet in CM Height Converter',
     description: 'Convert 5 feet to centimeters instantly. Learn how many centimeters are in 5 feet (152.4 cm) and view comprehensive conversion charts.',
     formula: '5 × 30.48 = 152.4 centimeters',
     isSpecific: true,
@@ -230,6 +256,7 @@ const metadata = {
   },
   '6-feet-in-cm': {
     title: '6 Feet in CM – Accurate Height Conversion (6 ft → cm)',
+    h1: '6 Feet in CM Height Converter',
     description: 'Convert exactly 6 feet to centimeters. Learn how many cm are in 6 feet (182.88 cm) and study the standard conversion metrics table.',
     formula: '6 × 30.48 = 182.88 centimeters',
     isSpecific: true,
@@ -248,22 +275,87 @@ if (!fs.existsSync(indexPath)) {
 
 const indexContent = fs.readFileSync(indexPath, 'utf-8');
 
-// Generate structural homepage JSON-LD schema
+// Generate structural homepage JSON-LD schema (@graph with WebApplication, FAQPage, HowTo, WebSite, Organization)
 const homepageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  'name': 'CM to Inches Converter (cmtoinches.uk)',
-  'url': 'https://www.cmtoinches.uk/',
-  'description': 'Instant centimeters (cm) to inches (in) length metrics translation engine. Featuring live conversion charts, standard UK height guide reference, and interactive gauges.',
-  'applicationCategory': 'CalculatorApplication',
-  'operatingSystem': 'All',
-  'browserRequirements': 'Requires JavaScript. Requires HTML5.',
-  'author': {
-    '@type': 'Organization',
-    'name': 'cmtoinches.uk',
-    'url': 'https://www.cmtoinches.uk/'
-  }
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': 'https://www.cmtoinches.uk/#app',
+      'name': 'CM to Inches & Inch to CM Converter UK',
+      'url': 'https://www.cmtoinches.uk/',
+      'description': 'Convert CM to inches and inch to cm quickly with our accurate UK measurement converter. Get instant metric to imperial length conversions for free.',
+      'applicationCategory': 'CalculatorApplication',
+      'operatingSystem': 'All',
+      'inLanguage': 'en-GB',
+      'browserRequirements': 'Requires JavaScript. Requires HTML5.',
+      'author': {
+        '@type': 'Organization',
+        'name': 'cmtoinches.uk',
+        'url': 'https://www.cmtoinches.uk/'
+      }
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.cmtoinches.uk/#website',
+      'url': 'https://www.cmtoinches.uk/',
+      'name': 'CM to Inches & Inch to CM Converter UK',
+      'description': 'Official UK unit conversion tool for CM to Inches and Inch to CM.',
+      'inLanguage': 'en-GB',
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'cmtoinches.uk',
+        'url': 'https://www.cmtoinches.uk/',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': 'https://www.cmtoinches.uk/favicon.svg'
+        }
+      }
+    },
+    {
+      '@type': 'HowTo',
+      '@id': 'https://www.cmtoinches.uk/#howto',
+      'name': 'How to Convert CM to Inches and Inch to CM',
+      'description': 'Step-by-step metrology guide for converting length units between centimeters and customary imperial inches.',
+      'step': [
+        {
+          '@type': 'HowToStep',
+          'name': 'Convert CM to Inches',
+          'text': 'To convert centimeters to inches, divide the length in centimeters by 2.54. Formula: Inches = Centimeters ÷ 2.54.'
+        },
+        {
+          '@type': 'HowToStep',
+          'name': 'Convert Inch to CM',
+          'text': 'To convert inches to centimeters, multiply the length in inches by 2.54. Formula: Centimeters = Inches × 2.54.'
+        }
+      ]
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.cmtoinches.uk/#faq',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'How do I convert CM to Inches (cm to in)?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'To convert CM to Inches, divide your centimeter value by 2.54. For example, 50 cm ÷ 2.54 = 19.685 inches.'
+          }
+        },
+        {
+          '@type': 'Question',
+          'name': 'How do I convert Inch to CM (in to cm)?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'To convert Inch to CM, multiply your value in inches by 2.54. For example, 10 inches × 2.54 = 25.4 cm.'
+          }
+        }
+      ]
+    }
+  ]
 };
+
+const staticRootBody = `<div id="root"><main><header><div>cmtoinches.uk</div></header><article><h1>CM to Inches &amp; Inch to CM Converter</h1><p>Convert CM to inches and inch to cm quickly with our accurate UK measurement converter. Get instant metric to imperial length conversions for free.</p><h2>CM to Inches Conversion (Metric to Imperial)</h2><p>To convert CM to Inches, divide centimeters by 2.54 (Inches = Centimeters ÷ 2.54).</p><h2>Inch to CM Conversion (Imperial to Metric)</h2><p>To convert Inches to CM, multiply inches by 2.54 (Centimeters = Inches × 2.54).</p></article></main></div>`;
 
 // Also write updated Root index.html with canonical tags and homepage JSON-LD for AI Search indexers
 const homeJsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(homepageSchema, null, 2)}\n</script>`;
@@ -271,6 +363,7 @@ const updatedRootIndex = indexContent
   .replace(/<link rel="canonical" href="[^"]*"/g, '<link rel="canonical" href="https://www.cmtoinches.uk/"')
   .replace(/<meta property="og:url" content="[^"]*"/g, '<meta property="og:url" content="https://www.cmtoinches.uk/"')
   .replace(/<meta property="twitter:url" content="[^"]*"/g, '<meta property="twitter:url" content="https://www.cmtoinches.uk/"')
+  .replace('<div id="root"></div>', staticRootBody)
   .replace('</head>', `${homeJsonLdScript}\n</head>`);
 
 fs.writeFileSync(indexPath, updatedRootIndex, 'utf-8');
@@ -284,7 +377,7 @@ function generateJsonLdSchema(route, meta) {
     return {
       '@context': 'https://schema.org',
       '@type': 'TechArticle',
-      'headline': meta.title,
+      'headline': meta.h1 || meta.title,
       'description': meta.description,
       'url': pageUrl,
       'datePublished': meta.datePublished,
@@ -340,7 +433,7 @@ function generateJsonLdSchema(route, meta) {
     return {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      'name': meta.title,
+      'name': meta.h1 || meta.title,
       'description': meta.description,
       'url': pageUrl,
       'estimatedCost': {
@@ -372,7 +465,7 @@ function generateJsonLdSchema(route, meta) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    'name': meta.title,
+    'name': meta.h1 || meta.title,
     'description': meta.description,
     'url': pageUrl,
     'publisher': {
@@ -386,6 +479,7 @@ function generateJsonLdSchema(route, meta) {
 routes.forEach((route) => {
   const meta = metadata[route] || {
     title: 'CM to Inches Converter (cm → in) – Fast & Accurate Calculator',
+    h1: 'CM to Inches Converter (cm → in)',
     description: 'Convert centimeters to inches instantly with our free CM to Inches Converter. Accurate calculations, conversion tables, formulas, and FAQs.'
   };
 
@@ -395,6 +489,9 @@ routes.forEach((route) => {
   const pageCanonical = `https://www.cmtoinches.uk/${route}/`;
   const schemaObj = generateJsonLdSchema(route, meta);
   const jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(schemaObj, null, 2)}\n</script>`;
+
+  const pageH1 = meta.h1 || meta.title.split('–')[0].trim();
+  const staticPageBody = `<div id="root"><main><header><div>cmtoinches.uk</div></header><article><h1>${pageH1}</h1><p>${meta.description}</p></article></main></div>`;
 
   // Dynamic meta replacements
   let pageContent = indexContent
@@ -412,7 +509,9 @@ routes.forEach((route) => {
     .replace(/<meta property="twitter:url" content="[^"]*"/g, `<meta property="twitter:url" content="${pageCanonical}"`)
     .replace(/<meta property="twitter:title" content="[^"]*"/g, `<meta property="twitter:title" content="${meta.title}"`)
     .replace(/<meta property="twitter:description" content="[^"]*"/g, `<meta property="twitter:description" content="${meta.description}"`)
-    // 6. Inject dynamic structured JSON-LD data for Googlebot SGE and modern AI LLM engines
+    // 6. Inject pre-rendered static body containing unique H1 for raw HTML crawlers
+    .replace('<div id="root"></div>', staticPageBody)
+    // 7. Inject dynamic structured JSON-LD data for Googlebot SGE and modern AI LLM engines
     .replace('</head>', `${jsonLdScript}\n</head>`);
 
   fs.writeFileSync(path.join(targetDir, 'index.html'), pageContent, 'utf-8');

@@ -40,9 +40,9 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               referrerPolicy="no-referrer"
             />
             <div>
-              <h1 className="text-xl font-black tracking-tight text-slate-900 flex items-center gap-0.5">
+              <div className="text-xl font-black tracking-tight text-slate-900 flex items-center gap-0.5">
                 <span>cmtoinches</span><span className="text-blue-600 font-extrabold text-xl">.uk</span>
-              </h1>
+              </div>
               <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-sans">Measurement Metrology Portal</p>
             </div>
           </div>

@@ -163,6 +163,14 @@ export const POPULAR_PAGES: HardcodedConversionPage[] = [
 
 export const FAQ_HOME: { question: string; answer: string }[] = [
   {
+    question: 'How do I convert CM to Inches (cm to in)?',
+    answer: 'To convert CM to Inches, divide your centimeter value by 2.54. For example, 50 cm ÷ 2.54 = 19.685 inches. Alternatively, you can multiply the centimeter length by 0.393701 to calculate the value in customary imperial inches.'
+  },
+  {
+    question: 'How do I convert Inch to CM (in to cm)?',
+    answer: 'To convert Inch to CM, multiply your value in inches by 2.54. For example, 10 inches × 2.54 = 25.4 cm. This calculation relies on the legally binding international metric standard where 1 inch is defined as exactly 2.54 centimeters.'
+  },
+  {
     question: 'How do you mathematically convert between centimeters and inches?',
     answer: 'To convert between centimeters and inches, one can divide the centimeter value by 2.54. This is the value of an inch in centimeters because an inch is defined as 2.54 centimeters. To convert 25.4 centimeters to inches, one would divide 25.4 by 2.54 to get 10 inches. Using mathematical notation, one could write Inches = Centimeters / 2.54. One could also write Inches = Centimeters * 0.393700787.'
   },

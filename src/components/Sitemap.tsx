@@ -68,10 +68,10 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         <span className="text-[10px] bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
           XML & HTML INDEX SITEMAP
         </span>
-        <h2 className="text-xl md:text-2xl font-black text-slate-950 mt-3.5 flex items-center gap-2">
+        <h1 className="text-xl md:text-2xl font-black text-slate-950 mt-3.5 flex items-center gap-2">
           <Network className="w-6 h-6 text-blue-600 stroke-[2.5]" />
           Programmatic HTML Sitemap Index
-        </h2>
+        </h1>
         <p className="text-lg text-slate-700 mt-2 leading-relaxed font-semibold">
           This page represents the comprehensive hierarchical diagram of <strong>cmtoinches.uk</strong>. Both spiders (Googlebot, Bingbot) and humans can immediately trace canonical structural boundaries and jump anywhere in one click.
         </p>

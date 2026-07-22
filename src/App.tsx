@@ -322,9 +322,9 @@ export default function App() {
             <span className="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-1 rounded font-mono uppercase tracking-wider">
               Popular Height Landmark Setup
             </span>
-            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               {matchedPopularPage.h1}
-            </h2>
+            </h1>
             
             <p className="text-lg text-slate-700 leading-relaxed font-sans">
               {matchedPopularPage.explanationText} Use our accurate length converter configured specifically below to change variables, review imperial increments, and extract fractional references.
@@ -381,9 +381,9 @@ export default function App() {
             <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded font-mono uppercase tracking-widest">
               Authority Metrological Portal
             </span>
-            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               {activeType.label} (Precise {activeType.fromUnit} → {activeType.toUnit})
-            </h2>
+            </h1>
             <p className="text-lg text-slate-700 leading-relaxed font-sans">
               Welcome to the official <strong>{activeType.label}</strong> authority segment. Use our optimized input layout box to calculate instantly, copy calibrated outcomes, and utilize correct step calculations.
             </p>
@@ -417,10 +417,10 @@ export default function App() {
         <div className="space-y-6">
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
-            <h2 className="text-xl md:text-2xl font-black text-slate-900 flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 flex items-center gap-2">
               <span className="p-1 bg-slate-900 rounded text-amber-400 select-none text-sm font-bold">About</span>
               {POLICIES_DATA.aboutUs.title}
-            </h2>
+            </h1>
             <p className="text-lg text-slate-800 leading-relaxed font-black">
               {POLICIES_DATA.aboutUs.intro}
             </p>
@@ -457,9 +457,9 @@ export default function App() {
             </div>
             
             <div className="space-y-2">
-              <h2 className="text-2xl font-black text-slate-900 tracking-tight">
+              <h1 className="text-2xl font-black text-slate-900 tracking-tight">
                 Contact Our Support Team
-              </h2>
+              </h1>
               <p className="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed font-sans">
                 We value your comments, measurement inquiries, advertising partnerships, or metrological bug reports. To maintain your privacy and secure communication, we do not utilize third-party web forms.
               </p>
@@ -522,9 +522,9 @@ export default function App() {
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <h2 className="text-xl md:text-2xl font-black text-slate-900">
+              <h1 className="text-xl md:text-2xl font-black text-slate-900">
                 {POLICIES_DATA.privacyPolicy.title}
-              </h2>
+              </h1>
               <p className="text-[10px] text-slate-400 font-mono mt-1">Last updated: {POLICIES_DATA.privacyPolicy.lastUpdated}</p>
             </div>
             
@@ -547,9 +547,9 @@ export default function App() {
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <h2 className="text-xl md:text-2xl font-black text-slate-900">
+              <h1 className="text-xl md:text-2xl font-black text-slate-900">
                 {POLICIES_DATA.termsOfUse.title}
-              </h2>
+              </h1>
               <p className="text-[10px] text-slate-400 font-mono mt-1">Last updated: {POLICIES_DATA.termsOfUse.lastUpdated}</p>
             </div>
             
@@ -571,10 +571,10 @@ export default function App() {
         <div className="space-y-6">
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
-            <h2 className="text-xl md:text-2xl font-black text-slate-900 flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 flex items-center gap-2">
               <ShieldAlert className="w-6 h-6 text-rose-600 animate-pulse" />
               {POLICIES_DATA.disclaimer.title}
-            </h2>
+            </h1>
             <p className="text-lg text-slate-700 leading-relaxed font-semibold bg-rose-50 p-5 rounded-xl border border-rose-100 font-sans">
               {POLICIES_DATA.disclaimer.content}
             </p>
@@ -588,9 +588,9 @@ export default function App() {
         <div className="space-y-6">
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
-            <h2 className="text-xl md:text-2xl font-black text-slate-900">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900">
               {POLICIES_DATA.cookiePolicy.title}
-            </h2>
+            </h1>
             <p className="text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.cookiePolicy.content}
             </p>
@@ -615,10 +615,10 @@ export default function App() {
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <h2 className="text-xl md:text-2xl font-black text-slate-950 flex items-center gap-2">
+              <h1 className="text-xl md:text-2xl font-black text-slate-950 flex items-center gap-2">
                 <BookOpen className="w-6 h-6 text-blue-600" />
                 Measurement Metrology & Guide Blog
-              </h2>
+              </h1>
               <p className="text-lg text-slate-600 mt-1.5 font-sans leading-relaxed">
                 Read deep-dives on international metric systems, clothing sizing conversions, and height indicators drafted by British experts.
               </p>
@@ -718,38 +718,66 @@ export default function App() {
           onNavigate={handleNavigate}
         />
 
-        {/* AdSense Unit placement 1 */}
-        <AdSensePlaceholder slotId="1001" type="in-feed-horizontal" />
-
         {/* Rich SEO Content (Topical relevance section) */}
-        <section className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-4">
+        <section className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-6">
           <div className="border-b border-slate-100 pb-3">
-            <h2 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
               <Scale className="w-6 h-6 text-blue-600" />
-              Primary CM to Inches Metrology Explanation
-            </h2>
+              CM to Inches &amp; Inch to CM Converter
+            </h1>
           </div>
           <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            Welcome to the original <strong>cmtoinches.uk</strong>. If you are trying to convert centimeters to inches, look no further. This program shows UK, crafters, builders, and normal e-commerce shoppers, UK focused, instant, visual calculators.
-          </p>
-          <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            As per the definition, an inch contains 2.54 centimeters. To reverse this calculation and convert centimeters to inches, directly, the fractional base-10 metrics formula is used:
+            Welcome to <strong>cmtoinches.uk</strong>, the premier UK measurement conversion tool. Whether you need to convert <strong>CM to Inches</strong> for clothing, DIY, and heights, or <strong>Inch to CM</strong> for engineering and woodworking, our instant UK calculator provides 100% accurate, high-precision results based on international metrology standards.
           </p>
 
-          {/* Clean Formula Highlight Card */}
-          <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl font-mono text-center space-y-3.5 max-w-xl mx-auto my-8 shadow-sm">
-            <span className="text-xs text-blue-700 font-black tracking-widest uppercase">OFFICIAL STANDARD FORMULA</span>
-            <div className="text-lg sm:text-2xl font-black text-blue-900">
-              Inches to = Centimeters ÷ 2.54
+          {/* Grid of Two Core Formulas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+            {/* CM to Inches Formula Card */}
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl font-mono space-y-3 shadow-sm">
+              <span className="text-xs text-blue-700 font-black tracking-widest uppercase">1. CM TO INCHES FORMULA</span>
+              <div className="text-xl font-black text-blue-900">
+                Inches = Centimeters ÷ 2.54
+              </div>
+              <p className="text-xs text-slate-600 font-sans">
+                Alternatively: <code className="bg-white/80 px-1.5 py-0.5 rounded font-mono font-bold text-slate-900">CM × 0.393701</code>
+              </p>
+              <div className="text-xs text-slate-700 font-sans pt-2 border-t border-blue-200/60">
+                <strong>Example:</strong> 10 cm ÷ 2.54 = <strong>3.937 inches</strong>
+              </div>
             </div>
-            <p className="text-xs text-slate-500">
-              Constant index ratio (Rounded) = 0.393700787 in/cm
+
+            {/* Inch to CM Formula Card */}
+            <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 border-l-4 border-emerald-600 rounded-r-2xl font-mono space-y-3 shadow-sm">
+              <span className="text-xs text-emerald-700 font-black tracking-widest uppercase">2. INCH TO CM FORMULA</span>
+              <div className="text-xl font-black text-emerald-900">
+                Centimeters = Inches × 2.54
+              </div>
+              <p className="text-xs text-slate-600 font-sans">
+                Exact constant defined by international agreement.
+              </p>
+              <div className="text-xs text-slate-700 font-sans pt-2 border-t border-emerald-200/60">
+                <strong>Example:</strong> 12 inches × 2.54 = <strong>30.48 cm</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 pt-2">
+            <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
+              CM to Inches Conversion (Metric to Imperial)
+            </h2>
+            <p className="text-base text-slate-700 leading-relaxed font-sans">
+              Converting centimeters (cm) to inches (in) is required across the UK for height documentation on passports, online apparel sizing, and household measurements. Because 1 inch is defined as exactly 2.54 centimeters, dividing any centimeter figure by 2.54 gives the corresponding length in customary imperial inches.
             </p>
           </div>
 
-          <p className="text-lg text-slate-700 leading-relaxed font-sans">
-            If you want to find out how many inches are in a measurement of 10 cm, say you need to convert cm to inches, you would, <code className="bg-slate-100 text-slate-900 px-2 py-1 rounded font-mono text-base font-black">10 ÷ 2.54 = 3.937 (inches)</code>. This ratio is perfect and gives no mechanical error margin.
-          </p>
+          <div className="space-y-4 pt-2">
+            <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
+              Inch to CM Conversion (Imperial to Metric)
+            </h2>
+            <p className="text-base text-slate-700 leading-relaxed font-sans">
+              Converting inches to centimeters (inch to cm) translates traditional imperial dimensions into the decimal System International (SI) metric framework. Simply multiply the number of inches by 2.54 to get the exact measurement in centimeters. For instance, a 70-inch height translates to <code className="bg-slate-100 text-slate-900 px-2 py-0.5 rounded font-mono font-bold">70 × 2.54 = 177.8 cm</code>.
+            </p>
+          </div>
         </section>
 
         {/* Reference tables block */}
@@ -774,11 +802,6 @@ export default function App() {
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-8">
         
-        {/* Dynamic Ad placement at the top of content */}
-        <div className="hidden lg:block mb-6">
-          <AdSensePlaceholder slotId="1000" type="header-leaderboard" />
-        </div>
-
         {/* Grid layout for layout structure */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -797,8 +820,6 @@ export default function App() {
             </div>
 
             <Sidebar currentPath={currentPath} onNavigate={handleNavigate} />
-
-            <AdSensePlaceholder slotId="1004" type="sidebar-square" />
           </section>
 
         </div>
