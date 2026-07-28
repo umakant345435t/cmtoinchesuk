@@ -10,13 +10,14 @@ export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const footerLinks: { label: string; path: RoutePath }[] = [
-    { label: 'Home Page', path: '/' },
+    { label: 'cm to inches', path: '/' },
     { label: 'About Us', path: '/about-us/' },
     { label: 'Contact Us', path: '/contact-us/' },
     { label: 'Privacy Policy', path: '/privacy-policy/' },
     { label: 'Terms & Conditions', path: '/terms-and-conditions/' },
     { label: 'Legal Disclaimer', path: '/disclaimer/' },
     { label: 'Cookie Policy', path: '/cookie-policy/' },
+    { label: 'Unit Chart', path: '/unit-conversion-chart/' },
     { label: 'HTML Sitemap', path: '/sitemap/' }
   ];
 
@@ -59,15 +60,23 @@ export function Footer({ onNavigate }: FooterProps) {
               Statutory Pages & Navigation
             </h4>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-              {footerLinks.map((link) => (
-                <button
-                  key={link.path}
-                  onClick={() => onNavigate(link.path)}
-                  className="text-left text-[11px] text-slate-400 hover:text-yellow-400 hover:underline transition-colors font-bold cursor-pointer focus:outline-none"
-                >
-                  {link.label}
-                </button>
-              ))}
+              {footerLinks.map((link) => {
+                const isHome = link.path === '/';
+                const href = isHome ? 'https://www.cmtoinches.uk/' : link.path;
+                return (
+                  <a
+                    key={link.path}
+                    href={href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate(link.path);
+                    }}
+                    className="text-left text-[11px] text-slate-400 hover:text-yellow-400 hover:underline transition-colors font-bold cursor-pointer focus:outline-none"
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -102,10 +111,10 @@ export function Footer({ onNavigate }: FooterProps) {
               <a 
                 href="https://stonetokg.uk/" 
                 target="_blank" 
-                rel="noopener" 
+                rel="noopener noreferrer" 
                 className="text-yellow-400 font-black hover:underline"
               >
-                Stone To Kg
+                stone to kg
               </a>
               {' '}— fast, accurate, mobile-friendly, and easy to use.
             </div>
@@ -115,10 +124,10 @@ export function Footer({ onNavigate }: FooterProps) {
               <a 
                 href="https://inchesincm.de/" 
                 target="_blank" 
-                rel="noopener" 
+                rel="noopener noreferrer" 
                 className="text-yellow-400 font-black hover:underline"
               >
-                Inches In CM
+                inch in cm
               </a>
               {' '}provides fast, accurate, and easy conversions for height, TV screens, paper, furniture, and everyday measurements.
             </div>

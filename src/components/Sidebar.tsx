@@ -1,8 +1,7 @@
 import React from 'react';
 import { RoutePath } from '../types';
 import { CONVERSION_TYPES } from '../data/conversions';
-import { BLOG_POSTS } from '../data/blog';
-import { Scroll, Award, Ruler, ExternalLink, Flame } from 'lucide-react';
+import { Award, Ruler, ExternalLink, Flame } from 'lucide-react';
 
 interface SidebarProps {
   currentPath: RoutePath;
@@ -116,31 +115,6 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
             >
               {target.label}
             </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Internal Blogs Widget */}
-      <div className="bg-white rounded-3xl p-6 shadow-xl border border-slate-200">
-        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-1.5 border-b-2 border-slate-200 pb-2.5">
-          <Scroll className="w-4 h-4 text-emerald-600 stroke-[2.5]" />
-          Featured Reading
-        </h4>
-        <div className="space-y-4">
-          {BLOG_POSTS.slice(0, 3).map((blog) => (
-            <div 
-              key={blog.slug} 
-              onClick={() => onNavigate(`/blog/${blog.slug}/` as RoutePath)}
-              className="cursor-pointer space-y-1 block group hover:bg-slate-50/80 p-2.5 -mx-2.5 rounded-xl transition-all"
-            >
-              <h5 className="text-xs font-black text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-                {blog.title}
-              </h5>
-              <div className="flex justify-between text-[10px] text-slate-400 font-bold font-mono uppercase tracking-wider">
-                <span>{blog.category}</span>
-                <span>{blog.readTime}</span>
-              </div>
-            </div>
           ))}
         </div>
       </div>

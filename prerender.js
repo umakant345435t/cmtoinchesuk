@@ -21,12 +21,7 @@ const routes = [
   'disclaimer',
   'cookie-policy',
   'sitemap',
-  'blog',
-  'blog/how-many-inches-in-1-cm',
-  'blog/cm-vs-inches',
-  'blog/uk-height-conversion-guide',
-  'blog/clothing-size-conversion',
-  'blog/international-measurement-systems',
+  'unit-conversion-chart',
   '150-cm-to-inches',
   '170-cm-to-inches',
   '180-cm-to-inches',
@@ -157,57 +152,12 @@ const metadata = {
   'sitemap': {
     title: 'HTML Sitemap Index – cmtoinches.uk Navigation Map',
     h1: 'Programmatic HTML Sitemap Index',
-    description: 'Browse 100% of the active URLs, conversion guides, blog columns, and legal policy structures on this portal.'
+    description: 'Browse 100% of the active URLs, conversion guides, and legal policy structures on this portal.'
   },
-  'blog': {
-    title: 'UK Metrology & Clothing Size Blog – Information Portal',
-    h1: 'Measurement Metrology & Guide Blog',
-    description: 'Learn how metric measurements apply to British size charts, passport registries, and historic trades.'
-  },
-  'blog/how-many-inches-in-1-cm': {
-    title: 'How Many Inches in 1 CM? The Definitive Metrology Answer – Metric Blog Guide',
-    h1: 'How Many Inches in 1 CM? The Definitive Metrology Answer',
-    description: 'Study the exact fractional standard for how many inches live inside a single centimeter. Accurate layout tables and historical metric treaty summaries.',
-    isBlog: true,
-    author: 'Eleanor Vance',
-    datePublished: '2026-06-20',
-    category: 'Length metrology'
-  },
-  'blog/cm-vs-inches': {
-    title: 'CM vs Inches: Understanding the Imperial & Metric Systems – Metric Blog Guide',
-    h1: 'CM vs Inches: Understanding the Imperial & Metric Systems',
-    description: 'Explore historical, industrial, and daily differences between centimeters and inches. Essential reading for global engineering students.',
-    isBlog: true,
-    author: 'James Sterling',
-    datePublished: '2026-06-21',
-    category: 'Socio-metrics'
-  },
-  'blog/uk-height-conversion-guide': {
-    title: 'The Ultimate UK Height Conversion Guide (CM, Feet, Inches) – Metric Blog Guide',
-    h1: 'The Ultimate UK Height Conversion Guide (CM, Feet, Inches)',
-    description: 'Master British height documentation requirements. Seamlessly bridge metric meters and imperial stone, feet, or inches.',
-    isBlog: true,
-    author: 'Eleanor Vance',
-    datePublished: '2026-06-22',
-    category: 'Passport standards'
-  },
-  'blog/clothing-size-conversion': {
-    title: 'How CM and Inches Impact Clothing & Shoe Sizes – Metric Blog Guide',
-    h1: 'How CM and Inches Impact Clothing & Shoe Sizes',
-    description: 'Learn why UK shoe sizes, trousers, waist measures, and clothing labels vary across regions. Full metric translation arrays inside.',
-    isBlog: true,
-    author: 'Harriet Cole',
-    datePublished: '2026-06-23',
-    category: 'E-commerce sizing'
-  },
-  'blog/international-measurement-systems': {
-    title: 'A History of the International System of Units (SI) – Metric Blog Guide',
-    h1: 'A History of the International System of Units (SI)',
-    description: 'A deep metrological study outlining the history of length definitions, from local steps to the light-speed standard.',
-    isBlog: true,
-    author: 'James Sterling',
-    datePublished: '2026-06-24',
-    category: 'Metrology history'
+  'unit-conversion-chart': {
+    title: 'Inch in CM vs Stone to KG – Unit Conversion Chart & Quick Difference List',
+    h1: 'Inch in CM vs Stone to KG Comparison Chart',
+    description: 'Quick comparison list and reference charts comparing length conversions (inch in cm) and weight conversions (stone to kg) with direct calculator links.'
   },
   '150-cm-to-inches': {
     title: '150 CM to Inches Converter (150 cm → in) – Height Conversion',
@@ -355,7 +305,7 @@ const homepageSchema = {
   ]
 };
 
-const staticRootBody = `<div id="root"><div style="min-height:100vh;background-color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;"><header style="background-color:#ffffff;border-bottom:1px solid #f1f5f9;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;"><div style="font-weight:900;font-size:20px;color:#0f172a;letter-spacing:-0.025em;">cmtoinches<span style="color:#2563eb;">.uk</span></div></header><main style="max-width:1280px;margin:0 auto;padding:32px 16px;"><div style="background:#ffffff;border-radius:16px;border:1px solid #f1f5f9;padding:32px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.05);"><div style="height:32px;width:240px;background:#e2e8f0;border-radius:8px;margin-bottom:16px;"></div><div style="height:48px;width:100%;max-width:480px;background:#f1f5f9;border-radius:8px;"></div></div></main><div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true"><h1>CM to Inches &amp; Inch to CM Converter</h1><p>Convert CM to inches and inch to cm quickly with our accurate UK measurement converter. Get instant metric to imperial length conversions for free.</p><h2>CM to Inches Conversion (Metric to Imperial)</h2><p>To convert CM to Inches, divide centimeters by 2.54 (Inches = Centimeters ÷ 2.54).</p><h2>Inch to CM Conversion (Imperial to Metric)</h2><p>To convert Inches to CM, multiply inches by 2.54 (Centimeters = Inches × 2.54).</p></div></div></div>`;
+const staticRootBody = `<div id="root"><div style="min-height:100vh;background-color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;"><header style="background-color:#ffffff;border-bottom:1px solid #f1f5f9;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;"><div style="font-weight:900;font-size:20px;color:#0f172a;letter-spacing:-0.025em;"><a href="https://www.cmtoinches.uk/" style="color:inherit;text-decoration:none;">cmtoinches<span style="color:#2563eb;">.uk</span></a></div></header><main style="max-width:1280px;margin:0 auto;padding:32px 16px;"><div style="background:#ffffff;border-radius:16px;border:1px solid #f1f5f9;padding:32px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.05);"><div style="height:32px;width:240px;background:#e2e8f0;border-radius:8px;margin-bottom:16px;"></div><div style="height:48px;width:100%;max-width:480px;background:#f1f5f9;border-radius:8px;"></div></div></main><div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true"><h1>CM to Inches &amp; Inch to CM Converter</h1><p>Convert CM to inches and inch to cm quickly with our accurate UK measurement converter. Get instant metric to imperial length conversions for free.</p><h2>CM to Inches Conversion (Metric to Imperial)</h2><p>To convert CM to Inches, divide centimeters by 2.54 (Inches = Centimeters ÷ 2.54).</p><h2>Inch to CM Conversion (Imperial to Metric)</h2><p>To convert Inches to CM, multiply inches by 2.54 (Centimeters = Inches × 2.54).</p><nav><a href="https://www.cmtoinches.uk/">cm to inches</a></nav><footer><p>Need stone to kg? <a href="https://stonetokg.uk/" target="_blank" rel="noopener">stone to kg</a></p><p>Need inch in cm? <a href="https://inchesincm.de/" target="_blank" rel="noopener">inch in cm</a></p></footer></div></div></div>`;
 
 // Also write updated Root index.html with canonical tags and homepage JSON-LD for AI Search indexers
 const homeJsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(homepageSchema, null, 2)}\n</script>`;
@@ -491,7 +441,13 @@ routes.forEach((route) => {
   const jsonLdScript = `<script type="application/ld+json">\n${JSON.stringify(schemaObj, null, 2)}\n</script>`;
 
   const pageH1 = meta.h1 || meta.title.split('–')[0].trim();
-  const staticPageBody = `<div id="root"><div style="min-height:100vh;background-color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;"><header style="background-color:#ffffff;border-bottom:1px solid #f1f5f9;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;"><div style="font-weight:900;font-size:20px;color:#0f172a;letter-spacing:-0.025em;">cmtoinches<span style="color:#2563eb;">.uk</span></div></header><main style="max-width:1280px;margin:0 auto;padding:32px 16px;"><div style="background:#ffffff;border-radius:16px;border:1px solid #f1f5f9;padding:32px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.05);"><div style="height:32px;width:240px;background:#e2e8f0;border-radius:8px;margin-bottom:16px;"></div><div style="height:48px;width:100%;max-width:480px;background:#f1f5f9;border-radius:8px;"></div></div></main><div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true"><h1>${pageH1}</h1><p>${meta.description}</p></div></div></div>`;
+  const partnerLink = route === 'inches-to-cm' 
+    ? `<p>Convert <a href="https://inchesincm.de/" target="_blank" rel="noopener">inch in cm</a> instantly with our partner calculator for height, paper, furniture, and screens.</p>` 
+    : route === 'feet-to-cm'
+    ? `<p>Need stone to kg or pounds? Convert body weight instantly with <a href="https://stonetokg.uk/" target="_blank" rel="noopener">stone to kg</a>.</p>`
+    : '';
+
+  const staticPageBody = `<div id="root"><div style="min-height:100vh;background-color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;"><header style="background-color:#ffffff;border-bottom:1px solid #f1f5f9;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;"><div style="font-weight:900;font-size:20px;color:#0f172a;letter-spacing:-0.025em;"><a href="https://www.cmtoinches.uk/" style="color:inherit;text-decoration:none;">cmtoinches<span style="color:#2563eb;">.uk</span></a></div></header><main style="max-width:1280px;margin:0 auto;padding:32px 16px;"><div style="background:#ffffff;border-radius:16px;border:1px solid #f1f5f9;padding:32px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.05);"><div style="height:32px;width:240px;background:#e2e8f0;border-radius:8px;margin-bottom:16px;"></div><div style="height:48px;width:100%;max-width:480px;background:#f1f5f9;border-radius:8px;"></div></div></main><div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true"><h1>${pageH1}</h1><p>${meta.description}</p>${partnerLink}<nav><a href="https://www.cmtoinches.uk/">cm to inches</a></nav><footer><p>Convert <a href="https://www.cmtoinches.uk/">cm to inches</a> online.</p><p>Partner tools: <a href="https://stonetokg.uk/" target="_blank" rel="noopener">stone to kg</a> | <a href="https://inchesincm.de/" target="_blank" rel="noopener">inch in cm</a></p></footer></div></div></div>`;
 
   // Dynamic meta replacements
   let pageContent = indexContent

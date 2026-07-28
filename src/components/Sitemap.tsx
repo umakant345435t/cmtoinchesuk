@@ -21,6 +21,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Feet to Meters Standardizer', path: '/feet-to-meters/' as RoutePath },
         { label: 'Millimeters to Inches Woodwork Standard', path: '/mm-to-inches/' as RoutePath },
         { label: 'Inches to Millimeters Woodwork Standard', path: '/inches-to-mm/' as RoutePath },
+        { label: 'Inch in CM vs Stone to KG Comparison Chart', path: '/unit-conversion-chart/' as RoutePath },
       ]
     },
     {
@@ -33,18 +34,6 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: '200 cm to Inches Height Guide', path: '/200-cm-to-inches/' as RoutePath },
         { label: '5 Feet in CM Height Guide', path: '/5-feet-in-cm/' as RoutePath },
         { label: '6 Feet in CM Height Guide', path: '/6-feet-in-cm/' as RoutePath },
-      ]
-    },
-    {
-      title: 'Topical Authority Knowledge Base',
-      icon: Book,
-      links: [
-        { label: '"How many inches are in 1 cm?" Deep-Dive', path: '/blog/how-many-inches-in-1-cm/' as RoutePath },
-        { label: '"CM vs Inches" System Comparison', path: '/blog/cm-vs-inches/' as RoutePath },
-        { label: '"UK Height Conversion" Passport & ID Guide', path: '/blog/uk-height-conversion-guide/' as RoutePath },
-        { label: '"Clothing Size Conversion" E-Commerce Guide', path: '/blog/clothing-size-conversion/' as RoutePath },
-        { label: '"International Measurement Systems" Geopolitical History', path: '/blog/international-measurement-systems/' as RoutePath },
-        { label: 'Main Blog Section Index', path: '/blog/' as RoutePath },
       ]
     },
     {

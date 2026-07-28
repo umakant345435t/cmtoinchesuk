@@ -21,23 +21,7 @@ export type RoutePath =
   | '/disclaimer/'
   | '/cookie-policy/'
   | '/sitemap/'
-  | '/blog/'
-  | '/blog/how-many-inches-in-1-cm/'
-  | '/blog/cm-vs-inches/'
-  | '/blog/uk-height-conversion-guide/'
-  | '/blog/clothing-size-conversion/'
-  | '/blog/international-measurement-systems/';
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  updatedAt: string;
-  description: string;
-  author: string;
-  category: string;
-  readTime: string;
-  contentHtml: string;
-}
+  | '/unit-conversion-chart/';
 
 export interface FAQItem {
   question: string;

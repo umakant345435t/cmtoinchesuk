@@ -11,11 +11,11 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const mainLinks: { label: string; path: RoutePath; icon?: any }[] = [
-    { label: 'Home', path: '/', icon: Home },
+    { label: 'cm to inches', path: '/', icon: Home },
     { label: 'CM → Inches', path: '/cm-to-inches/', icon: Compass },
     { label: 'Inches → CM', path: '/inches-to-cm/', icon: Compass },
     { label: 'Feet → CM', path: '/feet-to-cm/', icon: Compass },
-    { label: 'Blog Articles', path: '/blog/', icon: BookOpen },
+    { label: 'Unit Chart', path: '/unit-conversion-chart/', icon: Compass },
     { label: 'Sitemap', path: '/sitemap/', icon: FileText }
   ];
 
