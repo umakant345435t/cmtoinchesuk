@@ -87,28 +87,41 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        {/* Global Metrological Network & Backlinks */}
-        <div className="pt-2 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs font-bold text-slate-500">
+        {/* Useful Measurement Tools & Partner Backlinks */}
+        <div className="pt-6 border-t border-slate-900/80 space-y-4">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shrink-0"></span>
-            <span className="text-slate-400 font-sans tracking-wide">Our Measurement Network:</span>
+            <h4 className="text-slate-300 font-mono text-xs uppercase font-black tracking-wider">
+              Recommended Unit Converters &amp; Partner Tools
+            </h4>
           </div>
-          <div className="flex flex-wrap gap-4 items-center justify-center">
-            <a 
-              href="https://stonetokg.uk" 
-              target="_blank" 
-              className="text-slate-350 hover:text-yellow-400 transition-colors uppercase font-mono tracking-wider flex items-center gap-1 hover:underline"
-            >
-              <span>🇬🇧 stonetokg.uk</span>
-            </a>
-            <span className="text-slate-800 select-none">•</span>
-            <a 
-              href="https://inchesincm.de" 
-              target="_blank" 
-              className="text-slate-350 hover:text-yellow-400 transition-colors uppercase font-mono tracking-wider flex items-center gap-1 hover:underline"
-            >
-              <span>🇩🇪 inchesincm.de</span>
-            </a>
+
+          <div className="grid md:grid-cols-2 gap-4 text-[11px] text-slate-400 leading-relaxed font-medium">
+            <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-900">
+              Need stone to kg or pounds? Convert body weight, luggage, fitness, and everyday measurements instantly with{' '}
+              <a 
+                href="https://stonetokg.uk/" 
+                target="_blank" 
+                rel="noopener" 
+                className="text-yellow-400 font-black hover:underline"
+              >
+                Stone To Kg
+              </a>
+              {' '}— fast, accurate, mobile-friendly, and easy to use.
+            </div>
+
+            <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-900">
+              Need to convert inches to centimeters?{' '}
+              <a 
+                href="https://inchesincm.de/" 
+                target="_blank" 
+                rel="noopener" 
+                className="text-yellow-400 font-black hover:underline"
+              >
+                Inches In CM
+              </a>
+              {' '}provides fast, accurate, and easy conversions for height, TV screens, paper, furniture, and everyday measurements.
+            </div>
           </div>
         </div>
 
