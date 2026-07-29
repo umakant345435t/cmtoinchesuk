@@ -620,38 +620,142 @@ export default function App() {
     }
 
     if (currentPath === '/unit-conversion-chart/') {
+      const cmToInchTable = [
+        { cm: 1, in: (1 / 2.54).toFixed(4), ftIn: '0\' 0.39"' },
+        { cm: 5, in: (5 / 2.54).toFixed(4), ftIn: '0\' 1.97"' },
+        { cm: 10, in: (10 / 2.54).toFixed(4), ftIn: '0\' 3.94"' },
+        { cm: 25, in: (25 / 2.54).toFixed(4), ftIn: '0\' 9.84"' },
+        { cm: 50, in: (50 / 2.54).toFixed(4), ftIn: '1\' 7.69"' },
+        { cm: 75, in: (75 / 2.54).toFixed(4), ftIn: '2\' 5.53"' },
+        { cm: 100, in: (100 / 2.54).toFixed(4), ftIn: '3\' 3.37"' },
+        { cm: 150, in: (150 / 2.54).toFixed(4), ftIn: '4\' 11.06"' },
+        { cm: 170, in: (170 / 2.54).toFixed(4), ftIn: '5\' 6.93"' },
+        { cm: 180, in: (180 / 2.54).toFixed(4), ftIn: '5\' 10.87"' },
+        { cm: 200, in: (200 / 2.54).toFixed(4), ftIn: '6\' 6.74"' },
+        { cm: 250, in: (250 / 2.54).toFixed(4), ftIn: '8\' 2.43"' },
+        { cm: 300, in: (300 / 2.54).toFixed(4), ftIn: '9\' 10.11"' },
+        { cm: 400, in: (400 / 2.54).toFixed(4), ftIn: '13\' 1.48"' },
+        { cm: 500, in: (500 / 2.54).toFixed(4), ftIn: '16\' 4.85"' },
+        { cm: 600, in: (600 / 2.54).toFixed(4), ftIn: '19\' 8.22"' },
+        { cm: 700, in: (700 / 2.54).toFixed(4), ftIn: '22\' 11.59"' },
+        { cm: 800, in: (800 / 2.54).toFixed(4), ftIn: '26\' 2.96"' },
+        { cm: 900, in: (900 / 2.54).toFixed(4), ftIn: '29\' 6.33"' },
+        { cm: 1000, in: (1000 / 2.54).toFixed(4), ftIn: '32\' 9.70"' },
+      ];
+
+      const stoneToKgTable = [
+        { st: 0.5, lbs: '7 lbs', kg: (0.5 * 6.35029318).toFixed(2) },
+        { st: 1, lbs: '14 lbs', kg: (1 * 6.35029318).toFixed(2) },
+        { st: 2, lbs: '28 lbs', kg: (2 * 6.35029318).toFixed(2) },
+        { st: 3, lbs: '42 lbs', kg: (3 * 6.35029318).toFixed(2) },
+        { st: 4, lbs: '56 lbs', kg: (4 * 6.35029318).toFixed(2) },
+        { st: 5, lbs: '70 lbs', kg: (5 * 6.35029318).toFixed(2) },
+        { st: 6, lbs: '84 lbs', kg: (6 * 6.35029318).toFixed(2) },
+        { st: 7, lbs: '98 lbs', kg: (7 * 6.35029318).toFixed(2) },
+        { st: 8, lbs: '112 lbs', kg: (8 * 6.35029318).toFixed(2) },
+        { st: 9, lbs: '126 lbs', kg: (9 * 6.35029318).toFixed(2) },
+        { st: 10, lbs: '140 lbs', kg: (10 * 6.35029318).toFixed(2) },
+        { st: 11, lbs: '154 lbs', kg: (11 * 6.35029318).toFixed(2) },
+        { st: 12, lbs: '168 lbs', kg: (12 * 6.35029318).toFixed(2) },
+        { st: 13, lbs: '182 lbs', kg: (13 * 6.35029318).toFixed(2) },
+        { st: 14, lbs: '196 lbs', kg: (14 * 6.35029318).toFixed(2) },
+        { st: 15, lbs: '210 lbs', kg: (15 * 6.35029318).toFixed(2) },
+        { st: 16, lbs: '224 lbs', kg: (16 * 6.35029318).toFixed(2) },
+        { st: 18, lbs: '252 lbs', kg: (18 * 6.35029318).toFixed(2) },
+        { st: 20, lbs: '280 lbs', kg: (20 * 6.35029318).toFixed(2) },
+      ];
+
       return (
         <div className="space-y-6">
           {renderBreadcrumb()}
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
-            <div className="border-b border-slate-100 pb-4 space-y-2">
+          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-8">
+            <div className="border-b border-slate-100 pb-5 space-y-2">
               <span className="text-[10px] bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
-                UNIT CONVERSION CHART
+                UNIT CONVERSION MASTER CHART
               </span>
               <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
-                Inch in CM vs Stone to KG
+                1 CM to 1000 CM to Inches &amp; Stone to KG Conversion Charts
               </h1>
+              <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed font-sans">
+                Comprehensive reference lookup charts for length conversions (inch in cm) spanning 1 cm to 1000 cm, alongside body weight conversions (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a>) from 0.5 st to 20 st.
+              </p>
             </div>
 
-            {/* Quick Partner Links Highlights */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2">
-                <h3 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
-                  <span>📏 Length Converter Partner</span>
-                </h3>
-                <p className="text-sm text-slate-700 leading-relaxed font-sans">
-                  Need fast and accurate length conversions for height, paper sizes, furniture, and screens? Visit our partner tool for <a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> conversions.
-                </p>
+            {/* Side-by-Side Reference Tables */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* 1 cm to 1000 cm to Inches Table */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                    📏 Centimeters to Inches Chart (1 to 1000 CM)
+                  </h2>
+                  <span className="text-xs font-bold text-slate-500 font-mono">
+                    1 to 1000 CM
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                      <tr>
+                        <th className="p-2.5 border-b">Centimeters (CM)</th>
+                        <th className="p-2.5 border-b">Inches (IN)</th>
+                        <th className="p-2.5 border-b">Feet &amp; Inches</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {cmToInchTable.map((row) => (
+                        <tr key={row.cm} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-2.5 font-bold text-slate-900">{row.cm} cm</td>
+                          <td className="p-2.5 text-blue-700 font-bold">{row.in} in</td>
+                          <td className="p-2.5 text-slate-600">{row.ftIn}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
-              <div className="p-5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl space-y-2">
-                <h3 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
-                  <span>⚖️ Weight Converter Partner</span>
-                </h3>
-                <p className="text-sm text-slate-700 leading-relaxed font-sans">
-                  Need body weight, luggage, fitness, or scale conversions between stones, pounds, and kilograms? Use our partner calculator for <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> conversions.
-                </p>
+              {/* Stone to KG Table */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                    ⚖️ Stone to Kilograms Chart (0.5 to 20 ST)
+                  </h2>
+                  <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-amber-700 hover:underline">
+                    stone to kg →
+                  </a>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                      <tr>
+                        <th className="p-2.5 border-b">Stone (ST)</th>
+                        <th className="p-2.5 border-b">Pounds (LBS)</th>
+                        <th className="p-2.5 border-b">Kilograms (KG)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {stoneToKgTable.map((row) => (
+                        <tr key={row.st} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-2.5 font-bold text-slate-900">{row.st} st</td>
+                          <td className="p-2.5 text-slate-600">{row.lbs}</td>
+                          <td className="p-2.5 text-amber-700 font-bold">{row.kg} kg</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
+            </div>
+
+            {/* Quick Measurement Difference Explanation */}
+            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+              <h3 className="text-sm font-black text-slate-900 tracking-tight">
+                Key Comparison: Length (<a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">inch in cm</a>) vs Mass (stone to kg)
+              </h3>
+              <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-sans">
+                Centimeters and inches are linear length units used to determine height, room dimensions, clothing waist sizes, and screen diameters. In contrast, stones and kilograms measure body weight, luggage mass, and physical fitness metrics. 1 inch is defined as 2.54 cm, while 1 stone equals 14 lbs or approximately 6.35029 kg.
+              </p>
             </div>
           </div>
         </div>
@@ -711,6 +815,78 @@ export default function App() {
             </div>
           </div>
 
+          {/* Example Calculation Visual Card */}
+          <div className="my-6 p-5 md:p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs font-black text-slate-700 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                <span>📊 CONVERSION EXAMPLE PREVIEW</span>
+              </span>
+              <span className="text-xs bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-full font-mono">
+                9 CM = 3.5433 IN
+              </span>
+            </div>
+            
+            <div className="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
+              <div className="space-y-1">
+                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                  ACTIVE CONVERSION MODE:
+                </div>
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs md:text-sm font-bold text-slate-800 flex justify-between items-center">
+                  <span>CM → IN (Centimeters to Inches)</span>
+                  <span className="text-slate-400 text-xs">▼</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase">
+                    CENTIMETERS / CM INPUT
+                  </label>
+                  <div className="p-3 border-2 border-blue-500 rounded-xl bg-white font-mono font-bold text-xl text-slate-900 flex justify-between items-center">
+                    <span>9</span>
+                    <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded font-sans font-semibold">CM</span>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase">
+                    INCHES / IN OUTPUT
+                  </label>
+                  <div className="p-3 border border-blue-100 bg-blue-50/70 rounded-xl font-mono font-bold text-2xl text-blue-700 flex justify-between items-center">
+                    <span>3.5433</span>
+                    <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded font-sans font-semibold">IN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-t border-slate-100">
+                <div className="font-mono text-slate-600">
+                  Formula: <span className="italic font-bold">in = cm / 2.54</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs space-y-1">
+                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                    <span>📄 FRACTIONAL EQUIVALENT (UK CARPENTRY)</span>
+                  </div>
+                  <div className="font-bold text-slate-900 font-mono text-sm">
+                    3 9/16 in <span className="text-slate-500 font-normal text-xs">(Nearest 1/16")</span>
+                  </div>
+                </div>
+
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs space-y-1">
+                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                    <span>ℹ️ FORMULA EXPRESSION</span>
+                  </div>
+                  <div className="font-mono text-slate-800 bg-white p-1.5 rounded border border-slate-200">
+                    9 cm * 0.39370 = 3.5433 in
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-4 pt-2">
             <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
               CM to Inches Conversion (Metric to Imperial)
@@ -726,6 +902,9 @@ export default function App() {
             </h2>
             <p className="text-base text-slate-700 leading-relaxed font-sans">
               Converting inches to centimeters (inch to cm) translates traditional imperial dimensions into the decimal System International (SI) metric framework. Simply multiply the number of inches by 2.54 to get the exact measurement in centimeters. For instance, a 70-inch height translates to <code className="bg-slate-100 text-slate-900 px-2 py-0.5 rounded font-mono font-bold">70 × 2.54 = 177.8 cm</code>.
+            </p>
+            <p className="text-sm text-slate-700 font-medium">
+              Explore our comprehensive <a href="/unit-conversion-chart/" onClick={(e) => { e.preventDefault(); handleNavigate('/unit-conversion-chart/'); }} title="Inch to CM Conversion (Imperial to Metric)" className="text-blue-600 font-black underline hover:text-blue-800">Chart List</a> for inch to cm and cm to inches reference tables.
             </p>
           </div>
         </section>
