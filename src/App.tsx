@@ -623,17 +623,14 @@ export default function App() {
       return (
         <div className="space-y-6">
           {renderBreadcrumb()}
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-8">
-            <div className="border-b border-slate-100 pb-5 space-y-2">
+          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
+            <div className="border-b border-slate-100 pb-4 space-y-2">
               <span className="text-[10px] bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
-                UNIT CONVERSION QUICK CHART
+                UNIT CONVERSION CHART
               </span>
               <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
-                Inch in CM vs Stone to KG Comparison Chart
+                Inch in CM vs Stone to KG
               </h1>
-              <p className="text-base text-slate-700 font-medium leading-relaxed font-sans">
-                Quick comparison list, difference summary, and conversion tables comparing length measurements (<a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a>) and body weight measurements (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a>).
-              </p>
             </div>
 
             {/* Quick Partner Links Highlights */}
@@ -654,91 +651,6 @@ export default function App() {
                 <p className="text-sm text-slate-700 leading-relaxed font-sans">
                   Need body weight, luggage, fitness, or scale conversions between stones, pounds, and kilograms? Use our partner calculator for <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> conversions.
                 </p>
-              </div>
-            </div>
-
-            {/* Key Differences List */}
-            <div className="space-y-4">
-              <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight border-b border-slate-100 pb-2">
-                Key Differences: Inch in CM vs Stone to KG
-              </h2>
-              <ul className="space-y-3 text-sm text-slate-700 font-sans">
-                <li className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                  <strong>1. Physical Dimension:</strong> <a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> measures <em>Length, Height, and Distance</em>, whereas <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> measures <em>Mass and Body Weight</em>.
-                </li>
-                <li className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                  <strong>2. Imperial &amp; Metric Standards:</strong> 1 inch is defined as exactly 2.54 centimeters. 1 British stone is defined as 14 pounds or approximately 6.35029 kilograms.
-                </li>
-                <li className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                  <strong>3. Conversion Formulas:</strong>
-                  <ul className="mt-2 space-y-1 text-xs font-mono">
-                    <li>• Length: <code className="bg-white px-2 py-0.5 rounded border">Centimeters = Inches × 2.54</code></li>
-                    <li>• Weight: <code className="bg-white px-2 py-0.5 rounded border">Kilograms = Stone × 6.35029318</code></li>
-                  </ul>
-                </li>
-                <li className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                  <strong>4. Primary Uses in the UK:</strong> Length conversions like <a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> are used for UK passport height, screen dimensions, clothing waist sizes, and timber design. Weight conversions like <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> are used for body weight scales, gym progress, luggage, and medical charts.
-                </li>
-              </ul>
-            </div>
-
-            {/* Side by Side Conversion Reference Tables */}
-            <div className="space-y-4">
-              <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
-                Quick Unit Conversion Reference Charts
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Inch to CM Table */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <div className="bg-blue-600 text-white p-3.5 font-bold text-sm flex justify-between items-center">
-                    <span>Inch to CM Reference Chart</span>
-                    <a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-xs text-yellow-300 font-mono underline">
-                      inch in cm →
-                    </a>
-                  </div>
-                  <table className="w-full text-xs text-left">
-                    <thead className="bg-slate-100 font-bold text-slate-800">
-                      <tr>
-                        <th className="p-2.5 border-b">Inches (in)</th>
-                        <th className="p-2.5 border-b">Centimeters (cm)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 font-mono">
-                      <tr><td className="p-2.5">1 in</td><td className="p-2.5 font-bold">2.54 cm</td></tr>
-                      <tr><td className="p-2.5">5 in</td><td className="p-2.5 font-bold">12.70 cm</td></tr>
-                      <tr><td className="p-2.5">10 in</td><td className="p-2.5 font-bold">25.40 cm</td></tr>
-                      <tr><td className="p-2.5">12 in (1 ft)</td><td className="p-2.5 font-bold">30.48 cm</td></tr>
-                      <tr><td className="p-2.5">60 in (5 ft)</td><td className="p-2.5 font-bold">152.40 cm</td></tr>
-                      <tr><td className="p-2.5">72 in (6 ft)</td><td className="p-2.5 font-bold">182.88 cm</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Stone to KG Table */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <div className="bg-amber-600 text-white p-3.5 font-bold text-sm flex justify-between items-center">
-                    <span>Stone to KG Reference Chart</span>
-                    <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-xs text-yellow-300 font-mono underline">
-                      stone to kg →
-                    </a>
-                  </div>
-                  <table className="w-full text-xs text-left">
-                    <thead className="bg-slate-100 font-bold text-slate-800">
-                      <tr>
-                        <th className="p-2.5 border-b">Stone (st)</th>
-                        <th className="p-2.5 border-b">Kilograms (kg)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 font-mono">
-                      <tr><td className="p-2.5">1 st</td><td className="p-2.5 font-bold">6.35 kg</td></tr>
-                      <tr><td className="p-2.5">5 st</td><td className="p-2.5 font-bold">31.75 kg</td></tr>
-                      <tr><td className="p-2.5">10 st</td><td className="p-2.5 font-bold">63.50 kg</td></tr>
-                      <tr><td className="p-2.5">11 st</td><td className="p-2.5 font-bold">69.85 kg</td></tr>
-                      <tr><td className="p-2.5">12 st</td><td className="p-2.5 font-bold">76.20 kg</td></tr>
-                      <tr><td className="p-2.5">14 st</td><td className="p-2.5 font-bold">88.90 kg</td></tr>
-                    </tbody>
-                  </table>
-                </div>
               </div>
             </div>
           </div>
