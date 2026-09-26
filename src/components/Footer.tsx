@@ -120,16 +120,16 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
 
             <div className="bg-slate-900/50 p-4 rounded-xl border border-slate-900">
-              Need to convert inches to centimeters?{' '}
+              Want to type faster and have a little fun while practicing?{' '}
               <a 
-                href="https://inchesincm.de/" 
+                href="https://poptyping.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-yellow-400 font-black hover:underline"
               >
-                inch in cm
+                Popタイピング
               </a>
-              {' '}provides fast, accurate, and easy conversions for height, TV screens, paper, furniture, and everyday measurements.
+              {' '}is a simple typing where you can test your speed, improve your keyboard skills, and challenge yourself to get better with every try.
             </div>
           </div>
         </div>
