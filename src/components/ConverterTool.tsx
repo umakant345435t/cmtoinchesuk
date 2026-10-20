@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CONVERSION_TYPES } from '../data/conversions';
 import { ConversionType, RoutePath } from '../types';
-import { Copy, Check, Info, RefreshCw, Ruler, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn } from 'lucide-react';
+import { Copy, Check, Info, RefreshCw, Ruler, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft } from 'lucide-react';
 
 interface ConverterToolProps {
   initialTypeId?: string;
@@ -354,11 +354,11 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   };
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden" id="converter-tool">
-      <div className="p-6 md:p-8 space-y-6">
+    <div className="w-full bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl border border-slate-100 overflow-hidden" id="converter-tool">
+      <div className="p-3.5 sm:p-6 md:p-8 space-y-3 sm:space-y-5">
         {/* Unit Selector Dropdown */}
-        <div className="bg-slate-50/70 p-4 border border-slate-200/80 rounded-2xl">
-          <label htmlFor="conversion-mode-select" className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2">
+        <div className="bg-slate-50/80 p-2.5 sm:p-3.5 border border-slate-200/80 rounded-xl sm:rounded-2xl">
+          <label htmlFor="conversion-mode-select" className="block text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-wider mb-1 sm:mb-1.5">
             Active Conversion Mode:
           </label>
           <div className="relative">
@@ -366,7 +366,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               id="conversion-mode-select"
               value={selectedTypeId}
               onChange={(e) => handleTypeChange(e.target.value)}
-              className="w-full bg-white border-2 border-slate-200 text-slate-900 py-3.5 px-4 pr-10 rounded-xl text-sm font-black shadow-sm transition-all hover:border-blue-500 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none cursor-pointer appearance-none"
+              className="w-full bg-white border-2 border-slate-200 text-slate-900 py-2 sm:py-3 px-3 sm:px-4 pr-9 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black shadow-xs transition-all hover:border-blue-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none cursor-pointer appearance-none"
             >
               {CONVERSION_TYPES.map((type) => (
                 <option key={type.id} value={type.id} className="font-bold text-slate-800">
@@ -374,17 +374,17 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 </option>
               ))}
             </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-              <ChevronDown className="w-5 h-5 text-slate-500 stroke-[2.5]" />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 stroke-[2.5]" />
             </div>
           </div>
         </div>
 
         {/* Input & Output Double-Panel layout */}
-        <div className="grid md:grid-cols-9 gap-6 items-center">
+        <div className="grid md:grid-cols-9 gap-2 md:gap-6 items-center relative">
           {/* Input Panel */}
           <div className="md:col-span-4 flex flex-col">
-            <label className="block text-xs font-bold uppercase text-slate-400 mb-2">
+            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2">
               Centimeters / {currentType.fromUnit.toUpperCase()} input
             </label>
             <div className="relative">
@@ -393,54 +393,69 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Enter value"
-                className="w-full text-3xl font-black bg-slate-50 border-2 border-slate-200 rounded-2xl px-5 py-4 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-full text-2xl sm:text-3xl font-black bg-slate-50 border-2 border-slate-200 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3.5 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none shadow-xs"
                 id="converter-input"
               />
-              <span className="absolute right-5 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 bg-slate-200/50 px-2.5 py-1 rounded-md uppercase font-mono">
+              <span className="absolute right-3.5 sm:right-5 top-1/2 -translate-y-1/2 text-xs sm:text-sm font-black text-slate-400 bg-slate-200/60 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md uppercase font-mono">
                 {currentType.fromUnit}
               </span>
             </div>
           </div>
 
-          {/* Swap Button Column */}
-          <div className="md:col-span-1 flex justify-center">
+          {/* Swap Button: sleek arrow button saving space on mobile */}
+          <div className="md:col-span-1 flex justify-center -my-2.5 md:my-0 relative z-10">
             <button
               onClick={swapUnits}
-              title="Reverse direction"
-              className="bg-blue-50 text-blue-600 border-2 border-blue-100 hover:bg-blue-100 hover:text-blue-700 p-3.5 rounded-full transition-all active:rotate-180 hover:scale-105 shadow-md shadow-blue-50 cursor-pointer"
+              title={`Swap direction (${currentType.fromUnit} ⇄ ${currentType.toUnit})`}
+              aria-label="Swap conversion direction"
+              type="button"
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white border-2 border-white shadow-md hover:shadow-lg w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center transition-all active:rotate-180 hover:scale-105 cursor-pointer group"
             >
-              <RefreshCw className="w-5 h-5 stroke-[2.5]" />
+              <ArrowDownUp className="w-4 h-4 md:hidden stroke-[2.5] group-hover:scale-110 transition-transform" />
+              <ArrowRightLeft className="w-5 h-5 hidden md:block stroke-[2.5] group-hover:scale-110 transition-transform" />
             </button>
           </div>
 
           {/* Output Panel */}
           <div className="md:col-span-4 flex flex-col">
-            <label className="block text-xs font-bold uppercase text-slate-400 mb-2">
+            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2">
               Inches / {currentType.toUnit.toUpperCase()} output
             </label>
-            <div className="w-full text-3xl font-black bg-blue-50 border-2 border-blue-100 text-blue-700 rounded-2xl px-5 py-4 flex items-center justify-between gap-3 min-h-[72px]">
+            <div className="w-full text-2xl sm:text-3xl font-black bg-blue-50 border-2 border-blue-100 text-blue-700 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 min-h-[54px] sm:min-h-[68px] shadow-xs">
               <span className="font-sans truncate" id="converter-result">
                 {formattedResult}
               </span>
-              <span className="text-sm font-black text-blue-400 bg-blue-200/30 px-2.5 py-1 rounded-md uppercase font-mono shrink-0">
-                {currentType.toUnit}
-              </span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={handleCopy}
+                  type="button"
+                  className="p-1.5 text-blue-600 hover:text-blue-800 hover:bg-blue-200/50 rounded-lg transition-all cursor-pointer"
+                  title="Copy result"
+                  aria-label="Copy result to clipboard"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-600 stroke-[3]" /> : <Copy className="w-4 h-4" />}
+                </button>
+                <span className="text-xs sm:text-sm font-black text-blue-500 bg-blue-200/40 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md uppercase font-mono">
+                  {currentType.toUnit}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Copy Result & Formula Footer */}
-        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 pt-2 border-t border-slate-100">
-          <p className="text-sm font-semibold text-slate-400">
-            Formula: <span className="text-slate-600 font-mono italic">{currentType.formula}</span>
+        {/* Copy Result & Formula Action Row */}
+        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2 sm:gap-4 pt-2.5 border-t border-slate-100">
+          <p className="text-xs sm:text-sm font-semibold text-slate-500 truncate">
+            Formula: <span className="text-slate-700 font-mono italic">{currentType.formula}</span>
           </p>
           <button
             onClick={handleCopy}
-            className="bg-blue-600 text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+            type="button"
+            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shrink-0"
             title="Copy conversion text"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-300 stroke-[3]" /> : <Copy className="w-4 h-4" />}
-            {copied ? 'CONVERSION COPIED!' : 'COPY RESULT'}
+            <span>{copied ? 'CONVERSION COPIED!' : 'COPY RESULT'}</span>
           </button>
         </div>
 

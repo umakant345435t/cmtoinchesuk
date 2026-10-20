@@ -22,7 +22,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-sm" id="header-navigation">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-2.5 sm:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
         {/* Brand Header & Toggle Row */}
         <div className="flex items-center justify-between w-full lg:w-auto">
           {/* Brand Identity with Blue-600 High Contrast SVG Logo */}
@@ -37,7 +37,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
             <img 
               src="/favicon.svg" 
               alt="CM to Inches Converter Logo" 
-              className="w-11 h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105" 
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105" 
               referrerPolicy="no-referrer"
             />
           </div>

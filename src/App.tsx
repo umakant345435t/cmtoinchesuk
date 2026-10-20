@@ -267,7 +267,7 @@ export default function App() {
   const renderBreadcrumb = () => {
     const segments = currentPath.split('/').filter(Boolean);
     return (
-      <nav className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium mb-6 bg-slate-50 border border-slate-100 p-2.5 rounded-lg">
+      <nav className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium mb-3 sm:mb-6 bg-slate-50 border border-slate-100 p-2 sm:p-2.5 rounded-lg">
         <a 
           href="https://www.cmtoinches.uk/" 
           onClick={(e) => {
@@ -764,7 +764,7 @@ export default function App() {
 
     // 5. HOMEPAGE VIEW (Most Important Layout)
     return (
-      <div className="space-y-8">
+      <div className="space-y-4 sm:space-y-8">
         {/* Instant Converter Panel */}
         <ConverterTool 
           initialTypeId={converterType} 
@@ -929,10 +929,10 @@ export default function App() {
       <Navigation currentPath={currentPath} onNavigate={handleNavigate} />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-3.5 sm:py-8">
         
         {/* Grid layout for layout structure */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           
           {/* Main content pane (Left/Center Column) */}
           <section className="lg:col-span-8 order-1">
