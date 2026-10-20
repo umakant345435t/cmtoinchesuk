@@ -6,7 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const routes = [
-  'cm-to-inches',
   'inches-to-cm',
   'feet-to-cm',
   'cm-to-feet',
@@ -22,6 +21,7 @@ const routes = [
   'cookie-policy',
   'sitemap',
   'unit-conversion-chart',
+  '90-cm-to-inches',
   '150-cm-to-inches',
   '170-cm-to-inches',
   '180-cm-to-inches',
@@ -158,6 +158,15 @@ const metadata = {
     title: 'Inch in CM vs Stone to KG – Unit Conversion Chart & Quick Difference List',
     h1: 'Inch in CM vs Stone to KG Comparison Chart',
     description: 'Quick comparison list and reference charts comparing length conversions (inch in cm) and weight conversions (stone to kg) with direct calculator links.'
+  },
+  '90-cm-to-inches': {
+    title: '90 CM to Inches Converter (90 cm → in) – Standard Height & Width',
+    h1: '90 CM to Inches Conversion',
+    description: 'Convert 90 centimeters to inches accurately. 90 cm equals 35.4331 inches or 2 feet 11.4 inches. View conversion formula, steps, and instant chart.',
+    formula: '90 ÷ 2.54 = 35.4331 inches',
+    isSpecific: true,
+    from: '90 cm',
+    to: '35.43 inches (2 feet 11.4 inches)'
   },
   '150-cm-to-inches': {
     title: '150 CM to Inches Converter (150 cm → in) – Height Conversion',
@@ -477,5 +486,39 @@ routes.forEach((route) => {
 // Also create a 404.html at the root of dist as a fallback with homepage JSON-LD
 fs.writeFileSync(path.join(distDir, '404.html'), updatedRootIndex, 'utf-8');
 console.log('Generated: 404.html fallback');
+
+// Generate 301 Moved Permanently redirect for duplicate /cm-to-inches/ route to Canonical Homepage
+const redirectDir = path.join(distDir, 'cm-to-inches');
+fs.mkdirSync(redirectDir, { recursive: true });
+const redirectHtml = `<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <title>301 Moved Permanently - CM to Inches Converter</title>
+  <meta http-equiv="refresh" content="0;url=https://www.cmtoinches.uk/">
+  <link rel="canonical" href="https://www.cmtoinches.uk/">
+  <meta name="robots" content="noindex, follow">
+  <script>
+    window.location.replace("https://www.cmtoinches.uk/");
+  </script>
+</head>
+<body style="font-family:system-ui,-apple-system,sans-serif;padding:32px;text-align:center;background:#f8fafc;color:#0f172a;">
+  <p><strong>301 Moved Permanently</strong></p>
+  <p>This duplicate page has been permanently relocated to our official homepage.</p>
+  <p>Redirecting to <a href="https://www.cmtoinches.uk/">https://www.cmtoinches.uk/</a>...</p>
+</body>
+</html>`;
+fs.writeFileSync(path.join(redirectDir, 'index.html'), redirectHtml, 'utf-8');
+console.log('Generated: cm-to-inches/index.html with 301 Permanent Redirect to https://www.cmtoinches.uk/');
+
+// Ensure _redirects and .htaccess are in dist
+const redirectsSrc = path.join(__dirname, 'public', '_redirects');
+if (fs.existsSync(redirectsSrc)) {
+  fs.copyFileSync(redirectsSrc, path.join(distDir, '_redirects'));
+}
+const htaccessSrc = path.join(__dirname, 'public', '.htaccess');
+if (fs.existsSync(htaccessSrc)) {
+  fs.copyFileSync(htaccessSrc, path.join(distDir, '.htaccess'));
+}
 
 console.log('Static route prerendering completed successfully!');

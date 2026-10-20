@@ -12,9 +12,9 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
   const mainLinks: { label: string; path: RoutePath; icon?: any }[] = [
     { label: 'cm to inches', path: '/', icon: Home },
-    { label: 'CM → Inches', path: '/cm-to-inches/', icon: Compass },
     { label: 'Inches → CM', path: '/inches-to-cm/', icon: Compass },
     { label: 'Feet → CM', path: '/feet-to-cm/', icon: Compass },
+    { label: 'CM → Feet', path: '/cm-to-feet/', icon: Compass },
     { label: 'Unit Chart', path: '/unit-conversion-chart/', icon: Compass },
     { label: 'Sitemap', path: '/sitemap/', icon: FileText }
   ];

@@ -58,7 +58,7 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
     { cm: 145, ftIn: `4' 9"`, status: 'Petite Stature' },
     { cm: 150, ftIn: `4' 11"`, status: 'Petite / UK Teen' },
     { cm: 155, ftIn: `5' 1"`, status: 'Below Average Female' },
-    { cm: 160, ftIn: `5' 3"`, status: 'Average UK Female text-sm font-semibold' },
+    { cm: 160, ftIn: `5' 3"`, status: 'Average UK Female' },
     { cm: 165, ftIn: `5' 5"`, status: 'Above Average Female' },
     { cm: 170, ftIn: `5' 7"`, status: 'Average UK Stature' },
     { cm: 175, ftIn: `5' 9"`, status: 'Average UK Male' },
@@ -72,11 +72,11 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
   return (
     <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="conversion-tables">
       {/* Title & Tabs */}
-      <div className="bg-slate-50 px-6 py-5 border-b border-slate-200">
-        <h3 className="text-base font-black text-slate-900 uppercase tracking-widest">
+      <div className="bg-slate-50 px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200">
+        <h3 className="text-sm sm:text-base font-black text-slate-900 uppercase tracking-widest">
           📊 High-Traffic Conversion Tables
         </h3>
-        <p className="text-lg text-slate-700 mt-2 font-semibold">
+        <p className="text-xs sm:text-sm text-slate-600 mt-1 font-semibold">
           Select a reference tab below. Click any row to automatically load its values into the calculator tool.
         </p>
       </div>
@@ -85,7 +85,7 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
       <div className="flex border-b border-slate-200 bg-slate-100/50 p-2 gap-1.5 flex-col sm:flex-row">
         <button
           onClick={() => setActiveTab('cm-to-in')}
-          className={`py-2.5 px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
+          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
             activeTab === 'cm-to-in'
               ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
@@ -95,7 +95,7 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
         </button>
         <button
           onClick={() => setActiveTab('in-to-cm')}
-          className={`py-2.5 px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
+          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
             activeTab === 'in-to-cm'
               ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
@@ -105,7 +105,7 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
         </button>
         <button
           onClick={() => setActiveTab('height-references')}
-          className={`py-2.5 px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
+          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
             activeTab === 'height-references'
               ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
@@ -115,36 +115,48 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
         </button>
       </div>
 
-      {/* Table Area */}
-      <div className="p-2 overflow-x-auto">
+      {/* Table Area - Fully Mobile Optimized without horizontal scroll */}
+      <div className="w-full overflow-hidden">
         {activeTab === 'cm-to-in' && (
-          <table className="min-w-full text-xs text-left text-slate-700">
+          <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
-                <th className="px-4 py-3 border-b border-slate-200">Value (cm)</th>
-                <th className="px-4 py-3 border-b border-slate-200">Inches (Dec)</th>
-                <th className="px-4 py-3 border-b border-slate-200">Inches (Fraction)</th>
-                <th className="px-4 py-3 border-b border-slate-200 text-right">Quick Presets Tool</th>
+              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+                <th className="w-[24%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">CM</span>
+                  <span className="hidden sm:inline">Value (cm)</span>
+                </th>
+                <th className="w-[28%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Inches</span>
+                  <span className="hidden sm:inline">Inches (Dec)</span>
+                </th>
+                <th className="w-[28%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Fraction</span>
+                  <span className="hidden sm:inline">Inches (Fraction)</span>
+                </th>
+                <th className="w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
+                  <span className="sm:hidden">Tool</span>
+                  <span className="hidden sm:inline">Quick Preset</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
               {cmToInRows.map((row, idx) => (
                 <tr 
                   key={row.cm}
-                  className={`cursor-pointer transition-all duration-155 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
+                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
                   onClick={() => onSelectValue('cm-to-inches', row.cm)}
                 >
-                  <td className="px-4 py-3 font-bold text-slate-900 font-sans">
+                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
                     {row.cm} cm
                   </td>
-                  <td className="px-4 py-3 font-bold text-slate-700 font-sans text-sm">
-                    {row.in.toFixed(4)}"
+                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-700 text-xs sm:text-sm truncate">
+                    {row.in.toFixed(3)}"
                   </td>
-                  <td className="px-4 py-3 font-mono text-slate-500 font-bold">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-mono text-slate-500 font-bold text-[11px] sm:text-xs truncate">
                     {row.fraction}
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="px-3 py-1 bg-white hover:bg-blue-600 hover:text-white border-2 border-slate-200 font-bold hover:border-blue-600 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
+                    <button className="px-2.5 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
                       Load
                     </button>
                   </td>
@@ -155,33 +167,45 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
         )}
 
         {activeTab === 'in-to-cm' && (
-          <table className="min-w-full text-xs text-left text-slate-700">
+          <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
-                <th className="px-4 py-3 border-b border-slate-200">Value (inches)</th>
-                <th className="px-4 py-3 border-b border-slate-200">Inches (Fractional Label)</th>
-                <th className="px-4 py-3 border-b border-slate-200">Value (cm)</th>
-                <th className="px-4 py-3 border-b border-slate-200 text-right">Quick Presets Tool</th>
+              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+                <th className="w-[24%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Inches</span>
+                  <span className="hidden sm:inline">Value (in)</span>
+                </th>
+                <th className="w-[28%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Fraction</span>
+                  <span className="hidden sm:inline">Fractional</span>
+                </th>
+                <th className="w-[28%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">CM</span>
+                  <span className="hidden sm:inline">Value (cm)</span>
+                </th>
+                <th className="w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
+                  <span className="sm:hidden">Tool</span>
+                  <span className="hidden sm:inline">Quick Preset</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
               {inToCmRows.map((row, idx) => (
                 <tr 
                   key={row.in}
-                  className={`cursor-pointer transition-all duration-155 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
+                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
                   onClick={() => onSelectValue('inches-to-cm', row.in)}
                 >
-                  <td className="px-4 py-3 font-bold text-slate-900 font-sans">
+                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
                     {row.in} in
                   </td>
-                  <td className="px-4 py-3 font-mono text-slate-500 font-bold">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-mono text-slate-500 font-bold text-[11px] sm:text-xs truncate">
                     {row.fraction}
                   </td>
-                  <td className="px-4 py-3 font-bold text-slate-700 text-sm">
-                    {row.cm.toFixed(3)} cm
+                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-700 text-xs sm:text-sm truncate">
+                    {row.cm.toFixed(2)} cm
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="px-3 py-1 bg-white hover:bg-blue-600 hover:text-white border-2 border-slate-200 font-bold hover:border-blue-600 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
+                    <button className="px-2.5 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
                       Load
                     </button>
                   </td>
@@ -192,20 +216,32 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
         )}
 
         {activeTab === 'height-references' && (
-          <table className="min-w-full text-xs text-left text-slate-700">
+          <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
-                <th className="px-4 py-3 border-b border-slate-200">Stature Metric (cm)</th>
-                <th className="px-4 py-3 border-b border-slate-200">Stature Imperial (ft ' in")</th>
-                <th className="px-4 py-3 border-b border-slate-200">UK Visual Profile Guidance</th>
-                <th className="px-4 py-3 border-b border-slate-200 text-right">Instant Route</th>
+              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+                <th className="w-[22%] sm:w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">CM</span>
+                  <span className="hidden sm:inline">Metric (cm)</span>
+                </th>
+                <th className="w-[24%] sm:w-[22%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Ft / In</span>
+                  <span className="hidden sm:inline">Imperial (ft ' in")</span>
+                </th>
+                <th className="w-[36%] sm:w-[40%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                  <span className="sm:hidden">Profile</span>
+                  <span className="hidden sm:inline">UK Height Guidance</span>
+                </th>
+                <th className="w-[18%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
+                  <span className="sm:hidden">Action</span>
+                  <span className="hidden sm:inline">Route</span>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
               {heightsRows.map((row, idx) => (
                 <tr 
                   key={row.cm}
-                  className={`cursor-pointer transition-all duration-155 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
+                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
                   onClick={() => {
                     const mappedPath: RoutePath = row.cm === 150 ? '/150-cm-to-inches/' : row.cm === 170 ? '/170-cm-to-inches/' : row.cm === 180 ? '/180-cm-to-inches/' : row.cm === 200 ? '/200-cm-to-inches/' : '/';
                     if (mappedPath !== '/') {
@@ -215,18 +251,18 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
                     }
                   }}
                 >
-                  <td className="px-4 py-3 font-bold text-slate-900 font-sans">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
                     {row.cm} cm
                   </td>
-                  <td className="px-4 py-3 font-black text-blue-600 text-sm">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-black text-blue-600 text-xs sm:text-sm truncate">
                     {row.ftIn}
                   </td>
-                  <td className="px-4 py-3 text-slate-500 font-bold">
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-slate-600 font-bold text-[10px] sm:text-xs leading-tight truncate">
                     {row.status}
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="px-3 py-1 bg-white hover:bg-blue-600 hover:text-white border-2 border-slate-200 font-bold hover:border-blue-600 rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
-                      {row.cm === 150 || row.cm === 170 || row.cm === 180 || row.cm === 200 ? 'Go to Page' : 'Load'}
+                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
+                    <button className="px-2 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[9px] sm:text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
+                      {row.cm === 150 || row.cm === 170 || row.cm === 180 || row.cm === 200 ? 'Page' : 'Load'}
                     </button>
                   </td>
                 </tr>

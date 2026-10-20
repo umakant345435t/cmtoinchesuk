@@ -13,7 +13,6 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       icon: Home,
       links: [
         { label: '🇬🇧 Homepage / Main CM to Inches Calculator', path: '/' as RoutePath },
-        { label: 'Centimeters to Inches Main Portal', path: '/cm-to-inches/' as RoutePath },
         { label: 'Inches to Centimeters Reverse Portal', path: '/inches-to-cm/' as RoutePath },
         { label: 'Feet to Centimeters Height Standard', path: '/feet-to-cm/' as RoutePath },
         { label: 'Centimeters to Feet Standardizer', path: '/cm-to-feet/' as RoutePath },
@@ -28,6 +27,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       title: 'Popular UK Search Matches (Long-Tail Heights)',
       icon: Landmark,
       links: [
+        { label: '90 cm to Inches Conversion Guide', path: '/90-cm-to-inches/' as RoutePath },
         { label: '150 cm to Inches Height Guide', path: '/150-cm-to-inches/' as RoutePath },
         { label: '170 cm to Inches Height Guide', path: '/170-cm-to-inches/' as RoutePath },
         { label: '180 cm to Inches Height Guide', path: '/180-cm-to-inches/' as RoutePath },

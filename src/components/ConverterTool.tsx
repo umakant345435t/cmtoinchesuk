@@ -129,7 +129,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   const handleTypeChange = (id: string) => {
     setSelectedTypeId(id);
     if (onNavigate) {
-      if (id === 'cm-to-inches') onNavigate('/cm-to-inches/');
+      if (id === 'cm-to-inches') onNavigate('/');
       else if (id === 'inches-to-cm') onNavigate('/inches-to-cm/');
       else if (id === 'feet-to-cm') onNavigate('/feet-to-cm/');
       else if (id === 'cm-to-feet') onNavigate('/cm-to-feet/');

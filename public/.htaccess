@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 301 Permanent Redirect duplicate /cm-to-inches/ to Homepage
+  RewriteRule ^cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+
+  # Standard SPA fallback for other routes
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

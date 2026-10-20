@@ -10,7 +10,6 @@ export function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const footerLinks: { label: string; path: RoutePath }[] = [
-    { label: 'cm to inches', path: '/' },
     { label: 'About Us', path: '/about-us/' },
     { label: 'Contact Us', path: '/contact-us/' },
     { label: 'Privacy Policy', path: '/privacy-policy/' },

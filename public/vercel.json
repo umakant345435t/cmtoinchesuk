@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/cm-to-inches",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cm-to-inches/",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

@@ -36,9 +36,14 @@ export default function App() {
         path = path + '/';
       }
       
+      // 301 Permanent Redirect: remove duplicate /cm-to-inches/ page and route to / (homepage)
+      if (path === '/cm-to-inches/' || path === '/cm-to-inches' || path.startsWith('/cm-to-inches')) {
+        window.history.replaceState({ path: '/' }, '', '/');
+        return '/';
+      }
+      
       const allPaths: string[] = [
         '/',
-        '/cm-to-inches/',
         '/inches-to-cm/',
         '/feet-to-cm/',
         '/cm-to-feet/',
@@ -46,6 +51,7 @@ export default function App() {
         '/feet-to-meters/',
         '/mm-to-inches/',
         '/inches-to-mm/',
+        '/90-cm-to-inches/',
         '/150-cm-to-inches/',
         '/170-cm-to-inches/',
         '/180-cm-to-inches/',
@@ -87,9 +93,15 @@ export default function App() {
         path = path + '/';
       }
       
+      // 301 Redirect duplicate /cm-to-inches/ to /
+      if (path === '/cm-to-inches/' || path === '/cm-to-inches' || path.startsWith('/cm-to-inches')) {
+        window.history.replaceState({ path: '/' }, '', '/');
+        handleNavigate('/');
+        return;
+      }
+
       const allPaths: string[] = [
         '/',
-        '/cm-to-inches/',
         '/inches-to-cm/',
         '/feet-to-cm/',
         '/cm-to-feet/',
@@ -97,6 +109,7 @@ export default function App() {
         '/feet-to-meters/',
         '/mm-to-inches/',
         '/inches-to-mm/',
+        '/90-cm-to-inches/',
         '/150-cm-to-inches/',
         '/170-cm-to-inches/',
         '/180-cm-to-inches/',
@@ -148,9 +161,6 @@ export default function App() {
     if (popPage) {
       title = popPage.title;
       description = popPage.description;
-    } else if (currentPath === '/cm-to-inches/') {
-      title = 'CM to Inches Converter';
-      description = 'Determine centimeter to inches instantly. Official 1cm = 2.54in standards guide.';
     } else if (currentPath === '/inches-to-cm/') {
       title = 'Inches to CM Converter (in → cm) – Dynamic Ruler Calculator';
       description = 'Convert inches to centimeters using our high-precision base-10 metrics translator.';
@@ -212,9 +222,9 @@ export default function App() {
     setConverterType(typeId);
     setConverterValue(value);
     
-    // Auto translate type to RoutePath
+    // Auto translate type to RoutePath (cm-to-inches maps directly to canonical homepage '/')
     let route: RoutePath = '/';
-    if (typeId === 'cm-to-inches') route = '/cm-to-inches/';
+    if (typeId === 'cm-to-inches') route = '/';
     else if (typeId === 'inches-to-cm') route = '/inches-to-cm/';
     else if (typeId === 'feet-to-cm') route = '/feet-to-cm/';
     else if (typeId === 'cm-to-feet') route = '/cm-to-feet/';
@@ -229,18 +239,24 @@ export default function App() {
     }
   };
 
-  const handleNavigate = (path: RoutePath) => {
-    setCurrentPath(path);
-    if (typeof window !== 'undefined' && window.location.pathname !== path) {
-      window.history.pushState({ path }, '', path);
+  const handleNavigate = (path: RoutePath | string) => {
+    let targetPath = path as RoutePath;
+    if (targetPath === ('/cm-to-inches/' as RoutePath) || (targetPath as string) === '/cm-to-inches') {
+      targetPath = '/';
+      if (typeof window !== 'undefined') {
+        window.history.replaceState({ path: '/' }, '', '/');
+      }
+    } else if (typeof window !== 'undefined' && window.location.pathname !== targetPath) {
+      window.history.pushState({ path: targetPath }, '', targetPath);
     }
+    setCurrentPath(targetPath);
     // Reset specific custom values if arriving at generic route
-    if (path === '/') {
+    if (targetPath === '/') {
       setConverterType('cm-to-inches');
       setConverterValue(undefined);
     } else {
       // Configure corresponding tool type based on route
-      const cleanRouteSuffix = path.replace(/\//g, '');
+      const cleanRouteSuffix = targetPath.replace(/\//g, '');
       const typeMatch = CONVERSION_TYPES.find(t => t.id === cleanRouteSuffix);
       if (typeMatch) {
         setConverterType(typeMatch.id);
@@ -351,7 +367,6 @@ export default function App() {
 
     // 2. MAIN CONVERTER PAGES (Topical authority)
     const isMainConverterRoute = [
-      '/cm-to-inches/',
       '/inches-to-cm/',
       '/feet-to-cm/',
       '/cm-to-feet/',

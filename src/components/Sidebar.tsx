@@ -1,7 +1,6 @@
 import React from 'react';
 import { RoutePath } from '../types';
-import { CONVERSION_TYPES } from '../data/conversions';
-import { Award, Ruler, ExternalLink, Flame } from 'lucide-react';
+import { Award, Ruler, ExternalLink } from 'lucide-react';
 
 interface SidebarProps {
   currentPath: RoutePath;
@@ -11,7 +10,7 @@ interface SidebarProps {
 export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
   // Popular conversions to list in side menu
   const quickConversions: { label: string; path: RoutePath }[] = [
-    { label: 'CM to Inches (Standard)', path: '/cm-to-inches/' },
+    { label: 'CM to Inches (Standard)', path: '/' },
     { label: 'Inches to CM (Reverse)', path: '/inches-to-cm/' },
     { label: 'Feet to Centimeters', path: '/feet-to-cm/' },
     { label: 'Centimeters to Feet', path: '/cm-to-feet/' },
@@ -19,17 +18,6 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
     { label: 'Feet to Meters', path: '/feet-to-meters/' },
     { label: 'Millimeters to Inches', path: '/mm-to-inches/' },
     { label: 'Inches to Millimeters', path: '/inches-to-mm/' }
-  ];
-
-  // Specific landing values for height
-  const popularHeightLandings: { label: string; path: RoutePath }[] = [
-    { label: '90 cm to Inches', path: '/' },
-    { label: '150 cm to Inches', path: '/150-cm-to-inches/' },
-    { label: '170 cm to Inches', path: '/170-cm-to-inches/' },
-    { label: '180 cm to Inches', path: '/180-cm-to-inches/' },
-    { label: '200 cm to Inches', path: '/200-cm-to-inches/' },
-    { label: '5 feet in CM', path: '/5-feet-in-cm/' },
-    { label: '6 feet in CM', path: '/6-feet-in-cm/' }
   ];
 
   return (
@@ -91,29 +79,6 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
             >
               <span>{conv.label}</span>
               <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Long-Tail Traffic Landing Links */}
-      <div className="bg-white rounded-3xl p-6 shadow-xl border border-slate-200">
-        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-1.5 border-b-2 border-slate-200 pb-2.5">
-          <Flame className="w-4 h-4 text-orange-500 stroke-[2.5]" />
-          Popular UK Search Hits
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {popularHeightLandings.map((target, idx) => (
-            <button
-              key={idx}
-              onClick={() => onNavigate(target.path)}
-              className={`text-[10px] uppercase font-bold tracking-wider py-1.5 px-3 rounded-lg border-2 transition-all cursor-pointer ${
-                currentPath === target.path
-                  ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-100 font-black'
-                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
-              }`}
-            >
-              {target.label}
             </button>
           ))}
         </div>

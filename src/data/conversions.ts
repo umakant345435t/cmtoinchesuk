@@ -90,6 +90,18 @@ export interface HardcodedConversionPage {
 
 export const POPULAR_PAGES: HardcodedConversionPage[] = [
   {
+    path: '/90-cm-to-inches/',
+    title: '90 CM to Inches Converter (90 cm → in) – Standard Height & Width',
+    description: 'Convert 90 centimeters to inches accurately. 90 cm equals 35.4331 inches or 2 feet 11.4 inches. View conversion formula, steps, and instant chart.',
+    h1: '90 CM to Inches Conversion',
+    fromValue: 90,
+    fromUnit: 'cm',
+    toValue: 35.4331,
+    toUnit: 'in',
+    displayImperial: `2' 11.4"`,
+    explanationText: '90 cm is an essential metric standard widely used in home furnishing (standard desk, table, and counter heights), door widths, and baby/toddler clothing. It evaluates to exactly 35.4331 inches, which translates to approximately 2 feet and 11.4 inches (2\'11.4") in imperial units.'
+  },
+  {
     path: '/150-cm-to-inches/',
     title: '150 CM to Inches Converter (150 cm → in) – Height Conversion',
     description: 'Convert 150 centimeters to inches accurately. Find out what 150 cm means in inches (59.06 inches) and feet-inches format (4ft 11 inches) with standard tables.',

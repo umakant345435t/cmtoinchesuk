@@ -1,6 +1,5 @@
 export type RoutePath =
   | '/'
-  | '/cm-to-inches/'
   | '/inches-to-cm/'
   | '/feet-to-cm/'
   | '/cm-to-feet/'
@@ -8,6 +7,7 @@ export type RoutePath =
   | '/feet-to-meters/'
   | '/mm-to-inches/'
   | '/inches-to-mm/'
+  | '/90-cm-to-inches/'
   | '/150-cm-to-inches/'
   | '/170-cm-to-inches/'
   | '/180-cm-to-inches/'
