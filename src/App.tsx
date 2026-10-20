@@ -237,7 +237,7 @@ export default function App() {
     // Reset specific custom values if arriving at generic route
     if (path === '/') {
       setConverterType('cm-to-inches');
-      setConverterValue(0);
+      setConverterValue(undefined);
     } else {
       // Configure corresponding tool type based on route
       const cleanRouteSuffix = path.replace(/\//g, '');
