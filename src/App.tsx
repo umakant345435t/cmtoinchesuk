@@ -140,7 +140,7 @@ export default function App() {
 
   // Hook to handle dynamic Document Title & SEO meta updates in real-time
   useEffect(() => {
-    let title = 'CM to Inches Converter (cm → in) – Fast & Accurate Calculator';
+    let title = 'CM to Inches Converter';
     let description = 'Convert centimeters to inches instantly with our free CM to Inches Converter. Accurate calculations, conversion tables, formulas, and FAQs.';
 
     // Matches popular pages
@@ -149,7 +149,7 @@ export default function App() {
       title = popPage.title;
       description = popPage.description;
     } else if (currentPath === '/cm-to-inches/') {
-      title = 'CM to Inches Converter (cm → in) – Fast Imperial Tool';
+      title = 'CM to Inches Converter';
       description = 'Determine centimeter to inches instantly. Official 1cm = 2.54in standards guide.';
     } else if (currentPath === '/inches-to-cm/') {
       title = 'Inches to CM Converter (in → cm) – Dynamic Ruler Calculator';

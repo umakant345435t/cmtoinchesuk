@@ -32,8 +32,8 @@ const routes = [
 
 const metadata = {
   'cm-to-inches': {
-    title: 'CM to Inches Converter (cm → in) – Fast Imperial Tool',
-    h1: 'CM to Inches Converter (Precise cm → in)',
+    title: 'CM to Inches Converter',
+    h1: 'CM to Inches Converter',
     description: 'Determine centimeter to inches instantly. Official 1cm = 2.54in standards guide.',
     formula: 'Inches = Centimeters ÷ 2.54',
     steps: [
@@ -428,8 +428,8 @@ function generateJsonLdSchema(route, meta) {
 
 routes.forEach((route) => {
   const meta = metadata[route] || {
-    title: 'CM to Inches Converter (cm → in) – Fast & Accurate Calculator',
-    h1: 'CM to Inches Converter (cm → in)',
+    title: 'CM to Inches Converter',
+    h1: 'CM to Inches Converter',
     description: 'Convert centimeters to inches instantly with our free CM to Inches Converter. Accurate calculations, conversion tables, formulas, and FAQs.'
   };
 

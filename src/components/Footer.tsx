@@ -27,20 +27,20 @@ export function Footer({ onNavigate }: FooterProps) {
         
         {/* Main grid section */}
         <div className="grid md:grid-cols-12 gap-8 items-start">
-          {/* Brand Identity & Mission */}
+          {/* Brand Identity */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavigate('/')}>
-              <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-sm select-none">
-                cm
-              </div>
-              <span className="text-xl font-black text-white font-sans tracking-tight">
-                cmtoinches<span className="text-yellow-400 font-mono">.uk</span>
-              </span>
+            <div 
+              className="flex items-center cursor-pointer group" 
+              onClick={() => onNavigate('/')}
+              title="Home - CM to Inches Converter"
+            >
+              <img 
+                src="/favicon.svg" 
+                alt="CM to Inches Converter Logo" 
+                className="w-11 h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105" 
+                referrerPolicy="no-referrer"
+              />
             </div>
-            
-            <p className="text-slate-400 leading-relaxed text-[11px] font-semibold">
-              A premium, fast, and SEO-optimized length metrics translation engine. We provide instant centimeters (cm), inches (in), feet (ft), meters (m), and millimeters (mm) conversions with standard accuracy checks, conversion lookup lists, and interactive simulation rulers tailored for a UK-based audience.
-            </p>
 
             <div className="flex flex-col gap-2.5 text-[11px] font-bold">
               <div className="flex items-center gap-2 text-slate-400">
@@ -55,11 +55,11 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Quick-Nav Links Matrix */}
-          <div className="md:col-span-4 space-y-4">
+          <div className="md:col-span-7 space-y-4">
             <h4 className="text-yellow-400 font-black tracking-wider text-xs uppercase font-mono">
               Statutory Pages & Navigation
             </h4>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
               {footerLinks.map((link) => {
                 const isHome = link.path === '/';
                 const href = isHome ? 'https://www.cmtoinches.uk/' : link.path;
@@ -77,21 +77,6 @@ export function Footer({ onNavigate }: FooterProps) {
                   </a>
                 );
               })}
-            </div>
-          </div>
-
-          {/* Compliance Card */}
-          <div className="md:col-span-3 bg-slate-900/60 p-5 rounded-2xl border-2 border-slate-900/80 space-y-3.5">
-            <h5 className="text-xs font-black text-white flex items-center gap-1.5 uppercase font-mono">
-              <Flag className="w-4 h-4 text-red-500 stroke-[2.5]" />
-              UK Compliance Badge
-            </h5>
-            <p className="text-[10px] text-slate-400 leading-relaxed font-semibold">
-              Our calculations, guides, and articles are fully compliant with UK imperial legislation regulations, GDPR policies, and educational metrological systems.
-            </p>
-            <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-mono font-black uppercase tracking-wider">
-              <CheckCircle className="w-4 h-4 text-emerald-400" />
-              SSL & AdSense Enabled
             </div>
           </div>
         </div>

@@ -31,20 +31,15 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               onNavigate('/');
               setIsOpen(false);
             }} 
-            className="cursor-pointer flex items-center gap-3 group"
+            className="cursor-pointer flex items-center group"
+            title="Home - CM to Inches Converter"
           >
             <img 
               src="/favicon.svg" 
-              alt="cmtoinches.uk Logo" 
+              alt="CM to Inches Converter Logo" 
               className="w-11 h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105" 
               referrerPolicy="no-referrer"
             />
-            <div>
-              <div className="text-xl font-black tracking-tight text-slate-900 flex items-center gap-0.5">
-                <span>cmtoinches</span><span className="text-blue-600 font-extrabold text-xl">.uk</span>
-              </div>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-sans">Measurement Metrology Portal</p>
-            </div>
           </div>
 
           {/* Responsive Hamburger Toggle Button */}
