@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { CONVERSION_TYPES } from '../data/conversions';
 import { ConversionType, RoutePath } from '../types';
-import { Copy, Check, Info, RefreshCw, Ruler, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, X, RotateCcw } from 'lucide-react';
+import { Copy, Check, Info, RefreshCw, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, X, RotateCcw } from 'lucide-react';
 
 interface ConverterToolProps {
   initialTypeId?: string;
@@ -449,21 +449,25 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
         </div>
 
         {/* ACTION BUTTONS (COPY RESULT & CLEAR ON RIGHT SIDE) */}
-        <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
+        <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-1 pb-1">
           <button
             onClick={handleCopy}
             type="button"
-            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg shadow-blue-200 transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+            className={`min-h-[44px] px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 select-none ${
+              copied
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200'
+                : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-md hover:shadow-lg shadow-blue-200'
+            }`}
             title="Copy conversion text"
           >
-            {copied ? <Check className="w-4 h-4 text-emerald-300 stroke-[3]" /> : <Copy className="w-4 h-4" />}
-            <span>{copied ? 'CONVERSION COPIED!' : 'COPY RESULT'}</span>
+            {copied ? <Check className="w-4 h-4 text-white stroke-[3]" /> : <Copy className="w-4 h-4" />}
+            <span>COPY RESULT</span>
           </button>
 
           <button
             onClick={handleClear}
             type="button"
-            className="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+            className="min-h-[44px] px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 hover:text-slate-900 border border-slate-300 shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 select-none"
             title="Clear input and calculation"
           >
             <RotateCcw className="w-4 h-4 text-slate-500" />
@@ -475,34 +479,26 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
         <div className="border-2 border-slate-200 rounded-2xl p-5 bg-gradient-to-b from-slate-50 to-amber-50/30 space-y-4 shadow-sm">
           {/* Header Bar with Adaptive Zoom & Scale Controls */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 bg-amber-400 text-slate-950 rounded-lg shadow-sm">
-                <Ruler className="w-4 h-4" />
-              </span>
-              <div>
-                <h4 className="font-black text-xs sm:text-sm text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                  Real-Time Adaptive Scale
-                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-mono font-bold px-1.5 py-0.5 rounded">
-                    {zoomPreset === 'auto' ? `Auto-Zoom (0 – ${maxScale})` : `0 – ${maxScale}`}
-                  </span>
-                </h4>
-                {isOutOfScale && (
-                  <p className="text-[11px] text-amber-700 font-semibold mt-0.5">
-                    Input exceeds 100 visual limit. Ruler reset to 0 (see converted result in card above).
-                  </p>
-                )}
-              </div>
+            <div>
+              <h4 className="font-black text-sm sm:text-base text-slate-900 uppercase tracking-wider">
+                Real-Time Adaptive Scale
+              </h4>
+              {isOutOfScale && (
+                <p className="text-[11px] text-amber-700 font-semibold mt-0.5">
+                  Input exceeds 100 visual limit. Ruler reset to 0 (see converted result in card above).
+                </p>
+              )}
             </div>
 
             {/* Adaptive Zoom Preset Pills */}
-            <div className="flex flex-wrap items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-xs self-start sm:self-auto">
-              <span className="text-[10px] font-bold text-slate-400 uppercase px-1.5">Zoom:</span>
+            <div className="flex flex-wrap items-center gap-1.5 bg-white p-1.5 rounded-xl border border-slate-200 shadow-xs self-start sm:self-auto">
+              <span className="text-[17px] font-bold text-slate-500 uppercase px-2">Zoom:</span>
               {(['auto', '10', '20', '50', '100'] as const).map((mode) => (
                 <button
                   key={mode}
                   type="button"
                   onClick={() => setZoomPreset(mode)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-black transition-all ${
+                  className={`px-3 py-1 rounded-lg text-[17px] font-mono font-black transition-all cursor-pointer ${
                     zoomPreset === mode
                       ? 'bg-blue-600 text-white shadow-xs scale-105'
                       : 'bg-slate-100 hover:bg-slate-200 text-slate-700'

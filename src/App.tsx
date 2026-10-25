@@ -250,6 +250,9 @@ export default function App() {
       window.history.pushState({ path: targetPath }, '', targetPath);
     }
     setCurrentPath(targetPath);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
     // Reset specific custom values if arriving at generic route
     if (targetPath === '/') {
       setConverterType('cm-to-inches');
