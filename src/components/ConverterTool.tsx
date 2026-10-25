@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { CONVERSION_TYPES } from '../data/conversions';
 import { ConversionType, RoutePath } from '../types';
-import { Copy, Check, Info, RefreshCw, Ruler, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, X } from 'lucide-react';
+import { Copy, Check, Info, RefreshCw, Ruler, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, X, RotateCcw } from 'lucide-react';
 
 interface ConverterToolProps {
   initialTypeId?: string;
@@ -11,9 +11,9 @@ interface ConverterToolProps {
 
 export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue, onNavigate }: ConverterToolProps) {
   const [selectedTypeId, setSelectedTypeId] = useState<string>(initialTypeId);
-  // Default to '3' so initial load immediately showcases accurate 3cm alignment on the scale
+  // Default to empty string ('') if no initialFromValue provided
   const [inputValue, setInputValue] = useState<string>(
-    initialFromValue !== undefined ? initialFromValue.toString() : '3'
+    initialFromValue !== undefined ? initialFromValue.toString() : ''
   );
   const [copied, setCopied] = useState<boolean>(false);
   const [zoomPreset, setZoomPreset] = useState<'auto' | '10' | '20' | '50' | '100'>('auto');
@@ -105,6 +105,10 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleClear = () => {
+    setInputValue('');
+  };
+
   const swapUnits = () => {
     let nextId = 'cm-to-inches';
     if (selectedTypeId === 'cm-to-inches') nextId = 'inches-to-cm';
@@ -140,13 +144,6 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
     }
   };
 
-  // Adjust input by an increment step (e.g. +1 cm, -1 cm, +0.1 cm)
-  // Adjust input by an increment step (e.g. +1, -1, +10, -10)
-  const adjustValue = (delta: number) => {
-    let newVal = numInput + delta;
-    if (newVal < 0) newVal = 0;
-    setInputValue(Number(newVal.toFixed(1)).toString());
-  };
 
   // Scrubbing & clicking handler on the tape ruler (maps 0% - 100% directly to 0 - maxScale units)
   const handleTapeInteraction = (clientX: number) => {
@@ -451,56 +448,33 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
           </div>
         </div>
 
-        {/* Copy Result & Formula Action Row */}
-        <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2 sm:gap-4 pt-2.5 border-t border-slate-100">
-          <p className="text-xs sm:text-sm font-semibold text-slate-500 truncate">
-            Formula: <span className="text-slate-700 font-mono italic">{currentType.formula}</span>
-          </p>
+        {/* ACTION BUTTONS (COPY RESULT & CLEAR ON RIGHT SIDE) */}
+        <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
           <button
             onClick={handleCopy}
             type="button"
-            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shrink-0"
+            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg shadow-blue-200 transition-all flex items-center gap-2 cursor-pointer active:scale-95"
             title="Copy conversion text"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-300 stroke-[3]" /> : <Copy className="w-4 h-4" />}
             <span>{copied ? 'CONVERSION COPIED!' : 'COPY RESULT'}</span>
           </button>
+
+          <button
+            onClick={handleClear}
+            type="button"
+            className="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+            title="Clear input and calculation"
+          >
+            <RotateCcw className="w-4 h-4 text-slate-500" />
+            <span>CLEAR</span>
+          </button>
         </div>
 
-        {/* Multi-Format Information Cards (Great for UK DIY Trades & Height) */}
-        {numInput > 0 && (
-          <div className="grid sm:grid-cols-2 gap-4 p-5 bg-slate-50 rounded-2xl border-2 border-slate-200 text-xs">
-            <div>
-              <h4 className="font-black text-slate-900 flex items-center gap-1.5 mb-1 text-[11px] uppercase tracking-wider">
-                <FileCheck className="w-4 h-4 text-blue-600" />
-                Fractional Equivalent (UK Carpentry)
-              </h4>
-              <p className="text-slate-600 text-sm font-black mt-0.5">
-                {currentType.toUnit === 'in' ? (
-                  <><strong>{getFractionalEstimate(rawResult)}</strong> (Nearest 1/16")</>
-                ) : currentType.fromUnit === 'in' ? (
-                  <>Input is precisely <strong>{getFractionalEstimate(numInput)}</strong></>
-                ) : (
-                  <>Applied on imperial outputs</>
-                )}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-black text-slate-900 flex items-center gap-1.5 mb-1 text-[11px] uppercase tracking-wider">
-                <Info className="w-4 h-4 text-slate-500" />
-                Formula Expression
-              </h4>
-              <p className="font-mono text-[11px] text-slate-600 bg-white p-2 rounded-lg border border-slate-200 leading-normal">
-                {inputValue} {currentType.fromUnit} * {currentType.ratio.toFixed(5)} = <strong>{formattedResult}</strong> {currentType.toUnit}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* NEXT-GENERATION REAL-TIME DUAL TAPE MEASURE & CALIPER SCALE */}
+        {/* REAL-TIME DUAL TAPE MEASURE & CALIPER SCALE (DIRECTLY BELOW INPUTS) */}
         <div className="border-2 border-slate-200 rounded-2xl p-5 bg-gradient-to-b from-slate-50 to-amber-50/30 space-y-4 shadow-sm">
           {/* Header Bar with Adaptive Zoom & Scale Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/80 pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
             <div className="flex items-center gap-2">
               <span className="p-1.5 bg-amber-400 text-slate-950 rounded-lg shadow-sm">
                 <Ruler className="w-4 h-4" />
@@ -512,17 +486,11 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                     {zoomPreset === 'auto' ? `Auto-Zoom (0 – ${maxScale})` : `0 – ${maxScale}`}
                   </span>
                 </h4>
-                <p className="text-[11px] text-slate-500 font-medium">
-                  {isOutOfScale ? (
-                    <span className="text-amber-700 font-semibold">
-                      Input exceeds 100 visual limit. Ruler reset to 0 (see converted result in card above).
-                    </span>
-                  ) : (
-                    <span>
-                      Laser needle aligns accurately on {scaleFromValue} {currentType.fromUnit} and {Number(scaleToValue.toFixed(currentType.ratio >= 10 ? 1 : 2))} {currentType.toUnit}
-                    </span>
-                  )}
-                </p>
+                {isOutOfScale && (
+                  <p className="text-[11px] text-amber-700 font-semibold mt-0.5">
+                    Input exceeds 100 visual limit. Ruler reset to 0 (see converted result in card above).
+                  </p>
+                )}
               </div>
             </div>
 
@@ -564,78 +532,6 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               </button>
             </div>
           )}
-
-          {/* Interactive Micro-Stepper & Digital HUD */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl border border-slate-200">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Quick Step:</span>
-              <div className="flex flex-wrap items-center gap-1 font-mono">
-                <button
-                  type="button"
-                  onClick={() => adjustValue(-10)}
-                  className="px-2 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded text-xs font-bold transition-all cursor-pointer"
-                  title={`Minus 10 ${currentType.fromUnit}`}
-                >
-                  -10
-                </button>
-                <button
-                  type="button"
-                  onClick={() => adjustValue(-1)}
-                  className="px-2 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded text-xs font-bold transition-all cursor-pointer"
-                  title={`Minus 1 ${currentType.fromUnit}`}
-                >
-                  -1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => adjustValue(1)}
-                  className="px-2 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded text-xs font-bold transition-all cursor-pointer"
-                  title={`Plus 1 ${currentType.fromUnit}`}
-                >
-                  +1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => adjustValue(10)}
-                  className="px-2 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 rounded text-xs font-bold transition-all cursor-pointer"
-                  title={`Plus 10 ${currentType.fromUnit}`}
-                >
-                  +10
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInputValue('0')}
-                  className="px-2 py-1 bg-slate-200 hover:bg-slate-300 active:scale-95 text-slate-800 rounded text-xs font-bold transition-all cursor-pointer"
-                  title="Reset to 0"
-                >
-                  0
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInputValue(maxScale.toString())}
-                  className="px-2 py-1 bg-amber-100 hover:bg-amber-200 active:scale-95 text-amber-900 rounded text-xs font-bold transition-all cursor-pointer"
-                  title={`Set to max (${maxScale})`}
-                >
-                  {maxScale}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 text-xs font-mono">
-              <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 text-[10px] uppercase font-bold">{currentType.fromUnit}:</span>
-                <span className="font-black text-slate-900 text-sm sm:text-base">
-                  {scaleFromValue} <span className="text-xs font-black text-slate-600">{currentType.fromUnit.toUpperCase()}</span>
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 text-[10px] uppercase font-bold">{currentType.toUnit}:</span>
-                <span className="font-black text-blue-700 text-sm sm:text-base">
-                  {Number(scaleToValue.toFixed(currentType.ratio >= 10 ? 1 : (currentType.ratio >= 1 ? 2 : 3)))} <span className="text-xs font-black text-blue-600">{currentType.toUnit.toUpperCase()}</span>
-                </span>
-              </div>
-            </div>
-          </div>
 
           {/* Real-time Calibrated Dual Tape Visualizer */}
           <div className="pt-6 pb-6 px-2 relative select-none">
@@ -714,12 +610,35 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
           </div>
         </div>
 
-        {/* UK E-E-A-T Metric Formula Explanation */}
-        <div className="text-xs text-slate-500 leading-relaxed pt-2 border-t border-slate-100">
-          <p>
-            <strong>Note on Metric Standardization:</strong> Under UK metrology parameters and national measurement guidelines, 1 centimeter contains approximately <strong>0.3937 inches</strong>. To carry out highly precise calculations, we adhere to the international constant multiplier rating of <code className="bg-slate-100 text-slate-900 px-1 py-0.5 rounded font-mono font-bold">2.54</code>.
-          </p>
-        </div>
+        {/* BELOW SCALE: Multi-Format Information Cards (Carpentry Fraction & Formula Expression) */}
+        {numInput > 0 && (
+          <div className="grid sm:grid-cols-2 gap-4 p-5 bg-slate-50 rounded-2xl border-2 border-slate-200 text-xs">
+            <div>
+              <h4 className="font-black text-slate-900 flex items-center gap-1.5 mb-1 text-[11px] uppercase tracking-wider">
+                <FileCheck className="w-4 h-4 text-blue-600" />
+                Fractional Equivalent (UK Carpentry)
+              </h4>
+              <p className="text-slate-700 text-sm font-black mt-1">
+                {currentType.toUnit === 'in' ? (
+                  <><strong>{getFractionalEstimate(rawResult)}</strong> (Nearest 1/16")</>
+                ) : currentType.fromUnit === 'in' ? (
+                  <>Input is precisely <strong>{getFractionalEstimate(numInput)}</strong></>
+                ) : (
+                  <>Applied on imperial outputs</>
+                )}
+              </p>
+            </div>
+            <div>
+              <h4 className="font-black text-slate-900 flex items-center gap-1.5 mb-1 text-[11px] uppercase tracking-wider">
+                <Info className="w-4 h-4 text-slate-500" />
+                Formula Expression
+              </h4>
+              <p className="font-mono text-[11px] text-slate-700 bg-white p-2.5 rounded-lg border border-slate-200 leading-normal">
+                {inputValue} {currentType.fromUnit} * {currentType.ratio.toFixed(5)} = <strong>{formattedResult}</strong> {currentType.toUnit}, Formula: {currentType.formula}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
