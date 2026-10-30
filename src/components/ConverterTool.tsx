@@ -99,8 +99,11 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   };
 
   const handleCopy = () => {
-    const textToCopy = `${inputValue} ${currentType.fromUnit} = ${formattedResult} ${currentType.toUnit}`;
-    navigator.clipboard.writeText(textToCopy);
+    // Only copy the raw output numeric result (e.g. "3.937" or "0") as requested
+    const textToCopy = formattedResult;
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(textToCopy);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -369,13 +372,13 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
         </div>
 
         {/* Input & Output Double-Panel layout */}
-        <div className="grid md:grid-cols-9 gap-2 md:gap-6 items-center relative">
+        <div className="grid md:grid-cols-9 gap-2 md:gap-6 items-center relative w-full min-w-0">
           {/* Input Panel */}
-          <div className="md:col-span-4 flex flex-col">
-            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2">
+          <div className="md:col-span-4 flex flex-col min-w-0 w-full">
+            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2 truncate">
               Centimeters / {currentType.fromUnit.toUpperCase()} input
             </label>
-            <div className="relative">
+            <div className="relative w-full min-w-0">
               <input
                 type="text"
                 inputMode="decimal"
@@ -385,10 +388,16 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="0"
-                className="w-full text-2xl sm:text-3xl font-black bg-slate-50 border-2 border-slate-200 rounded-xl sm:rounded-2xl pl-4 sm:pl-5 pr-20 sm:pr-24 py-2.5 sm:py-3.5 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans shadow-xs"
+                className={`w-full max-w-full min-w-0 font-black bg-slate-50 border-2 border-slate-200 rounded-xl sm:rounded-2xl pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3.5 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans shadow-xs truncate ${
+                  inputValue.length > 9
+                    ? 'text-lg sm:text-xl'
+                    : inputValue.length > 6
+                    ? 'text-xl sm:text-2xl'
+                    : 'text-2xl sm:text-3xl'
+                }`}
                 id="converter-input"
               />
-              <div className="absolute right-3.5 sm:right-5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+              <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 shrink-0">
                 {inputValue !== '' && (
                   <button
                     type="button"
@@ -400,7 +409,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                     <X className="w-3.5 h-3.5 stroke-[2.5]" />
                   </button>
                 )}
-                <span className="text-sm sm:text-base font-black text-slate-700 bg-slate-200/90 px-2.5 sm:px-3 py-1 rounded-lg uppercase font-mono shadow-xs">
+                <span className="text-xs sm:text-sm font-black text-slate-700 bg-slate-200/90 px-2 sm:px-2.5 py-1 rounded-lg uppercase font-mono shadow-xs shrink-0 select-none">
                   {currentType.fromUnit}
                 </span>
               </div>
@@ -408,13 +417,13 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
           </div>
 
           {/* Swap Button: sleek arrow button saving space on mobile */}
-          <div className="md:col-span-1 flex justify-center -my-2.5 md:my-0 relative z-10">
+          <div className="md:col-span-1 flex justify-center -my-2.5 md:my-0 relative z-10 shrink-0">
             <button
               onClick={swapUnits}
               title={`Swap direction (${currentType.fromUnit} ⇄ ${currentType.toUnit})`}
               aria-label="Swap conversion direction"
               type="button"
-              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white border-2 border-white shadow-md hover:shadow-lg w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center transition-all active:rotate-180 hover:scale-105 cursor-pointer group"
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white border-2 border-white shadow-md hover:shadow-lg w-9 h-9 md:w-11 md:h-11 rounded-full flex items-center justify-center transition-all active:rotate-180 hover:scale-105 cursor-pointer group shrink-0"
             >
               <ArrowDownUp className="w-4 h-4 md:hidden stroke-[2.5] group-hover:scale-110 transition-transform" />
               <ArrowRightLeft className="w-5 h-5 hidden md:block stroke-[2.5] group-hover:scale-110 transition-transform" />
@@ -422,12 +431,18 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
           </div>
 
           {/* Output Panel */}
-          <div className="md:col-span-4 flex flex-col">
-            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2">
+          <div className="md:col-span-4 flex flex-col min-w-0 w-full">
+            <label className="block text-[10px] sm:text-xs font-bold uppercase text-slate-400 mb-1 sm:mb-2 truncate">
               Inches / {currentType.toUnit.toUpperCase()} output
             </label>
-            <div className="w-full text-2xl sm:text-3xl font-black bg-blue-50 border-2 border-blue-100 text-blue-700 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 min-h-[54px] sm:min-h-[68px] shadow-xs">
-              <span className="font-sans truncate" id="converter-result">
+            <div className={`w-full max-w-full min-w-0 font-black bg-blue-50 border-2 border-blue-100 text-blue-700 rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 min-h-[54px] sm:min-h-[68px] shadow-xs overflow-hidden ${
+              formattedResult.length > 9
+                ? 'text-lg sm:text-xl'
+                : formattedResult.length > 6
+                ? 'text-xl sm:text-2xl'
+                : 'text-2xl sm:text-3xl'
+            }`}>
+              <span className="font-sans truncate min-w-0 flex-1" id="converter-result">
                 {formattedResult}
               </span>
               <div className="flex items-center gap-1.5 shrink-0">
@@ -440,7 +455,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-600 stroke-[3]" /> : <Copy className="w-4 h-4" />}
                 </button>
-                <span className="text-sm sm:text-base font-black text-blue-700 bg-blue-200/80 px-2.5 sm:px-3 py-1 rounded-lg uppercase font-mono shadow-xs">
+                <span className="text-xs sm:text-sm font-black text-blue-700 bg-blue-200/80 px-2 sm:px-2.5 py-1 rounded-lg uppercase font-mono shadow-xs shrink-0 select-none">
                   {currentType.toUnit}
                 </span>
               </div>
@@ -448,29 +463,29 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
           </div>
         </div>
 
-        {/* ACTION BUTTONS (COPY RESULT & CLEAR ON RIGHT SIDE) */}
-        <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-1 pb-1">
+        {/* ACTION BUTTONS (COPY RESULT & CLEAR ON RIGHT SIDE - 7% SMALLER SIZE) */}
+        <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 pt-1 pb-1">
           <button
             onClick={handleCopy}
             type="button"
-            className={`min-h-[44px] px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 select-none ${
+            className={`min-h-[40px] px-4 py-2 rounded-lg sm:rounded-xl font-black text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 select-none ${
               copied
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200'
                 : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-md hover:shadow-lg shadow-blue-200'
             }`}
-            title="Copy conversion text"
+            title="Copy conversion result"
           >
-            {copied ? <Check className="w-4 h-4 text-white stroke-[3]" /> : <Copy className="w-4 h-4" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-white stroke-[3]" /> : <Copy className="w-3.5 h-3.5" />}
             <span>COPY RESULT</span>
           </button>
 
           <button
             onClick={handleClear}
             type="button"
-            className="min-h-[44px] px-5 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 hover:text-slate-900 border border-slate-300 shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 select-none"
+            className="min-h-[40px] px-4 py-2 rounded-lg sm:rounded-xl font-black text-[11px] uppercase tracking-wider bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 hover:text-slate-900 border border-slate-300 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 select-none"
             title="Clear input and calculation"
           >
-            <RotateCcw className="w-4 h-4 text-slate-500" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             <span>CLEAR</span>
           </button>
         </div>
