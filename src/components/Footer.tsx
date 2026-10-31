@@ -55,9 +55,11 @@ export function Footer({ onNavigate }: FooterProps) {
 
           {/* Quick-Nav Links Matrix */}
           <div className="md:col-span-7 space-y-4">
-            <h4 className="text-yellow-400 font-black tracking-wider text-xs uppercase font-mono">
-              Statutory Pages & Navigation
-            </h4>
+            <div className="border-b border-slate-900 pb-2">
+              <h4 className="text-yellow-400 font-black tracking-wider text-xs uppercase font-mono">
+                Statutory Pages & Navigation
+              </h4>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5">
               {footerLinks.map((link) => {
                 const isHome = link.path === '/';
@@ -130,6 +132,7 @@ export function Footer({ onNavigate }: FooterProps) {
           {/* Bottom Copyright line */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-slate-500 font-mono font-bold">
             <span>© {currentYear} cmtoinches.uk. All rights reserved. Created in alignment with UK measurement guidelines.</span>
+            
             <span className="flex items-center gap-1.5 text-slate-400">
               <Shield className="w-4 h-4 text-blue-500" />
               <span>GDPR / PECR Secure Environment</span>
