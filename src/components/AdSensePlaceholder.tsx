@@ -15,11 +15,10 @@ export function AdSensePlaceholder({ slotId = '1002', type = 'in-feed-horizontal
     
     try {
       if (typeof window !== 'undefined') {
-        const adsbygoogle = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
-        if (adsbygoogle) {
-          adsbygoogle.push({});
-          adPushedRef.current = true;
-        }
+        const win = window as unknown as { adsbygoogle?: unknown[] };
+        win.adsbygoogle = win.adsbygoogle || [];
+        win.adsbygoogle.push({});
+        adPushedRef.current = true;
       }
     } catch (_) {
       // Gracefully handle ad-blocker or script loading delays without crashing

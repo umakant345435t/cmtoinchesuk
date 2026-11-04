@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { CONVERSION_TYPES } from '../data/conversions';
 import { ConversionType, RoutePath } from '../types';
-import { Copy, Check, Info, RefreshCw, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, X, RotateCcw } from 'lucide-react';
+import { Copy, Check, Info, RefreshCw, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, RotateCcw } from 'lucide-react';
 
 interface ConverterToolProps {
   initialTypeId?: string;
@@ -155,9 +155,18 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
     const clampedX = Math.max(0, Math.min(rect.width, clientX - rect.left));
     const ratio = clampedX / rect.width;
     const targetVal = ratio * maxScale;
-    const snapStep = maxScale <= 10 ? 0.1 : (maxScale <= 20 ? 0.2 : 0.5);
-    const snapped = Math.round(targetVal / snapStep) * snapStep;
+    // Strict 0.1 increment across ALL scale modes (10, 20, 50, 100, auto)
+    const snapStep = 0.1;
+    const snapped = Math.max(0, Math.min(maxScale, Math.round(targetVal / snapStep) * snapStep));
     setInputValue(Number(snapped.toFixed(1)).toString());
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const delta = (e.deltaY < 0 || e.deltaX > 0) ? 0.1 : -0.1;
+    const current = isValidNumber ? numInput : 0;
+    const nextVal = Math.max(0, Math.min(maxScale, Math.round((current + delta) * 10) / 10));
+    setInputValue(Number(nextVal.toFixed(1)).toString());
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -397,18 +406,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 }`}
                 id="converter-input"
               />
-              <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5 shrink-0">
-                {inputValue !== '' && (
-                  <button
-                    type="button"
-                    onClick={() => setInputValue('')}
-                    className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-200/80 rounded-full transition-colors cursor-pointer"
-                    title="Clear input"
-                    aria-label="Clear input value"
-                  >
-                    <X className="w-3.5 h-3.5 stroke-[2.5]" />
-                  </button>
-                )}
+              <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 flex items-center shrink-0">
                 <span className="text-xs sm:text-sm font-black text-slate-700 bg-slate-200/90 px-2 sm:px-2.5 py-1 rounded-lg uppercase font-mono shadow-xs shrink-0 select-none">
                   {currentType.fromUnit}
                 </span>
@@ -445,16 +443,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               <span className="font-sans truncate min-w-0 flex-1" id="converter-result">
                 {formattedResult}
               </span>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  onClick={handleCopy}
-                  type="button"
-                  className="p-1.5 text-blue-600 hover:text-blue-800 hover:bg-blue-200/50 rounded-lg transition-all cursor-pointer"
-                  title="Copy result"
-                  aria-label="Copy result to clipboard"
-                >
-                  {copied ? <Check className="w-4 h-4 text-emerald-600 stroke-[3]" /> : <Copy className="w-4 h-4" />}
-                </button>
+              <div className="flex items-center shrink-0">
                 <span className="text-xs sm:text-sm font-black text-blue-700 bg-blue-200/80 px-2 sm:px-2.5 py-1 rounded-lg uppercase font-mono shadow-xs shrink-0 select-none">
                   {currentType.toUnit}
                 </span>
@@ -552,6 +541,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
+              onWheel={handleWheel}
               className="relative w-full h-32 rounded-xl border-2 border-slate-700 shadow-lg overflow-hidden cursor-crosshair touch-none bg-gradient-to-b from-amber-200 via-yellow-300 to-amber-200"
             >
               {/* Left Steel Hook of Tape Measure */}
