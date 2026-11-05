@@ -52,13 +52,20 @@
     <meta http-equiv="x-dns-prefetch-control" content="on" />
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
 
-    <!-- Google AdSense - Zero-Latency Interaction Loader (ca-pub-1551468689257640) -->
+    <!-- Google AdSense - Anti-Invalid-Traffic & Zero-Latency Human Interaction Loader (ca-pub-1551468689257640) -->
     <script>
       (function() {
         var adsenseLoaded = false;
         var events = ['scroll', 'mousemove', 'touchstart', 'pointerdown', 'keydown', 'click'];
-        function loadAdSense() {
+        function isBotOrAutomated() {
+          if (navigator.webdriver) return true;
+          var ua = (navigator.userAgent || '').toLowerCase();
+          return /bot|crawl|spider|slurp|headless|phantom|lighthouse|gtmetrix|pingdom|pagespeed|inspection/i.test(ua);
+        }
+        function loadAdSense(e) {
           if (adsenseLoaded) return;
+          if (e && e.isTrusted === false) return;
+          if (isBotOrAutomated()) return;
           adsenseLoaded = true;
           for (var i = 0; i < events.length; i++) {
             window.removeEventListener(events[i], loadAdSense);
@@ -69,8 +76,10 @@
           s.async = true;
           document.head.appendChild(s);
         }
-        for (var i = 0; i < events.length; i++) {
-          window.addEventListener(events[i], loadAdSense, { passive: true, once: true });
+        if (!isBotOrAutomated()) {
+          for (var i = 0; i < events.length; i++) {
+            window.addEventListener(events[i], loadAdSense, { passive: true, once: true });
+          }
         }
       })();
     </script>

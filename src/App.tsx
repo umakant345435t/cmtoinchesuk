@@ -74,8 +74,18 @@ export default function App() {
     }
     return '/';
   });
-  const [converterType, setConverterType] = useState<string>('cm-to-inches');
-  const [converterValue, setConverterValue] = useState<number | undefined>(undefined);
+  const [converterType, setConverterType] = useState<string>(() => {
+    const cleanRouteSuffix = currentPath.replace(/\//g, '');
+    const typeMatch = CONVERSION_TYPES.find(t => t.id === cleanRouteSuffix);
+    if (typeMatch) return typeMatch.id;
+    const isPopular = POPULAR_PAGES.find(p => p.path === currentPath);
+    if (isPopular) return isPopular.fromUnit === 'ft' ? 'feet-to-cm' : 'cm-to-inches';
+    return 'cm-to-inches';
+  });
+  const [converterValue, setConverterValue] = useState<number | undefined>(() => {
+    const isPopular = POPULAR_PAGES.find(p => p.path === currentPath);
+    return isPopular ? isPopular.fromValue : undefined;
+  });
 
   // States for interactive contact page
   const [contactName, setContactName] = useState('');
@@ -137,13 +147,6 @@ export default function App() {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
-
-  // Synchronize dynamic routes on startup
-  useEffect(() => {
-    if (currentPath !== '/') {
-      handleNavigate(currentPath);
-    }
   }, []);
 
   // Scroll to top whenever route changes
