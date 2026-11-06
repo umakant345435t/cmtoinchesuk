@@ -423,7 +423,7 @@ export default function App() {
                   <span>⚡ External Conversion Resource</span>
                 </h4>
                 <p className="text-sm text-slate-700 leading-relaxed font-sans">
-                  Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch to cm</a> conversions.
+                  Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> conversions.
                 </p>
               </div>
             )}
@@ -722,7 +722,7 @@ export default function App() {
                 CM to Inches, Inches to CM &amp; Feet to CM Conversion Charts
               </h1>
               <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed font-sans">
-                Comprehensive reference lookup charts for length conversions (<a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch to cm</a>, cm to inches, and feet to cm) spanning 1 cm to 1000 cm, alongside body weight conversions (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a>).
+                Comprehensive UK reference lookup charts for linear length conversions — including centimeters to inches, inches to centimeters, and feet to centimeters — spanning everyday household, height, and engineering measurements.
               </p>
             </div>
 
@@ -766,9 +766,9 @@ export default function App() {
                   <h2 className="text-base font-black text-slate-900 tracking-tight">
                     📐 Inches to Centimeters Chart (1 to 100 IN)
                   </h2>
-                  <a href="https://www.cmtoinches.uk/" className="text-xs font-bold text-blue-600 hover:underline">
-                    inch to cm →
-                  </a>
+                  <span className="text-xs font-bold text-slate-500 font-mono">
+                    IN → CM
+                  </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                   <table className="w-full text-xs text-left">
@@ -799,13 +799,9 @@ export default function App() {
                 <h2 className="text-base font-black text-slate-900 tracking-tight">
                   🧍 Feet to Centimeters Height Chart (1 to 20 FT)
                 </h2>
-                <button
-                  type="button"
-                  onClick={() => handleNavigate('/feet-to-cm/')}
-                  className="text-xs font-bold text-blue-600 hover:underline cursor-pointer"
-                >
-                  Feet to CM Calculator →
-                </button>
+                <span className="text-xs font-bold text-slate-500 font-mono">
+                  FT → CM
+                </span>
               </div>
               <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                 <table className="w-full text-xs text-left">
@@ -829,13 +825,13 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick Measurement Difference Explanation (Preserving stone to kg backlink & updating inch to cm backlink) */}
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-              <h3 className="text-sm font-black text-slate-900 tracking-tight">
-                Key Comparison: Length (<a href="https://www.cmtoinches.uk/" className="text-blue-600 font-bold underline hover:text-blue-800">inch to cm</a>) vs Mass (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-bold underline hover:text-amber-800">stone to kg</a>)
+            {/* Single Homepage Backlink on cm to inches keyword */}
+            <div className="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2">
+              <h3 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                <span>⚡ Instant Length Conversion Tool</span>
               </h3>
               <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-sans">
-                Centimeters, inches, and feet are linear length units used to determine height, room dimensions, clothing waist sizes, and screen diameters (1 inch = 2.54 cm, 1 foot = 30.48 cm). For body weight, luggage mass, and fitness metrics, use our partner <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> converter (1 stone = 14 lbs = 6.35029 kg).
+                Centimeters, inches, and feet are standard linear units used for height, screen sizes, furniture, and architectural measurements (1 inch = 2.54 cm, 1 foot = 30.48 cm). Need to calculate custom values outside these charts? Use our instant <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">cm to inches</a> converter for real-time precision results.
               </p>
             </div>
           </div>
@@ -1022,13 +1018,6 @@ export default function App() {
 
           {/* Sidebar Area (Right Column) */}
           <section className="lg:col-span-4 order-2 space-y-6">
-            
-            {/* Quick mini info block */}
-            <div className="bg-amber-400 text-slate-950 p-4 rounded-2xl shadow-sm text-xs font-semibold flex items-center justify-between gap-3 border border-amber-300">
-              <span>🇬🇧 Standard UK Metrical calibration model approved.</span>
-              <TrendingUp className="w-5 h-5 opacity-80 shrink-0" />
-            </div>
-
             <Sidebar currentPath={currentPath} onNavigate={handleNavigate} />
           </section>
 
