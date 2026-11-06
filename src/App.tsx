@@ -207,8 +207,8 @@ export default function App() {
       title = 'HTML Sitemap Index – cmtoinches.uk Navigation Map';
       description = 'Browse 100% of the active URLs, conversion guides, and legal policy structures on this portal.';
     } else if (currentPath === '/unit-conversion-chart/') {
-      title = 'Inch in CM vs Stone to KG – Unit Conversion Chart & Quick Difference List';
-      description = 'Compare length conversions (inch in cm) with weight conversions (stone to kg) using our quick reference list, conversion formula chart, and partner calculators.';
+      title = 'CM to Inches, Inches to CM & Feet to CM – Master Unit Conversion Chart';
+      description = 'Master reference lookup charts for CM to Inches, Inches to CM (inch to cm), and Feet to CM conversions with instant formulas and calculators.';
     }
 
     document.title = title;
@@ -423,7 +423,7 @@ export default function App() {
                   <span>⚡ External Conversion Resource</span>
                 </h4>
                 <p className="text-sm text-slate-700 leading-relaxed font-sans">
-                  Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast <a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> conversions.
+                  Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch to cm</a> conversions.
                 </p>
               </div>
             )}
@@ -664,26 +664,50 @@ export default function App() {
         { cm: 1000, in: (1000 / 2.54).toFixed(4), ftIn: '32\' 9.70"' },
       ];
 
-      const stoneToKgTable = [
-        { st: 0.5, lbs: '7 lbs', kg: (0.5 * 6.35029318).toFixed(2) },
-        { st: 1, lbs: '14 lbs', kg: (1 * 6.35029318).toFixed(2) },
-        { st: 2, lbs: '28 lbs', kg: (2 * 6.35029318).toFixed(2) },
-        { st: 3, lbs: '42 lbs', kg: (3 * 6.35029318).toFixed(2) },
-        { st: 4, lbs: '56 lbs', kg: (4 * 6.35029318).toFixed(2) },
-        { st: 5, lbs: '70 lbs', kg: (5 * 6.35029318).toFixed(2) },
-        { st: 6, lbs: '84 lbs', kg: (6 * 6.35029318).toFixed(2) },
-        { st: 7, lbs: '98 lbs', kg: (7 * 6.35029318).toFixed(2) },
-        { st: 8, lbs: '112 lbs', kg: (8 * 6.35029318).toFixed(2) },
-        { st: 9, lbs: '126 lbs', kg: (9 * 6.35029318).toFixed(2) },
-        { st: 10, lbs: '140 lbs', kg: (10 * 6.35029318).toFixed(2) },
-        { st: 11, lbs: '154 lbs', kg: (11 * 6.35029318).toFixed(2) },
-        { st: 12, lbs: '168 lbs', kg: (12 * 6.35029318).toFixed(2) },
-        { st: 13, lbs: '182 lbs', kg: (13 * 6.35029318).toFixed(2) },
-        { st: 14, lbs: '196 lbs', kg: (14 * 6.35029318).toFixed(2) },
-        { st: 15, lbs: '210 lbs', kg: (15 * 6.35029318).toFixed(2) },
-        { st: 16, lbs: '224 lbs', kg: (16 * 6.35029318).toFixed(2) },
-        { st: 18, lbs: '252 lbs', kg: (18 * 6.35029318).toFixed(2) },
-        { st: 20, lbs: '280 lbs', kg: (20 * 6.35029318).toFixed(2) },
+      const inchToCmTable = [
+        { inVal: 1, cm: (1 * 2.54).toFixed(2), ftIn: '0\' 1"' },
+        { inVal: 2, cm: (2 * 2.54).toFixed(2), ftIn: '0\' 2"' },
+        { inVal: 3, cm: (3 * 2.54).toFixed(2), ftIn: '0\' 3"' },
+        { inVal: 4, cm: (4 * 2.54).toFixed(2), ftIn: '0\' 4"' },
+        { inVal: 5, cm: (5 * 2.54).toFixed(2), ftIn: '0\' 5"' },
+        { inVal: 6, cm: (6 * 2.54).toFixed(2), ftIn: '0\' 6"' },
+        { inVal: 8, cm: (8 * 2.54).toFixed(2), ftIn: '0\' 8"' },
+        { inVal: 10, cm: (10 * 2.54).toFixed(2), ftIn: '0\' 10"' },
+        { inVal: 12, cm: (12 * 2.54).toFixed(2), ftIn: '1\' 0"' },
+        { inVal: 18, cm: (18 * 2.54).toFixed(2), ftIn: '1\' 6"' },
+        { inVal: 24, cm: (24 * 2.54).toFixed(2), ftIn: '2\' 0"' },
+        { inVal: 30, cm: (30 * 2.54).toFixed(2), ftIn: '2\' 6"' },
+        { inVal: 36, cm: (36 * 2.54).toFixed(2), ftIn: '3\' 0"' },
+        { inVal: 48, cm: (48 * 2.54).toFixed(2), ftIn: '4\' 0"' },
+        { inVal: 60, cm: (60 * 2.54).toFixed(2), ftIn: '5\' 0"' },
+        { inVal: 65, cm: (65 * 2.54).toFixed(2), ftIn: '5\' 5"' },
+        { inVal: 70, cm: (70 * 2.54).toFixed(2), ftIn: '5\' 10"' },
+        { inVal: 72, cm: (72 * 2.54).toFixed(2), ftIn: '6\' 0"' },
+        { inVal: 84, cm: (84 * 2.54).toFixed(2), ftIn: '7\' 0"' },
+        { inVal: 100, cm: (100 * 2.54).toFixed(2), ftIn: '8\' 4"' },
+      ];
+
+      const feetToCmTable = [
+        { ft: 1, inTotal: '12 in', cm: (1 * 30.48).toFixed(2) },
+        { ft: 1.5, inTotal: '18 in', cm: (1.5 * 30.48).toFixed(2) },
+        { ft: 2, inTotal: '24 in', cm: (2 * 30.48).toFixed(2) },
+        { ft: 2.5, inTotal: '30 in', cm: (2.5 * 30.48).toFixed(2) },
+        { ft: 3, inTotal: '36 in', cm: (3 * 30.48).toFixed(2) },
+        { ft: 3.5, inTotal: '42 in', cm: (3.5 * 30.48).toFixed(2) },
+        { ft: 4, inTotal: '48 in', cm: (4 * 30.48).toFixed(2) },
+        { ft: 4.5, inTotal: '54 in', cm: (4.5 * 30.48).toFixed(2) },
+        { ft: 5, inTotal: '60 in', cm: (5 * 30.48).toFixed(2) },
+        { ft: 5.25, inTotal: '63 in (5\' 3")', cm: (5.25 * 30.48).toFixed(2) },
+        { ft: 5.5, inTotal: '66 in (5\' 6")', cm: (5.5 * 30.48).toFixed(2) },
+        { ft: 5.75, inTotal: '69 in (5\' 9")', cm: (5.75 * 30.48).toFixed(2) },
+        { ft: 6, inTotal: '72 in (6\' 0")', cm: (6 * 30.48).toFixed(2) },
+        { ft: 6.25, inTotal: '75 in (6\' 3")', cm: (6.25 * 30.48).toFixed(2) },
+        { ft: 6.5, inTotal: '78 in (6\' 6")', cm: (6.5 * 30.48).toFixed(2) },
+        { ft: 7, inTotal: '84 in', cm: (7 * 30.48).toFixed(2) },
+        { ft: 8, inTotal: '96 in', cm: (8 * 30.48).toFixed(2) },
+        { ft: 10, inTotal: '120 in', cm: (10 * 30.48).toFixed(2) },
+        { ft: 15, inTotal: '180 in', cm: (15 * 30.48).toFixed(2) },
+        { ft: 20, inTotal: '240 in', cm: (20 * 30.48).toFixed(2) },
       ];
 
       return (
@@ -695,23 +719,23 @@ export default function App() {
                 UNIT CONVERSION MASTER CHART
               </span>
               <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
-                1 CM to 1000 CM to Inches &amp; Stone to KG Conversion Charts
+                CM to Inches, Inches to CM &amp; Feet to CM Conversion Charts
               </h1>
               <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed font-sans">
-                Comprehensive reference lookup charts for length conversions (inch in cm) spanning 1 cm to 1000 cm, alongside body weight conversions (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a>) from 0.5 st to 20 st.
+                Comprehensive reference lookup charts for length conversions (<a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch to cm</a>, cm to inches, and feet to cm) spanning 1 cm to 1000 cm, alongside body weight conversions (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a>).
               </p>
             </div>
 
-            {/* Side-by-Side Reference Tables */}
+            {/* Side-by-Side Reference Tables: CM to Inches & Inches to CM */}
             <div className="grid lg:grid-cols-2 gap-8">
-              {/* 1 cm to 1000 cm to Inches Table */}
+              {/* 1. CM to Inches Table */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center border-b border-slate-200 pb-2">
                   <h2 className="text-base font-black text-slate-900 tracking-tight">
                     📏 Centimeters to Inches Chart (1 to 1000 CM)
                   </h2>
                   <span className="text-xs font-bold text-slate-500 font-mono">
-                    1 to 1000 CM
+                    CM → IN
                   </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
@@ -736,31 +760,31 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Stone to KG Table */}
+              {/* 2. Inches to CM Table */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center border-b border-slate-200 pb-2">
                   <h2 className="text-base font-black text-slate-900 tracking-tight">
-                    ⚖️ Stone to Kilograms Chart (0.5 to 20 ST)
+                    📐 Inches to Centimeters Chart (1 to 100 IN)
                   </h2>
-                  <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-amber-700 hover:underline">
-                    stone to kg →
+                  <a href="https://www.cmtoinches.uk/" className="text-xs font-bold text-blue-600 hover:underline">
+                    inch to cm →
                   </a>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                   <table className="w-full text-xs text-left">
                     <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
                       <tr>
-                        <th className="p-2.5 border-b">Stone (ST)</th>
-                        <th className="p-2.5 border-b">Pounds (LBS)</th>
-                        <th className="p-2.5 border-b">Kilograms (KG)</th>
+                        <th className="p-2.5 border-b">Inches (IN)</th>
+                        <th className="p-2.5 border-b">Centimeters (CM)</th>
+                        <th className="p-2.5 border-b">Feet &amp; Inches</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 font-mono">
-                      {stoneToKgTable.map((row) => (
-                        <tr key={row.st} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-2.5 font-bold text-slate-900">{row.st} st</td>
-                          <td className="p-2.5 text-slate-600">{row.lbs}</td>
-                          <td className="p-2.5 text-amber-700 font-bold">{row.kg} kg</td>
+                      {inchToCmTable.map((row) => (
+                        <tr key={row.inVal} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-2.5 font-bold text-slate-900">{row.inVal} in</td>
+                          <td className="p-2.5 text-emerald-700 font-bold">{row.cm} cm</td>
+                          <td className="p-2.5 text-slate-600">{row.ftIn}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -769,13 +793,49 @@ export default function App() {
               </div>
             </div>
 
-            {/* Quick Measurement Difference Explanation */}
+            {/* 3. Feet to CM Table */}
+            <div className="space-y-3 pt-2">
+              <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                <h2 className="text-base font-black text-slate-900 tracking-tight">
+                  🧍 Feet to Centimeters Height Chart (1 to 20 FT)
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => handleNavigate('/feet-to-cm/')}
+                  className="text-xs font-bold text-blue-600 hover:underline cursor-pointer"
+                >
+                  Feet to CM Calculator →
+                </button>
+              </div>
+              <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table className="w-full text-xs text-left">
+                  <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                    <tr>
+                      <th className="p-2.5 border-b">Feet (FT)</th>
+                      <th className="p-2.5 border-b">Inches Equivalent</th>
+                      <th className="p-2.5 border-b">Centimeters (CM)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-mono">
+                    {feetToCmTable.map((row) => (
+                      <tr key={row.ft} className="hover:bg-slate-50 transition-colors">
+                        <td className="p-2.5 font-bold text-slate-900">{row.ft} ft</td>
+                        <td className="p-2.5 text-slate-600">{row.inTotal}</td>
+                        <td className="p-2.5 text-blue-700 font-bold">{row.cm} cm</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Quick Measurement Difference Explanation (Preserving stone to kg backlink & updating inch to cm backlink) */}
             <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
               <h3 className="text-sm font-black text-slate-900 tracking-tight">
-                Key Comparison: Length (<a href="https://inchesincm.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">inch in cm</a>) vs Mass (stone to kg)
+                Key Comparison: Length (<a href="https://www.cmtoinches.uk/" className="text-blue-600 font-bold underline hover:text-blue-800">inch to cm</a>) vs Mass (<a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-amber-700 font-bold underline hover:text-amber-800">stone to kg</a>)
               </h3>
               <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-sans">
-                Centimeters and inches are linear length units used to determine height, room dimensions, clothing waist sizes, and screen diameters. In contrast, stones and kilograms measure body weight, luggage mass, and physical fitness metrics. 1 inch is defined as 2.54 cm, while 1 stone equals 14 lbs or approximately 6.35029 kg.
+                Centimeters, inches, and feet are linear length units used to determine height, room dimensions, clothing waist sizes, and screen diameters (1 inch = 2.54 cm, 1 foot = 30.48 cm). For body weight, luggage mass, and fitness metrics, use our partner <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> converter (1 stone = 14 lbs = 6.35029 kg).
               </p>
             </div>
           </div>

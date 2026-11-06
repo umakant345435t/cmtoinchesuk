@@ -20,7 +20,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Feet to Meters Standardizer', path: '/feet-to-meters/' as RoutePath },
         { label: 'Millimeters to Inches Woodwork Standard', path: '/mm-to-inches/' as RoutePath },
         { label: 'Inches to Millimeters Woodwork Standard', path: '/inches-to-mm/' as RoutePath },
-        { label: 'Inch in CM vs Stone to KG Comparison Chart', path: '/unit-conversion-chart/' as RoutePath },
+        { label: 'CM to Inches, Inches to CM & Feet to CM Chart', path: '/unit-conversion-chart/' as RoutePath },
       ]
     },
     {
