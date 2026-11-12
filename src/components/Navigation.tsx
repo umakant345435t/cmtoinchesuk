@@ -49,15 +49,15 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-xs" id="header-navigation">
-      <div className="w-full lg:w-[68%] max-w-[900px] mx-auto px-3 sm:px-5 py-2 flex flex-col gap-1.5">
-        {/* Top Row: Brand Logo (SVG only), Desktop Header Links & Mobile Hamburger Toggle */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex flex-col gap-1.5">
+        {/* Top Row: Brand Logo (SVG only, aligned with Footer logo), Desktop Header Links (single line) & Mobile Hamburger Toggle */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
-          <div className="flex items-center justify-between w-full lg:w-auto">
+          <div className="flex items-center justify-between w-full lg:w-auto shrink-0">
             {/* Brand Identity with Blue-600 High Contrast SVG Logo ONLY (no text beside it) */}
             <a
               href="/"
               onClick={(e) => handleLinkClick(e, '/')}
-              className="cursor-pointer flex items-center group focus:outline-none"
+              className="cursor-pointer flex items-center group focus:outline-none shrink-0"
               title="Home - CM to Inches Converter"
             >
               <svg
@@ -90,8 +90,8 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
             </button>
           </div>
 
-          {/* Desktop Primary Navigation Links (7 items only, 14.8px unbolded font size) */}
-          <nav aria-label="Main Navigation" className="hidden lg:flex flex-wrap items-center gap-1.5 xl:gap-2">
+          {/* Desktop Primary Navigation Links (7 items fixed in a single horizontal line, 14.8px unbolded) */}
+          <nav aria-label="Main Navigation" className="hidden lg:flex flex-nowrap items-center gap-1 xl:gap-2 whitespace-nowrap">
             {desktopHeaderLinks.map((link) => {
               const isActive = currentPath === link.path;
               const Icon = link.icon;
@@ -101,7 +101,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                   href={link.path}
                   onClick={(e) => handleLinkClick(e, link.path)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`px-3 py-1.5 rounded-xl text-[14.8px] font-normal transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-2.5 xl:px-3 py-1.5 rounded-xl text-[14.8px] font-normal transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
                       ? 'bg-blue-600 text-white shadow-md shadow-blue-100'
                       : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
