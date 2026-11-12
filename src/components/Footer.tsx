@@ -20,7 +20,7 @@ export function Footer({ onNavigate }: FooterProps) {
   ];
 
   return (
-    <footer className="bg-slate-950 text-slate-300 text-sm border-t-2 border-slate-900" id="footer">
+    <footer className="bg-slate-950 text-slate-300 text-[14.8px] font-normal border-t-2 border-slate-900" id="footer">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 space-y-8">
         
         {/* Main grid section */}
@@ -40,7 +40,7 @@ export function Footer({ onNavigate }: FooterProps) {
               />
             </div>
 
-            <div className="flex flex-col gap-2.5 text-sm font-bold">
+            <div className="flex flex-col gap-2.5 text-[14.8px] font-normal">
               <div className="flex items-center gap-2.5 text-slate-300">
                 <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
                 <span>Kensington, London, W8 4SG, United Kingdom</span>
@@ -111,7 +111,7 @@ export function Footer({ onNavigate }: FooterProps) {
                       e.preventDefault();
                       onNavigate(link.path);
                     }}
-                    className="text-left text-sm sm:text-[15px] py-1 text-slate-200 hover:text-yellow-400 hover:underline transition-colors font-bold cursor-pointer focus:outline-none"
+                    className="text-left text-[14.8px] sm:text-[15.8px] py-1 text-slate-200 hover:text-yellow-400 hover:underline transition-colors font-normal cursor-pointer focus:outline-none"
                   >
                     {link.label}
                   </a>
@@ -122,7 +122,7 @@ export function Footer({ onNavigate }: FooterProps) {
         </div>
 
         {/* Bottom Copyright line */}
-        <div className="pt-5 border-t border-slate-800 text-center sm:text-left text-sm text-slate-400 font-bold">
+        <div className="pt-5 border-t border-slate-800 text-center sm:text-left text-[14.8px] text-slate-400 font-normal">
           <span>© {currentYear} cmtoinches.uk. All rights reserved.</span>
         </div>
 

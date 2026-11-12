@@ -48,10 +48,10 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
   };
 
   return (
-    <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-sm" id="header-navigation">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 sm:py-3.5 flex flex-col gap-2">
+    <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-xs" id="header-navigation">
+      <div className="w-full lg:w-[82%] max-w-[1050px] mx-auto px-3 sm:px-5 py-2 flex flex-col gap-1.5">
         {/* Top Row: Brand Logo (SVG only), Desktop Header Links & Mobile Hamburger Toggle */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
           <div className="flex items-center justify-between w-full lg:w-auto">
             {/* Brand Identity with Blue-600 High Contrast SVG Logo ONLY (no text beside it) */}
             <a
@@ -85,12 +85,12 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               aria-label="Toggle Menu"
               aria-expanded={isOpen}
             >
-              {isOpen ? <X className="w-5 h-5 text-blue-600 stroke-[2.5]" /> : <Menu className="w-5 h-5 stroke-[2.5]" />}
-              <span className="text-sm font-black">Menu</span>
+              {isOpen ? <X className="w-5 h-5 text-blue-600 stroke-[2]" /> : <Menu className="w-5 h-5 stroke-[2]" />}
+              <span className="text-[14.8px] font-normal">Menu</span>
             </button>
           </div>
 
-          {/* Desktop Primary Navigation Links (7 items only, 14px text-sm font size) */}
+          {/* Desktop Primary Navigation Links (7 items only, 14.8px unbolded font size) */}
           <nav aria-label="Main Navigation" className="hidden lg:flex flex-wrap items-center gap-1.5 xl:gap-2">
             {desktopHeaderLinks.map((link) => {
               const isActive = currentPath === link.path;
@@ -101,7 +101,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                   href={link.path}
                   onClick={(e) => handleLinkClick(e, link.path)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`px-3 py-1.5 rounded-xl text-sm font-bold transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-xl text-[14.8px] font-normal transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
                       ? 'bg-blue-600 text-white shadow-md shadow-blue-100'
                       : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
@@ -121,7 +121,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
             aria-label="Mobile Navigation"
             className="lg:hidden w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mt-1 space-y-3 shadow-inner"
           >
-            <div className="px-1 text-xs font-black uppercase tracking-wider text-slate-400">
+            <div className="px-1 text-[12.8px] font-normal uppercase tracking-wider text-slate-400">
               All Converters &amp; Pages
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -133,7 +133,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                     href={link.path}
                     onClick={(e) => handleLinkClick(e, link.path)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm sm:text-[15px] font-bold transition-all flex items-center justify-between cursor-pointer ${
+                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-[14.8px] sm:text-[15.8px] font-normal transition-all flex items-center justify-between cursor-pointer ${
                       isActive
                         ? 'bg-blue-600 text-white shadow-md shadow-blue-100'
                         : 'bg-white text-slate-800 border border-slate-200/80 hover:text-blue-600 hover:border-blue-300'

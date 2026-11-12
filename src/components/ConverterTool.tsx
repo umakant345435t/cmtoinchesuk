@@ -355,7 +355,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
 
   return (
     <div className="w-full bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl border border-slate-100 overflow-hidden" id="converter-tool">
-      <div className="p-3.5 sm:p-6 md:p-8 space-y-3 sm:space-y-5">
+      <div className="p-3.5 sm:p-5 space-y-3 sm:space-y-4">
         {/* Unit Selector Dropdown */}
         <div className="bg-slate-50/80 p-2.5 sm:p-3.5 border border-slate-200/80 rounded-xl sm:rounded-2xl">
           <label htmlFor="conversion-mode-select" className="block text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-wider mb-1 sm:mb-1.5">
