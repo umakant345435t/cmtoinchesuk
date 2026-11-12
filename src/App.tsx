@@ -685,118 +685,151 @@ export default function App() {
     }
 
     if (currentPath === '/unit-conversion-chart/') {
-      const cmToInchTable = [
-        { cm: 1, in: (1 / 2.54).toFixed(4), ftIn: '0\' 0.39"' },
-        { cm: 5, in: (5 / 2.54).toFixed(4), ftIn: '0\' 1.97"' },
-        { cm: 10, in: (10 / 2.54).toFixed(4), ftIn: '0\' 3.94"' },
-        { cm: 25, in: (25 / 2.54).toFixed(4), ftIn: '0\' 9.84"' },
-        { cm: 50, in: (50 / 2.54).toFixed(4), ftIn: '1\' 7.69"' },
-        { cm: 75, in: (75 / 2.54).toFixed(4), ftIn: '2\' 5.53"' },
-        { cm: 100, in: (100 / 2.54).toFixed(4), ftIn: '3\' 3.37"' },
-        { cm: 150, in: (150 / 2.54).toFixed(4), ftIn: '4\' 11.06"' },
-        { cm: 170, in: (170 / 2.54).toFixed(4), ftIn: '5\' 6.93"' },
-        { cm: 180, in: (180 / 2.54).toFixed(4), ftIn: '5\' 10.87"' },
-        { cm: 200, in: (200 / 2.54).toFixed(4), ftIn: '6\' 6.74"' },
-        { cm: 250, in: (250 / 2.54).toFixed(4), ftIn: '8\' 2.43"' },
-        { cm: 300, in: (300 / 2.54).toFixed(4), ftIn: '9\' 10.11"' },
-        { cm: 400, in: (400 / 2.54).toFixed(4), ftIn: '13\' 1.48"' },
-        { cm: 500, in: (500 / 2.54).toFixed(4), ftIn: '16\' 4.85"' },
-        { cm: 600, in: (600 / 2.54).toFixed(4), ftIn: '19\' 8.22"' },
-        { cm: 700, in: (700 / 2.54).toFixed(4), ftIn: '22\' 11.59"' },
-        { cm: 800, in: (800 / 2.54).toFixed(4), ftIn: '26\' 2.96"' },
-        { cm: 900, in: (900 / 2.54).toFixed(4), ftIn: '29\' 6.33"' },
-        { cm: 1000, in: (1000 / 2.54).toFixed(4), ftIn: '32\' 9.70"' },
+      const chartValues1To1500 = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        22, 24, 25, 28, 30, 32, 35, 36, 40, 42,
+        45, 48, 50, 55, 60, 65, 70, 72, 75, 80,
+        84, 85, 90, 95, 96, 100, 110, 120, 125, 130,
+        140, 150, 160, 170, 175, 180, 190, 200, 225, 250,
+        275, 300, 325, 350, 375, 400, 425, 450, 475, 500,
+        550, 600, 650, 700, 750, 800, 850, 900, 950, 1000,
+        1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500
       ];
 
-      const inchToCmTable = [
-        { inVal: 1, cm: (1 * 2.54).toFixed(2), ftIn: '0\' 1"' },
-        { inVal: 2, cm: (2 * 2.54).toFixed(2), ftIn: '0\' 2"' },
-        { inVal: 3, cm: (3 * 2.54).toFixed(2), ftIn: '0\' 3"' },
-        { inVal: 4, cm: (4 * 2.54).toFixed(2), ftIn: '0\' 4"' },
-        { inVal: 5, cm: (5 * 2.54).toFixed(2), ftIn: '0\' 5"' },
-        { inVal: 6, cm: (6 * 2.54).toFixed(2), ftIn: '0\' 6"' },
-        { inVal: 8, cm: (8 * 2.54).toFixed(2), ftIn: '0\' 8"' },
-        { inVal: 10, cm: (10 * 2.54).toFixed(2), ftIn: '0\' 10"' },
-        { inVal: 12, cm: (12 * 2.54).toFixed(2), ftIn: '1\' 0"' },
-        { inVal: 18, cm: (18 * 2.54).toFixed(2), ftIn: '1\' 6"' },
-        { inVal: 24, cm: (24 * 2.54).toFixed(2), ftIn: '2\' 0"' },
-        { inVal: 30, cm: (30 * 2.54).toFixed(2), ftIn: '2\' 6"' },
-        { inVal: 36, cm: (36 * 2.54).toFixed(2), ftIn: '3\' 0"' },
-        { inVal: 48, cm: (48 * 2.54).toFixed(2), ftIn: '4\' 0"' },
-        { inVal: 60, cm: (60 * 2.54).toFixed(2), ftIn: '5\' 0"' },
-        { inVal: 65, cm: (65 * 2.54).toFixed(2), ftIn: '5\' 5"' },
-        { inVal: 70, cm: (70 * 2.54).toFixed(2), ftIn: '5\' 10"' },
-        { inVal: 72, cm: (72 * 2.54).toFixed(2), ftIn: '6\' 0"' },
-        { inVal: 84, cm: (84 * 2.54).toFixed(2), ftIn: '7\' 0"' },
-        { inVal: 100, cm: (100 * 2.54).toFixed(2), ftIn: '8\' 4"' },
-      ];
+      const formatFeetAndInchesFromInches = (totalInches: number) => {
+        const ft = Math.floor(totalInches / 12);
+        const remIn = +(totalInches - ft * 12).toFixed(2);
+        return `${ft}' ${remIn}"`;
+      };
 
-      const feetToCmTable = [
-        { ft: 1, inTotal: '12 in', cm: (1 * 30.48).toFixed(2) },
-        { ft: 1.5, inTotal: '18 in', cm: (1.5 * 30.48).toFixed(2) },
-        { ft: 2, inTotal: '24 in', cm: (2 * 30.48).toFixed(2) },
-        { ft: 2.5, inTotal: '30 in', cm: (2.5 * 30.48).toFixed(2) },
-        { ft: 3, inTotal: '36 in', cm: (3 * 30.48).toFixed(2) },
-        { ft: 3.5, inTotal: '42 in', cm: (3.5 * 30.48).toFixed(2) },
-        { ft: 4, inTotal: '48 in', cm: (4 * 30.48).toFixed(2) },
-        { ft: 4.5, inTotal: '54 in', cm: (4.5 * 30.48).toFixed(2) },
-        { ft: 5, inTotal: '60 in', cm: (5 * 30.48).toFixed(2) },
-        { ft: 5.25, inTotal: '63 in (5\' 3")', cm: (5.25 * 30.48).toFixed(2) },
-        { ft: 5.5, inTotal: '66 in (5\' 6")', cm: (5.5 * 30.48).toFixed(2) },
-        { ft: 5.75, inTotal: '69 in (5\' 9")', cm: (5.75 * 30.48).toFixed(2) },
-        { ft: 6, inTotal: '72 in (6\' 0")', cm: (6 * 30.48).toFixed(2) },
-        { ft: 6.25, inTotal: '75 in (6\' 3")', cm: (6.25 * 30.48).toFixed(2) },
-        { ft: 6.5, inTotal: '78 in (6\' 6")', cm: (6.5 * 30.48).toFixed(2) },
-        { ft: 7, inTotal: '84 in', cm: (7 * 30.48).toFixed(2) },
-        { ft: 8, inTotal: '96 in', cm: (8 * 30.48).toFixed(2) },
-        { ft: 10, inTotal: '120 in', cm: (10 * 30.48).toFixed(2) },
-        { ft: 15, inTotal: '180 in', cm: (15 * 30.48).toFixed(2) },
-        { ft: 20, inTotal: '240 in', cm: (20 * 30.48).toFixed(2) },
-      ];
+      const cmToInchTable = chartValues1To1500.map((cm) => {
+        const inches = cm / 2.54;
+        return {
+          cm,
+          in: inches.toFixed(4),
+          ftIn: formatFeetAndInchesFromInches(inches)
+        };
+      });
+
+      const inchToCmTable = chartValues1To1500.map((inVal) => ({
+        inVal,
+        cm: (inVal * 2.54).toFixed(2),
+        ftIn: formatFeetAndInchesFromInches(inVal)
+      }));
+
+      const feetToCmTable = chartValues1To1500.map((ft) => ({
+        ft,
+        inTotal: `${(ft * 12).toLocaleString()} in`,
+        cm: (ft * 30.48).toFixed(2)
+      }));
+
+      const mmToCmTable = chartValues1To1500.map((mm) => ({
+        mm,
+        cm: (mm / 10).toFixed(2),
+        m: (mm / 1000).toFixed(4)
+      }));
+
+      const mmToInchesTable = chartValues1To1500.map((mm) => {
+        const inches = mm / 25.4;
+        return {
+          mm,
+          in: inches.toFixed(4),
+          ftIn: formatFeetAndInchesFromInches(inches)
+        };
+      });
+
+      const mmToFeetTable = chartValues1To1500.map((mm) => {
+        const feet = mm / 304.8;
+        const inches = mm / 25.4;
+        return {
+          mm,
+          ft: feet.toFixed(4),
+          ftIn: formatFeetAndInchesFromInches(inches)
+        };
+      });
+
+      const cmToFeetTable = chartValues1To1500.map((cm) => {
+        const feet = cm / 30.48;
+        const inches = cm / 2.54;
+        return {
+          cm,
+          ft: feet.toFixed(4),
+          ftIn: formatFeetAndInchesFromInches(inches)
+        };
+      });
+
+      const inchesToMmTable = chartValues1To1500.map((inVal) => ({
+        inVal,
+        mm: (inVal * 25.4).toFixed(2),
+        cm: (inVal * 2.54).toFixed(2)
+      }));
 
       return (
         <div className="space-y-6">
           {renderBreadcrumb()}
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-8">
-            <div className="border-b border-slate-100 pb-5 space-y-2.5">
+          <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-10">
+            <div className="border-b border-slate-100 pb-6 space-y-4">
               <span className="text-xs bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
-                UNIT CONVERSION MASTER CHART
+                UNIT CONVERSION MASTER CHART (1 TO 1500)
               </span>
               <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
-                CM to Inches, Inches to CM &amp; Feet to CM Conversion Charts
+                Master Unit Conversion Charts (1 to 1500) – CM, MM, Inches &amp; Feet
               </h1>
               <p className="text-base sm:text-lg text-slate-700 font-medium leading-relaxed font-sans">
-                Comprehensive UK reference lookup charts for linear length conversions — including centimeters to inches, inches to centimeters, and feet to centimeters — spanning everyday household, height, and engineering measurements.
+                Comprehensive UK reference lookup tables from <strong>1 to 1500</strong> for all major linear measurements: CM to Inches, Inches to CM, Feet to CM, MM to CM, MM to Inches, MM to Feet, CM to Feet, and Inches to MM.
               </p>
+
+              {/* Quick Jump Navigation for All 8 Charts */}
+              <div className="pt-2 flex flex-wrap gap-2">
+                {[
+                  { label: 'CM → Inches (1–1500)', href: '#chart-cm-to-inches' },
+                  { label: 'Inches → CM (1–1500)', href: '#chart-inches-to-cm' },
+                  { label: 'Feet → CM (1–1500)', href: '#chart-feet-to-cm' },
+                  { label: 'MM → CM (1–1500)', href: '#chart-mm-to-cm' },
+                  { label: 'MM → Inches (1–1500)', href: '#chart-mm-to-inches' },
+                  { label: 'MM → Feet (1–1500)', href: '#chart-mm-to-feet' },
+                  { label: 'CM → Feet (1–1500)', href: '#chart-cm-to-feet' },
+                  { label: 'Inches → MM (1–1500)', href: '#chart-inches-to-mm' }
+                ].map((jump) => (
+                  <a
+                    key={jump.href}
+                    href={jump.href}
+                    className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-blue-600 text-slate-800 hover:text-white text-sm sm:text-base font-bold transition-colors"
+                  >
+                    {jump.label}
+                  </a>
+                ))}
+              </div>
             </div>
 
-            {/* Vertically Stacked Reference Tables: CM to Inches, Inches to CM & Feet to CM */}
-            <div className="space-y-8">
+            {/* Vertically Stacked Long Reference Tables (1 to 1500) */}
+            <div className="space-y-10">
               {/* 1. CM to Inches Table */}
-              <div className="space-y-3.5">
+              <div id="chart-cm-to-inches" className="space-y-3.5 scroll-mt-24">
                 <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
-                  <h2 className="text-lg font-black text-slate-900 tracking-tight">
-                    📏 Centimeters to Inches Chart (1 to 1000 CM)
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    1. Centimeters to Inches Chart (1 to 1500 CM)
                   </h2>
-                  <span className="text-sm font-bold text-slate-500 font-mono">
+                  <span className="text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-lg font-mono">
                     CM → IN
                   </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <table className="w-full text-sm sm:text-base text-left tabular-nums">
-                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
                       <tr>
-                        <th className="p-3 border-b">Centimeters (CM)</th>
-                        <th className="p-3 border-b">Inches (IN)</th>
-                        <th className="p-3 border-b">Feet &amp; Inches</th>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
+                        <th className="p-3.5 border-b">Inches (IN)</th>
+                        <th className="p-3.5 border-b">Feet &amp; Inches</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 font-mono">
                       {cmToInchTable.map((row) => (
                         <tr key={row.cm} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-3 font-bold text-slate-900">{row.cm} cm</td>
-                          <td className="p-3 text-blue-700 font-bold">{row.in} in</td>
-                          <td className="p-3 text-slate-700">{row.ftIn}</td>
+                          <td className="p-3.5 font-bold text-slate-900">{row.cm} cm</td>
+                          <td className="p-3.5 text-blue-700 font-bold">{row.in} in</td>
+                          <td className="p-3.5 text-slate-700">{row.ftIn}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -805,67 +838,227 @@ export default function App() {
               </div>
 
               {/* 2. Inches to CM Table */}
-              <div className="space-y-3.5">
+              <div id="chart-inches-to-cm" className="space-y-3.5 scroll-mt-24">
                 <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
-                  <h2 className="text-lg font-black text-slate-900 tracking-tight">
-                    📐 Inches to Centimeters Chart (1 to 100 IN)
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    2. Inches to Centimeters Chart (1 to 1500 IN)
                   </h2>
-                  <span className="text-sm font-bold text-slate-500 font-mono">
+                  <span className="text-sm font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg font-mono">
                     IN → CM
                   </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <table className="w-full text-sm sm:text-base text-left tabular-nums">
-                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
                       <tr>
-                        <th className="p-3 border-b">Inches (IN)</th>
-                        <th className="p-3 border-b">Centimeters (CM)</th>
-                        <th className="p-3 border-b">Feet &amp; Inches</th>
+                        <th className="p-3.5 border-b">Inches (IN)</th>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
+                        <th className="p-3.5 border-b">Feet &amp; Inches</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 font-mono">
                       {inchToCmTable.map((row) => (
                         <tr key={row.inVal} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-3 font-bold text-slate-900">{row.inVal} in</td>
-                          <td className="p-3 text-emerald-700 font-bold">{row.cm} cm</td>
-                          <td className="p-3 text-slate-700">{row.ftIn}</td>
+                          <td className="p-3.5 font-bold text-slate-900">{row.inVal} in</td>
+                          <td className="p-3.5 text-emerald-700 font-bold">{row.cm} cm</td>
+                          <td className="p-3.5 text-slate-700">{row.ftIn}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
               </div>
-            </div>
 
-            {/* 3. Feet to CM Table */}
-            <div className="space-y-3.5 pt-2">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
-                <h2 className="text-lg font-black text-slate-900 tracking-tight">
-                  🧍 Feet to Centimeters Height Chart (1 to 20 FT)
-                </h2>
-                <span className="text-sm font-bold text-slate-500 font-mono">
-                  FT → CM
-                </span>
-              </div>
-              <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                <table className="w-full text-sm sm:text-base text-left tabular-nums">
-                  <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
-                    <tr>
-                      <th className="p-3 border-b">Feet (FT)</th>
-                      <th className="p-3 border-b">Inches Equivalent</th>
-                      <th className="p-3 border-b">Centimeters (CM)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 font-mono">
-                    {feetToCmTable.map((row) => (
-                      <tr key={row.ft} className="hover:bg-slate-50 transition-colors">
-                        <td className="p-3 font-bold text-slate-900">{row.ft} ft</td>
-                        <td className="p-3 text-slate-700">{row.inTotal}</td>
-                        <td className="p-3 text-blue-700 font-bold">{row.cm} cm</td>
+              {/* 3. Feet to CM Table */}
+              <div id="chart-feet-to-cm" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    3. Feet to Centimeters Chart (1 to 1500 FT)
+                  </h2>
+                  <span className="text-sm font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-lg font-mono">
+                    FT → CM
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Feet (FT)</th>
+                        <th className="p-3.5 border-b">Total Inches</th>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {feetToCmTable.map((row) => (
+                        <tr key={row.ft} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.ft} ft</td>
+                          <td className="p-3.5 text-slate-700">{row.inTotal}</td>
+                          <td className="p-3.5 text-indigo-700 font-bold">{row.cm} cm</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 4. MM to CM Table */}
+              <div id="chart-mm-to-cm" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    4. Millimeters to Centimeters Chart (1 to 1500 MM)
+                  </h2>
+                  <span className="text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-lg font-mono">
+                    MM → CM
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Millimeters (MM)</th>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
+                        <th className="p-3.5 border-b">Meters (M)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {mmToCmTable.map((row) => (
+                        <tr key={row.mm} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.mm} mm</td>
+                          <td className="p-3.5 text-blue-700 font-bold">{row.cm} cm</td>
+                          <td className="p-3.5 text-slate-700">{row.m} m</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 5. MM to Inches Table */}
+              <div id="chart-mm-to-inches" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    5. Millimeters to Inches Chart (1 to 1500 MM)
+                  </h2>
+                  <span className="text-sm font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg font-mono">
+                    MM → IN
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Millimeters (MM)</th>
+                        <th className="p-3.5 border-b">Inches (IN)</th>
+                        <th className="p-3.5 border-b">Feet &amp; Inches</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {mmToInchesTable.map((row) => (
+                        <tr key={row.mm} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.mm} mm</td>
+                          <td className="p-3.5 text-emerald-700 font-bold">{row.in} in</td>
+                          <td className="p-3.5 text-slate-700">{row.ftIn}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 6. MM to Feet Table */}
+              <div id="chart-mm-to-feet" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    6. Millimeters to Feet Chart (1 to 1500 MM)
+                  </h2>
+                  <span className="text-sm font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-lg font-mono">
+                    MM → FT
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Millimeters (MM)</th>
+                        <th className="p-3.5 border-b">Feet (FT)</th>
+                        <th className="p-3.5 border-b">Feet &amp; Inches</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {mmToFeetTable.map((row) => (
+                        <tr key={row.mm} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.mm} mm</td>
+                          <td className="p-3.5 text-indigo-700 font-bold">{row.ft} ft</td>
+                          <td className="p-3.5 text-slate-700">{row.ftIn}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 7. CM to Feet Table */}
+              <div id="chart-cm-to-feet" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    7. Centimeters to Feet Chart (1 to 1500 CM)
+                  </h2>
+                  <span className="text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-lg font-mono">
+                    CM → FT
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
+                        <th className="p-3.5 border-b">Feet (FT)</th>
+                        <th className="p-3.5 border-b">Feet &amp; Inches</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {cmToFeetTable.map((row) => (
+                        <tr key={row.cm} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.cm} cm</td>
+                          <td className="p-3.5 text-blue-700 font-bold">{row.ft} ft</td>
+                          <td className="p-3.5 text-slate-700">{row.ftIn}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 8. Inches to MM Table */}
+              <div id="chart-inches-to-mm" className="space-y-3.5 scroll-mt-24">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                    8. Inches to Millimeters Chart (1 to 1500 IN)
+                  </h2>
+                  <span className="text-sm font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg font-mono">
+                    IN → MM
+                  </span>
+                </div>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                  <table className="w-full text-base sm:text-[17px] text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-sm sm:text-base">
+                      <tr>
+                        <th className="p-3.5 border-b">Inches (IN)</th>
+                        <th className="p-3.5 border-b">Millimeters (MM)</th>
+                        <th className="p-3.5 border-b">Centimeters (CM)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-mono">
+                      {inchesToMmTable.map((row) => (
+                        <tr key={row.inVal} className="hover:bg-slate-50 transition-colors">
+                          <td className="p-3.5 font-bold text-slate-900">{row.inVal} in</td>
+                          <td className="p-3.5 text-emerald-700 font-bold">{row.mm} mm</td>
+                          <td className="p-3.5 text-slate-700">{row.cm} cm</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
@@ -875,7 +1068,7 @@ export default function App() {
                 <span>⚡ Instant Length Conversion Tool</span>
               </h3>
               <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
-                Centimeters, inches, and feet are standard linear units used for height, screen sizes, furniture, and architectural measurements (1 inch = 2.54 cm, 1 foot = 30.48 cm). Need to calculate custom values outside these charts? Use our instant <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">cm to inches</a> converter for real-time precision results.
+                Centimeters, millimeters, inches, and feet are standard linear units used for height, screen sizes, furniture, and architectural measurements (1 inch = 2.54 cm = 25.4 mm, 1 foot = 30.48 cm = 304.8 mm). Need to calculate custom values outside these charts? Use our instant <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">cm to inches</a> converter for real-time precision results.
               </p>
             </div>
           </div>
@@ -1050,22 +1243,18 @@ export default function App() {
       <Navigation currentPath={currentPath} onNavigate={handleNavigate} />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-3.5 sm:py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-3.5 sm:py-8 space-y-8">
         
-        {/* Grid layout for layout structure */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
-          
-          {/* Main content pane (Left/Center Column) */}
-          <section className="lg:col-span-8 order-1">
-            {renderPageContent()}
-          </section>
+        {/* Main content pane */}
+        <section className="w-full">
+          {renderPageContent()}
+        </section>
 
-          {/* Sidebar Area (Right Column) */}
-          <section className="lg:col-span-4 order-2 space-y-6">
-            <Sidebar currentPath={currentPath} onNavigate={handleNavigate} />
-          </section>
+        {/* Related Converters Section (Moved to the bottom right before Footer) */}
+        <section className="w-full">
+          <Sidebar currentPath={currentPath} onNavigate={handleNavigate} />
+        </section>
 
-        </div>
       </main>
 
       {/* Footer Area */}
