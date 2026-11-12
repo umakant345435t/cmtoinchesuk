@@ -260,15 +260,14 @@ function processCssBlocks(css, prefixRegex, mode = 'unwrap') {
 
 /**
  * Transforms Tailwind v4 CSS into 100% Universal Cross-Browser CSS:
- * 1. Removes `@layer ...;` statement declarations and unwraps all `@layer <name> { ... }` blocks
- *    so browsers without CSS Cascade Layers support (Chrome < 99, Safari < 15.4, Firefox < 97,
- *    UC Browser, older Samsung Internet, Android/iOS WebViews, Windows 7/8 browsers) apply 100% of styles.
- * 2. Unwraps Tailwind v4's restrictive `@supports` gate around `--tw-*` custom property initializations
- *    so all browsers (even without `@property` support) initialize `--tw-border-style: solid`, shadows, and gradients.
- * 3. Removes `@supports (color:color-mix(...))` blocks so standard hex/rgba colors are used everywhere.
- * 4. Runs esbuild CSS downleveling targeting Chrome 60 / Safari 11 / Firefox 60 / Edge 79 / iOS 11
- *    to convert all `oklch()` colors to `#hex`/`rgb()`, `@media (width >= ...)` to `@media (min-width: ...)`,
- *    `#rrggbbaa` to `rgba()`, and `inset` to `top/right/bottom/left`.
+ * 1. Removes `@layer ...;` statement declarations and unwraps all `@layer <name> { ... }` blocks.
+ * 2. Unwraps Tailwind v4's restrictive `@supports` gate around `--tw-*` custom property initializations.
+ * 3. Removes `@supports (color:color-mix(...))` and `@supports (color:oklch(...))` blocks.
+ * 4. Converts EVERY `oklch(...)` color (including inside `--color-*` CSS variables) to standard `#hex` / `rgb()`.
+ * 5. Strips `in oklab` / `in oklch` from linear-gradient positions so all browsers render gradients.
+ * 6. Expands CSS logical properties (`padding-inline`, `padding-block`, `margin-inline`, `margin-block`, `inset-block`)
+ *    to standard physical properties (`padding-left/right`, `margin-left/right`, `top/bottom`).
+ * 7. Unwraps `:where()` in `.space-y-*` and `.divide-*` selectors and adds `transform:` fallbacks for `translate:` / `scale:`.
  */
 function makeCssUniversal(rawCss) {
   let css = rawCss;
@@ -280,23 +279,74 @@ function makeCssUniversal(rawCss) {
   css = processCssBlocks(css, /@layer\s+[^{]+\{/i, 'unwrap');
 
   // 3. Unwrap Tailwind v4's `@supports ((-webkit-hyphens:none)...) { ... }` property initializer block
-  // so `*, :before, :after, ::backdrop { --tw-border-style: solid; ... }` applies unconditionally in all browsers
   css = processCssBlocks(css, /@supports\s*\(\(\(-webkit-hyphens:\s*none\)[^{]+\{/i, 'unwrap');
   css = processCssBlocks(css, /@supports\s*\(\(-webkit-hyphens:\s*none\)[^{]+\{/i, 'unwrap');
 
   // 4. Remove `@supports (color:color-mix(...))` and `@supports (color:oklch(...))` override blocks
-  // since standard rgba/hex fallbacks are already emitted right before them
   css = processCssBlocks(css, /@supports\s*\(color:\s*color-mix\([^{]+\{/i, 'remove');
   css = processCssBlocks(css, /@supports\s*\(color:\s*oklch\([^{]+\{/i, 'remove');
 
-  // 5. Run esbuild CSS transformer with legacy browser targets to downlevel oklch(), media ranges, inset, and hex alpha
+  // 5. Convert ALL `oklch(...)` occurrences (including inside `:root { --color-*: oklch(...) }`) to standard #hex / rgb()
+  const oklchMatches = Array.from(new Set(css.match(/oklch\([^)]+\)/gi) || []));
+  for (const oklchStr of oklchMatches) {
+    try {
+      const converted = esbuild.transformSync(`.x{color:${oklchStr}}`, {
+        loader: 'css',
+        target: ['chrome60', 'safari11', 'firefox60'],
+        minify: true,
+      }).code.trim();
+      const m = converted.match(/\.x\{color:([^}]+)\}/);
+      if (m && m[1]) {
+        css = css.split(oklchStr).join(m[1]);
+      }
+    } catch (_) {}
+  }
+
+  // 6. Strip `in oklab` / `in oklch` / `in srgb` from gradient directions (`to bottom in oklab` -> `to bottom`)
+  css = css.replace(/\s+in\s+(?:oklab|oklch|srgb|lab|lch)/gi, '');
+
+  // 7. Convert 4-digit `#0000` transparent and 8-digit `#rrggbbaa` hex inside custom properties to `rgba(...)`
+  css = css.replace(/#0000(?=[;,)\s}])/g, 'rgba(0,0,0,0)');
+  css = css.replace(/#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})(?=[;,)\s}])/g, (_, r, g, b, a) => {
+    const rv = parseInt(r, 16);
+    const gv = parseInt(g, 16);
+    const bv = parseInt(b, 16);
+    const av = Number((parseInt(a, 16) / 255).toFixed(2));
+    return `rgba(${rv},${gv},${bv},${av})`;
+  });
+
+  // 8. Expand CSS logical properties to universal physical properties
+  css = css
+    .replace(/padding-inline:([^;}]+)/g, 'padding-left:$1;padding-right:$1')
+    .replace(/padding-block:([^;}]+)/g, 'padding-top:$1;padding-bottom:$1')
+    .replace(/margin-inline:([^;}]+)/g, 'margin-left:$1;margin-right:$1')
+    .replace(/margin-block:([^;}]+)/g, 'margin-top:$1;margin-bottom:$1')
+    .replace(/margin-block-start:([^;}]+)/g, 'margin-top:$1')
+    .replace(/margin-block-end:([^;}]+)/g, 'margin-bottom:$1')
+    .replace(/inset-block:([^;}]+)/g, 'top:$1;bottom:$1')
+    .replace(/border-inline-style:([^;}]+)/g, 'border-left-style:$1;border-right-style:$1')
+    .replace(/border-inline-width:([^;}]+)/g, 'border-left-width:$1;border-right-width:$1')
+    .replace(/border-inline-color:([^;}]+)/g, 'border-left-color:$1;border-right-color:$1');
+
+  // 9. Unwrap `:where(...)` in `.space-y-*` and `.divide-*` so older browsers apply vertical spacing and table dividers
+  css = css.replace(/:where\((\.(?:[a-z]+\\:)?(?:space-y|divide-y|divide-slate)[^)]+)\)/g, '$1');
+
+  // 10. Add standard `transform:` fallbacks for individual `translate:` and `scale:` properties
+  css = css
+    .replace(/translate:var\(--tw-translate-x\)\s*var\(--tw-translate-y\)/g, 'transform:translate(var(--tw-translate-x,0),var(--tw-translate-y,0));translate:var(--tw-translate-x) var(--tw-translate-y)')
+    .replace(/scale:var\(--tw-scale-x\)\s*var\(--tw-scale-y\)/g, 'transform:scale(var(--tw-scale-x,1),var(--tw-scale-y,1));scale:var(--tw-scale-x) var(--tw-scale-y)');
+
+  // 11. Run esbuild CSS transformer with legacy browser targets to downlevel media ranges, inset, and vendor prefixes
   const transformed = esbuild.transformSync(css, {
     loader: 'css',
     target: ['chrome60', 'safari11', 'firefox60', 'edge79', 'ios11'],
     minify: true,
   });
 
-  return transformed.code.trim();
+  // 12. Remove `@property` declarations at the end so legacy CSS parsers never choke on unknown at-rules
+  let finalCss = transformed.code.replace(/@property\s+--[^{]+\{[^}]*\}/gi, '').trim();
+
+  return finalCss;
 }
 
 const distDir = path.join(__dirname, 'dist');
