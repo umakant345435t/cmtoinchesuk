@@ -23,18 +23,10 @@ export default defineConfig(({ command }) => {
       target: 'esnext',
       minify: 'esbuild',
       cssMinify: true,
+      cssCodeSplit: false,
       modulePreload: {
         polyfill: false,
       },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          }
-        }
-      }
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.

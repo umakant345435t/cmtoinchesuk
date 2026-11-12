@@ -28,8 +28,11 @@ import {
   Send
 } from 'lucide-react';
 
-export default function App() {
+export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
   const [currentPath, setCurrentPath] = useState<RoutePath>(() => {
+    if (initialPath) {
+      return initialPath;
+    }
     if (typeof window !== 'undefined') {
       let path = window.location.pathname;
       if (!path.endsWith('/') && !path.includes('.')) {
@@ -148,11 +151,6 @@ export default function App() {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
-
-  // Scroll to top whenever route changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' as any });
-  }, [currentPath]);
 
   // Hook to handle dynamic Document Title & SEO meta updates in real-time
   useEffect(() => {

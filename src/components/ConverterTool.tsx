@@ -48,7 +48,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   const rawResult = numInput * currentType.ratio;
   const formattedResult = !isValidNumber || numInput === 0 
     ? '0' 
-    : rawResult.toLocaleString('fullwide', { useGrouping: false, maximumFractionDigits: 4 });
+    : rawResult.toLocaleString('en-GB', { useGrouping: false, maximumFractionDigits: 4 });
 
   // ADAPTIVE AUTO-ZOOM VISUAL RULER SPECIFICATION (Max 100 Units Cap):
   // 1. Auto-Zoom System:
@@ -588,7 +588,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               >
                 {/* Center Crosshair Reticle */}
                 <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 w-4 h-4 rounded-full border-2 border-red-600 bg-white/90 shadow flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
                 </div>
 
                 {/* Top Source Flag */}

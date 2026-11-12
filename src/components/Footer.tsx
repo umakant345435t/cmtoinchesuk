@@ -7,7 +7,7 @@ interface FooterProps {
 }
 
 export function Footer({ onNavigate }: FooterProps) {
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2026;
 
   const footerLinks: { label: string; path: RoutePath }[] = [
     { label: 'About Us', path: '/about-us/' },
@@ -32,12 +32,21 @@ export function Footer({ onNavigate }: FooterProps) {
               onClick={() => onNavigate('/')}
               title="Home - CM to Inches Converter"
             >
-              <img 
-                src="/favicon.svg" 
-                alt="CM to Inches Converter Logo" 
-                className="w-11 h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105" 
-                referrerPolicy="no-referrer"
-              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
+                width="44"
+                height="44"
+                role="img"
+                aria-label="CM to Inches Converter Logo"
+                className="w-11 h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105"
+              >
+                <rect width="128" height="128" rx="28" fill="#2563eb" />
+                <path d="M24 40 H104 M24 88 H104" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity="0.4" />
+                <path d="M34 40 V50 M44 40 V46 M54 40 V46 M64 40 V54 M74 40 V46 M84 40 V46 M94 40 V50" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+                <path d="M34 88 V78 M44 88 V82 M54 88 V82 M64 88 V74 M74 88 V82 M84 88 V82 M94 88 V78" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+                <text x="64" y="72" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="34" fill="#ffffff" textAnchor="middle" letterSpacing="-1">CM</text>
+              </svg>
             </div>
 
             <div className="flex flex-col gap-2.5 text-[14.8px] font-normal">
