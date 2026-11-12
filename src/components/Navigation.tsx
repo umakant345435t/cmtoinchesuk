@@ -49,7 +49,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-xs" id="header-navigation">
-      <div className="w-full lg:w-[82%] max-w-[1050px] mx-auto px-3 sm:px-5 py-2 flex flex-col gap-1.5">
+      <div className="w-full lg:w-[68%] max-w-[900px] mx-auto px-3 sm:px-5 py-2 flex flex-col gap-1.5">
         {/* Top Row: Brand Logo (SVG only), Desktop Header Links & Mobile Hamburger Toggle */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
           <div className="flex items-center justify-between w-full lg:w-auto">

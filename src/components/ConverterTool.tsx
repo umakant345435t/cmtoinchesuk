@@ -30,25 +30,25 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
 
   const currentType = CONVERSION_TYPES.find((t) => t.id === selectedTypeId) || CONVERSION_TYPES[0];
 
-  // Controlled input change handler: permits numbers, decimal point, backspacing, and international commas
+  // Controlled input change handler: permits numbers, decimal point, backspacing, and international commas up to 25 digits
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
     val = val.replace(/,/g, '.');
     if (val === '' || /^\d*\.?\d*$/.test(val)) {
-      if (val.length <= 12) {
+      if (val.length <= 25) {
         setInputValue(val);
       }
     }
   };
 
-  // Calculate Result safely
+  // Calculate Result safely (supports full-width display for up to 25-digit numbers without scientific notation)
   const parsedNum = parseFloat(inputValue);
   const isValidNumber = !isNaN(parsedNum) && isFinite(parsedNum) && inputValue.trim() !== '';
   const numInput = isValidNumber ? Math.max(0, parsedNum) : 0;
   const rawResult = numInput * currentType.ratio;
   const formattedResult = !isValidNumber || numInput === 0 
     ? '0' 
-    : (Number.isInteger(rawResult) ? rawResult.toString() : rawResult.toFixed(4));
+    : rawResult.toLocaleString('fullwide', { useGrouping: false, maximumFractionDigits: 4 });
 
   // ADAPTIVE AUTO-ZOOM VISUAL RULER SPECIFICATION (Max 100 Units Cap):
   // 1. Auto-Zoom System:
@@ -394,12 +394,17 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck={false}
+                maxLength={25}
                 value={inputValue}
                 onChange={handleInputChange}
                 placeholder="0"
-                className={`w-full max-w-full min-w-0 font-black bg-slate-50 border-2 border-slate-200 rounded-xl sm:rounded-2xl pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3.5 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans shadow-xs truncate ${
-                  inputValue.length > 9
-                    ? 'text-lg sm:text-xl'
+                className={`w-full max-w-full min-w-0 font-black bg-slate-50 border-2 border-slate-200 rounded-xl sm:rounded-2xl pl-3.5 sm:pl-4 pr-14 sm:pr-16 py-2.5 sm:py-3.5 focus:border-blue-500 focus:bg-white outline-none transition-all font-sans shadow-xs truncate ${
+                  inputValue.length > 18
+                    ? 'text-xs sm:text-sm'
+                    : inputValue.length > 13
+                    ? 'text-sm sm:text-base'
+                    : inputValue.length > 9
+                    ? 'text-base sm:text-lg'
                     : inputValue.length > 6
                     ? 'text-xl sm:text-2xl'
                     : 'text-2xl sm:text-3xl'
@@ -434,8 +439,12 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
               Inches / {currentType.toUnit.toUpperCase()} output
             </label>
             <div className={`w-full max-w-full min-w-0 font-black bg-blue-50 border-2 border-blue-100 text-blue-700 rounded-xl sm:rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 min-h-[54px] sm:min-h-[68px] shadow-xs overflow-hidden ${
-              formattedResult.length > 9
-                ? 'text-lg sm:text-xl'
+              formattedResult.length > 18
+                ? 'text-xs sm:text-sm'
+                : formattedResult.length > 13
+                ? 'text-sm sm:text-base'
+                : formattedResult.length > 9
+                ? 'text-base sm:text-lg'
                 : formattedResult.length > 6
                 ? 'text-xl sm:text-2xl'
                 : 'text-2xl sm:text-3xl'

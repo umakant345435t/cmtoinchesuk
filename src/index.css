@@ -17,6 +17,7 @@
 
 /* Below-the-fold rendering acceleration for 0.1s initial paint */
 #conversion-tables,
+#related-converters,
 #faq-section,
 footer {
   content-visibility: auto;

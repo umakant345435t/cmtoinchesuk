@@ -1242,8 +1242,8 @@ export default function App() {
       {/* Dynamic Header & Path Bar */}
       <Navigation currentPath={currentPath} onNavigate={handleNavigate} />
 
-      {/* Main Container (9% narrower on left & right on desktop, minimal top gap below header) */}
-      <main className="flex-1 w-full lg:w-[82%] max-w-[1050px] mx-auto px-3 sm:px-5 pt-2 sm:pt-3 pb-6 sm:pb-8 space-y-6">
+      {/* Main Container (additional 7% narrower on left & right on desktop, minimal top gap below header) */}
+      <main className="flex-1 w-full lg:w-[68%] max-w-[900px] mx-auto px-3 sm:px-5 pt-2 sm:pt-3 pb-6 sm:pb-8 space-y-6">
         
         {/* Main content pane */}
         <section className="w-full">
