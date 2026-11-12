@@ -99,10 +99,20 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   };
 
   const handleCopy = () => {
-    // Only copy the raw output numeric result (e.g. "3.937" or "0") as requested
     const textToCopy = formattedResult;
     if (navigator?.clipboard?.writeText) {
-      navigator.clipboard.writeText(textToCopy);
+      navigator.clipboard.writeText(textToCopy).catch(() => {});
+    } else {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = textToCopy;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (_) {}
     }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

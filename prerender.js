@@ -227,6 +227,78 @@ const metadata = {
   }
 };
 
+/**
+ * Helper to unwrap or remove balanced CSS blocks matching a given prefix regex.
+ * If mode === 'unwrap', replaces `@rule ... { INNER }` with `INNER`.
+ * If mode === 'remove', removes `@rule ... { INNER }` completely.
+ */
+function processCssBlocks(css, prefixRegex, mode = 'unwrap') {
+  let result = css;
+  let match;
+  const regex = new RegExp(prefixRegex.source, 'i');
+  while ((match = regex.exec(result)) !== null) {
+    const startIdx = match.index;
+    const openBraceIdx = startIdx + match[0].length - 1;
+    if (result[openBraceIdx] !== '{') break;
+    let depth = 1;
+    let i = openBraceIdx + 1;
+    while (i < result.length && depth > 0) {
+      if (result[i] === '{') depth++;
+      else if (result[i] === '}') depth--;
+      i++;
+    }
+    if (depth === 0) {
+      const innerContent = result.slice(openBraceIdx + 1, i - 1);
+      const replacement = mode === 'unwrap' ? innerContent : '';
+      result = result.slice(0, startIdx) + replacement + result.slice(i);
+    } else {
+      break;
+    }
+  }
+  return result;
+}
+
+/**
+ * Transforms Tailwind v4 CSS into 100% Universal Cross-Browser CSS:
+ * 1. Removes `@layer ...;` statement declarations and unwraps all `@layer <name> { ... }` blocks
+ *    so browsers without CSS Cascade Layers support (Chrome < 99, Safari < 15.4, Firefox < 97,
+ *    UC Browser, older Samsung Internet, Android/iOS WebViews, Windows 7/8 browsers) apply 100% of styles.
+ * 2. Unwraps Tailwind v4's restrictive `@supports` gate around `--tw-*` custom property initializations
+ *    so all browsers (even without `@property` support) initialize `--tw-border-style: solid`, shadows, and gradients.
+ * 3. Removes `@supports (color:color-mix(...))` blocks so standard hex/rgba colors are used everywhere.
+ * 4. Runs esbuild CSS downleveling targeting Chrome 60 / Safari 11 / Firefox 60 / Edge 79 / iOS 11
+ *    to convert all `oklch()` colors to `#hex`/`rgb()`, `@media (width >= ...)` to `@media (min-width: ...)`,
+ *    `#rrggbbaa` to `rgba()`, and `inset` to `top/right/bottom/left`.
+ */
+function makeCssUniversal(rawCss) {
+  let css = rawCss;
+
+  // 1. Remove standalone `@layer a, b, c;` declarations (without braces)
+  css = css.replace(/@layer\s+[^{;]+;/gi, '');
+
+  // 2. Unwrap all `@layer <name> { ... }` blocks in place (preserving cascade order)
+  css = processCssBlocks(css, /@layer\s+[^{]+\{/i, 'unwrap');
+
+  // 3. Unwrap Tailwind v4's `@supports ((-webkit-hyphens:none)...) { ... }` property initializer block
+  // so `*, :before, :after, ::backdrop { --tw-border-style: solid; ... }` applies unconditionally in all browsers
+  css = processCssBlocks(css, /@supports\s*\(\(\(-webkit-hyphens:\s*none\)[^{]+\{/i, 'unwrap');
+  css = processCssBlocks(css, /@supports\s*\(\(-webkit-hyphens:\s*none\)[^{]+\{/i, 'unwrap');
+
+  // 4. Remove `@supports (color:color-mix(...))` and `@supports (color:oklch(...))` override blocks
+  // since standard rgba/hex fallbacks are already emitted right before them
+  css = processCssBlocks(css, /@supports\s*\(color:\s*color-mix\([^{]+\{/i, 'remove');
+  css = processCssBlocks(css, /@supports\s*\(color:\s*oklch\([^{]+\{/i, 'remove');
+
+  // 5. Run esbuild CSS transformer with legacy browser targets to downlevel oklch(), media ranges, inset, and hex alpha
+  const transformed = esbuild.transformSync(css, {
+    loader: 'css',
+    target: ['chrome60', 'safari11', 'firefox60', 'edge79', 'ios11'],
+    minify: true,
+  });
+
+  return transformed.code.trim();
+}
+
 const distDir = path.join(__dirname, 'dist');
 const indexPath = path.join(distDir, 'index.html');
 
@@ -261,24 +333,36 @@ function renderRouteHtml(routePath) {
 
 let indexContent = fs.readFileSync(indexPath, 'utf-8');
 
-// 1. Inline compiled CSS directly into <head> to eliminate render-blocking stylesheet request on Mobile 4G
-const cssLinkRegex = /<link\s+rel="stylesheet"[^>]*href="\/assets\/([^"]+\.css)"[^>]*>/i;
+// 1. Transform compiled CSS into Universal Cross-Browser CSS, write back to dist/assets/*.css,
+// and inject BOTH inline <style> (for 0.2s FCP/LCP) AND non-blocking <link rel="stylesheet"> fallback!
+const cssLinkRegex = /<link\s+rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/i;
 const cssMatch = indexContent.match(cssLinkRegex);
 if (cssMatch && cssMatch[1]) {
-  const cssFilePath = path.join(distDir, 'assets', cssMatch[1]);
+  const cssHref = cssMatch[1];
+  const cssFilePath = path.join(distDir, cssHref.replace(/^\//, ''));
   if (fs.existsSync(cssFilePath)) {
-    const cssContent = fs.readFileSync(cssFilePath, 'utf-8');
-    indexContent = indexContent.replace(cssLinkRegex, `<style id="inline-app-css">${cssContent}</style>`);
-    console.log(`Inlined CSS (${(cssContent.length / 1024).toFixed(1)} kB) into HTML <head> for zero render-blocking FCP/LCP`);
+    const rawCssContent = fs.readFileSync(cssFilePath, 'utf-8');
+    const universalCss = makeCssUniversal(rawCssContent);
+    // Overwrite asset CSS file so fallback stylesheet is also 100% universally compatible
+    fs.writeFileSync(cssFilePath, universalCss, 'utf-8');
+    const dualCssDeliveryHtml = `<style id="inline-app-css">${universalCss}</style><link rel="stylesheet" href="${cssHref}" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="${cssHref}"></noscript>`;
+    // Use function replacement callback so $ characters in CSS are never mangled
+    indexContent = indexContent.replace(cssLinkRegex, () => dualCssDeliveryHtml);
+    console.log(`Universal CSS (${(universalCss.length / 1024).toFixed(1)} kB) inlined + fallback linked for 100% browser compatibility`);
   }
 }
 
 // 2. Remove competing modulepreload tags from <head> and move main module script to end of <body>
+// Also attach a tiny ES5 fallback script so even legacy non-module browsers can calculate conversions
+const es5CalculatorFallback = `<script>(function(){var inp=document.getElementById('converter-input'),res=document.getElementById('converter-result'),sel=document.getElementById('conversion-mode-select');if(!inp||!res)return;var ratios={'cm-to-inches':0.3937007874,'inches-to-cm':2.54,'feet-to-cm':30.48,'cm-to-feet':0.032808399,'meters-to-feet':3.280839895,'feet-to-meters':0.3048,'mm-to-inches':0.0393700787,'inches-to-mm':25.4};inp.addEventListener('input',function(){var r= document.getElementById('root');if(r&&r._reactRootContainer)return;var v=parseFloat((inp.value||'').replace(/,/g,'.'));if(isNaN(v)||v<=0){res.textContent='0';return;}var mode=sel?sel.value:'cm-to-inches';var k=ratios[mode]||0.3937007874;res.textContent=Number((v*k).toFixed(4)).toString();});})();</script>`;
+
 indexContent = indexContent.replace(/<link\s+rel="modulepreload"[^>]*>\s*/gi, '');
 const scriptMatch = indexContent.match(/<script\s+type="module"[^>]*src="\/assets\/[^"]+\.js"[^>]*><\/script>/i);
 if (scriptMatch) {
   const scriptTag = scriptMatch[0];
-  indexContent = indexContent.replace(scriptTag, '').replace('</body>', `  ${scriptTag}\n  </body>`);
+  indexContent = indexContent
+    .replace(scriptTag, '')
+    .replace('</body>', () => `  ${scriptTag}\n  ${es5CalculatorFallback}\n  </body>`);
 }
 
 // Generate structural homepage JSON-LD schema (@graph with WebApplication, FAQPage, HowTo, WebSite, Organization)
@@ -368,11 +452,11 @@ const updatedRootIndex = indexContent
   .replace(/<link rel="canonical" href="[^"]*"/g, '<link rel="canonical" href="https://www.cmtoinches.uk/"')
   .replace(/<meta property="og:url" content="[^"]*"/g, '<meta property="og:url" content="https://www.cmtoinches.uk/"')
   .replace(/<meta property="twitter:url" content="[^"]*"/g, '<meta property="twitter:url" content="https://www.cmtoinches.uk/"')
-  .replace('<div id="root"></div>', `<div id="root">${rootAppHtml}</div>`)
-  .replace('</head>', `${homeJsonLdScript}\n</head>`);
+  .replace('<div id="root"></div>', () => `<div id="root">${rootAppHtml}</div>`)
+  .replace('</head>', () => `${homeJsonLdScript}\n</head>`);
 
 fs.writeFileSync(indexPath, updatedRootIndex, 'utf-8');
-console.log('Updated Root: dist/index.html with exact SSR HTML, canonical tags, and homepage JSON-LD');
+console.log('Updated Root: dist/index.html with exact SSR HTML, universal CSS, and homepage JSON-LD');
 
 // Helper to generate schema based on page attributes
 function generateJsonLdSchema(route, meta) {
@@ -496,20 +580,20 @@ routes.forEach((route) => {
   const routeAppHtml = renderRouteHtml(routePath);
 
   let pageContent = indexContent
-    .replace(/<title>.*?<\/title>/g, `<title>${meta.title}</title>`)
-    .replace(/<meta name="description" content="[^"]*"/g, `<meta name="description" content="${meta.description}"`)
-    .replace(/<link rel="canonical" href="[^"]*"/g, `<link rel="canonical" href="${pageCanonical}"`)
-    .replace(/<meta property="og:url" content="[^"]*"/g, `<meta property="og:url" content="${pageCanonical}"`)
-    .replace(/<meta property="og:title" content="[^"]*"/g, `<meta property="og:title" content="${meta.title}"`)
-    .replace(/<meta property="og:description" content="[^"]*"/g, `<meta property="og:description" content="${meta.description}"`)
-    .replace(/<meta property="twitter:url" content="[^"]*"/g, `<meta property="twitter:url" content="${pageCanonical}"`)
-    .replace(/<meta property="twitter:title" content="[^"]*"/g, `<meta property="twitter:title" content="${meta.title}"`)
-    .replace(/<meta property="twitter:description" content="[^"]*"/g, `<meta property="twitter:description" content="${meta.description}"`)
-    .replace('<div id="root"></div>', `<div id="root">${routeAppHtml}</div>`)
-    .replace('</head>', `${jsonLdScript}\n</head>`);
+    .replace(/<title>.*?<\/title>/g, () => `<title>${meta.title}</title>`)
+    .replace(/<meta name="description" content="[^"]*"/g, () => `<meta name="description" content="${meta.description}"`)
+    .replace(/<link rel="canonical" href="[^"]*"/g, () => `<link rel="canonical" href="${pageCanonical}"`)
+    .replace(/<meta property="og:url" content="[^"]*"/g, () => `<meta property="og:url" content="${pageCanonical}"`)
+    .replace(/<meta property="og:title" content="[^"]*"/g, () => `<meta property="og:title" content="${meta.title}"`)
+    .replace(/<meta property="og:description" content="[^"]*"/g, () => `<meta property="og:description" content="${meta.description}"`)
+    .replace(/<meta property="twitter:url" content="[^"]*"/g, () => `<meta property="twitter:url" content="${pageCanonical}"`)
+    .replace(/<meta property="twitter:title" content="[^"]*"/g, () => `<meta property="twitter:title" content="${meta.title}"`)
+    .replace(/<meta property="twitter:description" content="[^"]*"/g, () => `<meta property="twitter:description" content="${meta.description}"`)
+    .replace('<div id="root"></div>', () => `<div id="root">${routeAppHtml}</div>`)
+    .replace('</head>', () => `${jsonLdScript}\n</head>`);
 
   fs.writeFileSync(path.join(targetDir, 'index.html'), pageContent, 'utf-8');
-  console.log(`Generated: ${route}/index.html with exact SSR HTML, custom metadata & JSON-LD`);
+  console.log(`Generated: ${route}/index.html with exact SSR HTML, universal CSS & JSON-LD`);
 });
 
 // Clean up temporary SSR bundle

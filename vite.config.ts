@@ -20,7 +20,8 @@ export default defineConfig(({ command }) => {
       },
     },
     build: {
-      target: 'esnext',
+      target: ['es2018', 'chrome64', 'safari11.1', 'firefox62', 'edge79', 'ios11.3'],
+      cssTarget: ['chrome60', 'safari11', 'firefox60', 'edge79', 'ios11'],
       minify: 'esbuild',
       cssMinify: true,
       cssCodeSplit: false,
