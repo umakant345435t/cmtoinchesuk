@@ -289,16 +289,16 @@ export default function App() {
   const renderBreadcrumb = () => {
     const segments = currentPath.split('/').filter(Boolean);
     return (
-      <nav className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium mb-3 sm:mb-6 bg-slate-50 border border-slate-100 p-2 sm:p-2.5 rounded-lg">
+      <nav className="flex items-center gap-2 text-sm sm:text-base text-slate-600 font-semibold mb-4 sm:mb-6 bg-slate-50 border border-slate-200 p-3 rounded-xl">
         <a 
           href="https://www.cmtoinches.uk/" 
           onClick={(e) => {
             e.preventDefault();
             handleNavigate('/');
           }} 
-          className="hover:text-blue-600 flex items-center gap-1 shrink-0 font-bold"
+          className="hover:text-blue-600 flex items-center gap-1.5 shrink-0 font-bold"
         >
-          <Home className="w-3 h-3" />
+          <Home className="w-4 h-4 text-blue-600" />
           <span>cm to inches</span>
         </a>
         {segments.map((seg, idx) => {
@@ -307,11 +307,11 @@ export default function App() {
           
           return (
             <React.Fragment key={idx}>
-              <ChevronRight className="w-3 h-3 text-slate-300" />
+              <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
               <button
                 disabled={isLast}
                 onClick={() => handleNavigate(routeSoFar)}
-                className={`truncate ${isLast ? 'text-slate-700 font-bold cursor-default' : 'hover:text-blue-600'}`}
+                className={`truncate ${isLast ? 'text-slate-900 font-bold cursor-default' : 'hover:text-blue-600 cursor-pointer'}`}
               >
                 {seg.replace(/-/g, ' ')}
               </button>
@@ -418,22 +418,22 @@ export default function App() {
             </div>
 
             {currentPath === '/inches-to-cm/' && (
-              <div className="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl space-y-2 mt-6">
-                <h4 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
+              <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2.5 mt-6">
+                <h4 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
                   <span>⚡ External Conversion Resource</span>
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed font-sans">
+                <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
                   Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">inch in cm</a> conversions.
                 </p>
               </div>
             )}
 
             {currentPath === '/feet-to-cm/' && (
-              <div className="p-5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl space-y-2 mt-6">
-                <h4 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
+              <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl space-y-2.5 mt-6">
+                <h4 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
                   <span>⚡ External Weight Converter</span>
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed font-sans">
+                <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
                   Need to convert body weight, fitness, or everyday measurements between stone, pounds, and kilograms? Visit our partner tool for instant <a href="https://stonetokg.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-black underline hover:text-blue-800">stone to kg</a> conversions.
                 </p>
               </div>
@@ -563,10 +563,41 @@ export default function App() {
             <div className="space-y-8 text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.privacyPolicy.sections.map((sect, idx) => (
                 <div key={idx} className="space-y-3">
-                  <h3 className="font-black text-xl text-slate-900">{sect.heading}</h3>
+                  <h2 className="font-black text-xl text-slate-900">{sect.heading}</h2>
                   <p className="text-lg text-slate-700 leading-relaxed font-sans">{sect.content}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-3.5 text-base sm:text-lg text-slate-700">
+              <h2 className="font-black text-lg sm:text-xl text-slate-900">Official Google AdSense &amp; UK Privacy Opt-Out Links</h2>
+              <ul className="list-disc pl-6 space-y-2.5">
+                <li>
+                  <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">
+                    How Google uses information from sites or apps that use our services
+                  </a>
+                </li>
+                <li>
+                  <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">
+                    Google Advertising &amp; DART Cookie Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">
+                    Google Ads Settings (Manage or Opt Out of Personalized Ads)
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.youronlinechoices.com/uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">
+                    Your Online Choices UK (IAB UK Behavioural Advertising Opt-Out)
+                  </a>
+                </li>
+                <li>
+                  <a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800">
+                    UK Information Commissioner&apos;s Office (ICO)
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -588,7 +619,7 @@ export default function App() {
             <div className="space-y-8 text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.termsOfUse.sections.map((sect, idx) => (
                 <div key={idx} className="space-y-3">
-                  <h3 className="font-black text-xl text-slate-900">{sect.heading}</h3>
+                  <h2 className="font-black text-xl text-slate-900">{sect.heading}</h2>
                   <p className="text-lg text-slate-700 leading-relaxed font-sans">{sect.content}</p>
                 </div>
               ))}
@@ -626,6 +657,19 @@ export default function App() {
             <p className="text-lg text-slate-700 leading-relaxed font-sans">
               {POLICIES_DATA.cookiePolicy.content}
             </p>
+            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2 text-sm text-slate-700">
+              <p className="font-bold text-slate-900">Manage Cookie &amp; Ad Personalization Preferences:</p>
+              <p>
+                Review{' '}
+                <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">
+                  How Google uses information from sites or apps that use our services
+                </a>{' '}
+                or opt out of personalized DART cookies at{' '}
+                <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">
+                  Google Ads Settings
+                </a>.
+              </p>
+            </div>
           </div>
         </div>
       );
@@ -714,45 +758,45 @@ export default function App() {
         <div className="space-y-6">
           {renderBreadcrumb()}
           <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-8">
-            <div className="border-b border-slate-100 pb-5 space-y-2">
-              <span className="text-[10px] bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
+            <div className="border-b border-slate-100 pb-5 space-y-2.5">
+              <span className="text-xs bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
                 UNIT CONVERSION MASTER CHART
               </span>
               <h1 className="text-xl md:text-3xl font-black text-slate-950 tracking-tight leading-tight">
                 CM to Inches, Inches to CM &amp; Feet to CM Conversion Charts
               </h1>
-              <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed font-sans">
+              <p className="text-base sm:text-lg text-slate-700 font-medium leading-relaxed font-sans">
                 Comprehensive UK reference lookup charts for linear length conversions — including centimeters to inches, inches to centimeters, and feet to centimeters — spanning everyday household, height, and engineering measurements.
               </p>
             </div>
 
-            {/* Side-by-Side Reference Tables: CM to Inches & Inches to CM */}
-            <div className="grid lg:grid-cols-2 gap-8">
+            {/* Vertically Stacked Reference Tables: CM to Inches, Inches to CM & Feet to CM */}
+            <div className="space-y-8">
               {/* 1. CM to Inches Table */}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+              <div className="space-y-3.5">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg font-black text-slate-900 tracking-tight">
                     📏 Centimeters to Inches Chart (1 to 1000 CM)
                   </h2>
-                  <span className="text-xs font-bold text-slate-500 font-mono">
+                  <span className="text-sm font-bold text-slate-500 font-mono">
                     CM → IN
                   </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <table className="w-full text-xs text-left">
-                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                  <table className="w-full text-sm sm:text-base text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
                       <tr>
-                        <th className="p-2.5 border-b">Centimeters (CM)</th>
-                        <th className="p-2.5 border-b">Inches (IN)</th>
-                        <th className="p-2.5 border-b">Feet &amp; Inches</th>
+                        <th className="p-3 border-b">Centimeters (CM)</th>
+                        <th className="p-3 border-b">Inches (IN)</th>
+                        <th className="p-3 border-b">Feet &amp; Inches</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 font-mono">
                       {cmToInchTable.map((row) => (
                         <tr key={row.cm} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-2.5 font-bold text-slate-900">{row.cm} cm</td>
-                          <td className="p-2.5 text-blue-700 font-bold">{row.in} in</td>
-                          <td className="p-2.5 text-slate-600">{row.ftIn}</td>
+                          <td className="p-3 font-bold text-slate-900">{row.cm} cm</td>
+                          <td className="p-3 text-blue-700 font-bold">{row.in} in</td>
+                          <td className="p-3 text-slate-700">{row.ftIn}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -761,30 +805,30 @@ export default function App() {
               </div>
 
               {/* 2. Inches to CM Table */}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+              <div className="space-y-3.5">
+                <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                  <h2 className="text-lg font-black text-slate-900 tracking-tight">
                     📐 Inches to Centimeters Chart (1 to 100 IN)
                   </h2>
-                  <span className="text-xs font-bold text-slate-500 font-mono">
+                  <span className="text-sm font-bold text-slate-500 font-mono">
                     IN → CM
                   </span>
                 </div>
                 <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                  <table className="w-full text-xs text-left">
-                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                  <table className="w-full text-sm sm:text-base text-left tabular-nums">
+                    <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
                       <tr>
-                        <th className="p-2.5 border-b">Inches (IN)</th>
-                        <th className="p-2.5 border-b">Centimeters (CM)</th>
-                        <th className="p-2.5 border-b">Feet &amp; Inches</th>
+                        <th className="p-3 border-b">Inches (IN)</th>
+                        <th className="p-3 border-b">Centimeters (CM)</th>
+                        <th className="p-3 border-b">Feet &amp; Inches</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 font-mono">
                       {inchToCmTable.map((row) => (
                         <tr key={row.inVal} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-2.5 font-bold text-slate-900">{row.inVal} in</td>
-                          <td className="p-2.5 text-emerald-700 font-bold">{row.cm} cm</td>
-                          <td className="p-2.5 text-slate-600">{row.ftIn}</td>
+                          <td className="p-3 font-bold text-slate-900">{row.inVal} in</td>
+                          <td className="p-3 text-emerald-700 font-bold">{row.cm} cm</td>
+                          <td className="p-3 text-slate-700">{row.ftIn}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -794,30 +838,30 @@ export default function App() {
             </div>
 
             {/* 3. Feet to CM Table */}
-            <div className="space-y-3 pt-2">
-              <div className="flex justify-between items-center border-b border-slate-200 pb-2">
-                <h2 className="text-base font-black text-slate-900 tracking-tight">
+            <div className="space-y-3.5 pt-2">
+              <div className="flex justify-between items-center border-b border-slate-200 pb-2.5">
+                <h2 className="text-lg font-black text-slate-900 tracking-tight">
                   🧍 Feet to Centimeters Height Chart (1 to 20 FT)
                 </h2>
-                <span className="text-xs font-bold text-slate-500 font-mono">
+                <span className="text-sm font-bold text-slate-500 font-mono">
                   FT → CM
                 </span>
               </div>
               <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                <table className="w-full text-xs text-left">
-                  <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-[10px]">
+                <table className="w-full text-sm sm:text-base text-left tabular-nums">
+                  <thead className="bg-slate-100 font-bold text-slate-800 uppercase font-mono text-xs sm:text-sm">
                     <tr>
-                      <th className="p-2.5 border-b">Feet (FT)</th>
-                      <th className="p-2.5 border-b">Inches Equivalent</th>
-                      <th className="p-2.5 border-b">Centimeters (CM)</th>
+                      <th className="p-3 border-b">Feet (FT)</th>
+                      <th className="p-3 border-b">Inches Equivalent</th>
+                      <th className="p-3 border-b">Centimeters (CM)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 font-mono">
                     {feetToCmTable.map((row) => (
                       <tr key={row.ft} className="hover:bg-slate-50 transition-colors">
-                        <td className="p-2.5 font-bold text-slate-900">{row.ft} ft</td>
-                        <td className="p-2.5 text-slate-600">{row.inTotal}</td>
-                        <td className="p-2.5 text-blue-700 font-bold">{row.cm} cm</td>
+                        <td className="p-3 font-bold text-slate-900">{row.ft} ft</td>
+                        <td className="p-3 text-slate-700">{row.inTotal}</td>
+                        <td className="p-3 text-blue-700 font-bold">{row.cm} cm</td>
                       </tr>
                     ))}
                   </tbody>
@@ -826,11 +870,11 @@ export default function App() {
             </div>
 
             {/* Single Homepage Backlink on cm to inches keyword */}
-            <div className="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2">
-              <h3 className="text-xs font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
+            <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2.5">
+              <h3 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
                 <span>⚡ Instant Length Conversion Tool</span>
               </h3>
-              <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-sans">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
                 Centimeters, inches, and feet are standard linear units used for height, screen sizes, furniture, and architectural measurements (1 inch = 2.54 cm, 1 foot = 30.48 cm). Need to calculate custom values outside these charts? Use our instant <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">cm to inches</a> converter for real-time precision results.
               </p>
             </div>
@@ -864,29 +908,29 @@ export default function App() {
           {/* Grid of Two Core Formulas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
             {/* CM to Inches Formula Card */}
-            <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-l-4 border-blue-600 rounded-r-2xl font-mono space-y-3 shadow-sm">
-              <span className="text-xs text-blue-700 font-black tracking-widest uppercase">1. CM TO INCHES FORMULA</span>
+            <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl font-mono space-y-3 shadow-sm">
+              <span className="text-sm text-blue-700 font-black tracking-widest uppercase">1. CM TO INCHES FORMULA</span>
               <div className="text-xl font-black text-blue-900">
                 Inches = Centimeters ÷ 2.54
               </div>
-              <p className="text-xs text-slate-600 font-sans">
-                Alternatively: <code className="bg-white/80 px-1.5 py-0.5 rounded font-mono font-bold text-slate-900">CM × 0.393701</code>
+              <p className="text-base text-slate-700 font-sans">
+                Alternatively: <code className="bg-white/80 px-2 py-0.5 rounded font-mono font-bold text-slate-900">CM × 0.393701</code>
               </p>
-              <div className="text-xs text-slate-700 font-sans pt-2 border-t border-blue-200/60">
+              <div className="text-base text-slate-700 font-sans pt-2 border-t border-blue-200/60">
                 <strong>Example:</strong> 10 cm ÷ 2.54 = <strong>3.937 inches</strong>
               </div>
             </div>
 
             {/* Inch to CM Formula Card */}
-            <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 border-l-4 border-emerald-600 rounded-r-2xl font-mono space-y-3 shadow-sm">
-              <span className="text-xs text-emerald-700 font-black tracking-widest uppercase">2. INCH TO CM FORMULA</span>
+            <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl font-mono space-y-3 shadow-sm">
+              <span className="text-sm text-emerald-700 font-black tracking-widest uppercase">2. INCH TO CM FORMULA</span>
               <div className="text-xl font-black text-emerald-900">
                 Centimeters = Inches × 2.54
               </div>
-              <p className="text-xs text-slate-600 font-sans">
+              <p className="text-base text-slate-700 font-sans">
                 Exact constant defined by international agreement.
               </p>
-              <div className="text-xs text-slate-700 font-sans pt-2 border-t border-emerald-200/60">
+              <div className="text-base text-slate-700 font-sans pt-2 border-t border-emerald-200/60">
                 <strong>Example:</strong> 12 inches × 2.54 = <strong>30.48 cm</strong>
               </div>
             </div>
@@ -895,68 +939,68 @@ export default function App() {
           {/* Example Calculation Visual Card */}
           <div className="my-6 p-5 md:p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <span className="text-xs font-black text-slate-700 uppercase font-mono tracking-wider flex items-center gap-1.5">
+              <span className="text-sm font-black text-slate-800 uppercase font-mono tracking-wider flex items-center gap-1.5">
                 <span>📊 CONVERSION EXAMPLE PREVIEW</span>
               </span>
-              <span className="text-xs bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-full font-mono">
+              <span className="text-sm bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-lg font-mono">
                 9 CM = 3.5433 IN
               </span>
             </div>
             
             <div className="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-              <div className="space-y-1">
-                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+              <div className="space-y-1.5">
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                   ACTIVE CONVERSION MODE:
                 </div>
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs md:text-sm font-bold text-slate-800 flex justify-between items-center">
+                <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold text-slate-800 flex justify-between items-center">
                   <span>CM → IN (Centimeters to Inches)</span>
-                  <span className="text-slate-400 text-xs">▼</span>
+                  <span className="text-slate-400 text-sm">▼</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase">
                     CENTIMETERS / CM INPUT
                   </label>
-                  <div className="p-3 border-2 border-blue-500 rounded-xl bg-white font-mono font-bold text-xl text-slate-900 flex justify-between items-center">
+                  <div className="p-3.5 border-2 border-blue-500 rounded-xl bg-white font-mono font-bold text-2xl text-slate-900 flex justify-between items-center">
                     <span>9</span>
-                    <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded font-sans font-semibold">CM</span>
+                    <span className="text-sm text-slate-600 bg-slate-100 px-2.5 py-1 rounded font-sans font-bold">CM</span>
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-500 uppercase">
                     INCHES / IN OUTPUT
                   </label>
-                  <div className="p-3 border border-blue-100 bg-blue-50/70 rounded-xl font-mono font-bold text-2xl text-blue-700 flex justify-between items-center">
+                  <div className="p-3.5 border border-blue-100 bg-blue-50/70 rounded-xl font-mono font-bold text-2xl text-blue-700 flex justify-between items-center">
                     <span>3.5433</span>
-                    <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded font-sans font-semibold">IN</span>
+                    <span className="text-sm text-blue-700 bg-blue-100 px-2.5 py-1 rounded font-sans font-bold">IN</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-t border-slate-100">
-                <div className="font-mono text-slate-600">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm sm:text-base border-t border-slate-100">
+                <div className="font-mono text-slate-700">
                   Formula: <span className="italic font-bold">in = cm / 2.54</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs space-y-1">
-                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 text-base space-y-1">
+                  <div className="text-xs font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
                     <span>📄 FRACTIONAL EQUIVALENT (UK CARPENTRY)</span>
                   </div>
-                  <div className="font-bold text-slate-900 font-mono text-sm">
-                    3 9/16 in <span className="text-slate-500 font-normal text-xs">(Nearest 1/16")</span>
+                  <div className="font-bold text-slate-900 font-mono text-base">
+                    3 9/16 in <span className="text-slate-600 font-normal text-sm">(Nearest 1/16")</span>
                   </div>
                 </div>
 
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs space-y-1">
-                  <div className="text-[10px] font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 text-base space-y-1">
+                  <div className="text-xs font-black text-slate-500 uppercase tracking-wider flex items-center gap-1">
                     <span>ℹ️ FORMULA EXPRESSION</span>
                   </div>
-                  <div className="font-mono text-slate-800 bg-white p-1.5 rounded border border-slate-200">
+                  <div className="font-mono text-slate-800 bg-white p-2 rounded border border-slate-200 text-base font-bold">
                     9 cm * 0.39370 = 3.5433 in
                   </div>
                 </div>
@@ -965,22 +1009,22 @@ export default function App() {
           </div>
 
           <div className="space-y-4 pt-2">
-            <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               CM to Inches Conversion (Metric to Imperial)
             </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
+            <p className="text-lg text-slate-700 leading-relaxed font-sans">
               Converting centimeters (cm) to inches (in) is required across the UK for height documentation on passports, online apparel sizing, and household measurements. Because 1 inch is defined as exactly 2.54 centimeters, dividing any centimeter figure by 2.54 gives the corresponding length in customary imperial inches.
             </p>
           </div>
 
           <div className="space-y-4 pt-2">
-            <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
               Inch to CM Conversion (Imperial to Metric)
             </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
+            <p className="text-lg text-slate-700 leading-relaxed font-sans">
               Converting inches to centimeters (inch to cm) translates traditional imperial dimensions into the decimal System International (SI) metric framework. Simply multiply the number of inches by 2.54 to get the exact measurement in centimeters. For instance, a 70-inch height translates to <code className="bg-slate-100 text-slate-900 px-2 py-0.5 rounded font-mono font-bold">70 × 2.54 = 177.8 cm</code>.
             </p>
-            <p className="text-sm text-slate-700 font-medium">
+            <p className="text-base sm:text-lg text-slate-700 font-medium">
               Explore our comprehensive <a href="/unit-conversion-chart/" onClick={(e) => { e.preventDefault(); handleNavigate('/unit-conversion-chart/'); }} title="Inch to CM Conversion (Imperial to Metric)" className="text-blue-600 font-black underline hover:text-blue-800">Chart List</a> for inch to cm and cm to inches reference tables.
             </p>
           </div>

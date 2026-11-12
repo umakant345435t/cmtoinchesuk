@@ -1,6 +1,6 @@
 import React from 'react';
 import { RoutePath } from '../types';
-import { Award, Ruler, ExternalLink } from 'lucide-react';
+import { Ruler, ExternalLink } from 'lucide-react';
 
 interface SidebarProps {
   currentPath: RoutePath;
@@ -22,63 +22,25 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
 
   return (
     <aside className="w-full space-y-6" id="sidebar">
-      {/* UK Average Height Reference Card */}
-      <div className="bg-slate-900 text-white rounded-3xl p-6 shadow-xl border-2 border-slate-900 relative overflow-hidden">
-        <div className="flex items-center gap-2 mb-4">
-          <Award className="w-5 h-5 text-yellow-400 stroke-[2.5]" />
-          <h4 className="text-[11px] font-black uppercase tracking-wider text-yellow-400 font-mono">
-            Average British Height Guide
-          </h4>
-        </div>
-        <div className="space-y-4 text-xs font-semibold">
-          <p className="text-slate-300 leading-relaxed font-sans">
-            The national average height for adults residing in the United Kingdom:
-          </p>
-          <div className="flex justify-between items-center bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-            <div>
-              <span className="font-black block text-white text-sm">🇬🇧 UK Male Average</span>
-              <span className="text-[10px] text-slate-500 font-bold">Biological males</span>
-            </div>
-            <div className="text-right">
-              <span className="font-mono text-yellow-400 font-black block text-base leading-none">175.3 cm</span>
-              <span className="text-[10px] text-slate-400 font-bold">5 feet 9 inches</span>
-            </div>
-          </div>
-          <div className="flex justify-between items-center bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-            <div>
-              <span className="font-black block text-white text-sm">🇬🇧 UK Female Average</span>
-              <span className="text-[10px] text-slate-500 font-bold">Biological females</span>
-            </div>
-            <div className="text-right">
-              <span className="font-mono text-yellow-400 font-black block text-base leading-none">161.6 cm</span>
-              <span className="text-[10px] text-slate-400 font-bold">5 feet 3.6 inches</span>
-            </div>
-          </div>
-          <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-2 font-mono">
-            Source: UK Office for National Statistics (ONS).
-          </p>
-        </div>
-      </div>
-
       {/* Quick Nav Tools */}
       <div className="bg-white rounded-3xl p-6 shadow-xl border border-slate-200">
-        <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-1.5 border-b-2 border-slate-200 pb-2.5">
-          <Ruler className="w-4 h-4 text-blue-600 stroke-[2.5]" />
+        <h4 className="text-base sm:text-lg font-black text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
+          <Ruler className="w-5 h-5 text-blue-600 stroke-[2.5]" />
           Related Converters
         </h4>
-        <div className="grid grid-cols-1 gap-1.5">
+        <div className="grid grid-cols-1 gap-2">
           {quickConversions.map((conv) => (
             <button
               key={conv.path}
               onClick={() => onNavigate(conv.path)}
-              className={`text-left text-xs py-2 px-3 rounded-xl transition-all cursor-pointer flex justify-between items-center font-bold ${
+              className={`text-left text-base sm:text-[17px] py-2.5 px-3.5 rounded-xl transition-all cursor-pointer flex justify-between items-center font-bold ${
                 currentPath === conv.path
-                  ? 'bg-blue-50 text-blue-900 font-black border-l-4 border-blue-600'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-4 border-transparent'
+                  ? 'bg-blue-50 text-blue-900 font-black border border-blue-200'
+                  : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950 border border-transparent'
               }`}
             >
               <span>{conv.label}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              <ExternalLink className="w-4 h-4 text-slate-400 shrink-0" />
             </button>
           ))}
         </div>

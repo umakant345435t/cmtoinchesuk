@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RoutePath } from '../types';
-import { HelpCircle, RefreshCw, Home, Compass, BookOpen, Link, FileText, Menu, X } from 'lucide-react';
+import { Home, Compass, FileText, Menu, X } from 'lucide-react';
 
 interface NavigationProps {
   currentPath: RoutePath;
@@ -19,10 +19,9 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'Sitemap', path: '/sitemap/', icon: FileText }
   ];
 
-
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-sm" id="header-navigation">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-2.5 sm:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 sm:py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
         {/* Brand Header & Toggle Row */}
         <div className="flex items-center justify-between w-full lg:w-auto">
           {/* Brand Identity with Blue-600 High Contrast SVG Logo */}
@@ -41,7 +40,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               height="44"
               role="img"
               aria-label="CM to Inches Converter Logo"
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105"
             >
               <rect width="128" height="128" rx="28" fill="#2563eb" />
               <path d="M24 40 H104 M24 88 H104" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity="0.4" />
@@ -54,15 +53,15 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
           {/* Responsive Hamburger Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2.5 rounded-xl border-2 border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 hover:text-blue-600 focus:outline-none transition-all cursor-pointer shadow-sm flex items-center justify-center gap-1.5"
+            className="lg:hidden px-3.5 py-2.5 rounded-xl border-2 border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 hover:text-blue-600 focus:outline-none transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2"
             aria-label="Toggle Menu"
           >
             {isOpen ? <X className="w-5 h-5 text-blue-600 stroke-[2.5]" /> : <Menu className="w-5 h-5 stroke-[2.5]" />}
-            <span className="text-xs font-black uppercase tracking-wider hidden sm:inline">Menu</span>
+            <span className="text-base font-black">Menu</span>
           </button>
         </div>
 
-        {/* Desktop Primary Navigation Links (hidden on smaller screen boundaries) */}
+        {/* Desktop Primary Navigation Links */}
         <nav className="hidden lg:flex flex-wrap items-center gap-2">
           {mainLinks.map((link) => {
             const isActive = currentPath === link.path;
@@ -71,13 +70,13 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               <button
                 key={link.path}
                 onClick={() => onNavigate(link.path)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center gap-1.5 ${
+                className={`px-3.5 py-2 rounded-xl text-base font-bold transition-all duration-150 flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
                   isActive 
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 translate-y-[-1px]' 
-                    : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100/80'
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-100' 
+                    : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
                 }`}
               >
-                {Icon && <Icon className="w-3.5 h-3.5" />}
+                {Icon && <Icon className="w-4 h-4" />}
                 {link.label}
               </button>
             );
@@ -86,13 +85,8 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
         {/* Mobile & Tablet Expandable Navigation Menu */}
         {isOpen && (
-          <nav className="lg:hidden w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mt-2 space-y-2 animate-fade-in divide-y divide-slate-100 shadow-inner">
-            <div className="pb-2">
-              <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest font-mono">
-                🧭 Navigational Directory
-              </span>
-            </div>
-            <div className="space-y-1.5 pt-2">
+          <nav className="lg:hidden w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mt-2 space-y-2 shadow-inner">
+            <div className="space-y-1.5">
               {mainLinks.map((link) => {
                 const isActive = currentPath === link.path;
                 const Icon = link.icon;
@@ -103,18 +97,15 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                       onNavigate(link.path);
                       setIsOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-xs font-black transition-all flex items-center justify-between cursor-pointer ${
+                    className={`w-full text-left px-4 py-3 rounded-xl text-base sm:text-lg font-black transition-all flex items-center justify-between cursor-pointer ${
                       isActive 
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' 
-                        : 'text-slate-700 hover:text-blue-600 hover:bg-slate-200/50'
+                        ? 'bg-blue-600 text-white shadow-md shadow-blue-100' 
+                        : 'text-slate-800 hover:text-blue-600 hover:bg-slate-200/60'
                     }`}
                   >
-                    <span className="flex items-center gap-2.5">
-                      {Icon && <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-500'}`} />}
+                    <span className="flex items-center gap-3">
+                      {Icon && <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-slate-500'}`} />}
                       {link.label}
-                    </span>
-                    <span className="text-[10px] font-mono leading-none bg-black/10 text-slate-500 rounded px-1.5 py-1">
-                      {link.path}
                     </span>
                   </button>
                 );
@@ -123,8 +114,6 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
           </nav>
         )}
       </div>
-
-
     </header>
   );
 }

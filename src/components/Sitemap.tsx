@@ -54,7 +54,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
   return (
     <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-6 md:p-8 space-y-8" id="sitemap-page">
       <div className="border-b-2 border-slate-200 pb-5">
-        <span className="text-[10px] bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
+        <span className="text-xs bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
           XML & HTML INDEX SITEMAP
         </span>
         <h1 className="text-xl md:text-2xl font-black text-slate-950 mt-3.5 flex items-center gap-2">
@@ -71,21 +71,21 @@ export function Sitemap({ onNavigate }: SitemapProps) {
           const Icon = cat.icon;
           return (
             <div key={idx} className="bg-slate-50/60 rounded-2xl p-5 border-2 border-slate-200 space-y-4">
-              <h3 className="text-sm font-black uppercase text-slate-950 tracking-wider flex items-center gap-2 border-b-2 border-slate-200 pb-2.5">
-                <Icon className="w-4 h-4 text-slate-600 stroke-[2.5]" />
+              <h3 className="text-base sm:text-lg font-black uppercase text-slate-950 tracking-wider flex items-center gap-2 border-b-2 border-slate-200 pb-3">
+                <Icon className="w-5 h-5 text-blue-600 stroke-[2.5] shrink-0" />
                 {cat.title}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3.5">
                 {cat.links.map((link, lIdx) => (
-                  <li key={lIdx} className="text-sm">
+                  <li key={lIdx} className="text-base">
                     <button
                       onClick={() => onNavigate(link.path)}
-                      className="text-left py-1 text-slate-800 hover:text-blue-600 font-bold transition-all hover:underline focus:outline-none flex items-start gap-1 w-full cursor-pointer"
+                      className="text-left py-1 text-slate-800 hover:text-blue-600 font-bold text-base sm:text-[17px] transition-all hover:underline focus:outline-none flex items-start gap-2 w-full cursor-pointer"
                     >
                       <span className="text-blue-600 font-black font-mono mt-0.5">▸</span>
                       <span>{link.label}</span>
                     </button>
-                    <span className="text-[9px] text-slate-400 font-bold font-mono pl-3.5 block select-all uppercase">
+                    <span className="text-xs text-slate-500 font-bold font-mono pl-4 block select-all">
                       https://www.cmtoinches.uk{link.path}
                     </span>
                   </li>
@@ -97,13 +97,13 @@ export function Sitemap({ onNavigate }: SitemapProps) {
       </div>
 
       {/* SEO guidelines for search engines */}
-      <div className="bg-slate-900 text-white p-5 rounded-2xl text-xs space-y-2.5 border-2 border-slate-900">
-        <h4 className="font-black flex items-center gap-1.5 text-yellow-400 font-mono">
-          <FileCheck className="w-4 h-4 text-yellow-400 stroke-[2.5]" />
+      <div className="bg-slate-900 text-white p-6 rounded-2xl space-y-3 border-2 border-slate-900">
+        <h4 className="text-base font-black flex items-center gap-2 text-yellow-400 font-mono">
+          <FileCheck className="w-5 h-5 text-yellow-400 stroke-[2.5]" />
           CRAWLER TECHNICAL AUDIT METADATA
         </h4>
-        <p className="text-slate-300 font-semibold leading-relaxed text-sm">
-          This sitemap operates on clean static hashes corresponding with the live <code className="bg-slate-950 text-slate-200 px-1.5 py-1 rounded font-mono font-bold text-xs">/sitemap.xml</code> tree submitted to Google Search Console. 100% of links render instantly on the client side without broken callbacks or dynamic redirects.
+        <p className="text-slate-200 font-medium leading-relaxed text-base">
+          This sitemap operates on clean static paths corresponding with the live <code className="bg-slate-950 text-slate-200 px-2 py-1 rounded font-mono font-bold text-sm">/sitemap.xml</code> tree submitted to Google Search Console. 100% of links render instantly on the client side without broken callbacks or dynamic redirects.
         </p>
       </div>
     </div>

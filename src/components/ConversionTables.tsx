@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RoutePath } from '../types';
 
 interface ConversionTablesProps {
-  onSelectValue: (typeId: string, value: number) => void;
-  onNavigate: (path: RoutePath) => void;
+  onSelectValue?: (typeId: string, value: number) => void;
+  onNavigate?: (path: RoutePath) => void;
 }
 
-export function ConversionTables({ onSelectValue, onNavigate }: ConversionTablesProps) {
-  const [activeTab, setActiveTab] = useState<'cm-to-in' | 'in-to-cm' | 'height-references'>('cm-to-in');
-
+export function ConversionTables(_props: ConversionTablesProps) {
   const cmToInRows = [
     { cm: 1, in: 0.3937, fraction: '25/64"' },
     { cm: 2, in: 0.7874, fraction: '25/32"' },
@@ -53,228 +51,195 @@ export function ConversionTables({ onSelectValue, onNavigate }: ConversionTables
     { in: 72, cm: 182.880, fraction: '72" / 6ft' },
   ];
 
-  const heightsRows = [
-    { cm: 140, ftIn: `4' 7"`, status: 'Petite Stature' },
-    { cm: 145, ftIn: `4' 9"`, status: 'Petite Stature' },
-    { cm: 150, ftIn: `4' 11"`, status: 'Petite / UK Teen' },
-    { cm: 155, ftIn: `5' 1"`, status: 'Below Average Female' },
-    { cm: 160, ftIn: `5' 3"`, status: 'Average UK Female' },
-    { cm: 165, ftIn: `5' 5"`, status: 'Above Average Female' },
-    { cm: 170, ftIn: `5' 7"`, status: 'Average UK Stature' },
-    { cm: 175, ftIn: `5' 9"`, status: 'Average UK Male' },
-    { cm: 180, ftIn: `5' 11"`, status: 'Above Average Male' },
-    { cm: 185, ftIn: `6' 1"`, status: 'Tall Stature' },
-    { cm: 190, ftIn: `6' 3"`, status: 'Very Tall Stature' },
-    { cm: 195, ftIn: `6' 5"`, status: 'Professional Athlete Stature' },
-    { cm: 200, ftIn: `6' 6.7"`, status: 'Elite Height Threshold' },
+  const feetToCmRows = [
+    { ft: 1, inches: '12 in', cm: 30.48 },
+    { ft: 1.5, inches: '18 in', cm: 45.72 },
+    { ft: 2, inches: '24 in', cm: 60.96 },
+    { ft: 2.5, inches: '30 in', cm: 76.20 },
+    { ft: 3, inches: '36 in', cm: 91.44 },
+    { ft: 3.5, inches: '42 in', cm: 106.68 },
+    { ft: 4, inches: '48 in', cm: 121.92 },
+    { ft: 4.5, inches: '54 in', cm: 137.16 },
+    { ft: 5, inches: '60 in (5\' 0")', cm: 152.40 },
+    { ft: 5.25, inches: '63 in (5\' 3")', cm: 160.02 },
+    { ft: 5.5, inches: '66 in (5\' 6")', cm: 167.64 },
+    { ft: 5.75, inches: '69 in (5\' 9")', cm: 175.26 },
+    { ft: 6, inches: '72 in (6\' 0")', cm: 182.88 },
+    { ft: 6.25, inches: '75 in (6\' 3")', cm: 190.50 },
+    { ft: 6.5, inches: '78 in (6\' 6")', cm: 198.12 },
+    { ft: 7, inches: '84 in', cm: 213.36 },
+    { ft: 8, inches: '96 in', cm: 243.84 },
+    { ft: 10, inches: '120 in', cm: 304.80 },
   ];
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="conversion-tables">
-      {/* Title & Tabs */}
-      <div className="bg-slate-50 px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200">
-        <h3 className="text-sm sm:text-base font-black text-slate-900 uppercase tracking-widest">
-          📊 High-Traffic Conversion Tables
-        </h3>
-        <p className="text-xs sm:text-sm text-slate-600 mt-1 font-semibold">
-          Select a reference tab below. Click any row to automatically load its values into the calculator tool.
-        </p>
-      </div>
+    <div className="w-full space-y-8" id="conversion-tables">
+      {/* 1. Centimeters to Inches Table */}
+      <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+        <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              📏 Centimeters to Inches Conversion Table (1 to 500 cm)
+            </h3>
+            <p className="text-base text-slate-600 mt-1 font-medium">
+              Quick metric to imperial reference for converting centimeters (cm) into decimal and fractional inches (in).
+            </p>
+          </div>
+          <span className="hidden sm:inline-block text-sm font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-lg font-mono shrink-0">
+            CM → IN
+          </span>
+        </div>
 
-      {/* Tabs list */}
-      <div className="flex border-b border-slate-200 bg-slate-100/50 p-2 gap-1.5 flex-col sm:flex-row">
-        <button
-          onClick={() => setActiveTab('cm-to-in')}
-          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
-            activeTab === 'cm-to-in'
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
-          }`}
-        >
-          Centimeters → Inches (1 to 500 cm)
-        </button>
-        <button
-          onClick={() => setActiveTab('in-to-cm')}
-          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
-            activeTab === 'in-to-cm'
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
-          }`}
-        >
-          Inches → Centimeters (1/4" to 6ft)
-        </button>
-        <button
-          onClick={() => setActiveTab('height-references')}
-          className={`py-2 px-3 sm:py-2.5 sm:px-4 text-xs font-black rounded-xl text-center transition-all cursor-pointer ${
-            activeTab === 'height-references'
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
-          }`}
-        >
-          UK Height Guide Milestones
-        </button>
-      </div>
-
-      {/* Table Area - Fully Mobile Optimized without horizontal scroll */}
-      <div className="w-full overflow-hidden">
-        {activeTab === 'cm-to-in' && (
+        <div className="w-full overflow-hidden">
           <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
-                <th className="w-[24%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">CM</span>
-                  <span className="hidden sm:inline">Value (cm)</span>
+                  <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
-                <th className="w-[28%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">Inches</span>
-                  <span className="hidden sm:inline">Inches (Dec)</span>
+                  <span className="hidden sm:inline">Inches (Decimal)</span>
                 </th>
-                <th className="w-[28%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">Fraction</span>
                   <span className="hidden sm:inline">Inches (Fraction)</span>
                 </th>
-                <th className="w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
-                  <span className="sm:hidden">Tool</span>
-                  <span className="hidden sm:inline">Quick Preset</span>
-                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-slate-200 tabular-nums">
               {cmToInRows.map((row, idx) => (
-                <tr 
+                <tr
                   key={row.cm}
-                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
-                  onClick={() => onSelectValue('cm-to-inches', row.cm)}
+                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
                 >
-                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
+                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
                     {row.cm} cm
                   </td>
-                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-700 text-xs sm:text-sm truncate">
+                  <td className="px-3 sm:px-5 py-3 font-bold text-blue-700 text-base truncate">
                     {row.in.toFixed(3)}"
                   </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-mono text-slate-500 font-bold text-[11px] sm:text-xs truncate">
+                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
                     {row.fraction}
-                  </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
-                    <button className="px-2.5 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
-                      Load
-                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
+        </div>
+      </div>
 
-        {activeTab === 'in-to-cm' && (
+      {/* 2. Inches to Centimeters Table */}
+      <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+        <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              📐 Inches to Centimeters Conversion Table (1/4" to 6 ft)
+            </h3>
+            <p className="text-base text-slate-600 mt-1 font-medium">
+              Standard imperial to metric reference chart for converting inches (in) into centimeters (cm).
+            </p>
+          </div>
+          <span className="hidden sm:inline-block text-sm font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-lg font-mono shrink-0">
+            IN → CM
+          </span>
+        </div>
+
+        <div className="w-full overflow-hidden">
           <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
-                <th className="w-[24%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">Inches</span>
-                  <span className="hidden sm:inline">Value (in)</span>
+                  <span className="hidden sm:inline">Inches (in)</span>
                 </th>
-                <th className="w-[28%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">Fraction</span>
-                  <span className="hidden sm:inline">Fractional</span>
+                  <span className="hidden sm:inline">Fractional / Feet</span>
                 </th>
-                <th className="w-[28%] px-2.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">CM</span>
-                  <span className="hidden sm:inline">Value (cm)</span>
-                </th>
-                <th className="w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
-                  <span className="sm:hidden">Tool</span>
-                  <span className="hidden sm:inline">Quick Preset</span>
+                  <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
+            <tbody className="divide-y divide-slate-200 tabular-nums">
               {inToCmRows.map((row, idx) => (
-                <tr 
+                <tr
                   key={row.in}
-                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
-                  onClick={() => onSelectValue('inches-to-cm', row.in)}
+                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
                 >
-                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
+                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
                     {row.in} in
                   </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-mono text-slate-500 font-bold text-[11px] sm:text-xs truncate">
+                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
                     {row.fraction}
                   </td>
-                  <td className="px-2.5 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-700 text-xs sm:text-sm truncate">
+                  <td className="px-3 sm:px-5 py-3 font-bold text-emerald-700 text-base truncate">
                     {row.cm.toFixed(2)} cm
-                  </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
-                    <button className="px-2.5 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
-                      Load
-                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
+        </div>
+      </div>
 
-        {activeTab === 'height-references' && (
+      {/* 3. Feet to Centimeters Table */}
+      <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+        <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
+          <div>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              🧍 Feet to Centimeters Conversion Table (1 ft to 10 ft)
+            </h3>
+            <p className="text-base text-slate-600 mt-1 font-medium">
+              Direct height and length conversion chart from imperial feet (ft) and inches into metric centimeters (cm).
+            </p>
+          </div>
+          <span className="hidden sm:inline-block text-sm font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-lg font-mono shrink-0">
+            FT → CM
+          </span>
+        </div>
+
+        <div className="w-full overflow-hidden">
           <table className="w-full table-fixed text-left">
             <thead>
-              <tr className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
-                <th className="w-[22%] sm:w-[20%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
+              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                  <span className="sm:hidden">Feet</span>
+                  <span className="hidden sm:inline">Feet (ft)</span>
+                </th>
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                  <span className="sm:hidden">Inches</span>
+                  <span className="hidden sm:inline">Inches Equivalent</span>
+                </th>
+                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
                   <span className="sm:hidden">CM</span>
-                  <span className="hidden sm:inline">Metric (cm)</span>
-                </th>
-                <th className="w-[24%] sm:w-[22%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
-                  <span className="sm:hidden">Ft / In</span>
-                  <span className="hidden sm:inline">Imperial (ft ' in")</span>
-                </th>
-                <th className="w-[36%] sm:w-[40%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200">
-                  <span className="sm:hidden">Profile</span>
-                  <span className="hidden sm:inline">UK Height Guidance</span>
-                </th>
-                <th className="w-[18%] px-2 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200 text-right">
-                  <span className="sm:hidden">Action</span>
-                  <span className="hidden sm:inline">Route</span>
+                  <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200">
-              {heightsRows.map((row, idx) => (
-                <tr 
-                  key={row.cm}
-                  className={`cursor-pointer transition-colors duration-150 group ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/80`}
-                  onClick={() => {
-                    const mappedPath: RoutePath = row.cm === 150 ? '/150-cm-to-inches/' : row.cm === 170 ? '/170-cm-to-inches/' : row.cm === 180 ? '/180-cm-to-inches/' : row.cm === 200 ? '/200-cm-to-inches/' : '/';
-                    if (mappedPath !== '/') {
-                      onNavigate(mappedPath);
-                    } else {
-                      onSelectValue('cm-to-inches', row.cm);
-                    }
-                  }}
+            <tbody className="divide-y divide-slate-200 tabular-nums">
+              {feetToCmRows.map((row, idx) => (
+                <tr
+                  key={row.ft}
+                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
                 >
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-bold text-slate-900 text-xs sm:text-sm truncate">
-                    {row.cm} cm
+                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
+                    {row.ft} ft
                   </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 font-black text-blue-600 text-xs sm:text-sm truncate">
-                    {row.ftIn}
+                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
+                    {row.inches}
                   </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-slate-600 font-bold text-[10px] sm:text-xs leading-tight truncate">
-                    {row.status}
-                  </td>
-                  <td className="px-2 sm:px-4 py-2 sm:py-2.5 text-right">
-                    <button className="px-2 py-1 sm:px-3 sm:py-1 bg-white group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 text-slate-700 border border-slate-300 font-bold rounded-lg text-[9px] sm:text-[10px] uppercase tracking-wider transition-colors cursor-pointer">
-                      {row.cm === 150 || row.cm === 170 || row.cm === 180 || row.cm === 200 ? 'Page' : 'Load'}
-                    </button>
+                  <td className="px-3 sm:px-5 py-3 font-bold text-blue-700 text-base truncate">
+                    {row.cm.toFixed(2)} cm
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
-      </div>
-      
-      {/* Footer warning */}
-      <div className="bg-slate-50 p-4 border-t border-slate-200 text-center text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-        UK Metrological Standards Agreement Registered
+        </div>
       </div>
     </div>
   );
