@@ -75,135 +75,39 @@ export const CONVERSION_TYPES: ConversionType[] = [
   }
 ];
 
-export interface HardcodedConversionPage {
-  path: string;
-  title: string;
-  description: string;
-  h1: string;
-  fromValue: number;
-  fromUnit: string;
-  toValue: number;
-  toUnit: string;
-  displayImperial?: string; // e.g. 5' 7"
-  explanationText: string;
-}
-
-export const POPULAR_PAGES: HardcodedConversionPage[] = [
-  {
-    path: '/90-cm-to-inches/',
-    title: '90 CM to Inches Converter (90 cm → in) – Standard Height & Width',
-    description: 'Convert 90 centimeters to inches accurately. 90 cm equals 35.4331 inches or 2 feet 11.4 inches. View conversion formula, steps, and instant chart.',
-    h1: '90 CM to Inches Conversion',
-    fromValue: 90,
-    fromUnit: 'cm',
-    toValue: 35.4331,
-    toUnit: 'in',
-    displayImperial: `2' 11.4"`,
-    explanationText: '90 cm is an essential metric standard widely used in home furnishing (standard desk, table, and counter heights), door widths, and baby/toddler clothing. It evaluates to exactly 35.4331 inches, which translates to approximately 2 feet and 11.4 inches (2\'11.4") in imperial units.'
-  },
-  {
-    path: '/150-cm-to-inches/',
-    title: '150 CM to Inches Converter (150 cm → in) – Height Conversion',
-    description: 'Convert 150 centimeters to inches accurately. Find out what 150 cm means in inches (59.06 inches) and feet-inches format (4ft 11 inches) with standard tables.',
-    h1: '150 CM to Inches Conversion',
-    fromValue: 150,
-    fromUnit: 'cm',
-    toValue: 59.0551,
-    toUnit: 'in',
-    displayImperial: `4' 11"`,
-    explanationText: '150 cm is an extremely popular metric clothing size limit and standard height boundary for teens or petite adults. It evaluates to exactly 59.06 inches, which translates to 4 feet and 11 inches (4\'11") in the traditional British imperial layout.'
-  },
-  {
-    path: '/170-cm-to-inches/',
-    title: '170 CM to Inches Converter (170 cm → in) – Height Conversion',
-    description: 'Convert exactly 170 cm to inches. 170 centimeters equals 66.93 inches or 5ft 7in. Check our detailed guide and formula.',
-    h1: '170 CM to Inches Conversion',
-    fromValue: 170,
-    fromUnit: 'cm',
-    toValue: 66.9291,
-    toUnit: 'in',
-    displayImperial: `5' 7"`,
-    explanationText: '170 cm is a common benchmark height for both men and women in the United Kingdom. 170 centimeters evaluates to 66.93 inches, which equates to exactly 5 feet and 7 inches (5\'7") under traditional imperial measures.'
-  },
-  {
-    path: '/180-cm-to-inches/',
-    title: '180 CM to Inches Converter (180 cm → in) – Height Conversion',
-    description: 'Convert 180 centimeters to inches. 180 cm equals 70.87 inches or 5 feet 11 inches. Fast, accurate, and completely free height guide.',
-    h1: '180 CM to Inches Conversion',
-    fromValue: 180,
-    fromUnit: 'cm',
-    toValue: 70.8661,
-    toUnit: 'in',
-    displayImperial: `5' 11"`,
-    explanationText: '180 cm is a tall physical stature benchmark. In the UK, many aspire to achieve this standard (which is just under 6 feet). More precisely, 180 centimeters equals 70.87 inches, which converts directly to 5 feet and 10.87 inches, practically 5\'11".'
-  },
-  {
-    path: '/200-cm-to-inches/',
-    title: '200 CM to Inches Converter (200 cm → in) – Height Conversion',
-    description: 'How many inches is 200 cm? Convert 200 cm to inches (78.74 inches) or feet-inches (6ft 6.7in) instantly with this accurate tool.',
-    h1: '200 CM to Inches Conversion',
-    fromValue: 200,
-    fromUnit: 'cm',
-    toValue: 78.7402,
-    toUnit: 'in',
-    displayImperial: `6' 6.7"`,
-    explanationText: '200 cm represents a flat two-meter threshold. This height converts to exactly 78.74 inches, which translates in standard British measurements to 6 feet and 6.7 inches (6\'7") — a stature often linked with professional basketball and rugby players.'
-  },
-  {
-    path: '/5-feet-in-cm/',
-    title: '5 Feet in CM – Accurate Height Conversion (5 ft → cm)',
-    description: 'Convert 5 feet to centimeters instantly. Learn how many centimeters are in 5 feet (152.4 cm) and view comprehensive conversion charts.',
-    h1: '5 Feet to Centimeters Conversion',
-    fromValue: 5,
-    fromUnit: 'ft',
-    toValue: 152.4,
-    toUnit: 'cm',
-    explanationText: '5 feet is an exact height milestone equal to exactly 60 inches. Translating to the decimal scientific metric layout, 5 feet equates to exactly 152.4 centimeters.'
-  },
-  {
-    path: '/6-feet-in-cm/',
-    title: '6 Feet in CM – Accurate Height Conversion (6 ft → cm)',
-    description: 'Convert 6 feet to centimeters instantly. Learn how many centimeters are in 6 feet (182.88 cm) with step-by-step height calculations.',
-    h1: '6 Feet to Centimeters Conversion',
-    fromValue: 6,
-    fromUnit: 'ft',
-    toValue: 182.88,
-    toUnit: 'cm',
-    explanationText: '6 feet is a highly celebrated vertical height benchmark in English-speaking societies. Translating to the metric layout, 6 feet equates to exactly 182.88 centimeters.'
-  }
-];
+export const REDIRECTED_PROGRAMMATIC_PRESETS: Record<string, { typeId: string; value: number }> = {
+  '/90-cm-to-inches/': { typeId: 'cm-to-inches', value: 90 },
+  '/150-cm-to-inches/': { typeId: 'cm-to-inches', value: 150 },
+  '/170-cm-to-inches/': { typeId: 'cm-to-inches', value: 170 },
+  '/180-cm-to-inches/': { typeId: 'cm-to-inches', value: 180 },
+  '/200-cm-to-inches/': { typeId: 'cm-to-inches', value: 200 },
+  '/5-feet-in-cm/': { typeId: 'feet-to-cm', value: 5 },
+  '/6-feet-in-cm/': { typeId: 'feet-to-cm', value: 6 }
+};
 
 export const FAQ_HOME: { question: string; answer: string }[] = [
   {
-    question: 'How do I convert CM to Inches (cm to in)?',
-    answer: 'To convert CM to Inches, divide your centimeter value by 2.54. For example, 50 cm ÷ 2.54 = 19.685 inches. Alternatively, you can multiply the centimeter length by 0.393701 to calculate the value in customary imperial inches.'
+    question: 'What is the exact official ratio between CM and Inches?',
+    answer: 'Under the International Yard and Pound Agreement of 1959 and the UK Weights and Measures Act, 1 international inch is defined as exactly 2.54 centimetres (25.4 mm). This means converting centimetres to inches always divides by 2.54, while converting inches to centimetres multiplies by 2.54 with zero rounding drift.'
   },
   {
-    question: 'How do I convert Inch to CM (in to cm)?',
-    answer: 'To convert Inch to CM, multiply your value in inches by 2.54. For example, 10 inches × 2.54 = 25.4 cm. This calculation relies on the legally binding international metric standard where 1 inch is defined as exactly 2.54 centimeters.'
+    question: 'What is the official UK passport photo size in cm and inches?',
+    answer: 'HM Passport Office rules specify printed UK passport photos must be 45 mm high by 35 mm wide (4.5 cm × 3.5 cm), which converts to 1.77 inches high by 1.38 inches wide. The head from crown to chin must measure between 29 mm and 34 mm (2.9 cm to 3.4 cm, or 1.14" to 1.34").'
   },
   {
-    question: 'How do you mathematically convert between centimeters and inches?',
-    answer: 'To convert between centimeters and inches, one can divide the centimeter value by 2.54. This is the value of an inch in centimeters because an inch is defined as 2.54 centimeters. To convert 25.4 centimeters to inches, one would divide 25.4 by 2.54 to get 10 inches. Using mathematical notation, one could write Inches = Centimeters / 2.54. One could also write Inches = Centimeters * 0.393700787.'
+    question: 'How do I convert decimal inches into 1/16" UK carpentry fractions?',
+    answer: 'Take only the decimal portion after the whole inch and multiply by 16, then round to the nearest whole number. For example, 3.5433 inches has a remainder of 0.5433. Multiplying 0.5433 × 16 gives 8.69, which rounds to 9/16"—giving a practical tape-measure reading of 3 9/16 inches.'
   },
   {
-    question: 'What is the legally defined, absolute conversion factor between metric centimeters and imperial inches?',
-    answer: 'The legally defined conversion factor was agreed upon in 1959 when the International Yard and Pound Agreement was signed. This agreement states that 1 inch equals 2.54 centimeters. Since this agreement was about a equality of definitions, since inch and centimeter were defined in relation to one another, the conversion value would not change, since there would be no drift in measurements, would forever remain 2.54.'
+    question: 'How do standard UK bed and mattress dimensions compare in CM vs Feet/Inches?',
+    answer: 'A standard UK Single mattress measures 90 × 190 cm (approx. 3 ft × 6 ft 3 in), a UK Double measures 135 × 190 cm (4 ft 6 in × 6 ft 3 in), a UK King measures 150 × 200 cm (5 ft × 6 ft 6 in), and a UK Super King measures 180 × 200 cm (6 ft × 6 ft 6 in). Note that UK mattress sizes differ slightly from US Twin/Queen/King dimensions.'
   },
   {
-    question: 'How do I convert inches expressed as decimals to inches expressed in standard English fractions, for example, 1/16 or 1/8?',
-    answer: 'To convert inches expressed as a decimal to a standard English fraction, take the decimal value of an inch, remove the whole number, and multiply the result by the denominator you want the fraction to have, i.e., 16, 32, 64, etc. Round to the nearest whole number for the numerator of the fraction. For example, to convert 0.3937 inches to the nearest 16th of an inch, multiply 0.3937 by 16 to get 6.299, which would be rounded to 6. Therefore, 0.3937 inches is about 3/8 of an inch, because 6/16 simplifies to that.'
+    question: 'How do I convert my metric height in cm to feet and inches for UK forms?',
+    answer: 'First divide your height in centimetres by 2.54 to get total inches, then divide by 12 to find whole feet and remaining inches. For instance, 170 cm ÷ 2.54 = 66.93 inches, which equals 5 feet 6.9 inches (commonly written 5 ft 7 in), while 180 cm equals 70.87 inches (5 ft 11 in).'
   },
   {
-    question: 'How many feet and inches are equivalent to exactly 170 cm?',
-    answer: 'A height of 170 centimeters conversion yields exactly 66.9291 inches. Since there are 12 inches in a foot, dividing 66.9291 by 12 yields 5 feet with a remainder of 6.9291 inches. For everyday practical use and stature estimates, this is rounded to 5 feet and 7 inches (5\'7"), representing a highly common adult female stature in the United Kingdom.'
-  },
-  {
-    question: 'How many feet and inches are equivalent to exactly 180 cm?',
-    answer: 'A standard measurement of 180 centimeters conversion translates to exactly 70.8661 inches. To express this in imperial feet and inches, divide by 12, which results in 5 feet and a remainder of 10.8661 inches. For clothing labels, physical height checks, and medical forms, this is conventionally rounded to 5 feet and 11 inches (5\'11").'
-  },
-  {
-    question: 'Why does the United Kingdom still use a hybrid system of imperial and metric lengths?',
-    answer: 'The UK currently administers a unique hybrid system due to a gradual, incomplete decimalization process initiated in the mid-1960s. While scientific research, school curriculums, and commercial trade transactions utilize metric centimeters, statutory road regulations (miles and yards) and personal height or weight measurements remain strongly rooted in imperial feet, inches, and stones to maintain cultural consistency.'
+    question: 'Why does the United Kingdom use both centimetres and inches?',
+    answer: 'The UK adopted metric units in schools, science, and trade manufacturing from the late 1960s onward, while everyday consumer categories—such as television screen diagonals, jeans waist sizes, timber lengths, and personal height—kept traditional imperial feet and inches alongside metric packaging.'
   }
 ];

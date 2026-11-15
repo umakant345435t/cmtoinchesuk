@@ -91,38 +91,29 @@ export function ConversionTables(_props: ConversionTablesProps) {
         </div>
 
         <div className="w-full overflow-hidden">
-          <table className="w-full table-fixed text-left">
+          <table className="ct-tbl">
             <thead>
-              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+              <tr>
+                <th>
                   <span className="sm:hidden">CM</span>
                   <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">Inches</span>
                   <span className="hidden sm:inline">Inches (Decimal)</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">Fraction</span>
                   <span className="hidden sm:inline">Inches (Fraction)</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 tabular-nums">
-              {cmToInRows.map((row, idx) => (
-                <tr
-                  key={row.cm}
-                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
-                >
-                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
-                    {row.cm} cm
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-bold text-blue-700 text-base truncate">
-                    {row.in.toFixed(3)}"
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
-                    {row.fraction}
-                  </td>
+            <tbody>
+              {cmToInRows.map((row) => (
+                <tr key={row.cm}>
+                  <td>{row.cm} cm</td>
+                  <td className="c-b">{row.in.toFixed(3)}&quot;</td>
+                  <td className="c-m">{row.fraction}</td>
                 </tr>
               ))}
             </tbody>
@@ -135,7 +126,7 @@ export function ConversionTables(_props: ConversionTablesProps) {
         <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              📐 Inches to Centimeters Conversion Table (1/4" to 6 ft)
+              📐 Inches to Centimeters Conversion Table (1/4&quot; to 6 ft)
             </h3>
             <p className="text-base text-slate-600 mt-1 font-medium">
               Standard imperial to metric reference chart for converting inches (in) into centimeters (cm).
@@ -147,38 +138,29 @@ export function ConversionTables(_props: ConversionTablesProps) {
         </div>
 
         <div className="w-full overflow-hidden">
-          <table className="w-full table-fixed text-left">
+          <table className="ct-tbl">
             <thead>
-              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+              <tr>
+                <th>
                   <span className="sm:hidden">Inches</span>
                   <span className="hidden sm:inline">Inches (in)</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">Fraction</span>
                   <span className="hidden sm:inline">Fractional / Feet</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">CM</span>
                   <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 tabular-nums">
-              {inToCmRows.map((row, idx) => (
-                <tr
-                  key={row.in}
-                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
-                >
-                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
-                    {row.in} in
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
-                    {row.fraction}
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-bold text-emerald-700 text-base truncate">
-                    {row.cm.toFixed(2)} cm
-                  </td>
+            <tbody>
+              {inToCmRows.map((row) => (
+                <tr key={row.in}>
+                  <td>{row.in} in</td>
+                  <td className="c-m">{row.fraction}</td>
+                  <td className="c-g">{row.cm.toFixed(2)} cm</td>
                 </tr>
               ))}
             </tbody>
@@ -203,38 +185,29 @@ export function ConversionTables(_props: ConversionTablesProps) {
         </div>
 
         <div className="w-full overflow-hidden">
-          <table className="w-full table-fixed text-left">
+          <table className="ct-tbl">
             <thead>
-              <tr className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-xs sm:text-sm">
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+              <tr>
+                <th>
                   <span className="sm:hidden">Feet</span>
                   <span className="hidden sm:inline">Feet (ft)</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">Inches</span>
                   <span className="hidden sm:inline">Inches Equivalent</span>
                 </th>
-                <th className="w-1/3 px-3 sm:px-5 py-3.5 border-b border-slate-200">
+                <th>
                   <span className="sm:hidden">CM</span>
                   <span className="hidden sm:inline">Centimeters (cm)</span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 tabular-nums">
-              {feetToCmRows.map((row, idx) => (
-                <tr
-                  key={row.ft}
-                  className={`transition-colors duration-150 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-blue-50/60`}
-                >
-                  <td className="px-3 sm:px-5 py-3 font-bold text-slate-900 text-base truncate">
-                    {row.ft} ft
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-mono text-slate-700 font-bold text-base truncate">
-                    {row.inches}
-                  </td>
-                  <td className="px-3 sm:px-5 py-3 font-bold text-blue-700 text-base truncate">
-                    {row.cm.toFixed(2)} cm
-                  </td>
+            <tbody>
+              {feetToCmRows.map((row) => (
+                <tr key={row.ft}>
+                  <td>{row.ft} ft</td>
+                  <td className="c-m">{row.inches}</td>
+                  <td className="c-b">{row.cm.toFixed(2)} cm</td>
                 </tr>
               ))}
             </tbody>

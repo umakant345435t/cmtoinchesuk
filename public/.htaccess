@@ -2,8 +2,15 @@
   RewriteEngine On
   RewriteBase /
 
-  # 301 Permanent Redirect duplicate /cm-to-inches/ to Homepage
+  # 301 Permanent Redirect duplicate and retired programmatic routes to Homepage
   RewriteRule ^cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^90-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^150-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^170-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^180-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^200-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^5-feet-in-cm/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^6-feet-in-cm/?$ https://www.cmtoinches.uk/ [R=301,L]
 
   # Standard SPA fallback for other routes
   RewriteCond %{REQUEST_FILENAME} !-f

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --color-white: #ffffff;
   --color-slate-50: #f8fafc;
@@ -80,11 +80,115 @@
   scrollbar-width: none;
 }
 
-/* Below-the-fold rendering acceleration for fast mobile paint without scroll shift */
+/* Compact ruler tick & CSS hairline subdivision classes (zero visual change, ~100 fewer DOM nodes) */
+.rt-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.75rem;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(to right, rgba(51, 65, 85, 0.85) 0 1.2px, transparent 1.2px 5%),
+    repeating-linear-gradient(to right, rgba(100, 116, 139, 0.65) 0 1px, transparent 1px 1%);
+  background-size: 100% 0.75rem, 100% 0.375rem;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+.rt-m {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rt-m > i { width: 1.5px; height: 1.125rem; background-color: #0f172a; display: block; }
+.rt-m > b { width: 2px; height: 1.5rem; background-color: #b91c1c; display: block; }
+.rt-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+  margin-top: 2px;
+  letter-spacing: -0.05em;
+  color: #0f172a;
+}
+.rt-lbl-r {
+  color: #b91c1c;
+  font-weight: 800;
+}
+.rb {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  width: 1px;
+  height: 0.5rem;
+  background-color: rgba(37, 99, 235, 0.6);
+}
+.rb-m {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rb-m > i { width: 1.5px; height: 1.125rem; background-color: #1e3a8a; display: block; }
+.rb-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+  margin-bottom: 2px;
+  letter-spacing: -0.05em;
+  color: #1e3a8a;
+}
+@media (min-width: 640px) {
+  .rt-lbl, .rb-lbl { font-size: 11px; }
+}
+
+/* Compact table styling for ConversionTables so repeated rows need minimal class attributes */
+.ct-tbl { width: 100%; table-layout: fixed; text-align: left; }
+.ct-tbl thead tr { background-color: #f1f5f9; color: #334155; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; }
+.ct-tbl th { width: 33.333333%; padding: 0.875rem 0.75rem; border-bottom: 1px solid #e2e8f0; }
+.ct-tbl tbody { font-variant-numeric: tabular-nums; }
+.ct-tbl tbody tr { border-top: 1px solid #e2e8f0; transition: background-color 150ms; }
+.ct-tbl tbody tr:nth-child(odd) { background-color: #ffffff; }
+.ct-tbl tbody tr:nth-child(even) { background-color: rgba(248, 250, 252, 0.5); }
+.ct-tbl tbody tr:hover { background-color: rgba(239, 246, 255, 0.6); }
+.ct-tbl td { padding: 0.75rem; font-size: 1rem; font-weight: 700; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ct-tbl td.c-b { color: #1d4ed8; }
+.ct-tbl td.c-g { color: #047857; }
+.ct-tbl td.c-i { color: #4338ca; }
+.ct-tbl td.c-m { font-family: var(--font-mono); color: #334155; }
+.ct-tbl.ct-uk { table-layout: auto; }
+.ct-tbl.ct-uk th { width: auto; padding: 0.875rem; font-family: var(--font-mono); }
+.ct-tbl.ct-uk td { padding: 0.875rem; font-size: 0.875rem; white-space: normal; font-weight: 600; }
+.ct-tbl.ct-uk td.c-b, .ct-tbl.ct-uk td.c-m { font-weight: 700; }
+.ct-tbl.ct-uk td.c-m { font-weight: 400; }
+.ct-tbl.ct-uc { table-layout: auto; font-family: var(--font-mono); }
+.ct-tbl.ct-uc th { width: auto; padding: 0.875rem; font-size: 0.875rem; }
+.ct-tbl.ct-uc td { padding: 0.875rem; font-size: 1rem; white-space: normal; font-weight: 400; }
+.ct-tbl.ct-uc td:first-child, .ct-tbl.ct-uc td.c-b, .ct-tbl.ct-uc td.c-g, .ct-tbl.ct-uc td.c-i { font-weight: 700; }
+@media (min-width: 640px) {
+  .ct-tbl thead tr { font-size: 0.875rem; }
+  .ct-tbl th { padding: 0.875rem 1.25rem; }
+  .ct-tbl td { padding: 0.75rem 1.25rem; }
+  .ct-tbl.ct-uk th, .ct-tbl.ct-uk td, .ct-tbl.ct-uc th { padding: 0.875rem; }
+  .ct-tbl.ct-uk td, .ct-tbl.ct-uc th { font-size: 1rem; }
+  .ct-tbl.ct-uc td { padding: 0.875rem; font-size: 1.0625rem; }
+}
+
+/* Below-the-fold rendering acceleration for ultra-fast mobile paint with zero scroll shift */
+#uk-guides,
+#conversion-tables,
 #related-converters,
-#faq-section {
+#faq-section,
+#footer {
   content-visibility: auto;
-  contain-intrinsic-size: auto 420px;
+  contain-intrinsic-size: auto 480px;
 }
 
 /* Base custom styles for prose layout */

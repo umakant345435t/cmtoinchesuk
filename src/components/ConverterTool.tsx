@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { CONVERSION_TYPES } from '../data/conversions';
-import { ConversionType, RoutePath } from '../types';
-import { Copy, Check, Info, RefreshCw, FileCheck, ChevronDown, Crosshair, Plus, Minus, ZoomIn, ArrowDownUp, ArrowRightLeft, RotateCcw } from 'lucide-react';
+import { RoutePath } from '../types';
+import { Copy, Check, Info, FileCheck, ChevronDown, ArrowDownUp, ArrowRightLeft, RotateCcw } from 'lucide-react';
 
 interface ConverterToolProps {
   initialTypeId?: string;
@@ -19,6 +19,19 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
   const [zoomPreset, setZoomPreset] = useState<'auto' | '10' | '20' | '50' | '100'>('auto');
   const tapeRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef<boolean>(false);
+
+  // Restore any digits/mode entered during the pre-hydration window before first paint
+  useLayoutEffect(() => {
+    const w = window as Window & { __PREHYDRATE_INPUT__?: string; __PREHYDRATE_MODE__?: string };
+    if (typeof w.__PREHYDRATE_INPUT__ === 'string' && w.__PREHYDRATE_INPUT__.length > 0) {
+      setInputValue(w.__PREHYDRATE_INPUT__);
+      delete w.__PREHYDRATE_INPUT__;
+    }
+    if (typeof w.__PREHYDRATE_MODE__ === 'string' && w.__PREHYDRATE_MODE__.length > 0) {
+      setSelectedTypeId(w.__PREHYDRATE_MODE__);
+      delete w.__PREHYDRATE_MODE__;
+    }
+  }, []);
 
   // Sync state if initial props change
   useEffect(() => {
@@ -198,86 +211,22 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
     } catch (_) {}
   };
 
-  // Top Scale Ticks: Adaptive based on maxScale (10, 20, 50, 100)
+  // Top Scale Ticks: CSS .rt-grid draws all 0.1 & 0.5 subdivisions; DOM renders only the 11 major numbered ticks
   const fromUnitTicks = useMemo(() => {
-    const ticks: React.ReactNode[] = [];
-    
-    let majorInterval = 10;
-    let halfInterval = 5;
-    let minorInterval = 1;
-    let redMarks = [0, 50, 100];
+    const majorInterval = maxScale / 10;
+    const redMarks = [0, maxScale / 2, maxScale];
+    const ticks: React.ReactNode[] = [<div key="rt-grid" className="rt-grid" />];
 
-    if (maxScale === 10) {
-      majorInterval = 1;
-      halfInterval = 0.5;
-      minorInterval = 0.1;
-      redMarks = [0, 5, 10];
-    } else if (maxScale === 20) {
-      majorInterval = 2;
-      halfInterval = 1;
-      minorInterval = 0.2;
-      redMarks = [0, 10, 20];
-    } else if (maxScale === 50) {
-      majorInterval = 5;
-      halfInterval = 2.5;
-      minorInterval = 0.5;
-      redMarks = [0, 25, 50];
-    }
-
-    const totalMinors = Math.round(maxScale / minorInterval);
-
-    for (let i = 0; i <= totalMinors; i++) {
-      const u = Number((i * minorInterval).toFixed(2));
-      if (u > maxScale + 0.0001) break;
-      const pct = (u / maxScale) * 100;
-      if (pct > 100.01) break;
-
-      const isMajor = Math.abs(u % majorInterval) < 0.001 || Math.abs((u % majorInterval) - majorInterval) < 0.001;
-      const isHalf = !isMajor && (Math.abs(u % halfInterval) < 0.001 || Math.abs((u % halfInterval) - halfInterval) < 0.001);
-
-      if (isMajor) {
-        const isRed = redMarks.some((rm) => Math.abs(rm - u) < 0.001);
-        ticks.push(
-          <div
-            key={`from-major-${u}`}
-            className="absolute top-0 flex flex-col items-center pointer-events-none"
-            style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
-          >
-            <div
-              className={`w-[1.5px] ${
-                isRed ? 'h-6 bg-red-700 w-[2px]' : 'h-4.5 bg-slate-900'
-              }`}
-            />
-            <span
-              className={`text-[10px] sm:text-[11px] font-mono font-black mt-0.5 tracking-tighter ${
-                isRed ? 'text-red-700 font-extrabold' : 'text-slate-900'
-              }`}
-            >
-              {u}
-            </span>
-          </div>
-        );
-      } else if (isHalf) {
-        ticks.push(
-          <div
-            key={`from-half-${u}`}
-            className="absolute top-0 pointer-events-none"
-            style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
-          >
-            <div className="w-[1.2px] h-3 bg-slate-700" />
-          </div>
-        );
-      } else {
-        ticks.push(
-          <div
-            key={`from-minor-${u}`}
-            className="absolute top-0 pointer-events-none"
-            style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
-          >
-            <div className="w-[1px] h-1.5 bg-slate-500/70" />
-          </div>
-        );
-      }
+    for (let i = 0; i <= 10; i++) {
+      const u = Number((i * majorInterval).toFixed(2));
+      const pct = i * 10;
+      const isRed = redMarks.some((rm) => Math.abs(rm - u) < 0.001);
+      ticks.push(
+        <div key={`fM-${u}`} className="rt-m" style={{ left: `${pct}%` }}>
+          {isRed ? <b /> : <i />}
+          <span className={isRed ? 'rt-lbl rt-lbl-r' : 'rt-lbl'}>{u}</span>
+        </div>
+      );
     }
     return ticks;
   }, [maxScale]);
@@ -327,7 +276,7 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
     for (let s = 0; s <= safeSteps; s++) {
       const val = s * minorStep;
       if (val > maxTarget + 0.0001) break;
-      const pct = (val / maxTarget) * 100;
+      const pct = Math.round(((val / maxTarget) * 100) * 100) / 100;
       if (pct > 100.01) break;
 
       const rem = val % majorStep;
@@ -336,27 +285,15 @@ export function ConverterTool({ initialTypeId = 'cm-to-inches', initialFromValue
       if (isMajor) {
         const displayVal = Number(val.toFixed(2));
         ticks.push(
-          <div
-            key={`to-major-${s}`}
-            className="absolute bottom-0 flex flex-col items-center pointer-events-none"
-            style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
-          >
-            <span className="text-[10px] sm:text-[11px] font-mono font-black mb-0.5 text-blue-900 tracking-tighter">
+          <div key={`bM-${s}`} className="rb-m" style={{ left: `${pct}%` }}>
+            <span className="rb-lbl">
               {displayVal}{currentType.toUnit === 'in' ? '"' : ''}
             </span>
-            <div className="w-[1.5px] h-4.5 bg-blue-900" />
+            <i />
           </div>
         );
       } else {
-        ticks.push(
-          <div
-            key={`to-minor-${s}`}
-            className="absolute bottom-0 pointer-events-none"
-            style={{ left: `${pct}%`, transform: 'translateX(-50%)' }}
-          >
-            <div className="w-[1px] h-2 bg-blue-600/60" />
-          </div>
-        );
+        ticks.push(<i key={`bm-${s}`} className="rb" style={{ left: `${pct}%` }} />);
       }
     }
 

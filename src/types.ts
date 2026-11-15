@@ -7,13 +7,6 @@ export type RoutePath =
   | '/feet-to-meters/'
   | '/mm-to-inches/'
   | '/inches-to-mm/'
-  | '/90-cm-to-inches/'
-  | '/150-cm-to-inches/'
-  | '/170-cm-to-inches/'
-  | '/180-cm-to-inches/'
-  | '/200-cm-to-inches/'
-  | '/5-feet-in-cm/'
-  | '/6-feet-in-cm/'
   | '/about-us/'
   | '/contact-us/'
   | '/privacy-policy/'
@@ -21,19 +14,22 @@ export type RoutePath =
   | '/disclaimer/'
   | '/cookie-policy/'
   | '/sitemap/'
-  | '/unit-conversion-chart/';
+  | '/unit-conversion-chart/'
+  | '/paper-size-in-inches/';
+
+export interface ConversionType {
+  id: string;
+  label: string;
+  shortLabel?: string;
+  fromUnit: string;
+  toUnit: string;
+  ratio: number;
+  formula: string;
+  example?: string;
+  description?: string;
+}
 
 export interface FAQItem {
   question: string;
   answer: string;
-}
-
-export interface ConversionType {
-  id: string;
-  fromUnit: string;
-  toUnit: string;
-  label: string;
-  ratio: number;
-  formula: string;
-  example: string;
 }

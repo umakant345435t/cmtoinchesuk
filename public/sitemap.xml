@@ -1,172 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main Hub -->
+  <!-- Main Hub & Core Calculators -->
   <url>
     <loc>https://www.cmtoinches.uk/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/inches-to-cm/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/feet-to-cm/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/cm-to-feet/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/meters-to-feet/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/feet-to-meters/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/mm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/inches-to-mm/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cmtoinches.uk/unit-conversion-chart/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cmtoinches.uk/paper-size-in-inches/</loc>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Popular Height Landings -->
-  <url>
-    <loc>https://www.cmtoinches.uk/90-cm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/150-cm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/170-cm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/180-cm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/200-cm-to-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/5-feet-in-cm/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/6-feet-in-cm/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Blog articles -->
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/how-many-inches-in-1-cm/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/cm-vs-inches/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/uk-height-conversion-guide/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/clothing-size-conversion/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.cmtoinches.uk/blog/international-measurement-systems/</loc>
-    <lastmod>2026-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Legal & Trust pages -->
+  <!-- Editorial & Legal Trust Pages -->
   <url>
     <loc>https://www.cmtoinches.uk/about-us/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/contact-us/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/privacy-policy/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/terms-and-conditions/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/disclaimer/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.cmtoinches.uk/cookie-policy/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.cmtoinches.uk/sitemap/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

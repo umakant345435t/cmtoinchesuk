@@ -1,6 +1,6 @@
 import React from 'react';
 import { RoutePath } from '../types';
-import { Ruler, ExternalLink } from 'lucide-react';
+import { Ruler } from 'lucide-react';
 
 interface SidebarProps {
   currentPath: RoutePath;
@@ -8,7 +8,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
-  // Only converter & chart pages in Related Converters (no duplicate footer legal/info pages)
+  // Only canonical converter & chart pages in Related Converters (no programmatic number pages or footer duplicates)
   const relatedPages: { label: string; path: RoutePath }[] = [
     { label: 'CM to Inches', path: '/' },
     { label: 'Inches → CM', path: '/inches-to-cm/' },
@@ -18,18 +18,21 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
     { label: 'Feet → Meters', path: '/feet-to-meters/' },
     { label: 'MM → Inches', path: '/mm-to-inches/' },
     { label: 'Inches → MM', path: '/inches-to-mm/' },
-    { label: 'Unit Chart', path: '/unit-conversion-chart/' },
-    { label: '90 CM in Inches', path: '/90-cm-to-inches/' },
-    { label: '150 CM in Inches', path: '/150-cm-to-inches/' },
-    { label: '170 CM in Inches', path: '/170-cm-to-inches/' },
-    { label: '180 CM in Inches', path: '/180-cm-to-inches/' },
-    { label: '200 CM in Inches', path: '/200-cm-to-inches/' },
-    { label: '5 Feet in CM', path: '/5-feet-in-cm/' },
-    { label: '6 Feet in CM', path: '/6-feet-in-cm/' }
+    { label: 'Paper Sizes (A0–A15)', path: '/paper-size-in-inches/' },
+    { label: 'Unit Chart', path: '/unit-conversion-chart/' }
   ];
 
   return (
     <aside className="w-full" id="related-converters">
+      <svg width="0" height="0" className="hidden" aria-hidden="true">
+        <defs>
+          <g id="ico-ext">
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </g>
+        </defs>
+      </svg>
       <nav aria-label="Related Converters" className="bg-white rounded-3xl p-6 shadow-xl border border-slate-200">
         <h4 className="text-base sm:text-lg font-black text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
           <Ruler className="w-5 h-5 text-blue-600 stroke-[2.5]" />
@@ -52,7 +55,9 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
               }`}
             >
               <span>{page.label}</span>
-              <ExternalLink className="w-4 h-4 text-slate-400 shrink-0" />
+              <svg viewBox="0 0 24 24" className="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <use href="#ico-ext" />
+              </svg>
             </a>
           ))}
         </div>

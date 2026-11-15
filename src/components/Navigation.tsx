@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RoutePath } from '../types';
-import { Home, Compass, Menu, X, Ruler } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface NavigationProps {
   currentPath: RoutePath;
@@ -11,17 +11,17 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Desktop Header Links: ONLY these 7 items as requested
-  const desktopHeaderLinks: { label: string; path: RoutePath; icon?: any }[] = [
-    { label: 'CM to Inches', path: '/', icon: Home },
-    { label: 'Inches → CM', path: '/inches-to-cm/', icon: Compass },
-    { label: 'Feet → CM', path: '/feet-to-cm/', icon: Compass },
-    { label: 'CM → Feet', path: '/cm-to-feet/', icon: Compass },
-    { label: 'Meters → Feet', path: '/meters-to-feet/', icon: Ruler },
-    { label: 'MM → Inches', path: '/mm-to-inches/', icon: Ruler },
-    { label: 'Unit Chart', path: '/unit-conversion-chart/', icon: Compass }
+  const desktopHeaderLinks: { label: string; path: RoutePath; iconId: string }[] = [
+    { label: 'CM to Inches', path: '/', iconId: 'ico-hm' },
+    { label: 'Inches → CM', path: '/inches-to-cm/', iconId: 'ico-cmp' },
+    { label: 'Feet → CM', path: '/feet-to-cm/', iconId: 'ico-cmp' },
+    { label: 'CM → Feet', path: '/cm-to-feet/', iconId: 'ico-cmp' },
+    { label: 'Meters → Feet', path: '/meters-to-feet/', iconId: 'ico-rlr' },
+    { label: 'MM → Inches', path: '/mm-to-inches/', iconId: 'ico-rlr' },
+    { label: 'Unit Chart', path: '/unit-conversion-chart/', iconId: 'ico-cmp' }
   ];
 
-  // Hamburger Menu Links: All converter & chart pages (no duplicate footer legal pages)
+  // Hamburger Menu Links: Only core unique converters & chart pages (no programmatic thin pages or footer duplicates)
   const allSitePages: { label: string; path: RoutePath }[] = [
     { label: 'CM to Inches', path: '/' },
     { label: 'Inches → CM', path: '/inches-to-cm/' },
@@ -31,14 +31,8 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'Feet → Meters', path: '/feet-to-meters/' },
     { label: 'MM → Inches', path: '/mm-to-inches/' },
     { label: 'Inches → MM', path: '/inches-to-mm/' },
-    { label: 'Unit Chart', path: '/unit-conversion-chart/' },
-    { label: '90 CM in Inches', path: '/90-cm-to-inches/' },
-    { label: '150 CM in Inches', path: '/150-cm-to-inches/' },
-    { label: '170 CM in Inches', path: '/170-cm-to-inches/' },
-    { label: '180 CM in Inches', path: '/180-cm-to-inches/' },
-    { label: '200 CM in Inches', path: '/200-cm-to-inches/' },
-    { label: '5 Feet in CM', path: '/5-feet-in-cm/' },
-    { label: '6 Feet in CM', path: '/6-feet-in-cm/' }
+    { label: 'Paper Sizes (A0–A15)', path: '/paper-size-in-inches/' },
+    { label: 'Unit Chart', path: '/unit-conversion-chart/' }
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: RoutePath) => {
@@ -49,6 +43,25 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
 
   return (
     <header className="w-full bg-white text-slate-950 border-b border-slate-200 shadow-xs" id="header-navigation">
+      <svg width="0" height="0" className="hidden" aria-hidden="true">
+        <defs>
+          <g id="ico-hm">
+            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+            <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          </g>
+          <g id="ico-cmp">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+          </g>
+          <g id="ico-rlr">
+            <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+            <path d="m14.5 12.5 2-2" />
+            <path d="m11.5 9.5 2-2" />
+            <path d="m8.5 6.5 2-2" />
+            <path d="m17.5 15.5 2-2" />
+          </g>
+        </defs>
+      </svg>
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex flex-col gap-1.5">
         {/* Top Row: Brand Logo (SVG only, aligned with Footer logo), Desktop Header Links (single line) & Mobile Hamburger Toggle */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2">
@@ -61,6 +74,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
               title="Home - CM to Inches Converter"
             >
               <svg
+                id="brand-cm-logo"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 128 128"
                 width="44"
@@ -69,11 +83,13 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                 aria-label="CM to Inches Converter Logo"
                 className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105"
               >
-                <rect width="128" height="128" rx="28" fill="#2563eb" />
-                <path d="M24 40 H104 M24 88 H104" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity="0.4" />
-                <path d="M34 40 V50 M44 40 V46 M54 40 V46 M64 40 V54 M74 40 V46 M84 40 V46 M94 40 V50" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
-                <path d="M34 88 V78 M44 88 V82 M54 88 V82 M64 88 V74 M74 88 V82 M84 88 V82 M94 88 V78" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
-                <text x="64" y="72" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="34" fill="#ffffff" textAnchor="middle" letterSpacing="-1">CM</text>
+                <g id="brand-cm-mark">
+                  <rect width="128" height="128" rx="28" fill="#2563eb" />
+                  <path d="M24 40 H104 M24 88 H104" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity="0.4" />
+                  <path d="M34 40 V50 M44 40 V46 M54 40 V46 M64 40 V54 M74 40 V46 M84 40 V46 M94 40 V50" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+                  <path d="M34 88 V78 M44 88 V82 M54 88 V82 M64 88 V74 M74 88 V82 M84 88 V82 M94 88 V78" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+                  <text x="64" y="72" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="900" fontSize="34" fill="#ffffff" textAnchor="middle" letterSpacing="-1">CM</text>
+                </g>
               </svg>
             </a>
 
@@ -94,7 +110,6 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
           <nav aria-label="Main Navigation" className="hidden lg:flex flex-nowrap items-center gap-1 xl:gap-2 whitespace-nowrap">
             {desktopHeaderLinks.map((link) => {
               const isActive = currentPath === link.path;
-              const Icon = link.icon;
               return (
                 <a
                   key={link.path}
@@ -107,7 +122,9 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
                       : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4 shrink-0" />}
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <use href={`#${link.iconId}`} />
+                  </svg>
                   {link.label}
                 </a>
               );
