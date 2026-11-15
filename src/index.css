@@ -172,7 +172,11 @@
 .ct-tbl.ct-uc th { width: auto; padding: 0.875rem; font-size: 0.875rem; }
 .ct-tbl.ct-uc td { padding: 0.875rem; font-size: 1rem; white-space: normal; font-weight: 400; }
 .ct-tbl.ct-uc td:first-child, .ct-tbl.ct-uc td.c-b, .ct-tbl.ct-uc td.c-g, .ct-tbl.ct-uc td.c-i { font-weight: 700; }
+.faq-ans { margin-top: 0.875rem; font-size: 1rem; line-height: 1.625; color: #334155; background-color: rgba(239, 246, 255, 0.4); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid rgba(191, 219, 254, 0.7); font-family: var(--font-sans); }
+.faq-chev { color: #64748b; background-color: #f1f5f9; border-radius: 9999px; height: 1.5rem; width: 1.5rem; padding: 0.25rem; flex-shrink: 0; transition: transform 150ms; }
+[data-faq-btn][aria-expanded="true"] .faq-chev { color: #dbeafe; background-color: #2563eb; transform: rotate(180deg); }
 @media (min-width: 640px) {
+  .faq-ans { font-size: 1.125rem; }
   .ct-tbl thead tr { font-size: 0.875rem; }
   .ct-tbl th { padding: 0.875rem 1.25rem; }
   .ct-tbl td { padding: 0.75rem 1.25rem; }

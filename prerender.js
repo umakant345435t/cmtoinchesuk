@@ -24,7 +24,8 @@ const routes = [
   'cookie-policy',
   'sitemap',
   'unit-conversion-chart',
-  'paper-size-in-inches'
+  'paper-size-in-inches',
+  'ring-shoe-size-cm'
 ];
 
 const redirectRoutes = [
@@ -171,6 +172,16 @@ const metadata = {
     title: 'Paper Size Converter: A4, A3, A2, A1 & A0–A15 in Inches, CM & MM',
     h1: 'Paper Size Converter: A4, A3, A2, A1 & A0–A15 in Inches, CM & MM',
     description: 'Convert ISO paper sizes from A0 to A15 into inches, cm, mm, and 300 DPI print pixels. Exact A4 size in inches (8.27 x 11.69 in), A3, A2, and A1 dimensions.'
+  },
+  'ring-shoe-size-cm': {
+    title: 'Ring, Wrist & UK Shoe Size to CM Converter | Ring Size Chart UK',
+    h1: 'Ring, Wrist & UK Shoe Size to CM Converter (Ring Size Chart UK A–Z)',
+    description: 'Convert finger circumference (mm/cm) to UK ring sizes (A–Z), print a home ring sizer, and convert foot length (cm/in) to UK child & adult shoe sizes.',
+    steps: [
+      { name: 'Wrap a paper strip around your finger', text: 'Cut a 6 mm strip of non-stretch paper, wrap it snugly at the base of the intended finger, and mark the overlap point.' },
+      { name: 'Measure circumference in mm or cm', text: 'Lay the strip flat against a metric ruler to read finger circumference in millimetres or centimetres.' },
+      { name: 'Match against the UK Ring Size Chart (A–Z)', text: 'Enter the circumference into the converter or read the nearest BS 6820 alphabetical UK ring size (A–Z), diameter, US, and EU equivalent.' }
+    ]
   }
 };
 
@@ -411,17 +422,11 @@ function splitSelectorList(selectorText) {
 }
 
 const DYNAMIC_UI_CLASSES = [
-  'bg-emerald-600', 'shadow-emerald-200', 'text-white', 'text-amber-700', 'bg-amber-50', 'border-amber-300',
-  'text-amber-900', 'bg-amber-200', 'hover:bg-amber-300', 'text-amber-950', 'bg-amber-600', 'text-amber-600',
-  'sm:grid-cols-2', 'p-2.5', 'gap-4', 'p-5', 'border-2', 'text-xs', 'text-sm', 'text-base', 'text-lg',
-  'text-xl', 'text-2xl', 'text-3xl', 'sm:text-sm', 'sm:text-base', 'sm:text-lg', 'sm:text-2xl', 'sm:text-3xl',
-  'fixed', 'bottom-3', 'left-3', 'right-3', 'sm:left-auto', 'sm:right-5', 'sm:max-w-md', 'z-50',
-  'mb-3.5', 'mb-2', 'mb-1', 'p-4', 'sm:p-5', 'shadow-xl', 'bg-slate-100', 'hover:bg-slate-200',
-  'bg-blue-600', 'hover:bg-blue-700', 'min-h-[40px]', 'flex-1', 'grid-cols-1', 'shadow-inner',
-  'bg-slate-50', 'border-slate-300', 'text-slate-400', 'hover:text-slate-700', 'p-1', 'rounded-lg',
-  'text-blue-600', 'underline', 'hover:text-blue-800', 'w-5', 'h-5', 'w-4', 'h-4', 'mt-3.5',
-  'bg-blue-50/40', 'border-blue-200/70', 'py-4.5', 'first:pt-0', 'last:pb-0',
-  'rt-grid', 'rt-m', 'rt-lbl', 'rt-lbl-r', 'rb', 'rb-m', 'rb-lbl', 'ct-tbl', 'ct-uk', 'ct-uc', 'c-b', 'c-g', 'c-i', 'c-m'
+  'bg-emerald-600', 'shadow-emerald-200', 'text-white', 'bg-blue-600', 'bg-slate-100',
+  'text-slate-400', 'text-blue-600', 'underline', 'w-5', 'h-5', 'w-4', 'h-4', 'lg:hidden',
+  'mb-3', 'p-1', 'hidden', 'flex', 'grid', 'text-xs', 'text-sm', 'text-base', 'text-lg',
+  'text-xl', 'text-2xl', 'sm:text-sm', 'sm:text-base', 'sm:text-lg', 'sm:text-2xl', 'sm:text-3xl',
+  'rt-grid', 'rt-m', 'rt-lbl', 'rt-lbl-r', 'rb', 'rb-m', 'rb-lbl', 'ct-tbl', 'ct-uk', 'c-b', 'c-g', 'c-m', 'faq-ans', 'faq-chev'
 ];
 
 // Unused Tailwind Preflight element tags that can be pruned if the HTML tag never appears on the route
@@ -487,10 +492,6 @@ function purgeCssForRoute(universalCss, routeHtml) {
 
       const parts = splitSelectorList(st.header);
       const keptParts = parts.filter((part) => {
-        // Defer pure :hover / :active rules to async full stylesheet (never affect initial paint or LCP)
-        if (/:hover\b|:active\b/i.test(part)) {
-          return false;
-        }
         const idMatches = part.match(/#([A-Za-z0-9_-]+)/g);
         if (idMatches && idMatches.some((idSel) => !usedIds.has(idSel.slice(1)))) {
           return false;
@@ -664,16 +665,13 @@ if (cssMatch && cssMatch[1]) {
     fs.writeFileSync(cssFilePath, universalCss, 'utf-8');
     indexContent = indexContent.replace(
       cssLinkRegex,
-      () => `__INLINE_CSS_PLACEHOLDER__<link rel="stylesheet" href="${cssHref}" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="${cssHref}"></noscript>`
+      () => `__INLINE_CSS_PLACEHOLDER__<meta name="app-css" content="${cssHref}"><noscript><link rel="stylesheet" href="${cssHref}"></noscript>`
     );
     console.log(`Full Universal CSS (${(universalCss.length / 1024).toFixed(1)} kB raw) prepared for per-route purging`);
   }
 }
 
-// 2. Remove competing modulepreload tags from <head> and attach enhanced ES5 pre-hydration controller
-// Handles 25-digit input, clear, swap, copy & ruler needle smoothly BEFORE React hydrates at idle/interact
-const es5CalculatorFallback = `<script>(function(){var w=window,d=document,inp=d.getElementById('converter-input'),res=d.getElementById('converter-result'),sel=d.getElementById('conversion-mode-select');if(!inp||!res)return;var R={'cm-to-inches':0.3937007874,'inches-to-cm':2.54,'feet-to-cm':30.48,'cm-to-feet':0.032808399,'meters-to-feet':3.280839895,'feet-to-meters':0.3048,'mm-to-inches':0.0393700787,'inches-to-mm':25.4};function calc(){if(w.__REACT_HYDRATED__)return;var v=parseFloat((inp.value||'').replace(/,/g,'.'));var m=sel?sel.value:'cm-to-inches';res.textContent=(isNaN(v)||v<=0)?'0':Number((v*(R[m]||0.3937007874)).toFixed(4)).toString();}inp.addEventListener('input',calc);if(sel)sel.addEventListener('change',calc);var clr=d.querySelector('button[title="Clear input and calculation"]');if(clr)clr.addEventListener('click',function(){if(w.__REACT_HYDRATED__)return;inp.value='';res.textContent='0';});})();</script>`;
-
+// 2. Remove competing modulepreload tags and redundant shell style, place compact module entry at end of <body>
 indexContent = indexContent
   .replace(/<style>html,body\{[^<]*<\/style>\s*/i, '')
   .replace(/<link\s+rel="modulepreload"[^>]*>\s*/gi, '')
@@ -683,7 +681,7 @@ if (scriptMatch) {
   const scriptTag = scriptMatch[0];
   indexContent = indexContent
     .replace(scriptTag, '')
-    .replace('</body>', () => `${es5CalculatorFallback}${scriptTag}</body>`);
+    .replace('</body>', () => `${scriptTag}</body>`);
 }
 
 // Generate structural homepage JSON-LD schema (@graph with WebApplication, FAQPage, HowTo, WebSite, Organization)
@@ -745,7 +743,7 @@ const homepageSchema = {
 };
 
 // Render 100% exact React SSR markup for Homepage ('/') + purge inline CSS strictly for homepage classes
-const rootAppHtml = renderRouteHtml('/');
+const rootAppHtml = renderRouteHtml('/').replace(/<!--[\s\S]*?-->/g, '');
 const homePurgedCss = universalCss ? purgeCssForRoute(universalCss, rootAppHtml) : '';
 const homeJsonLdScript = `<script type="application/ld+json">${JSON.stringify(homepageSchema)}</script>`;
 const updatedRootIndex = indexContent
@@ -878,7 +876,13 @@ routes.forEach((route) => {
   const jsonLdScript = `<script type="application/ld+json">${JSON.stringify(schemaObj)}</script>`;
 
   const routePath = `/${route}/`;
-  const routeAppHtml = renderRouteHtml(routePath);
+  const isHydratedRoute =
+    route === 'paper-size-in-inches' ||
+    route === 'ring-shoe-size-cm' ||
+    route === 'unit-conversion-chart' ||
+    route === 'contact-us';
+  const rawRouteAppHtml = renderRouteHtml(routePath);
+  const routeAppHtml = isHydratedRoute ? rawRouteAppHtml : rawRouteAppHtml.replace(/<!--[\s\S]*?-->/g, '');
   const routePurgedCss = universalCss ? purgeCssForRoute(universalCss, routeAppHtml) : '';
 
   let pageContent = indexContent

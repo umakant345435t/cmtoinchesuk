@@ -15,6 +15,10 @@ export interface RouteViewRegistry {
     onNavigate: (path: RoutePath | string) => void;
     breadcrumb: ReactNode;
   }>;
+  ringShoeSize?: ComponentType<{
+    onNavigate: (path: RoutePath | string) => void;
+    breadcrumb: ReactNode;
+  }>;
   staticPages?: ComponentType<{
     currentPath: RoutePath;
     onNavigate: (path: RoutePath | string) => void;
@@ -71,6 +75,12 @@ export async function preloadRouteView(rawPath: string): Promise<void> {
     return;
   }
 
+  if (path === '/ring-shoe-size-cm/' && !RESOLVED_VIEWS.ringShoeSize) {
+    const mod = await import('./views/RingShoeSizeView');
+    RESOLVED_VIEWS.ringShoeSize = mod.default;
+    return;
+  }
+
   if (STATIC_PAGES.has(path) && !RESOLVED_VIEWS.staticPages) {
     const mod = await import('./views/StaticPagesView');
     RESOLVED_VIEWS.staticPages = mod.default;
@@ -78,14 +88,16 @@ export async function preloadRouteView(rawPath: string): Promise<void> {
 }
 
 export async function preloadAllRouteViews(): Promise<void> {
-  const [c, u, p, s] = await Promise.all([
+  const [c, u, p, r, s] = await Promise.all([
     import('./views/ConverterSubpageView'),
     import('./views/UnitChartView'),
     import('./views/PaperSizeView'),
+    import('./views/RingShoeSizeView'),
     import('./views/StaticPagesView')
   ]);
   RESOLVED_VIEWS.converterSubpage = c.default;
   RESOLVED_VIEWS.unitChart = u.default;
   RESOLVED_VIEWS.paperSize = p.default;
+  RESOLVED_VIEWS.ringShoeSize = r.default;
   RESOLVED_VIEWS.staticPages = s.default;
 }

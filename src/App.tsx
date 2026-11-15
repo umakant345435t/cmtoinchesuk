@@ -35,6 +35,7 @@ const CANONICAL_PATHS = new Set([
   '/',
   '/unit-conversion-chart/',
   '/paper-size-in-inches/',
+  '/ring-shoe-size-cm/',
   ...MAIN_CONVERTER_PATHS,
   ...STATIC_PAGE_PATHS
 ]);
@@ -197,6 +198,10 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
       title = 'Paper Size Converter: A4, A3, A2, A1 & A0–A15 in Inches, CM & MM';
       description =
         'Convert ISO paper sizes from A0 to A15 into inches, cm, mm, and 300 DPI print pixels. View exact A4 size in inches (8.27 x 11.69 in), A3, A2, and A1 dimensions.';
+    } else if (currentPath === '/ring-shoe-size-cm/') {
+      title = 'Ring, Wrist & UK Shoe Size to CM Converter | Ring Size Chart UK';
+      description =
+        'Convert finger circumference (mm/cm) to UK ring sizes (A–Z), print a home ring sizer, and convert foot length (cm/in) to UK child & adult shoe sizes.';
     }
 
     document.title = title;
@@ -324,6 +329,12 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
     if (currentPath === '/paper-size-in-inches/' && RESOLVED_VIEWS.paperSize) {
       const PaperSize = RESOLVED_VIEWS.paperSize;
       return <PaperSize onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
+    }
+
+    // 4. RING, WRIST & UK SHOE SIZE TO CM CONVERTER (Code-split view)
+    if (currentPath === '/ring-shoe-size-cm/' && RESOLVED_VIEWS.ringShoeSize) {
+      const RingShoeSize = RESOLVED_VIEWS.ringShoeSize;
+      return <RingShoeSize onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
     }
 
     // 4. STATUTORY, TRUST, CONTACT & SITEMAP PAGES (Code-split view)
@@ -561,7 +572,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
               </table>
             </div>
             <p className="text-base text-slate-700 font-medium pt-1">
-              Need complete numeric lookup grids or ISO print sheets? Explore our{' '}
+              Explore our{' '}
               <a
                 href="/unit-conversion-chart/"
                 onClick={(e) => {
@@ -571,9 +582,9 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
                 title="Master Unit Conversion Charts"
                 className="text-blue-600 font-bold underline hover:text-blue-800"
               >
-                Master Unit Conversion Charts (1 to 1500)
-              </a>{' '}
-              or our{' '}
+                Master Unit Charts (1–1500)
+              </a>
+              ,{' '}
               <a
                 href="/paper-size-in-inches/"
                 onClick={(e) => {
@@ -583,7 +594,19 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
                 title="Paper Size Converter A0 to A15 in Inches"
                 className="text-blue-600 font-bold underline hover:text-blue-800"
               >
-                Paper Size Converter (A4, A3, A2, A1 &amp; A0–A15 in Inches)
+                Paper Size Converter (A0–A15)
+              </a>
+              , or{' '}
+              <a
+                href="/ring-shoe-size-cm/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  void handleNavigate('/ring-shoe-size-cm/');
+                }}
+                title="Ring, Wrist & UK Shoe Size to CM Converter"
+                className="text-blue-600 font-bold underline hover:text-blue-800"
+              >
+                Ring, Wrist &amp; UK Shoe Size to CM Converter
               </a>
               .
             </p>

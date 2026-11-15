@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQ_HOME } from '../data/conversions';
-import { ChevronDown, ChevronUp, MessageSquare } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 
 interface FAQSectionProps {
   customFAQs?: { question: string; answer: string }[];
@@ -30,6 +30,11 @@ export function FAQSection({ customFAQs }: FAQSectionProps) {
 
   return (
     <div className="w-full bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="faq-section">
+      <svg width="0" height="0" className="hidden" aria-hidden="true">
+        <defs>
+          <g id="ico-chev"><path d="m6 9 6 6 6-6" /></g>
+        </defs>
+      </svg>
       <div className="bg-slate-50 px-6 py-5 border-b border-slate-200 flex items-center gap-3">
         <MessageSquare className="w-6 h-6 text-blue-600 stroke-[2.5] shrink-0" />
         <div>
@@ -48,22 +53,21 @@ export function FAQSection({ customFAQs }: FAQSectionProps) {
           return (
             <div key={idx} className="py-4.5 first:pt-0 last:pb-0">
               <button
+                type="button"
+                data-faq-btn={idx}
+                aria-expanded={isExpanded}
                 onClick={() => toggleFAQ(idx)}
                 className="w-full flex justify-between items-center text-left text-base sm:text-lg font-black text-slate-950 hover:text-blue-600 transition-colors focus:outline-none cursor-pointer"
               >
                 <span className="pr-4 leading-snug">{faq.question}</span>
-                {isExpanded ? (
-                  <ChevronUp className="text-blue-100 bg-blue-600 rounded-full h-6 w-6 flex items-center justify-center stroke-[3px] shrink-0 p-1" />
-                ) : (
-                  <ChevronDown className="text-slate-500 bg-slate-100 rounded-full h-6 w-6 flex items-center justify-center stroke-[2.5px] shrink-0 p-1" />
-                )}
+                <svg viewBox="0 0 24 24" className="faq-chev" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <use href="#ico-chev" />
+                </svg>
               </button>
-              
-              {isExpanded && (
-                <div className="mt-3.5 text-base sm:text-lg text-slate-700 leading-relaxed bg-blue-50/40 p-5 rounded-xl border border-blue-200/70 transition-all font-sans">
-                  {faq.answer}
-                </div>
-              )}
+
+              <div data-faq-panel={idx} className={isExpanded ? 'faq-ans' : 'hidden faq-ans'}>
+                {isExpanded ? faq.answer : null}
+              </div>
             </div>
           );
         })}

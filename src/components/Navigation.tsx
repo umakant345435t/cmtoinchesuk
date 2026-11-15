@@ -32,6 +32,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'MM → Inches', path: '/mm-to-inches/' },
     { label: 'Inches → MM', path: '/inches-to-mm/' },
     { label: 'Paper Sizes (A0–A15)', path: '/paper-size-in-inches/' },
+    { label: 'Ring & Shoe Size (CM)', path: '/ring-shoe-size-cm/' },
     { label: 'Unit Chart', path: '/unit-conversion-chart/' }
   ];
 

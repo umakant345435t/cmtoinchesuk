@@ -63,6 +63,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
   const [landscape, setLandscape] = useState<boolean>(false);
   const [dpi, setDpi] = useState<number>(300);
   const [copied, setCopied] = useState<boolean>(false);
+  const [imgFailed, setImgFailed] = useState<boolean>(false);
 
   const row = ISO_A_SIZES.find((r) => r.code === selectedCode) || ISO_A_SIZES[4];
   const wMm = landscape ? row.mmH : row.mmW;
@@ -87,7 +88,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
     <div className="space-y-6">
       {breadcrumb}
 
-      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-8">
+      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-4 sm:p-6 md:p-8 space-y-8">
         <div className="border-b border-slate-100 pb-4 space-y-2">
           <p className="text-xs font-bold uppercase tracking-wider text-blue-700 font-mono flex items-center gap-1.5">
             <FileText className="w-4 h-4" />
@@ -101,8 +102,33 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
           </p>
         </div>
 
+        {/* Visual ISO Paper Scale Reference Image (< 40 KB WebP) */}
+        <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+          {imgFailed ? (
+            <div className="aspect-[4/3] w-full flex flex-col items-center justify-center gap-2 p-6 text-slate-500 bg-slate-100">
+              <FileText className="w-8 h-8 text-blue-600" />
+              <span className="text-sm font-semibold text-slate-700">ISO A3, A4, A5 &amp; A6 Proportional Scale Comparison</span>
+            </div>
+          ) : (
+            <img
+              src="/images/iso-paper-sizes.webp"
+              alt="ISO A3, A4, A5, and A6 archival paper sheets aligned corner to corner beside a stainless steel cm and inch ruler"
+              width={800}
+              height={600}
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
+              onError={() => setImgFailed(true)}
+              className="w-full h-auto aspect-[4/3] object-cover block"
+            />
+          )}
+          <figcaption className="px-4 py-2.5 text-xs sm:text-sm text-slate-600 border-t border-slate-200 bg-white">
+            Visual ISO 216 comparison showing how each paper step halves cleanly from A3 (11.69&quot; × 16.54&quot;) through A4 (8.27&quot; × 11.69&quot;), A5, and A6.
+          </figcaption>
+        </figure>
+
         {/* Interactive Paper Size Converter */}
-        <div className="bg-slate-50/80 border border-slate-200 rounded-2xl p-5 space-y-5">
+        <div className="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-5">
           <div className="grid sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="paper-size-select" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
@@ -129,10 +155,10 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
               <button
                 type="button"
                 onClick={() => setLandscape((prev) => !prev)}
-                className="w-full bg-white border-2 border-slate-200 hover:border-blue-500 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 flex items-center justify-between cursor-pointer"
+                className="w-full bg-white border-2 border-slate-200 hover:border-blue-500 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 flex items-center justify-between cursor-pointer whitespace-nowrap"
               >
                 <span>{landscape ? 'Landscape (Wide)' : 'Portrait (Tall)'}</span>
-                <ArrowLeftRight className="w-4 h-4 text-blue-600" />
+                <ArrowLeftRight className="w-4 h-4 text-blue-600 shrink-0" />
               </button>
             </div>
 
@@ -154,28 +180,28 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 tabular-nums">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-blue-700 font-mono">{row.code} Size in Inches</div>
-              <div className="text-lg sm:text-xl font-black text-blue-900 font-mono mt-1">
+              <div className="text-base sm:text-xl font-black text-blue-900 font-mono mt-1">
                 {wIn}&quot; × {hIn}&quot;
               </div>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-slate-500 font-mono">Centimeters (CM)</div>
-              <div className="text-lg sm:text-xl font-black text-slate-900 font-mono mt-1">
+              <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
                 {wCm} × {hCm} cm
               </div>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-slate-500 font-mono">Millimeters (MM)</div>
-              <div className="text-lg sm:text-xl font-black text-slate-900 font-mono mt-1">
+              <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
                 {wMm} × {hMm} mm
               </div>
             </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-4">
+            <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-slate-500 font-mono">Pixels ({dpi} DPI)</div>
-              <div className="text-lg sm:text-xl font-black text-slate-900 font-mono mt-1">
+              <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
                 {wPx} × {hPx} px
               </div>
             </div>
@@ -188,7 +214,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
             <button
               type="button"
               onClick={handleCopyDimensions}
-              className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors ${
+              className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors whitespace-nowrap ${
                 copied ? 'bg-emerald-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
@@ -198,23 +224,22 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
           </div>
         </div>
 
-        {/* Complete A0 to A15 Paper Size Chart */}
+        {/* Complete A0 to A15 Paper Size Chart (Fixed zero-scroll responsive mobile table) */}
         <div className="space-y-3">
           <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
             All Paper Sizes A0 to A15 in Inches, CM, MM &amp; Pixels
           </h2>
-          <div className="border border-slate-200 rounded-2xl overflow-x-auto">
-            <table className="w-full text-left text-sm sm:text-base tabular-nums">
-              <thead className="bg-slate-100 text-slate-800 font-bold uppercase font-mono text-xs sm:text-sm">
+          <div className="border border-slate-200 rounded-2xl overflow-hidden">
+            <table className="w-full table-fixed text-left tabular-nums">
+              <thead className="bg-slate-100 text-slate-800 font-bold uppercase font-mono text-[11px] sm:text-xs">
                 <tr>
-                  <th className="p-3 border-b border-slate-200">Size</th>
-                  <th className="p-3 border-b border-slate-200">Inches (in)</th>
-                  <th className="p-3 border-b border-slate-200">Centimeters (cm)</th>
-                  <th className="p-3 border-b border-slate-200">Millimeters (mm)</th>
-                  <th className="p-3 border-b border-slate-200">300 DPI (px)</th>
+                  <th className="w-[14%] px-2 py-2.5 sm:p-3 border-b border-slate-200">Size</th>
+                  <th className="w-[30%] px-2 py-2.5 sm:p-3 border-b border-slate-200">Inches</th>
+                  <th className="w-[32%] px-2 py-2.5 sm:p-3 border-b border-slate-200">CM / MM</th>
+                  <th className="w-[24%] px-2 py-2.5 sm:p-3 border-b border-slate-200">300 DPI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-mono">
+              <tbody className="divide-y divide-slate-100 font-mono text-[11px] sm:text-sm md:text-base">
                 {ISO_A_SIZES.map((s, idx) => {
                   const inW = (s.mmW / 25.4).toFixed(2);
                   const inH = (s.mmH / 25.4).toFixed(2);
@@ -232,11 +257,13 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
                           : 'bg-slate-50/50 hover:bg-slate-100/70'
                       }`}
                     >
-                      <td className="p-3 font-black text-slate-900">{s.code}</td>
-                      <td className="p-3 font-bold text-blue-700">{inW}&quot; × {inH}&quot;</td>
-                      <td className="p-3 text-slate-800">{(s.mmW / 10).toFixed(1)} × {(s.mmH / 10).toFixed(1)} cm</td>
-                      <td className="p-3 text-slate-600">{s.mmW} × {s.mmH} mm</td>
-                      <td className="p-3 text-slate-600">{pxW} × {pxH}</td>
+                      <td className="px-2 py-2.5 sm:p-3 font-black text-slate-900 align-top">{s.code}</td>
+                      <td className="px-2 py-2.5 sm:p-3 font-bold text-blue-700 align-top break-words">{`${inW}"×${inH}"`}</td>
+                      <td className="px-2 py-2.5 sm:p-3 text-slate-800 align-top">
+                        <span className="block font-semibold">{`${(s.mmW / 10).toFixed(1)}×${(s.mmH / 10).toFixed(1)} cm`}</span>
+                        <span className="block text-[10px] sm:text-xs text-slate-500">{`${s.mmW}×${s.mmH} mm`}</span>
+                      </td>
+                      <td className="px-2 py-2.5 sm:p-3 text-slate-600 align-top break-words">{`${pxW}×${pxH}`}</td>
                     </tr>
                   );
                 })}

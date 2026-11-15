@@ -21,6 +21,7 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         { label: 'Millimeters to Inches Woodworking Converter', path: '/mm-to-inches/' as RoutePath },
         { label: 'Inches to Millimeters Precision Converter', path: '/inches-to-mm/' as RoutePath },
         { label: 'Paper Size Converter (A4, A3, A2, A1 & A0–A15 in Inches)', path: '/paper-size-in-inches/' as RoutePath },
+        { label: 'Ring, Wrist & UK Shoe Size to CM Converter', path: '/ring-shoe-size-cm/' as RoutePath },
         { label: 'Master Unit Conversion Charts (1 to 1500)', path: '/unit-conversion-chart/' as RoutePath },
       ]
     },
