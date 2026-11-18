@@ -25,18 +25,19 @@ const routes = [
   'sitemap',
   'unit-conversion-chart',
   'paper-size-in-inches',
-  'ring-shoe-size-cm'
+  'ring-size-in-cm'
 ];
 
 const redirectRoutes = [
-  'cm-to-inches',
-  '90-cm-to-inches',
-  '150-cm-to-inches',
-  '170-cm-to-inches',
-  '180-cm-to-inches',
-  '200-cm-to-inches',
-  '5-feet-in-cm',
-  '6-feet-in-cm'
+  { slug: 'cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '90-cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '150-cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '170-cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '180-cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '200-cm-to-inches', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '5-feet-in-cm', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: '6-feet-in-cm', targetUrl: 'https://www.cmtoinches.uk/' },
+  { slug: 'ring-shoe-size-cm', targetUrl: 'https://www.cmtoinches.uk/ring-size-in-cm/' }
 ];
 
 const metadata = {
@@ -173,10 +174,10 @@ const metadata = {
     h1: 'Paper Size Converter: A4, A3, A2, A1 & A0–A15 in Inches, CM & MM',
     description: 'Convert ISO paper sizes from A0 to A15 into inches, cm, mm, and 300 DPI print pixels. Exact A4 size in inches (8.27 x 11.69 in), A3, A2, and A1 dimensions.'
   },
-  'ring-shoe-size-cm': {
-    title: 'Ring, Wrist & UK Shoe Size to CM Converter | Ring Size Chart UK',
-    h1: 'Ring, Wrist & UK Shoe Size to CM Converter (Ring Size Chart UK A–Z)',
-    description: 'Convert finger circumference (mm/cm) to UK ring sizes (A–Z), print a home ring sizer, and convert foot length (cm/in) to UK child & adult shoe sizes.',
+  'ring-size-in-cm': {
+    title: 'Ring Size Chart UK (A–Z) & Ring Size in CM Converter | cmtoinches.uk',
+    h1: 'Ring Size Chart UK & Finger Circumference to CM Converter (A–Z)',
+    description: 'Measure ring size at home with our BS 6820 UK ring size chart (A–Z), finger circumference in cm/mm to UK size converter, printable 1:1 sizer, and 7 visual infographics.',
     steps: [
       { name: 'Wrap a paper strip around your finger', text: 'Cut a 6 mm strip of non-stretch paper, wrap it snugly at the base of the intended finger, and mark the overlap point.' },
       { name: 'Measure circumference in mm or cm', text: 'Lay the strip flat against a metric ruler to read finger circumference in millimetres or centimetres.' },
@@ -878,7 +879,7 @@ routes.forEach((route) => {
   const routePath = `/${route}/`;
   const isHydratedRoute =
     route === 'paper-size-in-inches' ||
-    route === 'ring-shoe-size-cm' ||
+    route === 'ring-size-in-cm' ||
     route === 'unit-conversion-chart' ||
     route === 'contact-us';
   const rawRouteAppHtml = renderRouteHtml(routePath);
@@ -912,30 +913,30 @@ if (fs.existsSync(ssrBundlePath)) {
 fs.writeFileSync(path.join(distDir, '404.html'), updatedRootIndex, 'utf-8');
 console.log('Generated: 404.html fallback');
 
-// Generate noindex + 301 redirect HTML pages for duplicate & retired programmatic number routes
-redirectRoutes.forEach((redirectRoute) => {
-  const redirectDir = path.join(distDir, redirectRoute);
+// Generate noindex + 301 redirect HTML pages for duplicate & retired routes
+redirectRoutes.forEach(({ slug, targetUrl }) => {
+  const redirectDir = path.join(distDir, slug);
   fs.mkdirSync(redirectDir, { recursive: true });
   const redirectHtml = `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <title>301 Moved Permanently - CM to Inches Converter</title>
-  <meta http-equiv="refresh" content="0;url=https://www.cmtoinches.uk/">
-  <link rel="canonical" href="https://www.cmtoinches.uk/">
+  <title>301 Moved Permanently - cmtoinches.uk</title>
+  <meta http-equiv="refresh" content="0;url=${targetUrl}">
+  <link rel="canonical" href="${targetUrl}">
   <meta name="robots" content="noindex, follow">
   <script>
-    window.location.replace("https://www.cmtoinches.uk/");
+    window.location.replace(${JSON.stringify(targetUrl)});
   </script>
 </head>
 <body style="font-family:system-ui,-apple-system,sans-serif;padding:32px;text-align:center;background:#f8fafc;color:#0f172a;">
   <p><strong>301 Moved Permanently</strong></p>
-  <p>This page has been consolidated into our main UK Length Converter.</p>
-  <p>Redirecting to <a href="https://www.cmtoinches.uk/">https://www.cmtoinches.uk/</a>...</p>
+  <p>This page has moved to its updated canonical URL.</p>
+  <p>Redirecting to <a href="${targetUrl}">${targetUrl}</a>...</p>
 </body>
 </html>`;
   fs.writeFileSync(path.join(redirectDir, 'index.html'), redirectHtml, 'utf-8');
-  console.log(`Generated: ${redirectRoute}/index.html with noindex + 301 redirect to https://www.cmtoinches.uk/`);
+  console.log(`Generated: ${slug}/index.html with noindex + 301 redirect to ${targetUrl}`);
 });
 
 // Ensure _redirects and .htaccess are in dist

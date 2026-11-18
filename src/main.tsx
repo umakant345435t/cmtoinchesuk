@@ -3,8 +3,8 @@ import { initVanillaCore } from './vanillaCore';
 const REACT_REQUIRED_ROUTES = new Set([
   '/paper-size-in-inches/',
   '/paper-size-in-inches',
-  '/ring-shoe-size-cm/',
-  '/ring-shoe-size-cm',
+  '/ring-size-in-cm/',
+  '/ring-size-in-cm',
   '/unit-conversion-chart/',
   '/unit-conversion-chart',
   '/contact-us/',

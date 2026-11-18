@@ -11,6 +11,7 @@
   RewriteRule ^200-cm-to-inches/?$ https://www.cmtoinches.uk/ [R=301,L]
   RewriteRule ^5-feet-in-cm/?$ https://www.cmtoinches.uk/ [R=301,L]
   RewriteRule ^6-feet-in-cm/?$ https://www.cmtoinches.uk/ [R=301,L]
+  RewriteRule ^ring-shoe-size-cm/?$ https://www.cmtoinches.uk/ring-size-in-cm/ [R=301,L]
 
   # Standard SPA fallback for other routes
   RewriteCond %{REQUEST_FILENAME} !-f

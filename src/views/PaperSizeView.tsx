@@ -49,7 +49,7 @@ const PAPER_SIZE_FAQS = [
   {
     question: 'What is the pixel size of A4 and A3 at 300 DPI for UK printing?',
     answer:
-      'At 300 DPI commercial print resolution, A4 equals 2480 × 3508 pixels and A3 equals 3508 × 4961 pixels. Dividing any pixel dimension by DPI converts directly back to inches.'
+      'At 300 DPI commercial print resolution, A4 equals 2480 × 3508 pixels and A3 equals 3508 × 4961 pixels (or 2551 × 3579 px with standard 3 mm bleed on all four edges).'
   }
 ];
 
@@ -64,6 +64,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
   const [dpi, setDpi] = useState<number>(300);
   const [copied, setCopied] = useState<boolean>(false);
   const [imgFailed, setImgFailed] = useState<boolean>(false);
+  const [frameImgFailed, setFrameImgFailed] = useState<boolean>(false);
 
   const row = ISO_A_SIZES.find((r) => r.code === selectedCode) || ISO_A_SIZES[4];
   const wMm = landscape ? row.mmH : row.mmW;
@@ -142,7 +143,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
               >
                 {ISO_A_SIZES.map((s) => (
                   <option key={s.code} value={s.code}>
-                    {s.code} ({(s.mmW / 25.4).toFixed(2)}&quot; × {(s.mmH / 25.4).toFixed(2)}&quot;)
+                    {`${s.code} (${(s.mmW / 25.4).toFixed(2)}" × ${(s.mmH / 25.4).toFixed(2)}")`}
                   </option>
                 ))}
               </select>
@@ -182,27 +183,27 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5 tabular-nums">
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-3.5 sm:p-4">
-              <div className="text-xs font-bold uppercase text-blue-700 font-mono">{row.code} Size in Inches</div>
+              <div className="text-xs font-bold uppercase text-blue-700 font-mono">{`${row.code} Size in Inches`}</div>
               <div className="text-base sm:text-xl font-black text-blue-900 font-mono mt-1">
-                {wIn}&quot; × {hIn}&quot;
+                {`${wIn}" × ${hIn}"`}
               </div>
             </div>
             <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-slate-500 font-mono">Centimeters (CM)</div>
               <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
-                {wCm} × {hCm} cm
+                {`${wCm} × ${hCm} cm`}
               </div>
             </div>
             <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
               <div className="text-xs font-bold uppercase text-slate-500 font-mono">Millimeters (MM)</div>
               <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
-                {wMm} × {hMm} mm
+                {`${wMm} × ${hMm} mm`}
               </div>
             </div>
             <div className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4">
-              <div className="text-xs font-bold uppercase text-slate-500 font-mono">Pixels ({dpi} DPI)</div>
+              <div className="text-xs font-bold uppercase text-slate-500 font-mono">{`Pixels (${dpi} DPI)`}</div>
               <div className="text-base sm:text-xl font-black text-slate-900 font-mono mt-1">
-                {wPx} × {hPx} px
+                {`${wPx} × ${hPx} px`}
               </div>
             </div>
           </div>
@@ -272,32 +273,130 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
           </div>
         </div>
 
-        {/* Dedicated Practical Guide Sections for A1, A2, A3, A4 */}
-        <div className="space-y-6 text-slate-700 font-sans text-base sm:text-lg leading-relaxed">
+        {/* Dedicated Practical Guide & Advanced ISO 216 Engineering Article Section */}
+        <article className="space-y-6 text-slate-700 font-sans text-base sm:text-lg leading-relaxed border-t border-slate-100 pt-6">
           <div className="space-y-2">
             <h2 className="text-lg sm:text-xl font-black text-slate-900">
-              A4 Size in Inches (8.27 × 11.69 Inches)
+              A4 Size in Inches (8.27 × 11.69 Inches) &amp; ISO 216 Halving Geometry
             </h2>
             <p>
-              <strong>A4 size in inches</strong> is exactly <strong>8.27 × 11.69 in</strong> (derived from <strong>210 × 297 mm</strong> divided by 25.4). Across the UK, Europe, and Commonwealth offices, A4 is the universal sheet for printer trays, university essays, CV resumes, and picture frames. When buying frames imported from North America, check whether an 8×12&quot; or 8.5×11&quot; (US Letter) mount clips the top edge of A4 artwork.
+              <strong>A4 size in inches</strong> is exactly <strong>8.27 × 11.69 in</strong> (derived from <strong>210 × 297 mm</strong> divided by 25.4). Every ISO 216 sheet obeys the <strong>Lichtenberg 1 : √2 aspect ratio</strong> (1 : 1.4142), anchored to <strong>A0 = 1 square metre</strong> (33.11&quot; × 46.81&quot;). Because √2 halves cleanly along the longer side without changing proportions, a UK designer can scale artwork from A4 to A3 (141.4%) or down to A5 (70.7%) with zero cropping or wasted trim.
+            </p>
+          </div>
+
+          {/* Article Infographic Blueprint + Studio Envelope/Frame WebP Visual */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <figure className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50 flex flex-col">
+              <div className="p-4 bg-white flex-1 flex items-center justify-center">
+                <svg
+                  viewBox="0 0 360 250"
+                  className="w-full h-auto"
+                  role="img"
+                  aria-label="ISO 216 1 to square root 2 halving ratio blueprint showing A0 through A6 sheet nesting"
+                >
+                  <rect x="14" y="14" width="332" height="222" rx="6" fill="#eff6ff" stroke="#1d4ed8" strokeWidth="2.5" />
+                  <text x="96" y="130" textAnchor="middle" fontSize="22" fontWeight="900" fill="#1e3a8a" fontFamily="monospace">
+                    A1
+                  </text>
+                  <text x="96" y="148" textAnchor="middle" fontSize="9.5" fill="#1e40af" fontFamily="monospace">
+                    23.39&quot; × 33.11&quot;
+                  </text>
+
+                  <line x1="180" y1="14" x2="180" y2="236" stroke="#1d4ed8" strokeWidth="2" />
+                  <rect x="180" y="14" width="166" height="111" fill="#ecfdf5" stroke="#059669" strokeWidth="2" />
+                  <text x="263" y="68" textAnchor="middle" fontSize="20" fontWeight="900" fill="#065f46" fontFamily="monospace">
+                    A2
+                  </text>
+                  <text x="263" y="85" textAnchor="middle" fontSize="9" fill="#047857" fontFamily="monospace">
+                    16.54&quot; × 23.39&quot;
+                  </text>
+
+                  <rect x="180" y="125" width="83" height="111" fill="#fef3c7" stroke="#d97706" strokeWidth="2" />
+                  <text x="221" y="178" textAnchor="middle" fontSize="16" fontWeight="900" fill="#92400e" fontFamily="monospace">
+                    A3
+                  </text>
+                  <text x="221" y="194" textAnchor="middle" fontSize="8" fill="#b45309" fontFamily="monospace">
+                    11.69&quot;×16.54&quot;
+                  </text>
+
+                  <rect x="263" y="125" width="83" height="55.5" fill="#e0e7ff" stroke="#4338ca" strokeWidth="2" />
+                  <text x="304" y="153" textAnchor="middle" fontSize="13" fontWeight="900" fill="#312e81" fontFamily="monospace">
+                    A4
+                  </text>
+                  <text x="304" y="167" textAnchor="middle" fontSize="7.5" fill="#3730a3" fontFamily="monospace">
+                    8.27&quot;×11.69&quot;
+                  </text>
+
+                  <rect x="263" y="180.5" width="41.5" height="55.5" fill="#fce7f3" stroke="#be185d" strokeWidth="1.8" />
+                  <text x="283" y="212" textAnchor="middle" fontSize="11" fontWeight="900" fill="#831843" fontFamily="monospace">
+                    A5
+                  </text>
+
+                  <rect x="304.5" y="180.5" width="41.5" height="27.7" fill="#f1f5f9" stroke="#334155" strokeWidth="1.5" />
+                  <text x="325" y="198" textAnchor="middle" fontSize="9.5" fontWeight="800" fill="#0f172a" fontFamily="monospace">
+                    A6
+                  </text>
+
+                  <rect x="304.5" y="208.2" width="20.7" height="27.8" fill="#ffffff" stroke="#64748b" strokeWidth="1.2" />
+                  <text x="315" y="225" textAnchor="middle" fontSize="7" fontWeight="800" fill="#475569" fontFamily="monospace">
+                    A7
+                  </text>
+                </svg>
+              </div>
+              <figcaption className="p-4 bg-white border-t border-slate-200 space-y-1">
+                <div className="text-xs font-black uppercase tracking-wider text-blue-700 font-mono">
+                  Infographic • ISO 216 1 : √2 Halving Ratio
+                </div>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  Halving any A-series long edge produces the next size down with identical 1 : 1.4142 proportions—cutting two A4 sheets cleanly from one A3 press sheet.
+                </p>
+              </figcaption>
+            </figure>
+
+            <figure className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50 flex flex-col">
+              {frameImgFailed ? (
+                <div className="aspect-[4/3] w-full flex items-center justify-center p-6 bg-slate-100 text-slate-600 text-sm font-semibold">
+                  UK A4 Sheet, C4/C5 Envelopes &amp; Picture Frame Clearance
+                </div>
+              ) : (
+                <img
+                  src="/images/paper-frame-guide.webp"
+                  alt="Printed A4 sheet next to matching C4 kraft flat envelope, C5 folded envelope, timber picture frame, and metal metric ruler"
+                  width={760}
+                  height={567}
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  onError={() => setFrameImgFailed(true)}
+                  className="w-full h-auto aspect-[4/3] object-cover block"
+                />
+              )}
+              <figcaption className="p-4 bg-white border-t border-slate-200 space-y-1 flex-1">
+                <div className="text-xs font-black uppercase tracking-wider text-blue-700 font-mono">
+                  UK Print &amp; Envelope Fit • A4 vs C4 / C5 &amp; Frames
+                </div>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  Match unfolded A4 documents to a C4 envelope (229 × 324 mm / 9.02&quot; × 12.76&quot;) or single-folded A4 letters to a C5 pocket (6.38&quot; × 9.02&quot;).
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div className="space-y-2">
+            <h2 className="text-lg sm:text-xl font-black text-slate-900">
+              A3, A2 &amp; A1 Sizes in Inches for UK Posters &amp; Picture Frames
+            </h2>
+            <p>
+              <strong>A3 size in inches</strong> measures <strong>11.69 × 16.54 in</strong> (<strong>29.7 × 42.0 cm</strong>), making it the natural two-up layout for UK menus, technical schematics, and inkjet proofing. Stepping up, <strong>A2 size in inches</strong> is <strong>16.54 × 23.39 in</strong> (<strong>42.0 × 59.4 cm</strong>) for exhibition fine-art prints, while <strong>A1 size in inches</strong> reaches <strong>23.39 × 33.11 in</strong> (<strong>59.4 × 84.1 cm</strong>) for architectural elevations and high-street retail boards. Always double-check North American frames labelled 8.5×11&quot; (US Letter) or 11×17&quot; (Tabloid), as they trim the extra height of A4 and A3 sheets.
             </p>
           </div>
 
           <div className="space-y-2">
             <h2 className="text-lg sm:text-xl font-black text-slate-900">
-              A3 Size in Inches (11.69 × 16.54 Inches)
+              Print Bleed, Royal Mail Envelopes &amp; 300 DPI Prepress Specs
             </h2>
             <p>
-              <strong>A3 size in inches</strong> measures <strong>11.69 × 16.54 in</strong> (<strong>29.7 × 42.0 cm</strong>). Placing two A4 sheets side by side along their long edge forms an exact A3 spread, making A3 popular for UK restaurant menus, music scores, architectural elevations, and home office inkjet posters.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h2 className="text-lg sm:text-xl font-black text-slate-900">
-              A2 Size in Inches (16.54 × 23.39 Inches) &amp; A1 Size in Inches (23.39 × 33.11 Inches)
-            </h2>
-            <p>
-              Moving up to large-format print, <strong>A2 size in inches</strong> is <strong>16.54 × 23.39 in</strong> (<strong>42.0 × 59.4 cm</strong>), ideal for wall art prints and studio moodboards. Doubling A2 yields <strong>A1 size in inches</strong> at <strong>23.39 × 33.11 in</strong> (<strong>59.4 × 84.1 cm</strong>)—standard across UK construction site plans, retail window posters, and presentation flipcharts.
+              Commercial litho and digital presses in the UK require a <strong>3 mm (0.12&quot;) trim bleed</strong> beyond the finished trim box so edge-to-edge colour reaches the guillotine line cleanly. At <strong>300 DPI</strong>, an unbled A4 canvas measures <strong>2480 × 3508 px</strong> (expanding to <strong>2551 × 3579 px</strong> with 3 mm bleed), while A5 postcards sit at <strong>1748 × 2480 px</strong> and slip straight into C6 envelopes (4.49&quot; × 6.38&quot;) within standard Royal Mail Letter thickness limits.
             </p>
           </div>
 
@@ -315,7 +414,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
             </a>
             .
           </p>
-        </div>
+        </article>
       </div>
 
       <FAQSection customFAQs={PAPER_SIZE_FAQS} />

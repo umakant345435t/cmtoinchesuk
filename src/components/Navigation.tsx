@@ -21,7 +21,7 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'Unit Chart', path: '/unit-conversion-chart/', iconId: 'ico-cmp' }
   ];
 
-  // Hamburger Menu Links: Only core unique converters & chart pages (no programmatic thin pages or footer duplicates)
+  // Hamburger Menu Links: Only core linear converters & Unit Chart
   const allSitePages: { label: string; path: RoutePath }[] = [
     { label: 'CM to Inches', path: '/' },
     { label: 'Inches → CM', path: '/inches-to-cm/' },
@@ -31,8 +31,6 @@ export function Navigation({ currentPath, onNavigate }: NavigationProps) {
     { label: 'Feet → Meters', path: '/feet-to-meters/' },
     { label: 'MM → Inches', path: '/mm-to-inches/' },
     { label: 'Inches → MM', path: '/inches-to-mm/' },
-    { label: 'Paper Sizes (A0–A15)', path: '/paper-size-in-inches/' },
-    { label: 'Ring & Shoe Size (CM)', path: '/ring-shoe-size-cm/' },
     { label: 'Unit Chart', path: '/unit-conversion-chart/' }
   ];
 

@@ -16,7 +16,7 @@ export type RoutePath =
   | '/sitemap/'
   | '/unit-conversion-chart/'
   | '/paper-size-in-inches/'
-  | '/ring-shoe-size-cm/';
+  | '/ring-size-in-cm/';
 
 export interface ConversionType {
   id: string;

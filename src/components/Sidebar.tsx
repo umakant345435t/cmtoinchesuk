@@ -8,7 +8,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
-  // Only canonical converter & chart pages in Related Converters (no programmatic number pages or footer duplicates)
+  // Canonical converter & reference pages in Related Converters
   const relatedPages: { label: string; path: RoutePath }[] = [
     { label: 'CM to Inches', path: '/' },
     { label: 'Inches → CM', path: '/inches-to-cm/' },
@@ -18,8 +18,8 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
     { label: 'Feet → Meters', path: '/feet-to-meters/' },
     { label: 'MM → Inches', path: '/mm-to-inches/' },
     { label: 'Inches → MM', path: '/inches-to-mm/' },
-    { label: 'Paper Sizes (A0–A15)', path: '/paper-size-in-inches/' },
-    { label: 'Ring & Shoe Size (CM)', path: '/ring-shoe-size-cm/' },
+    { label: 'Paper Size in Inches', path: '/paper-size-in-inches/' },
+    { label: 'Ring Size in CM', path: '/ring-size-in-cm/' },
     { label: 'Unit Chart', path: '/unit-conversion-chart/' }
   ];
 

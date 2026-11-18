@@ -1,6 +1,8 @@
 import React from 'react';
+import { RoutePath } from '../types';
 
 interface UnitChartViewProps {
+  onNavigate?: (path: RoutePath | string) => void;
   breadcrumb: React.ReactNode;
 }
 
@@ -19,7 +21,7 @@ const formatFeetAndInchesFromInches = (totalInches: number) => {
   return `${ft}' ${remIn}"`;
 };
 
-export default function UnitChartView({ breadcrumb }: UnitChartViewProps) {
+export default function UnitChartView({ onNavigate, breadcrumb }: UnitChartViewProps) {
   const cmToInchTable = CHART_VALUES_1_TO_1500.map((cm) => {
     const inches = cm / 2.54;
     return { cm, in: inches.toFixed(4), ftIn: formatFeetAndInchesFromInches(inches) };
@@ -358,6 +360,53 @@ export default function UnitChartView({ breadcrumb }: UnitChartViewProps) {
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+
+        {/* Specialized UK Sizing & Paper Size Converter Backlinks */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+            <h3 className="text-base font-black text-slate-900 tracking-tight">
+              UK Ring Size Chart (A–Z) &amp; Finger CM Converter
+            </h3>
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+              Convert finger circumference (mm/cm) or inside ring diameter into alphabetical BS 6820 UK sizes with our printable 1:1 strip:{' '}
+              <a
+                href="/ring-size-in-cm/"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/ring-size-in-cm/');
+                  }
+                }}
+                className="text-blue-600 font-bold underline hover:text-blue-800"
+              >
+                Ring Size in CM Converter
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+            <h3 className="text-base font-black text-slate-900 tracking-tight">
+              Paper Size Converter (A0–A15 in Inches)
+            </h3>
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+              Look up exact A4 (8.27&quot; × 11.69&quot;), A3, A2, and A1 dimensions in inches, cm, mm, and 300 DPI print pixels:{' '}
+              <a
+                href="/paper-size-in-inches/"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/paper-size-in-inches/');
+                  }
+                }}
+                className="text-blue-600 font-bold underline hover:text-blue-800"
+              >
+                Paper Size in Inches Converter
+              </a>
+              .
+            </p>
           </div>
         </div>
 

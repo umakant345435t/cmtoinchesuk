@@ -35,7 +35,7 @@ const CANONICAL_PATHS = new Set([
   '/',
   '/unit-conversion-chart/',
   '/paper-size-in-inches/',
-  '/ring-shoe-size-cm/',
+  '/ring-size-in-cm/',
   ...MAIN_CONVERTER_PATHS,
   ...STATIC_PAGE_PATHS
 ]);
@@ -70,6 +70,11 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
       ) {
         window.history.replaceState({ path: '/' }, '', '/');
         return '/';
+      }
+
+      if (path === '/ring-shoe-size-cm/') {
+        window.history.replaceState({ path: '/ring-size-in-cm/' }, '', '/ring-size-in-cm/');
+        return '/ring-size-in-cm/';
       }
 
       if (CANONICAL_PATHS.has(path)) {
@@ -115,6 +120,12 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
         return;
       }
 
+      if (path === '/ring-shoe-size-cm/') {
+        window.history.replaceState({ path: '/ring-size-in-cm/' }, '', '/ring-size-in-cm/');
+        void handleNavigate('/ring-size-in-cm/', true);
+        return;
+      }
+
       if (CANONICAL_PATHS.has(path)) {
         void handleNavigate(path as RoutePath, true);
       } else {
@@ -132,7 +143,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
   useEffect(() => {
     let title = 'CM to Inches Converter';
     let description =
-      'Convert CM to inches and inch to cm quickly with our accurate UK measurement converter, dual adaptive ruler, passport photo dims, mattress & clothing guides.';
+      'Convert CM to inches and inch to cm quickly with our accurate UK measurement converter, dual adaptive ruler, conversion formulas, and reference charts.';
 
     if (currentPath === '/inches-to-cm/') {
       title = 'Inches to CM Converter (in → cm) – UK Screen, Frame & Sizing Guide';
@@ -198,10 +209,10 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
       title = 'Paper Size Converter: A4, A3, A2, A1 & A0–A15 in Inches, CM & MM';
       description =
         'Convert ISO paper sizes from A0 to A15 into inches, cm, mm, and 300 DPI print pixels. View exact A4 size in inches (8.27 x 11.69 in), A3, A2, and A1 dimensions.';
-    } else if (currentPath === '/ring-shoe-size-cm/') {
-      title = 'Ring, Wrist & UK Shoe Size to CM Converter | Ring Size Chart UK';
+    } else if (currentPath === '/ring-size-in-cm/') {
+      title = 'Ring Size Chart UK (A–Z) & Ring Size in CM Converter | cmtoinches.uk';
       description =
-        'Convert finger circumference (mm/cm) to UK ring sizes (A–Z), print a home ring sizer, and convert foot length (cm/in) to UK child & adult shoe sizes.';
+        'Measure ring size at home with our BS 6820 UK ring size chart (A–Z), finger circumference in cm/mm to UK size converter, printable 1:1 sizer, and 7 visual infographics.';
     }
 
     document.title = title;
@@ -213,6 +224,12 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
 
   const handleNavigate = async (path: RoutePath | string, skipPushState = false) => {
     let targetPath = path as RoutePath;
+    if ((targetPath as string) === '/ring-shoe-size-cm/' || (targetPath as string) === '/ring-shoe-size-cm') {
+      targetPath = '/ring-size-in-cm/';
+      if (typeof window !== 'undefined') {
+        window.history.replaceState({ path: '/ring-size-in-cm/' }, '', '/ring-size-in-cm/');
+      }
+    }
     const preset = REDIRECTED_PROGRAMMATIC_PRESETS[targetPath];
     if (
       targetPath === ('/cm-to-inches/' as RoutePath) ||
@@ -322,7 +339,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
     // 2. MASTER UNIT CONVERSION CHART (1 TO 1500) (Code-split view)
     if (currentPath === '/unit-conversion-chart/' && RESOLVED_VIEWS.unitChart) {
       const UnitChart = RESOLVED_VIEWS.unitChart;
-      return <UnitChart breadcrumb={renderBreadcrumb()} />;
+      return <UnitChart onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
     }
 
     // 3. ISO PAPER SIZE CONVERTER A0-A15 (Code-split view)
@@ -331,10 +348,10 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
       return <PaperSize onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
     }
 
-    // 4. RING, WRIST & UK SHOE SIZE TO CM CONVERTER (Code-split view)
-    if (currentPath === '/ring-shoe-size-cm/' && RESOLVED_VIEWS.ringShoeSize) {
-      const RingShoeSize = RESOLVED_VIEWS.ringShoeSize;
-      return <RingShoeSize onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
+    // 4. RING SIZE CHART UK & FINGER CM CONVERTER (Code-split view)
+    if (currentPath === '/ring-size-in-cm/' && RESOLVED_VIEWS.ringSize) {
+      const RingSize = RESOLVED_VIEWS.ringSize;
+      return <RingSize onNavigate={handleNavigate} breadcrumb={renderBreadcrumb()} />;
     }
 
     // 4. STATUTORY, TRUST, CONTACT & SITEMAP PAGES (Code-split view)
@@ -359,10 +376,10 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
           onNavigate={handleNavigate}
         />
 
-        {/* Core Formulas & Practical UK Measurement Guides */}
+        {/* Core Formulas Overview (Clean Homepage Layout) */}
         <section
           id="uk-guides"
-          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-8"
+          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-6"
         >
           <div className="border-b border-slate-100 pb-3 space-y-2">
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
@@ -370,7 +387,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
               CM to Inches &amp; Inch to CM Converter
             </h1>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
-              Convert centimetres to inches and inches to centimetres accurately using the international metrology ratio (<strong className="font-mono">1 inch = 2.54 cm</strong>). Use the live calculator above for decimal and UK 1/16&quot; carpentry fractions, or consult our UK reference guides below.
+              Convert centimetres to inches and inches to centimetres accurately using the international metrology ratio (<strong className="font-mono">1 inch = 2.54 cm</strong>). Use the live calculator above for decimal and UK 1/16&quot; carpentry fractions.
             </p>
           </div>
 
@@ -401,216 +418,21 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
             </div>
           </div>
 
-          {/* Practical Guide 1: UK Passport & Visa Photo Dimensions */}
-          <div className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              1. UK Passport &amp; Photo ID Dimensions (CM &amp; Inches)
-            </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
-              Printed United Kingdom passport photographs submitted to HM Passport Office must meet strict millimetre and centimetre rules. Here is how official UK photo requirements translate into inches for imported frames or photo cutters:
-            </p>
-            <div className="border border-slate-200 rounded-2xl overflow-hidden">
-              <table className="ct-tbl ct-uk">
-                <thead>
-                  <tr>
-                    <th>Requirement</th>
-                    <th>Metric (CM / MM)</th>
-                    <th>Imperial (Inches)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Printed Photo Size</td>
-                    <td className="c-m c-b">3.5 × 4.5 cm (35 × 45 mm)</td>
-                    <td className="c-m">1.38&quot; × 1.77&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Head Size (Crown to Chin)</td>
-                    <td className="c-m c-b">2.9 – 3.4 cm (29 – 34 mm)</td>
-                    <td className="c-m">1.14&quot; – 1.34&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>US / India 2×2&quot; Visa Photo</td>
-                    <td className="c-m c-b">5.08 × 5.08 cm (51 × 51 mm)</td>
-                    <td className="c-m">2.00&quot; × 2.00&quot;</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Practical Guide 2: UK Standard Bed & Mattress Sizes */}
-          <div className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              2. UK Standard Bed &amp; Mattress Sizes (CM vs Feet &amp; Inches)
-            </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
-              British mattress sizes differ from European IKEA and North American dimensions. Always compare both centimetre and imperial tape measurements before ordering fitted sheets or bed frames:
-            </p>
-            <div className="border border-slate-200 rounded-2xl overflow-hidden">
-              <table className="ct-tbl ct-uk">
-                <thead>
-                  <tr>
-                    <th>UK Bed Size</th>
-                    <th>Centimetres (W × L)</th>
-                    <th>Inches / Feet &amp; Inches</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>UK Single</td>
-                    <td className="c-m c-b">90 × 190 cm</td>
-                    <td className="c-m">35.4&quot; × 74.8&quot; (3&apos; 0&quot; × 6&apos; 3&quot;)</td>
-                  </tr>
-                  <tr>
-                    <td>Small Double (Queen)</td>
-                    <td className="c-m c-b">120 × 190 cm</td>
-                    <td className="c-m">47.2&quot; × 74.8&quot; (4&apos; 0&quot; × 6&apos; 3&quot;)</td>
-                  </tr>
-                  <tr>
-                    <td>UK Double</td>
-                    <td className="c-m c-b">135 × 190 cm</td>
-                    <td className="c-m">53.1&quot; × 74.8&quot; (4&apos; 6&quot; × 6&apos; 3&quot;)</td>
-                  </tr>
-                  <tr>
-                    <td>UK King Size</td>
-                    <td className="c-m c-b">150 × 200 cm</td>
-                    <td className="c-m">59.1&quot; × 78.7&quot; (5&apos; 0&quot; × 6&apos; 6&quot;)</td>
-                  </tr>
-                  <tr>
-                    <td>UK Super King</td>
-                    <td className="c-m c-b">180 × 200 cm</td>
-                    <td className="c-m">70.9&quot; × 78.7&quot; (6&apos; 0&quot; × 6&apos; 6&quot;)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Practical Guide 3: UK & European Airline Cabin Luggage Allowances */}
-          <div className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              3. UK &amp; European Cabin Luggage Allowances (CM to Inches)
-            </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
-              Airlines operating from UK airports publish bag sizer limits in centimetres, while suitcase manufacturers frequently tag cabin bags as 18-inch, 20-inch, or 22-inch carry-ons:
-            </p>
-            <div className="border border-slate-200 rounded-2xl overflow-hidden">
-              <table className="ct-tbl ct-uk">
-                <thead>
-                  <tr>
-                    <th>UK / EU Airline</th>
-                    <th>Limit (CM)</th>
-                    <th>Converted Inches</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>British Airways (Cabin Bag)</td>
-                    <td className="c-m c-b">56 × 45 × 25 cm</td>
-                    <td className="c-m">22.0&quot; × 17.7&quot; × 9.8&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>easyJet (Free Under-Seat)</td>
-                    <td className="c-m c-b">45 × 36 × 20 cm</td>
-                    <td className="c-m">17.7&quot; × 14.2&quot; × 7.9&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Ryanair (Free Small Bag)</td>
-                    <td className="c-m c-b">40 × 20 × 25 cm</td>
-                    <td className="c-m">15.7&quot; × 7.9&quot; × 9.8&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Jet2 (Standard Hand Luggage)</td>
-                    <td className="c-m c-b">56 × 45 × 25 cm</td>
-                    <td className="c-m">22.0&quot; × 17.7&quot; × 9.8&quot;</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Practical Guide 4: UK Clothing, Collar & Trouser Waist Chart */}
-          <div className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              4. UK Clothing, Shirt Collar &amp; Trouser Waist Chart
-            </h2>
-            <p className="text-base text-slate-700 leading-relaxed font-sans">
-              UK menswear collars and denim waist sizes use inches, whereas continental brands list garments in centimetres:
-            </p>
-            <div className="border border-slate-200 rounded-2xl overflow-hidden">
-              <table className="ct-tbl ct-uk">
-                <thead>
-                  <tr>
-                    <th>UK Garment Size</th>
-                    <th>Centimetres (CM)</th>
-                    <th>Imperial (Inches)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Men&apos;s Shirt Collar (S / M / L)</td>
-                    <td className="c-m c-b">37 / 39 / 41 cm</td>
-                    <td className="c-m">14.5&quot; / 15.5&quot; / 16&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>Men&apos;s Waist (30&quot; / 32&quot; / 34&quot; / 36&quot;)</td>
-                    <td className="c-m c-b">76 / 81 / 86 / 91 cm</td>
-                    <td className="c-m">30&quot; / 32&quot; / 34&quot; / 36&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>UK Women&apos;s Size 10 (Bust / Waist)</td>
-                    <td className="c-m c-b">86 cm / 68 cm</td>
-                    <td className="c-m">34&quot; / 26.8&quot;</td>
-                  </tr>
-                  <tr>
-                    <td>UK Women&apos;s Size 14 (Bust / Waist)</td>
-                    <td className="c-m c-b">96 cm / 78 cm</td>
-                    <td className="c-m">37.8&quot; / 30.7&quot;</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="text-base text-slate-700 font-medium pt-1">
-              Explore our{' '}
-              <a
-                href="/unit-conversion-chart/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  void handleNavigate('/unit-conversion-chart/');
-                }}
-                title="Master Unit Conversion Charts"
-                className="text-blue-600 font-bold underline hover:text-blue-800"
-              >
-                Master Unit Charts (1–1500)
-              </a>
-              ,{' '}
-              <a
-                href="/paper-size-in-inches/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  void handleNavigate('/paper-size-in-inches/');
-                }}
-                title="Paper Size Converter A0 to A15 in Inches"
-                className="text-blue-600 font-bold underline hover:text-blue-800"
-              >
-                Paper Size Converter (A0–A15)
-              </a>
-              , or{' '}
-              <a
-                href="/ring-shoe-size-cm/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  void handleNavigate('/ring-shoe-size-cm/');
-                }}
-                title="Ring, Wrist & UK Shoe Size to CM Converter"
-                className="text-blue-600 font-bold underline hover:text-blue-800"
-              >
-                Ring, Wrist &amp; UK Shoe Size to CM Converter
-              </a>
-              .
-            </p>
-          </div>
+          <p className="text-base text-slate-700 font-medium pt-1">
+            Explore our{' '}
+            <a
+              href="/unit-conversion-chart/"
+              onClick={(e) => {
+                e.preventDefault();
+                void handleNavigate('/unit-conversion-chart/');
+              }}
+              title="Master Unit Conversion Charts"
+              className="text-blue-600 font-bold underline hover:text-blue-800"
+            >
+              Master Unit Charts (1–1500)
+            </a>
+            .
+          </p>
         </section>
 
         {/* Reference tables block */}

@@ -37,8 +37,6 @@ const SITE_PAGES: [string, string][] = [
   ['Feet → Meters', '/feet-to-meters/'],
   ['MM → Inches', '/mm-to-inches/'],
   ['Inches → MM', '/inches-to-mm/'],
-  ['Paper Sizes (A0–A15)', '/paper-size-in-inches/'],
-  ['Ring & Shoe Size (CM)', '/ring-shoe-size-cm/'],
   ['Unit Chart', '/unit-conversion-chart/'],
 ];
 
@@ -125,12 +123,16 @@ export function initVanillaCore() {
   if (w.__VANILLA_ACTIVE__ || w.__REACT_HYDRATED__) return;
   w.__VANILLA_ACTIVE__ = true;
 
-  // 1. Handle programmatic /cm-to-inches redirects cleanly
+  // 1. Handle programmatic & retired slug redirects cleanly
   let normPath = window.location.pathname;
   if (normPath && !normPath.endsWith('/') && !normPath.includes('.')) normPath += '/';
   const preset = PRESETS[normPath];
   if (normPath.startsWith('/cm-to-inches') || preset) {
     window.history.replaceState({ path: '/' }, '', '/');
+  } else if (normPath === '/ring-shoe-size-cm/') {
+    window.history.replaceState({ path: '/ring-size-in-cm/' }, '', '/ring-size-in-cm/');
+    handoffToReact('/ring-size-in-cm/');
+    return;
   }
 
   // 2. Converter + Dual Adaptive Ruler State
