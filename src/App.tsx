@@ -416,6 +416,22 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
             </div>
           </div>
 
+          {/* Worked Visual Example (Homepage Only, < 5 KB WebP) */}
+          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+            <img
+              src="/images/cm-to-inches-example.webp"
+              alt="Example CM to Inches conversion showing 15 cm equals 5.9055 inches, 5 7/8 inches to the nearest 1/16 inch, and the exact formula 15 cm divided by 2.54"
+              width={600}
+              height={246}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto block"
+            />
+            <figcaption className="px-4 py-2.5 text-xs sm:text-sm text-slate-600 font-medium border-t border-slate-200 bg-white">
+              Worked example: entering <strong>15 cm</strong> returns <strong>5.9055 inches</strong>, the UK carpentry fraction <strong>5 7/8 in (nearest 1/16&quot;)</strong>, and the live calculation step.
+            </figcaption>
+          </figure>
+
           {/* Human-Written Practical UK Editorial Sections */}
           <div className="space-y-6 text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
             <div className="space-y-2">
