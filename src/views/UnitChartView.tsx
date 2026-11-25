@@ -105,6 +105,27 @@ export default function UnitChartView({ onNavigate, breadcrumb }: UnitChartViewP
           </div>
         </div>
 
+        {/* Practical UK Usage Guide so visitors get clear context alongside reference charts */}
+        <section className="bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3">
+          <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+            How to Use These UK Conversion Charts Effectively
+          </h2>
+          <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+            Every figure below is computed from the exact international yard definition (<strong>1 inch = 2.54 cm = 25.4 mm</strong> and <strong>1 foot = 30.48 cm = 304.8 mm</strong>). For everyday British tasks, pick the chart matching your source drawing or retailer label:
+          </p>
+          <ul className="list-disc pl-5 space-y-1.5 text-sm sm:text-base text-slate-700">
+            <li>
+              <strong>Home &amp; Furniture (CM → IN):</strong> Use rows from 40 cm to 250 cm to check sofa widths, UK mattress lengths (190 cm and 200 cm), and doorway clearances against imperial tape measures.
+            </li>
+            <li>
+              <strong>Joinery &amp; Hardware (MM → IN / IN → MM):</strong> British builders&apos; merchants price sheet timber in millimetres (1220 × 2440 mm equals nominal 4 × 8 ft), while older drill bits and plumbing fittings often quote inches.
+            </li>
+            <li>
+              <strong>Height &amp; Room Plans (FT → CM / CM → FT):</strong> Remember that decimal feet differ from feet-and-inches—the right-hand column converts decimals automatically (for example, 180 cm = 5.9055 ft = <strong>5&apos; 10.87&quot;</strong>).
+            </li>
+          </ul>
+        </section>
+
         <div className="space-y-10">
           {/* 1. CM to Inches Table */}
           <div id="chart-cm-to-inches" className="space-y-3.5 scroll-mt-24">
@@ -412,8 +433,8 @@ export default function UnitChartView({ onNavigate, breadcrumb }: UnitChartViewP
 
         {/* Single Homepage Backlink on cm to inches keyword */}
         <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2.5">
-          <h3 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
-            <span>⚡ Instant Length Conversion Tool</span>
+          <h3 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider">
+            Instant Length Conversion Tool
           </h3>
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
             Centimeters, millimeters, inches, and feet are standard linear units used for height, screen sizes, furniture, and architectural measurements (1 inch = 2.54 cm = 25.4 mm, 1 foot = 30.48 cm = 304.8 mm). Need to calculate custom values outside these charts? Use our instant{' '}

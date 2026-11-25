@@ -1,55 +1,47 @@
 export const POLICIES_DATA = {
   aboutUs: {
-    title: 'About Us — cmtoinches.uk',
-    intro: 'cmtoinches.uk is an independent United Kingdom digital measurement utility built to give shoppers, students, DIY woodworkers, tailors, and travellers fast, distraction-free metric-to-imperial conversions.',
-    whoBuiltIt: 'Created and maintained by an independent UK web engineering and technical writing team, cmtoinches.uk was launched to solve an everyday British problem: while official education, packaging, and construction specs use centimetres and millimetres, clothing labels, screen sizes, height checks, and home furnishings are still frequently quoted in inches and feet. Existing converter websites were often slow on mobile networks, cluttered with pop-ups, or inaccurate with UK fractional carpentry values.',
-    mission: 'Our focus is clarity, speed, and zero-bloat utility. Every tool runs 100% locally inside your browser so calculations happen instantaneously without server round-trips, user accounts, or input tracking. Alongside the interactive converter and visual dual-scale ruler, we publish practical UK reference guides covering passport photo dimensions, standard British mattress sizes, airline cabin baggage limits, and UK clothing measurements.',
-    qualityPromise: 'Every formula, lookup chart, and fractional carpentry approximation on cmtoinches.uk is audited against the International Yard and Pound Agreement (1959) and the UK Weights and Measures Act standards: 1 international inch equals exactly 25.4 millimetres (2.54 centimetres), and 1 international foot equals exactly 30.48 centimetres (0.3048 metres).',
-    editorialContact: 'Editorial corrections, chart requests, and privacy inquiries are handled directly by our support desk at support@cmtoinches.uk or through our Contact Us form.'
+    title: 'About cmtoinches.uk',
+    intro: 'cmtoinches.uk is an independent online length conversion tool and practical UK measurement reference site built to help everyday shoppers, students, DIY woodworkers, tailors, and travellers translate between metric and imperial units quickly and accurately.',
+    whoBuiltIt: 'This site was created as an independent digital project to solve a common United Kingdom measurement headache: while schools, retail specs, and builders work in centimetres and millimetres, clothing labels, screen sizes, personal heights, and timber boards are still frequently listed in inches and feet. Many existing converter websites are slow on mobile connections or hide useful conversion details behind cluttered layouts.',
+    mission: 'Our goal is straightforward: fast, distraction-free conversions backed by clear, human-written explanations. Every calculation runs directly inside your web browser with zero server round-trips, accounts, or input tracking. Alongside our interactive length converters, we publish practical UK reference guides covering standard British mattress dimensions, HM Passport Office photo sizes, carpentry 1/16" fractions, ISO paper sizes, and UK alphabetical ring sizing.',
+    qualityPromise: 'Every conversion factor, table, and worked example published on cmtoinches.uk follows the International Yard and Pound Agreement (1959) and UK Weights and Measures standards: 1 international inch equals exactly 2.54 centimetres (25.4 millimetres), and 1 international foot equals exactly 30.48 centimetres (0.3048 metres).',
+    editorialContact: 'Spotted a typo, want to suggest a measurement guide, or have a privacy question? Reach us directly by email at support@cmtoinches.uk or visit our Contact page.'
   },
   privacyPolicy: {
     title: 'Privacy Policy',
     lastUpdated: 'November 2026',
     sections: [
       {
-        heading: '1. Introduction, Data Controller & UK-GDPR / EU-GDPR Compliance',
-        content: 'At cmtoinches.uk (accessible from https://www.cmtoinches.uk/), protecting the privacy and personal data of our visitors is an essential priority. This Privacy Policy explains what information is collected when you visit cmtoinches.uk, how that information is processed, and your statutory privacy rights under the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018 (DPA 2018), the Privacy and Electronic Communications Regulations (PECR), and the EU General Data Protection Regulation (EU GDPR). For all data protection inquiries, the operator of cmtoinches.uk acts as Data Controller and can be contacted at support@cmtoinches.uk.'
+        heading: '1. Overview & Data Protection Compliance (UK GDPR / EU GDPR)',
+        content: 'At cmtoinches.uk (https://www.cmtoinches.uk/), respecting visitor privacy is fundamental to how this website operates. This Privacy Policy describes what technical information may be processed when you browse cmtoinches.uk, how advertising cookies operate if ads are active, and your statutory rights under the UK General Data Protection Regulation (UK GDPR), the Data Protection Act 2018, the Privacy and Electronic Communications Regulations (PECR), and the EU GDPR. You can contact the site operator regarding any privacy request at support@cmtoinches.uk.'
       },
       {
-        heading: '2. How Google Uses Information from Sites or Apps That Use Our Services',
-        content: 'We use Google AdSense to support the free operation of cmtoinches.uk. Third parties, including Google, may place and read cookies on your browser, or use web beacons and IP addresses to collect information as a result of ad serving on this website. To learn more about how Google collects, shares, and processes data on partner sites, please review Google\'s official disclosure page "How Google uses information from sites or apps that use our services" at https://policies.google.com/technologies/partner-sites.'
+        heading: '2. Local Browser Calculations (No Measurement Tracking)',
+        content: 'Every measurement you enter into our converters (centimetres, inches, feet, metres, millimetres, paper sizes, or ring circumferences) is calculated 100% locally in your web browser using JavaScript. We do not record, store, or transmit your entered numbers to any database or external server.'
       },
       {
-        heading: '3. Google AdSense & DoubleClick DART Cookies',
-        content: 'Google, as a third-party vendor, uses cookies (including DoubleClick DART and AdSense advertising cookies) to serve ads on www.cmtoinches.uk based on a user\'s prior visits to our website and other sites on the Internet. Google\'s use of advertising cookies enables it and its partners to serve personalized or non-personalized advertisements depending on your consent selection. Users may opt out of personalized advertising at any time by visiting Google Ads Settings at https://adssettings.google.com/ or https://policies.google.com/technologies/ads. Visitors in the United Kingdom and European Economic Area may also manage third-party advertising preferences via https://www.youronlinechoices.com/uk/ and https://www.aboutads.info/choices/.'
+        heading: '3. Direct Email Support (No Third-Party Form Storage)',
+        content: 'cmtoinches.uk does not use third-party form processors or backend databases to store visitor inquiries. Our Contact page provides a direct email address (support@cmtoinches.uk) alongside an optional message builder that opens a draft directly in your own email application. If you choose to email us, your email address and message are used solely to respond to your inquiry.'
       },
       {
-        heading: '4. UK & EU User Consent Policy (CMP & Cookie Choices)',
-        content: 'In accordance with the Google EU User Consent Policy, UK GDPR, and PECR guidelines, visitors accessing cmtoinches.uk from the United Kingdom, the European Economic Area (EEA), and Switzerland are presented with clear cookie consent choices before personalized advertising cookies are activated. You can accept all cookies, restrict storage to essential functional preferences only, or update your choice at any time using the "Cookie Settings" button in our footer without losing access to any converter tool.'
+        heading: '4. Google AdSense & Advertising Cookies',
+        content: 'cmtoinches.uk may display advertisements served by Google AdSense to help cover hosting and maintenance costs. When advertising is enabled, Google and its advertising partners may use cookies (including Google advertising cookies) or similar technologies to serve personalised or non-personalised ads based on your consent choices and prior visits to websites. You can learn how Google handles data on partner sites at https://policies.google.com/technologies/partner-sites and manage ad personalisation at https://adssettings.google.com/.'
       },
       {
-        heading: '5. Local Calculator Processing & Information We Collect',
-        content: 'All numeric length conversions entered into our calculators (centimeters, inches, feet, meters, and millimeters) are processed 100% locally inside your web browser via JavaScript. We do not store, log, or transmit your measurement inputs to any server database. If you choose to contact us via the Contact Form or email support@cmtoinches.uk, we use the name, email address, and message you supply solely to reply to your inquiry.'
+        heading: '5. UK & EEA Visitor Consent Management (Google Certified CMP)',
+        content: 'Where advertising is active for visitors in the United Kingdom, European Economic Area (EEA), and Switzerland, cookie consent choices are presented and managed through Google’s certified Consent Management Platform (TCF v2.2) in line with Google’s EU User Consent Policy, UK GDPR, and PECR. Visitors can choose personalised ads, non-personalised ads, or adjust consent preferences at any time without losing access to any converter or guide on this site.'
       },
       {
-        heading: '6. Server Log Files & Technical Diagnostics',
-        content: 'Like most websites, our hosting infrastructure maintains standard automated server access logs for security and uptime monitoring. These logs may record non-identifying request metadata such as IP address (anonymized where required), browser user-agent, referring page, HTTP status code, and timestamp. This information is processed under legitimate interest (UK GDPR Article 6(1)(f)) to defend against automated abuse and troubleshoot technical issues.'
+        heading: '6. Standard Server Access Logs',
+        content: 'Like standard web hosting services, our server infrastructure maintains automated security and access logs to prevent abuse and monitor uptime. These logs record standard technical request headers such as IP address, browser type, requested URL, HTTP status code, and timestamp under legitimate interest for site security.'
       },
       {
-        heading: '7. Cookies, Web Beacons & Third-Party Advertising Partners',
-        content: 'cmtoinches.uk uses lightweight first-party storage solely to remember your cookie consent preference. Third-party advertising partners such as Google AdSense may place cookies or use web beacons when displaying ads, subject to your consent status and governed by their own privacy policies.'
+        heading: '7. Your Statutory Privacy Rights',
+        content: 'Under UK GDPR and EU GDPR, you have the right to request access to, correction of, or deletion of any personal data you have sent to us via email, and the right to lodge a complaint with the UK Information Commissioner’s Office (ICO) at https://ico.org.uk/. California residents also hold rights under CCPA/CPRA; cmtoinches.uk does not sell personal information.'
       },
       {
-        heading: '8. Your Statutory Data Protection Rights (UK GDPR & EU GDPR)',
-        content: 'Residents of the United Kingdom and the European Economic Area hold statutory rights under GDPR: (1) Right of Access, (2) Right to Rectification, (3) Right to Erasure, (4) Right to Restrict Processing, (5) Right to Object, and (6) Right to Data Portability. To exercise any of these rights, email support@cmtoinches.uk. You also have the right to lodge a complaint with the UK Information Commissioner\'s Office (ICO) at https://ico.org.uk/.'
-      },
-      {
-        heading: '9. California Consumer Privacy Rights (CCPA / CPRA)',
-        content: 'Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California residents have the right to request disclosure of personal information categories collected, request deletion, and opt out of the "sale" or "sharing" of personal information for cross-context behavioral advertising. cmtoinches.uk does not sell personal data.'
-      },
-      {
-        heading: '10. Children\'s Privacy Safeguards (COPPA & UK Age Appropriate Design)',
-        content: 'cmtoinches.uk is a general-audience measurement utility and does not knowingly collect Personal Identifiable Information from children under 13 (or under 16 in the UK and EEA). If a parent or guardian believes a child has sent personal information via email, please write to support@cmtoinches.uk for prompt removal.'
+        heading: '8. Children’s Privacy',
+        content: 'cmtoinches.uk is a general educational and household measurement utility and does not knowingly collect personal information from children under 13 (or under 16 in the UK and EEA). If a parent or guardian believes a child has emailed personal details to us, please write to support@cmtoinches.uk so we can delete the correspondence immediately.'
       }
     ]
   },
@@ -58,27 +50,27 @@ export const POLICIES_DATA = {
     lastUpdated: 'November 2026',
     sections: [
       {
-        heading: '1. Acceptance of Terms & Permitted Usage',
-        content: 'By accessing and using cmtoinches.uk, you agree to comply with these Terms and Conditions. All interactive measurement calculators, real-time rulers, conversion lookup tables, formulas, and practical guides on this website are provided free of charge for personal, academic, DIY, and general commercial reference. Automated scraping or bulk redistribution of our content without permission is prohibited.'
+        heading: '1. Permitted Use',
+        content: 'By accessing cmtoinches.uk, you agree to these Terms and Conditions. All calculators, conversion reference tables, formulas, and practical UK measurement guides are provided free of charge for personal, educational, DIY, and general reference use. Automated scraping or bulk republishing of our written content without prior permission is prohibited.'
       },
       {
-        heading: '2. Metrological Accuracy & Limitation of Liability',
-        content: 'While every conversion factor on cmtoinches.uk is verified against international standards (1 inch = 2.54 cm, 1 foot = 30.48 cm), all tools and tables are provided on an "as-is" basis without warranties of any kind. cmtoinches.uk and its operators accept no liability for any loss or damage resulting from reliance on rounded values in structural engineering, construction, medical dosing, or aviation.'
+        heading: '2. Accuracy & Limitation of Liability',
+        content: 'Every conversion ratio on cmtoinches.uk follows established international standards (1 inch = 2.54 cm, 1 foot = 30.48 cm). However, all tools and reference articles are provided on an "as-is" basis without warranty. We accept no liability for losses resulting from relying on rounded outputs in structural engineering, construction, legal compliance, or medical applications.'
       },
       {
-        heading: '3. External Links & Third-Party Advertisements',
-        content: 'This website may display third-party advertisements served by Google AdSense and reference links to external partner utilities. We are not responsible for the content or privacy practices of external third-party websites. These Terms are governed by the laws of England and Wales.'
+        heading: '3. Advertising, External Links & Governing Law',
+        content: 'This site may display third-party advertisements served via Google AdSense and links to official external reference resources (such as privacy opt-out pages). We are not responsible for external websites. These Terms are governed by the laws of England and Wales.'
       }
     ]
   },
   disclaimer: {
     title: 'Legal Disclaimer',
     lastUpdated: 'November 2026',
-    content: 'All measurement conversions, interactive visual scale rulers, mattress charts, airline baggage tables, and technical guides published on cmtoinches.uk are provided strictly for general informational and educational purposes. On-screen visual rulers vary depending on display pixel density (PPI/DPI) and browser zoom; for critical engineering, architectural, medical, or legal tolerances, always confirm dimensions using a calibrated physical measuring instrument.'
+    content: 'All length conversions, carpentry fraction estimates, paper dimension charts, UK ring sizing guides, and household reference articles published on cmtoinches.uk are provided strictly for general informational and educational use. While every mathematical formula is verified against international standards (1 in = 2.54 cm), printable sizers and sizing tables can vary slightly by printer scaling or manufacturer tolerances. For critical engineering, building, legal, or medical measurements, always verify physical dimensions with a calibrated measuring instrument.'
   },
   cookiePolicy: {
     title: 'Cookie Policy',
     lastUpdated: 'November 2026',
-    content: 'In compliance with the UK Privacy and Electronic Communications Regulations (PECR) and UK GDPR, this Cookie Policy explains how cmtoinches.uk uses browser storage and cookies. Essential local storage remembers only your cookie consent choice. Where permitted by your consent settings, Google AdSense uses advertising cookies (including DoubleClick DART cookies) to measure ad performance and deliver relevant ads. You can adjust your preference at any time via the Cookie Settings button in the footer, Google Ads Settings (https://adssettings.google.com/), or Google Partner Sites Policy (https://policies.google.com/technologies/partner-sites).'
+    content: 'In accordance with the UK Privacy and Electronic Communications Regulations (PECR) and UK GDPR, this Cookie Policy explains how cookies may be used on cmtoinches.uk. Our conversion calculators operate locally in your browser without requiring login or tracking cookies. Where Google AdSense advertising is active, Google and its partners may place advertising cookies subject to your consent choice collected via Google’s certified Consent Management Platform (CMP). You can review Google’s partner privacy disclosures at https://policies.google.com/technologies/partner-sites or manage ad preferences at https://adssettings.google.com/.'
   }
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import { RoutePath } from '../types';
-import { Ruler } from 'lucide-react';
 
 interface SidebarProps {
   currentPath: RoutePath;
@@ -35,8 +34,7 @@ export function Sidebar({ currentPath, onNavigate }: SidebarProps) {
         </defs>
       </svg>
       <nav aria-label="Related Converters" className="bg-white rounded-3xl p-6 shadow-xl border border-slate-200">
-        <h4 className="text-base sm:text-lg font-black text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
-          <Ruler className="w-5 h-5 text-blue-600 stroke-[2.5]" />
+        <h4 className="text-base sm:text-lg font-black text-slate-900 mb-4 border-b border-slate-200 pb-3">
           Related Converters
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">

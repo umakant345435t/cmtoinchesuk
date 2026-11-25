@@ -102,40 +102,20 @@ export default function ConverterSubpageView({
           </div>
         )}
 
-        {currentPath === '/inches-to-cm/' && (
-          <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2.5 mt-4">
-            <h4 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
-              <span>External Conversion Resource</span>
-            </h4>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
-              Need to convert inches to centimeters for height, TV screens, paper, furniture, or everyday measurements? Visit our partner tool for fast{' '}
-              <a href="https://www.cmtoinches.uk/" className="text-blue-600 font-black underline hover:text-blue-800">
-                inch in cm
-              </a>{' '}
-              conversions.
-            </p>
-          </div>
-        )}
-
-        {currentPath === '/feet-to-cm/' && (
-          <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl space-y-2.5 mt-4">
-            <h4 className="text-base font-black text-slate-900 uppercase font-mono tracking-wider flex items-center gap-1.5">
-              <span>External Weight Converter</span>
-            </h4>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
-              Need to convert body weight, fitness, or everyday measurements between stone, pounds, and kilograms? Visit our partner tool for instant{' '}
-              <a
-                href="https://stonetokg.uk/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 font-black underline hover:text-blue-800"
-              >
-                stone to kg
-              </a>{' '}
-              conversions.
-            </p>
-          </div>
-        )}
+        <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-base text-slate-700 mt-4">
+          Need to convert another linear unit or check our full UK measurement reference guides? Return to the main{' '}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('/');
+            }}
+            className="text-blue-600 font-bold underline hover:text-blue-800"
+          >
+            CM to Inches Converter
+          </a>
+          .
+        </div>
       </div>
 
       {guide && guide.faqs.length > 0 && <FAQSection customFAQs={guide.faqs} />}

@@ -19,16 +19,6 @@ export function Footer({ onNavigate }: FooterProps) {
     { label: 'HTML Sitemap', path: '/sitemap/' }
   ];
 
-  const handleOpenCookieSettings = () => {
-    if (typeof window !== 'undefined') {
-      if (typeof window.__cmtoinchesOpenConsent === 'function') {
-        window.__cmtoinchesOpenConsent();
-      } else {
-        window.dispatchEvent(new Event('cmtoinches-open-cookie-consent'));
-      }
-    }
-  };
-
   return (
     <footer className="bg-slate-950 text-slate-300 text-[14.8px] font-normal border-t-2 border-slate-900" id="footer">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 space-y-8">
@@ -126,13 +116,6 @@ export function Footer({ onNavigate }: FooterProps) {
                   </a>
                 );
               })}
-              <button
-                type="button"
-                onClick={handleOpenCookieSettings}
-                className="text-left text-[14.8px] sm:text-[15.8px] py-1 text-slate-200 hover:text-yellow-400 hover:underline transition-colors font-normal cursor-pointer focus:outline-none"
-              >
-                Cookie Settings
-              </button>
             </div>
           </div>
         </div>

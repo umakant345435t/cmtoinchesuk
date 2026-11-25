@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQSection } from '../components/FAQSection';
-import { CircleDot, Printer, Check, Copy, ArrowLeftRight } from 'lucide-react';
+import { Printer, Check, Copy, ArrowLeftRight } from 'lucide-react';
 import { RoutePath } from '../types';
 
 interface RingSizeRow {
@@ -130,9 +130,8 @@ export default function RingSizeView({ onNavigate, breadcrumb }: RingSizeViewPro
       <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-4 sm:p-6 md:p-8 space-y-8">
         {/* Header */}
         <div className="border-b border-slate-100 pb-4 space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wider text-blue-700 font-mono flex items-center gap-1.5">
-            <CircleDot className="w-4 h-4 shrink-0" />
-            <span>BS 6820 Alphabetical Ring Sizing (UK A – Z)</span>
+          <p className="text-xs font-bold uppercase tracking-wider text-blue-700 font-mono">
+            BS 6820 Alphabetical Ring Sizing (UK A – Z)
           </p>
           <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
             Ring Size Chart UK &amp; Finger Circumference to CM Converter (A–Z)

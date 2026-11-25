@@ -1,6 +1,5 @@
 import React from 'react';
 import { RoutePath } from '../types';
-import { Network, Home, FileCheck, Shield } from 'lucide-react';
 
 interface SitemapProps {
   onNavigate: (path: RoutePath) => void;
@@ -10,7 +9,6 @@ export function Sitemap({ onNavigate }: SitemapProps) {
   const categories = [
     {
       title: 'Main Metrological Hub & Tools',
-      icon: Home,
       links: [
         { label: 'Homepage / Main CM to Inches Calculator', path: '/' as RoutePath },
         { label: 'Inches to Centimeters Reverse Converter', path: '/inches-to-cm/' as RoutePath },
@@ -27,10 +25,9 @@ export function Sitemap({ onNavigate }: SitemapProps) {
     },
     {
       title: 'Trust, Editorial & Statutory Policies',
-      icon: Shield,
       links: [
         { label: 'About Us & Editorial Purpose', path: '/about-us/' as RoutePath },
-        { label: 'Contact Us & Support Form', path: '/contact-us/' as RoutePath },
+        { label: 'Contact Us & Direct Email Support', path: '/contact-us/' as RoutePath },
         { label: 'Privacy Policy (UK GDPR & EU GDPR)', path: '/privacy-policy/' as RoutePath },
         { label: 'Terms and Conditions', path: '/terms-and-conditions/' as RoutePath },
         { label: 'Legal Disclaimer', path: '/disclaimer/' as RoutePath },
@@ -46,24 +43,20 @@ export function Sitemap({ onNavigate }: SitemapProps) {
         <span className="text-xs bg-blue-100 text-blue-800 font-black px-3 py-1 rounded-lg font-mono uppercase tracking-widest">
           HTML SITEMAP INDEX
         </span>
-        <h1 className="text-xl md:text-2xl font-black text-slate-950 mt-3.5 flex items-center gap-2">
-          <Network className="w-6 h-6 text-blue-600 stroke-[2.5]" />
+        <h1 className="text-xl md:text-2xl font-black text-slate-950 mt-3.5">
           HTML Sitemap Index
         </h1>
         <p className="text-lg text-slate-700 mt-2 leading-relaxed font-semibold">
-          Browse every active calculator, reference chart, and statutory policy page on <strong>cmtoinches.uk</strong>. All URLs listed here correspond directly to our canonical XML sitemap.
+          Browse every active calculator, reference chart, and policy page on <strong>cmtoinches.uk</strong>.
         </p>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
-        {categories.map((cat, idx) => {
-          const Icon = cat.icon;
-          return (
-            <div key={idx} className="bg-slate-50/60 rounded-2xl p-5 border-2 border-slate-200 space-y-4">
-              <h3 className="text-base sm:text-lg font-black uppercase text-slate-950 tracking-wider flex items-center gap-2 border-b-2 border-slate-200 pb-3">
-                <Icon className="w-5 h-5 text-blue-600 stroke-[2.5] shrink-0" />
-                {cat.title}
-              </h3>
+        {categories.map((cat, idx) => (
+          <div key={idx} className="bg-slate-50/60 rounded-2xl p-5 border-2 border-slate-200 space-y-4">
+            <h3 className="text-base sm:text-lg font-black uppercase text-slate-950 tracking-wider border-b-2 border-slate-200 pb-3">
+              {cat.title}
+            </h3>
               <ul className="space-y-3.5">
                 {cat.links.map((link, lIdx) => (
                   <li key={lIdx} className="text-base">
@@ -83,15 +76,13 @@ export function Sitemap({ onNavigate }: SitemapProps) {
                     </span>
                   </li>
                 ))}
-              </ul>
-            </div>
-          );
-        })}
+            </ul>
+          </div>
+        ))}
       </div>
 
       <div className="bg-slate-900 text-white p-6 rounded-2xl space-y-3 border-2 border-slate-900">
-        <h4 className="text-base font-black flex items-center gap-2 text-yellow-400 font-mono">
-          <FileCheck className="w-5 h-5 text-yellow-400 stroke-[2.5]" />
+        <h4 className="text-base font-black text-yellow-400 font-mono">
           CANONICAL INDEXING STRUCTURE
         </h4>
         <p className="text-slate-200 font-medium leading-relaxed text-base">

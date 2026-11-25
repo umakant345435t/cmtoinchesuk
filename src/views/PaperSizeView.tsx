@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQSection } from '../components/FAQSection';
-import { FileText, Copy, Check, ArrowLeftRight } from 'lucide-react';
+import { Copy, Check, ArrowLeftRight } from 'lucide-react';
 import { RoutePath } from '../types';
 
 interface PaperSizeRow {
@@ -91,9 +91,8 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
 
       <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-4 sm:p-6 md:p-8 space-y-8">
         <div className="border-b border-slate-100 pb-4 space-y-2">
-          <p className="text-xs font-bold uppercase tracking-wider text-blue-700 font-mono flex items-center gap-1.5">
-            <FileText className="w-4 h-4" />
-            <span>ISO 216 Paper Dimensions &amp; Inch Converter (A0 – A15)</span>
+          <p className="text-xs font-bold uppercase tracking-wider text-blue-700 font-mono">
+            ISO 216 Paper Dimensions &amp; Inch Converter (A0 – A15)
           </p>
           <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
             Paper Size Converter: A4, A3, A2, A1 &amp; A0–A15 in Inches, CM &amp; MM
@@ -106,8 +105,7 @@ export default function PaperSizeView({ onNavigate, breadcrumb }: PaperSizeViewP
         {/* Visual ISO Paper Scale Reference Image (< 40 KB WebP) */}
         <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
           {imgFailed ? (
-            <div className="aspect-[4/3] w-full flex flex-col items-center justify-center gap-2 p-6 text-slate-500 bg-slate-100">
-              <FileText className="w-8 h-8 text-blue-600" />
+            <div className="aspect-[4/3] w-full flex flex-col items-center justify-center p-6 text-slate-500 bg-slate-100">
               <span className="text-sm font-semibold text-slate-700">ISO A3, A4, A5 &amp; A6 Proportional Scale Comparison</span>
             </div>
           ) : (

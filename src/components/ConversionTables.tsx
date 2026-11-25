@@ -8,26 +8,26 @@ interface ConversionTablesProps {
 
 export function ConversionTables(_props: ConversionTablesProps) {
   const cmToInRows = [
-    { cm: 1, in: 0.3937, fraction: '25/64"' },
-    { cm: 2, in: 0.7874, fraction: '25/32"' },
-    { cm: 5, in: 1.9685, fraction: '1 31/32"' },
+    { cm: 1, in: 0.3937, fraction: '3/8"' },
+    { cm: 2, in: 0.7874, fraction: '13/16"' },
+    { cm: 5, in: 1.9685, fraction: '1 15/16"' },
     { cm: 10, in: 3.9370, fraction: '3 15/16"' },
-    { cm: 15, in: 5.9055, fraction: '5 29/32"' },
+    { cm: 15, in: 5.9055, fraction: '5 7/8"' },
     { cm: 20, in: 7.8740, fraction: '7 7/8"' },
     { cm: 30, in: 11.8110, fraction: '11 13/16"' },
     { cm: 40, in: 15.7480, fraction: '15 3/4"' },
     { cm: 50, in: 19.6850, fraction: '19 11/16"' },
-    { cm: 75, in: 29.5276, fraction: '29 17/32"' },
+    { cm: 75, in: 29.5276, fraction: '29 1/2"' },
     { cm: 100, in: 39.3701, fraction: '39 3/8"' },
     { cm: 120, in: 47.2441, fraction: '47 1/4"' },
     { cm: 150, in: 59.0551, fraction: '59 1/16"' },
-    { cm: 160, in: 62.9921, fraction: '62 31/32"' },
+    { cm: 160, in: 62.9921, fraction: '63"' },
     { cm: 170, in: 66.9291, fraction: '66 15/16"' },
     { cm: 180, in: 70.8661, fraction: '70 7/8"' },
     { cm: 200, in: 78.7402, fraction: '78 3/4"' },
-    { cm: 300, in: 118.1102, fraction: '118 7/64"' },
-    { cm: 400, in: 157.4803, fraction: '157 15/32"' },
-    { cm: 500, in: 196.8504, fraction: '196 27/32"' },
+    { cm: 300, in: 118.1102, fraction: '118 1/8"' },
+    { cm: 400, in: 157.4803, fraction: '157 1/2"' },
+    { cm: 500, in: 196.8504, fraction: '196 7/8"' },
   ];
 
   const inToCmRows = [
@@ -79,7 +79,7 @@ export function ConversionTables(_props: ConversionTablesProps) {
         <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              📏 Centimeters to Inches Conversion Table (1 to 500 cm)
+              Centimeters to Inches Conversion Table (1 to 500 cm)
             </h3>
             <p className="text-base text-slate-600 mt-1 font-medium">
               Quick metric to imperial reference for converting centimeters (cm) into decimal and fractional inches (in).
@@ -103,8 +103,8 @@ export function ConversionTables(_props: ConversionTablesProps) {
                   <span className="hidden sm:inline">Inches (Decimal)</span>
                 </th>
                 <th>
-                  <span className="sm:hidden">Fraction</span>
-                  <span className="hidden sm:inline">Inches (Fraction)</span>
+                  <span className="sm:hidden">Nearest 1/16&quot;</span>
+                  <span className="hidden sm:inline">Inches (Nearest 1/16&quot;)</span>
                 </th>
               </tr>
             </thead>
@@ -126,7 +126,7 @@ export function ConversionTables(_props: ConversionTablesProps) {
         <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              📐 Inches to Centimeters Conversion Table (1/4&quot; to 6 ft)
+              Inches to Centimeters Conversion Table (1/4&quot; to 6 ft)
             </h3>
             <p className="text-base text-slate-600 mt-1 font-medium">
               Standard imperial to metric reference chart for converting inches (in) into centimeters (cm).
@@ -173,7 +173,7 @@ export function ConversionTables(_props: ConversionTablesProps) {
         <div className="bg-slate-50 px-5 sm:px-6 py-5 border-b border-slate-200 flex items-center justify-between gap-2">
           <div>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-              🧍 Feet to Centimeters Conversion Table (1 ft to 10 ft)
+              Feet to Centimeters Conversion Table (1 ft to 10 ft)
             </h3>
             <p className="text-base text-slate-600 mt-1 font-medium">
               Direct height and length conversion chart from imperial feet (ft) and inches into metric centimeters (cm).

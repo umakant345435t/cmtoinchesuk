@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RoutePath } from '../types';
 import { POLICIES_DATA } from '../data/policies';
 import { Sitemap } from '../components/Sitemap';
-import { Mail, Check, ShieldAlert, Send } from 'lucide-react';
+import { Mail, Check, Send } from 'lucide-react';
 
 interface StaticPagesViewProps {
   currentPath: RoutePath;
@@ -91,10 +91,10 @@ export default function StaticPagesView({ currentPath, onNavigate, breadcrumb }:
               <Mail className="w-7 h-7 stroke-[2.2]" />
             </div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              Contact Our Support Team
+              Contact cmtoinches.uk
             </h1>
             <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed font-sans">
-              Have a measurement correction, feature suggestion, or GDPR privacy inquiry? Send a message using the form below or email our support desk directly.
+              Have a measurement correction, guide suggestion, or privacy question? Email us directly at <strong>support@cmtoinches.uk</strong>, or use the message helper below to prepare a pre-filled email in your own mail app (no third-party form storage is used).
             </p>
           </div>
 
@@ -197,7 +197,7 @@ export default function StaticPagesView({ currentPath, onNavigate, breadcrumb }:
                 className="w-full sm:w-auto min-h-[44px] px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 <Send className="w-4 h-4" />
-                <span>Submit Inquiry</span>
+                <span>Prepare Email Draft</span>
               </button>
             </form>
           )}
@@ -340,8 +340,7 @@ export default function StaticPagesView({ currentPath, onNavigate, breadcrumb }:
       <div className="space-y-6">
         {breadcrumb}
         <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 space-y-6">
-          <h1 className="text-xl md:text-2xl font-black text-slate-900 flex items-center gap-2">
-            <ShieldAlert className="w-6 h-6 text-rose-600 animate-pulse" />
+          <h1 className="text-xl md:text-2xl font-black text-slate-900">
             {POLICIES_DATA.disclaimer.title}
           </h1>
           <p className="text-lg text-slate-700 leading-relaxed font-semibold bg-rose-50 p-5 rounded-xl border border-rose-100 font-sans">

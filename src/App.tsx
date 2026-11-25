@@ -8,8 +8,7 @@ import { ConversionTables } from './components/ConversionTables';
 import { FAQSection } from './components/FAQSection';
 import { Sidebar } from './components/Sidebar';
 import { Footer } from './components/Footer';
-import { CookieConsent } from './components/CookieConsent';
-import { Scale, Home, ChevronRight } from 'lucide-react';
+import { Home, ChevronRight } from 'lucide-react';
 
 const MAIN_CONVERTER_PATHS = new Set([
   '/inches-to-cm/',
@@ -143,7 +142,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
   useEffect(() => {
     let title = 'CM to Inches Converter';
     let description =
-      'Convert CM to inches and inch to cm quickly with our accurate UK measurement converter, dual adaptive ruler, conversion formulas, and reference charts.';
+      'Convert CM to inches and inch to cm accurately with worked formulas, UK 1/16" carpentry fractions, practical British measurement guides, and reference charts.';
 
     if (currentPath === '/inches-to-cm/') {
       title = 'Inches to CM Converter (in → cm) – UK Screen, Frame & Sizing Guide';
@@ -180,7 +179,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
     } else if (currentPath === '/contact-us/') {
       title = 'Contact Support – Feedback, Corrections & Privacy Inquiries | cmtoinches.uk';
       description =
-        'Send questions, bug reports, or data protection requests via our interactive Contact Form or support@cmtoinches.uk.';
+        'Send questions, measurement corrections, or privacy enquiries directly to support@cmtoinches.uk.';
     } else if (currentPath === '/privacy-policy/') {
       title = 'Privacy Policy – UK GDPR, PECR & Google AdSense Compliance';
       description =
@@ -192,7 +191,7 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
     } else if (currentPath === '/disclaimer/') {
       title = 'Legal Disclaimer – Measurement Tolerance Notice | cmtoinches.uk';
       description =
-        'Important guidelines on screen ruler PPI calibration and verifying critical engineering dimensions physically.';
+        'Important verification guidance for critical engineering, building, legal, and household measurement conversions.';
     } else if (currentPath === '/cookie-policy/') {
       title = 'Cookie Policy – UK PECR & Consent Preferences | cmtoinches.uk';
       description =
@@ -376,64 +375,147 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
           onNavigate={handleNavigate}
         />
 
-        {/* Core Formulas Overview (Clean Homepage Layout) */}
-        <section
+        {/* Core Formulas & Original UK Measurement Editorial Guide */}
+        <article
           id="uk-guides"
-          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-6"
+          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-7"
         >
-          <div className="border-b border-slate-100 pb-3 space-y-2">
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-              <Scale className="w-6 h-6 text-blue-600 shrink-0" />
+          <div className="border-b border-slate-100 pb-4 space-y-2.5">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               CM to Inches &amp; Inch to CM Converter
             </h1>
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
-              Convert centimetres to inches and inches to centimetres accurately using the international metrology ratio (<strong className="font-mono">1 inch = 2.54 cm</strong>). Use the live calculator above for decimal and UK 1/16&quot; carpentry fractions.
+              Convert centimetres to inches and inches to centimetres accurately using the exact international standard (<strong className="font-mono">1 inch = 2.54 cm</strong>). Enter any number above—whether a small 1.5 cm craft seam or a 240 cm room width—to see instant decimal inches, nearest <strong className="font-mono">1/16&quot;</strong> UK carpentry fractions, and the complete calculation step.
             </p>
           </div>
 
           {/* Concise Two-Formula Strip */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="p-5 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl space-y-2 shadow-xs">
+            <div className="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl space-y-2">
               <span className="text-xs text-blue-700 font-bold tracking-wider uppercase font-mono">
-                CM to Inches
+                CM to Inches Formula
               </span>
               <div className="text-lg sm:text-xl font-black text-blue-900 font-mono">
                 Inches = cm ÷ 2.54
               </div>
               <p className="text-sm sm:text-base text-slate-700 font-sans">
-                Example: <span className="font-mono font-bold">15 cm ÷ 2.54 = 5.9055 in</span>
+                Worked example: <span className="font-mono font-bold">10 cm ÷ 2.54 = 3.9370 in</span> (approx. 3 15/16&quot;)
               </p>
             </div>
 
-            <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl space-y-2 shadow-xs">
+            <div className="p-5 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2">
               <span className="text-xs text-emerald-700 font-bold tracking-wider uppercase font-mono">
-                Inch to CM
+                Inch to CM Formula
               </span>
               <div className="text-lg sm:text-xl font-black text-emerald-900 font-mono">
                 Centimetres = in × 2.54
               </div>
               <p className="text-sm sm:text-base text-slate-700 font-sans">
-                Example: <span className="font-mono font-bold">12 in × 2.54 = 30.48 cm</span>
+                Worked example: <span className="font-mono font-bold">12 in × 2.54 = 30.48 cm</span> (1 imperial foot)
               </p>
             </div>
           </div>
 
-          <p className="text-base text-slate-700 font-medium pt-1">
-            Explore our{' '}
-            <a
-              href="/unit-conversion-chart/"
-              onClick={(e) => {
-                e.preventDefault();
-                void handleNavigate('/unit-conversion-chart/');
-              }}
-              title="Master Unit Conversion Charts"
-              className="text-blue-600 font-bold underline hover:text-blue-800"
-            >
-              Master Unit Charts (1–1500)
-            </a>
-            .
-          </p>
-        </section>
+          {/* Human-Written Practical UK Editorial Sections */}
+          <div className="space-y-6 text-base sm:text-lg text-slate-700 leading-relaxed font-sans">
+            <div className="space-y-2">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                How to Convert Centimetres to Inches &amp; Read 1/16&quot; Fractions
+              </h2>
+              <p>
+                Under the International Yard and Pound Agreement of 1959 and the UK Weights and Measures Act, one international inch is fixed at exactly <strong>2.54 centimetres (25.4 mm)</strong>. Dividing any metric length by 2.54 gives decimal inches, which works cleanly for spreadsheets and CAD drawings, whereas traditional British imperial tape measures divide each inch into <strong>16 equal steps</strong> (1/16&quot;, 1/8&quot;, 1/4&quot;, 1/2&quot;).
+              </p>
+              <p>
+                To turn a decimal result into a workshop fraction by hand, take only the digits after the decimal point and multiply by 16. For example, converting <strong>18 cm</strong> gives <code>18 ÷ 2.54 = 7.0866 in</code>. Multiplying <code>0.0866 × 16 = 1.39</code>, which rounds to <strong>1/16&quot;</strong>—so 18 cm marks just over <strong>7 1/16 inches</strong> on a physical joiner&apos;s tape.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                Everyday UK Height, Mattress &amp; Passport Photo Dimensions
+              </h2>
+              <p>
+                Because the United Kingdom blends metric official standards with traditional imperial retail labels, switching between units accurately avoids costly sizing mistakes across household purchases and government forms:
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-slate-700">
+                <li>
+                  <strong>UK Passport &amp; Visa Photos:</strong> HM Passport Office specifies printed photos at exactly <strong>35 × 45 mm (3.5 × 4.5 cm)</strong>, which converts to <strong>1.38&quot; × 1.77&quot;</strong>, with head height from crown to chin strictly between <strong>29 mm and 34 mm</strong> (1.14&quot;–1.34&quot;). By comparison, US and Indian 2×2 inch visa photos equal <strong>5.08 × 5.08 cm</strong>.
+                </li>
+                <li>
+                  <strong>UK Bed &amp; Mattress Sizes:</strong> A British Single measures <strong>90 × 190 cm</strong> (3&apos; 0&quot; × 6&apos; 3&quot;), a UK Double measures <strong>135 × 190 cm</strong> (4&apos; 6&quot; × 6&apos; 3&quot;), a UK King is <strong>150 × 200 cm</strong> (5&apos; 0&quot; × 6&apos; 6&quot;), and a UK Super King is <strong>180 × 200 cm</strong> (6&apos; 0&quot; × 6&apos; 6&quot;). Always check metric dimensions before ordering fitted sheets from European IKEA stores (where a Double is 140 × 200 cm) or North American brands.
+                </li>
+                <li>
+                  <strong>Personal Height on UK Forms:</strong> Divide your height in centimetres by 2.54 for total inches, then divide by 12 for whole feet. For instance, <strong>170 cm</strong> equals 66.93 inches (<strong>5 ft 7 in</strong>), <strong>175 cm</strong> equals 68.90 inches (<strong>5 ft 9 in</strong>), and <strong>180 cm</strong> equals 70.87 inches (<strong>5 ft 11 in</strong>).
+                </li>
+                <li>
+                  <strong>UK Cabin Bags &amp; Parcel Limits:</strong> British Airways and Jet2 allow standard cabin bags up to <strong>56 × 45 × 25 cm</strong> (22.0&quot; × 17.7&quot; × 9.8&quot;), while Ryanair&apos;s free under-seat bag limit is <strong>40 × 20 × 25 cm</strong> (15.7&quot; × 7.9&quot; × 9.8&quot;). Royal Mail Small Parcels must stay within <strong>45 × 35 × 16 cm</strong> (17.7&quot; × 13.8&quot; × 6.3&quot;).
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                Common CM-to-Inches Conversion Mistakes to Avoid
+              </h2>
+              <p>
+                Even experienced DIYers and online shoppers frequently run into subtle unit traps when switching between metric and imperial specifications:
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-slate-700">
+                <li>
+                  <strong>Confusing decimal feet with feet and inches:</strong> A result of <strong>5.5 ft</strong> equals <strong>5 ft 6 in</strong> (half of 12 inches), not 5 ft 5 in. Always multiply the decimal portion of feet by 12 to obtain exact inches.
+                </li>
+                <li>
+                  <strong>Using 2.5 instead of 2.54 for long spans:</strong> Rough mental rounding (dividing by 2.5) introduces a 1.6% error—barely noticeable on 5 cm, yet over a <strong>240 cm</strong> kitchen worktop it creates a <strong>3.8 cm (1.5 inch)</strong> cutting mistake.
+                </li>
+                <li>
+                  <strong>Ignoring internal vs. external sizing:</strong> Television screens (e.g., 55&quot; = 139.7 cm) measure diagonally across the glass panel without the bezel, whereas UK photo frames (e.g., 8&quot; × 10&quot; = 20.3 × 25.4 cm) describe the artwork aperture rather than the outer moulding.
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                Specialised UK Sizing &amp; Print Reference Tools
+              </h2>
+              <p>
+                Need exact dimensions for UK printing or jewellery? Check our{' '}
+                <a
+                  href="/paper-size-in-inches/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    void handleNavigate('/paper-size-in-inches/');
+                  }}
+                  className="text-blue-600 font-bold underline hover:text-blue-800"
+                >
+                  Paper Size in Inches Converter (A0–A15)
+                </a>{' '}
+                for A4 (8.27&quot; × 11.69&quot;) and framing bleed sizes, use our{' '}
+                <a
+                  href="/ring-size-in-cm/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    void handleNavigate('/ring-size-in-cm/');
+                  }}
+                  className="text-blue-600 font-bold underline hover:text-blue-800"
+                >
+                  Ring Size Chart UK (A–Z)
+                </a>{' '}
+                for BS 6820 finger circumference measurements, or browse our{' '}
+                <a
+                  href="/unit-conversion-chart/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    void handleNavigate('/unit-conversion-chart/');
+                  }}
+                  className="text-blue-600 font-bold underline hover:text-blue-800"
+                >
+                  Master Unit Charts (1–1500)
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </article>
 
         {/* Reference tables block */}
         <section>
@@ -466,9 +548,6 @@ export default function App({ initialPath }: { initialPath?: RoutePath } = {}) {
 
       {/* Footer Area */}
       <Footer onNavigate={handleNavigate} />
-
-      {/* UK GDPR & PECR Cookie Consent Banner */}
-      <CookieConsent onNavigate={handleNavigate} />
     </div>
   );
 }

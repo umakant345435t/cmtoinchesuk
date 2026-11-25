@@ -2,19 +2,11 @@
   "redirects": [
     { "source": "/cm-to-inches", "destination": "/", "permanent": true },
     { "source": "/cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/90-cm-to-inches", "destination": "/", "permanent": true },
-    { "source": "/90-cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/150-cm-to-inches", "destination": "/", "permanent": true },
-    { "source": "/150-cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/170-cm-to-inches", "destination": "/", "permanent": true },
-    { "source": "/170-cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/180-cm-to-inches", "destination": "/", "permanent": true },
-    { "source": "/180-cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/200-cm-to-inches", "destination": "/", "permanent": true },
-    { "source": "/200-cm-to-inches/", "destination": "/", "permanent": true },
-    { "source": "/5-feet-in-cm", "destination": "/", "permanent": true },
-    { "source": "/5-feet-in-cm/", "destination": "/", "permanent": true },
-    { "source": "/6-feet-in-cm", "destination": "/", "permanent": true },
-    { "source": "/6-feet-in-cm/", "destination": "/", "permanent": true }
+    { "source": "/ring-shoe-size-cm", "destination": "/ring-size-in-cm/", "permanent": true },
+    { "source": "/ring-shoe-size-cm/", "destination": "/ring-size-in-cm/", "permanent": true },
+    { "source": "/:num(\\d+)-cm-to-inches", "destination": "/", "permanent": true },
+    { "source": "/:num(\\d+)-cm-to-inches/", "destination": "/", "permanent": true },
+    { "source": "/:num(\\d+)-feet-in-cm", "destination": "/", "permanent": true },
+    { "source": "/:num(\\d+)-feet-in-cm/", "destination": "/", "permanent": true }
   ]
 }

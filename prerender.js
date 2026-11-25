@@ -53,9 +53,9 @@ const metadata = {
     ]
   },
   'inches-to-cm': {
-    title: 'Inches to CM Converter (in → cm) – Dynamic Ruler Calculator',
+    title: 'Inches to CM Converter (in → cm) – UK Screen, Frame & Sizing Guide',
     h1: 'Inches to CM Converter (Precise in → cm)',
-    description: 'Convert inches to centimeters using our high-precision base-10 metrics translator.',
+    description: 'Convert inches to centimetres accurately for UK TV screens, photo frames, clothing, and DIY using our instant calculator and practical guide.',
     formula: 'Centimeters = Inches × 2.54',
     steps: [
       { name: 'Identify inches', text: 'Determine the length in inches (in) to convert to the metric system.' },
@@ -137,7 +137,7 @@ const metadata = {
   'contact-us': {
     title: 'Contact Us – Support & Measurement Feedback | cmtoinches.uk',
     h1: 'Contact Us',
-    description: 'Send feedback, bug reports, or general enquiries to the cmtoinches.uk editorial team at support@cmtoinches.uk or via our online contact form.'
+    description: 'Send feedback, measurement corrections, or privacy enquiries directly to support@cmtoinches.uk.'
   },
   'privacy-policy': {
     title: 'Privacy Policy – UK GDPR & Cookie Compliance | cmtoinches.uk',
@@ -427,7 +427,7 @@ const DYNAMIC_UI_CLASSES = [
   'text-slate-400', 'text-blue-600', 'underline', 'w-5', 'h-5', 'w-4', 'h-4', 'lg:hidden',
   'mb-3', 'p-1', 'hidden', 'flex', 'grid', 'text-xs', 'text-sm', 'text-base', 'text-lg',
   'text-xl', 'text-2xl', 'sm:text-sm', 'sm:text-base', 'sm:text-lg', 'sm:text-2xl', 'sm:text-3xl',
-  'rt-grid', 'rt-m', 'rt-lbl', 'rt-lbl-r', 'rb', 'rb-m', 'rb-lbl', 'ct-tbl', 'ct-uk', 'c-b', 'c-g', 'c-m', 'faq-ans', 'faq-chev'
+  'ct-tbl', 'ct-uk', 'c-b', 'c-g', 'c-m', 'faq-ans'
 ];
 
 // Unused Tailwind Preflight element tags that can be pruned if the HTML tag never appears on the route
@@ -862,6 +862,18 @@ function generateJsonLdSchema(route, meta) {
   };
 }
 
+const NO_ADS_ROUTES = new Set([
+  'sitemap',
+  'unit-conversion-chart',
+  'contact-us',
+  'privacy-policy',
+  'terms-and-conditions',
+  'disclaimer',
+  'cookie-policy'
+]);
+
+const ADSENSE_SCRIPT_REGEX = /(?:<script[^>]*pagead2\.googlesyndication\.com[^>]*><\/script>|<link[^>]*pagead2\.googlesyndication\.com[^>]*>)/gi;
+
 routes.forEach((route) => {
   const meta = metadata[route] || {
     title: 'CM to Inches Converter',
@@ -886,8 +898,11 @@ routes.forEach((route) => {
   const routeAppHtml = isHydratedRoute ? rawRouteAppHtml : rawRouteAppHtml.replace(/<!--[\s\S]*?-->/g, '');
   const routePurgedCss = universalCss ? purgeCssForRoute(universalCss, routeAppHtml) : '';
 
+  const robotsMeta = route === 'unit-conversion-chart' ? 'noindex, follow' : 'index, follow';
+
   let pageContent = indexContent
     .replace('__INLINE_CSS_PLACEHOLDER__', () => routePurgedCss ? `<style id="inline-app-css">${routePurgedCss}</style>` : '')
+    .replace(/<meta name="robots" content="[^"]*"/g, () => `<meta name="robots" content="${robotsMeta}"`)
     .replace(/<title>.*?<\/title>/g, () => `<title>${meta.title}</title>`)
     .replace(/<meta name="description" content="[^"]*"/g, () => `<meta name="description" content="${meta.description}"`)
     .replace(/<link rel="canonical" href="[^"]*"/g, () => `<link rel="canonical" href="${pageCanonical}"`)
@@ -900,6 +915,10 @@ routes.forEach((route) => {
     .replace('<div id="root"></div>', () => `<div id="root">${routeAppHtml}</div>`)
     .replace('</head>', () => `${jsonLdScript}</head>`);
 
+  if (NO_ADS_ROUTES.has(route)) {
+    pageContent = pageContent.replace(ADSENSE_SCRIPT_REGEX, '');
+  }
+
   fs.writeFileSync(path.join(targetDir, 'index.html'), pageContent, 'utf-8');
   console.log(`Generated: ${route}/index.html (CSS trimmed to ${(routePurgedCss.length / 1024).toFixed(1)} kB raw)`);
 });
@@ -909,9 +928,12 @@ if (fs.existsSync(ssrBundlePath)) {
   fs.unlinkSync(ssrBundlePath);
 }
 
-// Also create a 404.html at the root of dist as a fallback with homepage JSON-LD
-fs.writeFileSync(path.join(distDir, '404.html'), updatedRootIndex, 'utf-8');
-console.log('Generated: 404.html fallback');
+// Create a clean noindex, ad-free 404.html fallback (never serve AdSense on 404 screens)
+const clean404Html = updatedRootIndex
+  .replace(ADSENSE_SCRIPT_REGEX, '')
+  .replace(/<meta name="robots" content="[^"]*"/g, '<meta name="robots" content="noindex, follow"');
+fs.writeFileSync(path.join(distDir, '404.html'), clean404Html, 'utf-8');
+console.log('Generated: 404.html fallback (noindex, ad-free)');
 
 // Generate noindex + 301 redirect HTML pages for duplicate & retired routes
 redirectRoutes.forEach(({ slug, targetUrl }) => {
